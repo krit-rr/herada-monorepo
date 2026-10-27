@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Ledger: a tool by Herada</title>
-<meta name="description" content="A private, local-only log of your health story: symptoms, visits, tests, treatments. Prints to one page for the next appointment. A personal log, not a medical record.">
+<meta name="description" content="A private, local-only log of your health story — symptoms, visits, tests, treatments — that builds the Visit Kit: your timeline, what's been tested and what's worth asking, and your questions for today. Printable, nothing typed twice.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -90,6 +90,7 @@ input, select, textarea {
   padding: 0.5rem 0.65rem; min-height: 2.75rem;
 }
 input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
+textarea { width: 100%; resize: vertical; min-height: 4rem; }
 .lg-fields { display: flex; flex-wrap: wrap; gap: 0.9rem 1.25rem; margin-top: 1.25rem; }
 .lg-field { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
 .lg-field > span { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; color: var(--ink-soft); }
@@ -128,6 +129,97 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
   .lg-feed li { grid-template-columns: auto 1fr auto; }
   .lg-date { grid-column: 1 / -1; }
 }
+
+/* Symptom picker (the knowledge-base step) */
+.vk-symchips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; max-width: 56rem; }
+.vk-symchips button {
+  font-family: var(--ui); font-size: 0.9375rem; font-weight: 600;
+  padding: 0.55rem 0.9rem; min-height: 2.75rem;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 2px; cursor: pointer;
+}
+.vk-symchips button:hover { border-color: var(--accent); color: var(--accent); }
+.vk-symchips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.vk-preset { margin-top: 1rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); }
+.vk-conds { margin-top: 1.5rem; }
+.vk-cond { padding: 1.25rem 0; border-top: 1px solid var(--rule); max-width: 52rem; }
+.vk-cond:last-child { border-bottom: 1px solid var(--rule); }
+.vk-match { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--kicker); }
+.vk-cond h3 { margin-top: 0.25rem; font-size: 1.1875rem; }
+.vk-cond p { margin-top: 0.4rem; font-size: 0.9875rem; color: var(--ink-soft); max-width: 46rem; }
+.vk-cond .vk-ask { color: var(--ink); font-size: 1rem; }
+.vk-cond .vk-ask b { font-weight: 600; }
+.vk-cond a.vk-jump { font-family: var(--ui); font-size: 0.875rem; font-weight: 600; }
+.vk-pairs { margin-top: 1.75rem; max-width: 52rem; }
+.vk-pair { padding: 1rem 0; border-top: 1px solid var(--rule); }
+.vk-pair h3 { font-size: 1.0625rem; }
+.vk-pair p { margin-top: 0.35rem; font-size: 0.9875rem; color: var(--ink-soft); max-width: 46rem; }
+
+/* Timeline */
+.vk-scroll { margin-top: 1.5rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.vk-scroll svg { display: block; }
+.vk-empty { margin-top: 1.5rem; padding: 2rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); color: var(--ink-soft); max-width: 44rem; }
+.vk-legend { margin-top: 1rem; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
+.vk-legend b { color: var(--ink); font-weight: 600; }
+
+/* Tested & worth asking (derived from the log) */
+.vk-group { margin-top: 2.25rem; }
+.vk-group:first-of-type { margin-top: 1.5rem; }
+.vk-group h3 { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); }
+.vk-group .vk-groupnote { margin-top: 0.3rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); max-width: 44rem; }
+.vk-tested { margin: 1rem 0 0; padding: 0; list-style: none; max-width: 56rem; }
+.vk-tested li { display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 1rem; padding: 1rem 0; border-top: 1px solid var(--rule); }
+.vk-tested li:last-child { border-bottom: 1px solid var(--rule); }
+li.vk-fits { border-left: 3px solid var(--accent); padding-left: 0.9rem; }
+.vk-fits-tag { display: none; font-family: var(--ui); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+li.vk-fits .vk-fits-tag { display: inline; }
+.vk-box {
+  width: 1.3rem; height: 1.3rem; margin-top: 0.2rem; border: 1px solid var(--ink-soft); border-radius: 2px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--ui); font-size: 0.9rem; font-weight: 700; color: var(--accent-ink); background: transparent;
+}
+li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
+.vk-tested b { font-weight: 600; font-size: 1.0625rem; }
+.vk-state { grid-column: 2; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); }
+.vk-state b { font-size: 0.875rem; color: var(--ink); }
+.vk-logit { font-family: var(--ui); font-size: 0.875rem; font-weight: 600; background: none; border: none; padding: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 0.18em; width: fit-content; }
+.vk-logit:hover { color: var(--accent-hover); }
+.vk-more { grid-column: 2; margin-top: 0.1rem; }
+.vk-more summary { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; color: var(--kicker); cursor: pointer; width: fit-content; }
+.vk-more summary:hover { color: var(--accent); }
+.vk-why { font-size: 0.9875rem; color: var(--ink-soft); max-width: 46rem; margin-top: 0.35rem; }
+.vk-src { display: block; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); margin-top: 0.25rem; }
+.vk-otherlist { margin: 1rem 0 0; padding: 0; list-style: none; max-width: 52rem; }
+.vk-otherlist li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 1rem; padding: 0.55rem 0; border-top: 1px solid var(--rule); font-size: 1rem; }
+.vk-otherlist li:last-child { border-bottom: 1px solid var(--rule); }
+.vk-otherlist b { font-weight: 600; }
+.vk-otherlist .vk-meta { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); }
+
+/* The not-an-order-sheet box */
+.vk-caveat { margin-top: 2.25rem; max-width: 46rem; padding: 1rem 1.25rem; border: 1px solid var(--ink); }
+.vk-caveat p { font-size: 1rem; color: var(--ink-soft); }
+.vk-caveat b { color: var(--ink); font-weight: 700; }
+
+/* Today's visit */
+.vk-qs { margin-top: 1.25rem; max-width: 52rem; display: grid; gap: 0.9rem; }
+.vk-q { display: grid; grid-template-columns: auto 1fr; gap: 0.75rem; align-items: start; }
+.vk-qnum { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; color: var(--kicker); padding-top: 0.9rem; }
+.vk-q input { width: 100%; font-size: 1.0625rem; }
+.vk-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; max-width: 56rem; }
+.vk-chips button {
+  font-family: var(--ui); font-size: 0.875rem; font-weight: 600; text-align: left;
+  padding: 0.5rem 0.8rem; min-height: 2.5rem;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 2px; cursor: pointer;
+}
+.vk-chips button:hover { border-color: var(--accent); color: var(--accent); }
+.vk-chips .vk-tone { display: block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--kicker); }
+.vk-route { margin-top: 2rem; max-width: 46rem; padding: 1rem 1.25rem; border: 1px solid var(--rule); }
+.vk-route h4 { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--kicker); }
+.vk-route ul { margin: 0.5rem 0 0; padding: 0; list-style: none; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); }
+.vk-route li { padding: 0.25rem 0; }
+.vk-route b { color: var(--ink); font-weight: 600; }
+.vk-route .vk-routenote { margin-top: 0.5rem; font-size: 0.8125rem; }
 
 /* The one-pager */
 .lg-pager { max-width: 54rem; border: 1px solid var(--rule); padding: clamp(1.25rem, 4vw, 2.25rem); margin-top: 1.5rem; }
@@ -174,11 +266,17 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
 .lg-clinician b { color: var(--ink); font-weight: 600; }
 
 .hr-section { border-top: 1px solid var(--rule); padding: clamp(2.5rem, 6vw, 4rem) 0; }
+.hr-prose { max-width: 42rem; }
+.hr-prose p { margin-top: 1rem; font-size: 1.0625rem; color: var(--ink-soft); }
 .hr-sources { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
+.hr-sources ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+.hr-sources li { margin-top: 0.25rem; }
+.hr-sources a { overflow-wrap: anywhere; }
 
 .hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
 
-/* Print: the one-pager alone, one portrait page */
+/* Print. Default: the Visit Kit — timeline, one-pager, checks, today, one page each.
+   body.pm-pager (the one-pager's own button): just the one-pager. */
 @page { size: letter portrait; margin: 13mm 15mm; }
 @media print {
   :root, :root[data-theme="dark"] {
@@ -186,13 +284,47 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
     --accent: #AD1457; --accent-hover: #8A0E45; --accent-ink: #FDFCFE; --rule: #CFCCD6; --kicker: #6B68A0;
   }
   body { font-size: 9.5pt; }
-  .hr-header, .hr-notice, .hr-intro, .lg-entry, .lg-logsec, .lg-actions, .lg-backup, .lg-clinician, .hr-section, .hr-footer, .lg-pager-kicker, .lg-pager-h2 { display: none !important; }
+  .hr-header, .hr-notice, .hr-intro, .lg-entry, .lg-logsec, .vk-picker, .lg-actions, .lg-backup, .lg-clinician, .hr-section, .hr-footer, .lg-sub, .vk-empty, .vk-more, .vk-chips, .vk-logit, .lg-keep { display: none !important; }
   .lg-section { border-top: none; padding: 0; }
-  .lg-section .hr-wrap { padding: 0; max-width: none; }
-  .lg-pager { border: none; padding: 0; margin-top: 0; max-width: none; }
+  .lg-section .hr-wrap { padding-left: 0; padding-right: 0; max-width: none; }
+  .lg-printpage { page-break-after: always; }
+  .lg-printpage:last-of-type { page-break-after: auto; }
+  body.pm-pager .lg-printpage:not(.lg-pagersec) { display: none !important; }
+  body.pm-pager .lg-pagersec { page-break-after: auto; }
+  .lg-kicker { font-size: 7.5pt; margin-bottom: 0.2rem; }
+  h2 { font-size: 14pt; }
+  .vk-print-head { display: block !important; font-family: var(--ui); font-size: 8pt; color: var(--ink-soft); margin-top: 0.3rem; }
+  .vk-scroll { overflow: visible; margin-top: 0.75rem; }
+  .vk-scroll svg { width: 100% !important; height: auto !important; }
+  .vk-legend { font-size: 7.5pt; margin-top: 0.5rem; }
+  .vk-group { margin-top: 0.55rem; }
+  .vk-group h3 { font-size: 7.5pt; }
+  .vk-group .vk-groupnote { display: none; }
+  .vk-tested { margin-top: 0.2rem; }
+  .vk-tested li { padding: 0.28rem 0; gap: 0.05rem 0.6rem; }
+  li.vk-fits { padding-left: 0.5rem; }
+  .vk-box { width: 0.9rem; height: 0.9rem; margin-top: 0.1rem; font-size: 0.65rem; }
+  .vk-tested b { font-size: 9pt; }
+  .vk-state { font-size: 8pt; }
+  .vk-fits-tag { font-size: 7pt; }
+  .vk-otherlist { margin-top: 0.2rem; }
+  .vk-otherlist li { padding: 0.2rem 0; font-size: 8pt; }
+  .vk-otherlist .vk-meta { font-size: 7.5pt; }
+  .vk-caveat { margin-top: 0.5rem; padding: 0.35rem 0.6rem; }
+  .vk-caveat p { font-size: 7pt; }
+  .vk-qs { margin-top: 0.75rem; gap: 0.6rem; }
+  .vk-q input { border: none; border-bottom: 1px solid var(--rule); border-radius: 0; padding: 0.3rem 0; min-height: 0; font-size: 11pt; font-family: var(--display); }
+  .vk-qnum { padding-top: 0.35rem; }
+  #wantWrap { display: block !important; }
+  #wantWrap textarea { border: none; padding: 0; min-height: 0; font-size: 9.5pt; }
+  .vk-route { margin-top: 0.9rem; padding: 0.5rem 0.7rem; }
+  .vk-route ul { font-size: 8pt; }
+  .vk-route .vk-routenote { font-size: 7pt; }
+  .lg-pager { border: none; padding: 0; margin-top: 0.5rem; max-width: none; }
   .lg-pgroup h4 { font-size: 7.5pt; }
   .lg-pgroup li { font-size: 9pt; padding: 0.25rem 0; }
 }
+.vk-print-head { display: none; }
 </style>
 </head>
 <body>
@@ -204,17 +336,18 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
 </header>
 
 <div class="hr-notice">
-  <div class="hr-wrap"><p><b>A personal log, not a medical record.</b> Everything lives on this device only — nothing is sent anywhere, and Clear all erases it. Back it up yourself with the backup file below.</p></div>
+  <div class="hr-wrap"><p><b>A personal log, not a medical record — and a draft, pending clinical review.</b> The consider-list and symptom map are compiled from the guidance linked on each item, not yet clinician-reviewed. Everything lives on this device only.</p></div>
 </div>
 
 <main>
   <section class="hr-intro">
     <div class="hr-wrap">
-      <h1>Your whole story, kept.</h1>
-      <p class="hr-lede">Every new clinician starts from zero — unless you don&rsquo;t. The Ledger is a private log of symptoms, visits, tests and treatments that builds the one-pager you hand over at the next appointment.</p>
+      <h1>Your whole story, kept — and told.</h1>
+      <p class="hr-lede">Log symptoms, visits, tests and treatments once. The Ledger keeps the record, and builds the Visit Kit from it: your timeline, your one-pager, what&rsquo;s been tested and what&rsquo;s worth asking, and your questions for today — printable, nothing typed twice.</p>
     </div>
   </section>
 
+  <!-- ============ The log: the only place data is entered ============ -->
   <section class="lg-section lg-entry" aria-label="Add to the ledger">
     <div class="hr-wrap">
       <p class="lg-kicker">Add to the ledger</p>
@@ -224,6 +357,7 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
         <button type="button" data-type="visit" aria-pressed="false">Visit</button>
         <button type="button" data-type="test" aria-pressed="false">Test</button>
         <button type="button" data-type="treatment" aria-pressed="false">Treatment</button>
+        <button type="button" data-type="event" aria-pressed="false">Life event</button>
       </div>
       <form id="form" novalidate>
         <div class="lg-fields" id="fields"></div>
@@ -242,20 +376,106 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
     </div>
   </section>
 
-  <section class="lg-section" aria-label="The one-pager">
+  <!-- ============ The picker: screen only, chips light up from the log ============ -->
+  <section class="lg-section vk-picker" aria-label="Your symptoms">
     <div class="hr-wrap">
-      <p class="lg-kicker lg-pager-kicker">The handover</p>
-      <h2 class="lg-pager-h2">Your one-pager</h2>
+      <p class="lg-kicker">What shares your symptoms · Optional</p>
+      <h2>The look-alikes</h2>
+      <p class="lg-sub">Chips light up from your logged symptoms — adjust them to see which midlife conditions share your picture. The checks that fit get a raspberry edge on the tested list. Worth a look because <a href="https://www.nice.org.uk/guidance/ng23">NICE guidance</a> lets perimenopause be diagnosed from symptoms alone after 45, so the label can settle before the look-alikes are weighed.</p>
+      <div class="vk-symchips" id="symChips" role="group" aria-label="Symptoms"></div>
+      <p class="vk-preset">Or start from <a href="#" id="preset">the classic cluster</a>: fatigue, brain fog, joint pain, palpitations. <a href="#" id="clearPicks" hidden>Clear picks</a></p>
+      <div id="condResult"></div>
+    </div>
+  </section>
+
+  <!-- ============ The Visit Kit: four printable pages, all derived from the log ============ -->
+  <section class="lg-section lg-printpage" aria-label="Visit Kit page one: the timeline">
+    <div class="hr-wrap">
+      <p class="lg-kicker">The Visit Kit · Page 1 — The timeline</p>
+      <h2>What happened, and when</h2>
+      <span class="vk-print-head" id="printDate1"></span>
+      <p class="lg-sub">Drawn from your log: symptoms become bars (thicker = more severe, raspberry = ongoing); visits and life events become markers.</p>
+      <div id="chart"><p class="vk-empty">Log a symptom and the timeline draws itself here.</p></div>
+      <p class="vk-legend" id="legend" hidden><b>Reading it:</b> each line is a symptom — the thicker the line, the more severe. A raspberry line is still ongoing. Diamonds mark visits and life events.</p>
+    </div>
+  </section>
+
+  <section class="lg-section lg-printpage lg-pagersec" aria-label="Visit Kit page two: the one-pager">
+    <div class="hr-wrap">
+      <p class="lg-kicker">The Visit Kit · Page 2 — The one-pager</p>
+      <h2>The handover</h2>
       <div class="lg-pager" id="pager"></div>
       <div class="lg-actions">
-        <button type="button" class="hr-button" id="printPager">Print the one-pager</button>
+        <button type="button" class="lg-ghost" id="printPager">Print just this page</button>
         <button type="button" class="lg-ghost" id="copyPager">Copy as text</button>
-        <button type="button" class="lg-clear" id="clearAll">Clear all</button>
+        <span class="lg-copied" id="copiedPager" hidden>Copied — paste it into your notes or portal.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-section lg-printpage" aria-label="Visit Kit page three: tested and worth asking">
+    <div class="hr-wrap">
+      <p class="lg-kicker" id="listKicker">The Visit Kit · Page 3 — Tested &amp; worth asking</p>
+      <h2>What&rsquo;s been checked — and what hasn&rsquo;t</h2>
+      <span class="vk-print-head" id="printDate3"></span>
+      <p class="lg-sub">The consider-list for the midlife look-alikes, filled from your logged tests — a check is ticked because a matching test is in your log. The unticked boxes are their own message; &ldquo;log it&rdquo; adds one. Each item&rsquo;s reasoning sits under &ldquo;why · source.&rdquo;</p>
+      <div id="testedGroups"></div>
+      <div id="otherTests"></div>
+
+      <div class="vk-caveat">
+        <p><b>This is not an order sheet.</b> Broad lab panels are low-yield — testing everyone for everything mostly finds noise, which is why <a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">family-medicine guidance</a> keeps the first panel small. The ask is &ldquo;was this considered?&rdquo; — and &ldquo;not needed, because&hellip;&rdquo; is a perfectly good answer. Which of these fit your picture is your clinician&rsquo;s call.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-section lg-printpage" aria-label="Visit Kit page four: today's visit">
+    <div class="hr-wrap">
+      <p class="lg-kicker">The Visit Kit · Page 4 — Today&rsquo;s visit</p>
+      <h2>What I want from today</h2>
+      <span class="vk-print-head" id="printDate4"></span>
+      <div id="wantWrap" style="margin-top: 1rem; max-width: 52rem;">
+        <textarea id="want" maxlength="300" placeholder="e.g. A plan for figuring out my fatigue — not just reassurance. If labs are normal, I want to know what we check next."></textarea>
+      </div>
+
+      <p class="lg-kicker" style="margin-top: 2rem">My three questions</p>
+      <div class="vk-qs" id="questions">
+        <div class="vk-q"><span class="vk-qnum">1</span><input type="text" maxlength="140" data-q="0" placeholder="Tap a suggestion below, or write your own"></div>
+        <div class="vk-q"><span class="vk-qnum">2</span><input type="text" maxlength="140" data-q="1" placeholder=""></div>
+        <div class="vk-q"><span class="vk-qnum">3</span><input type="text" maxlength="140" data-q="2" placeholder=""></div>
+      </div>
+      <div class="vk-chips" id="qChips" role="group" aria-label="Question suggestions"></div>
+
+      <div class="vk-route">
+        <h4>Who sees what</h4>
+        <ul>
+          <li><b>Cycles and hormones</b> — OB-GYN or a menopause specialist</li>
+          <li><b>Thyroid, metabolic</b> — endocrinology</li>
+          <li><b>Joints, immune, multi-system</b> — rheumatology</li>
+          <li><b>Heart, palpitations</b> — cardiology</li>
+          <li><b>Unrefreshing sleep</b> — sleep medicine</li>
+          <li><b>Lifelong focus trouble</b> — psychiatry or an ADHD specialist</li>
+        </ul>
+        <p class="vk-routenote">Routes people commonly discuss with a PCP — whether to refer is your clinician&rsquo;s call.</p>
+      </div>
+
+      <div class="lg-actions">
+        <button type="button" class="hr-button" id="printKit">Print the Visit Kit</button>
+        <button type="button" class="lg-ghost" id="exportPng">Save timeline as image</button>
+        <button type="button" class="lg-ghost" id="copyKit">Copy the kit as text</button>
         <span class="lg-copied" id="copied" hidden>Copied — paste it into your notes or portal.</span>
       </div>
 
+      <p class="lg-clinician"><b>Why it works:</b> it saves you retelling the story, and it makes the visit start where you actually are. It is a record of what you noticed and asked — something to discuss with your clinician, not a diagnosis, and not a set of demands.</p>
+    </div>
+  </section>
+
+  <!-- ============ Keep it ============ -->
+  <section class="lg-section lg-keep" aria-label="Backup and clearing">
+    <div class="hr-wrap">
+      <p class="lg-kicker">Keep it</p>
+      <h2>Backup &amp; move devices</h2>
       <div class="lg-backup">
-        <h4>Backup &amp; move devices</h4>
+        <h4>Backup file</h4>
         <p>Save your ledger as a file you keep — add a passphrase and the file is encrypted on your device before it&rsquo;s saved. Load it here on any device to continue.</p>
         <div class="lg-brow">
           <input type="password" id="passphrase" placeholder="Optional passphrase" autocomplete="new-password" aria-label="Backup passphrase">
@@ -264,20 +484,40 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
           <input type="file" id="loadBackup" accept=".json,application/json">
         </div>
       </div>
-
-      <p class="lg-clinician"><b>Hand it over, or read it out.</b> The Ledger is your own account of your own history — a head start for the visit, not a medical record and not a diagnosis. Your clinician will verify what matters against your chart; what any of it means is a conversation to have with them.</p>
+      <div class="lg-actions">
+        <button type="button" class="lg-clear" id="clearAll">Clear all</button>
+      </div>
+      <p class="lg-clinician"><b>Hand it over, or read it out.</b> The Ledger is your own account of your own history — a head start for the visit, not a medical record. Your clinician will verify what matters against your chart; what any of it means is a conversation to have with them.</p>
     </div>
   </section>
 
-  <section class="hr-section" aria-label="Sources">
+  <section class="hr-section" aria-label="About and sources">
     <div class="hr-wrap">
-      <p class="hr-sources">No external data is used on this page: everything shown is what you typed, stored only in your browser. The printout, text copy and backup file are generated on your device; a passphrase-protected backup is encrypted in the browser before saving. A free tool by <a href="/">Herada</a>. As of October 2026.</p>
+      <h2>Why this page exists</h2>
+      <div class="hr-prose">
+        <p>Fatigue, brain fog, joint pain and palpitations are shared symptoms — each appears in at least four of the ten conditions this page maps, fatigue in all ten — which is why pattern-matching on any one of them misroutes people. The fix isn&rsquo;t more testing for everyone; it&rsquo;s keeping your own record and putting the consider-list next to it, so the explanation that remains has actually earned it.</p>
+        <p>Everything stays on your device, saved in your browser only (Clear all removes it); the printouts, image, text copies and backup file are generated locally, and a passphrase-protected backup is encrypted in the browser before saving.</p>
+      </div>
+      <p class="hr-sources" style="margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);">Draft compiled by Herada; <b>pending clinical review</b> — the symptom map, consider-list and separating checks are one knowledge base, reviewed together. General information, not medical advice for any individual. Each check links its source above.</p>
+      <details class="vk-more" style="margin-top: 0.75rem;">
+        <summary>All sources</summary>
+        <ul class="hr-sources">
+          <li><a href="https://www.nice.org.uk/guidance/ng23">NICE NG23 — Menopause: identification and management</a></li>
+          <li><a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">Latimer et al., Fatigue in Adults: Evaluation and Management — Am Fam Physician 2023;108(1):58–69</a></li>
+          <li><a href="https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html">CDC — Evaluation of ME/CFS (clinical testing recommendations)</a></li>
+          <li><a href="https://emas-online.org/wp-content/uploads/2024/04/PIIS0378512224000860.pdf">EMAS position statement: Thyroid disease and menopause — Maturitas 2024</a></li>
+          <li><a href="https://doi.org/10.1161/CIR.0000000000000678">2019 ACC/AHA Guideline on the Primary Prevention of Cardiovascular Disease</a></li>
+          <li><a href="https://doi.org/10.1002/art.1780400909">Tan et al., Range of antinuclear antibodies in &ldquo;healthy&rdquo; individuals — Arthritis &amp; Rheumatism 1997</a></li>
+          <li><a href="https://doi.org/10.1111/jcpp.13920">Skoglund et al., Time after time — J Child Psychol Psychiatry 2024</a></li>
+        </ul>
+      </details>
+      <p class="hr-sources" style="margin-top: 1rem;">A free tool by <a href="/">Herada</a>. As of October 2026.</p>
     </div>
   </section>
 </main>
 
 <footer class="hr-footer">
-  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice — discuss your ledger with your clinician.</p></div>
+  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice — the Ledger starts the conversation; your clinician carries it.</p></div>
 </footer>
 
 <script>
@@ -285,8 +525,13 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
   "use strict";
 
   var STORAGE_KEY = "herada-ledger-v1";
+  var OLD_KIT_KEY = "herada-visit-kit-v1"; // migrated into the log, then removed
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   var SEVERITY_NAME = { 1: "mild", 2: "moderate", 3: "severe" };
+  var BAR_H = { 1: 5, 2: 9, 3: 14 };
+  var EXPORT_COLORS = { paper: "#FDFCFE", ink: "#2B2733", soft: "#5B5666", accent: "#AD1457", rule: "#CFCCD6" };
+  var LIVE_COLORS = { paper: "none", ink: "var(--ink)", soft: "var(--ink-soft)", accent: "var(--accent)", rule: "var(--rule)" };
+  var STATUS_LABEL = { "told-normal": "told normal", abnormal: "abnormal / follow-up", waiting: "waiting on result", unknown: "never heard back" };
 
   var FORMS = {
     symptom: {
@@ -324,12 +569,179 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
         { f: "end", label: "Stopped (blank = current)", type: "date" },
         { f: "outcome", label: "What happened", type: "text", grow: true, ph: "e.g. no change after 3 months" }
       ]
+    },
+    event: {
+      hint: "Context the timeline should show — a move, a job change, a loss, a new medication elsewhere.",
+      fields: [
+        { f: "name", label: "Life event", type: "text", grow: true, ph: "e.g. Changed jobs", req: true },
+        { f: "date", label: "When", type: "date", req: true }
+      ]
     }
   };
-  var TAG_LABEL = { symptom: "Symptom", visit: "Visit", test: "Test", treatment: "Treatment" };
+  var TAG_LABEL = { symptom: "Symptom", visit: "Visit", test: "Test", treatment: "Treatment", event: "Life event" };
 
-  var data = load() || { records: [] };
+  // ---------- The knowledge base (ex Rule-Out Checklist; pending clinical review) ----------
+  var ITEMS = [
+    { k: "tsh", group: "routine", label: "Thyroid panel (TSH, free T4, TPO antibodies)",
+      why: "Thyroid disease and menopause share symptoms almost one for one — cycle changes, mood, sweats, sleep, hair. European menopause guidance treats the thyroid as part of telling them apart; ask whether free T4 and antibodies were included, not just TSH.",
+      srcLabel: "EMAS position statement, Maturitas 2024", srcUrl: "https://emas-online.org/wp-content/uploads/2024/04/PIIS0378512224000860.pdf" },
+    { k: "ferritin", group: "routine", label: "Ferritin and iron panel",
+      why: "Low iron stores can drive fatigue, brain fog and palpitations before anemia shows up, and a normal CBC doesn’t rule them out. Ask for the ferritin number, not just “normal.”",
+      srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
+    { k: "cbc", group: "routine", label: "CBC — complete blood count",
+      why: "The basic screen for anemia and other blood conditions that commonly present as exhaustion; a standard anchor of a first fatigue workup.",
+      srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
+    { k: "cmp", group: "routine", label: "CMP — comprehensive metabolic panel",
+      why: "Kidneys, liver, glucose and electrolytes in one draw — the other standard anchor of the initial workup.",
+      srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
+    { k: "dvitb12", group: "routine", label: "Vitamin D and B12",
+      why: "Deficiencies in either are common, cheap to check, and can drive fatigue, aches, low mood and cognitive complaints; clinicians evaluating unexplained fatigue often include them early.",
+      srcLabel: "CDC, Evaluation of ME/CFS", srcUrl: "https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html" },
+    { k: "crp", group: "routine", label: "hs-CRP or ESR — inflammation markers",
+      why: "Persistent joint pain or symptoms across systems make an inflammation marker worth asking about; a raised result is a question to pursue with your clinician, not an answer by itself.",
+      srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
+    { k: "cvd", group: "routine", label: "Cardiovascular risk calculation",
+      why: "Palpitations and fatigue in midlife women deserve a formally calculated risk score — cholesterol, blood pressure, the estimate itself — rather than reassurance by age or sex.",
+      srcLabel: "ACC/AHA primary-prevention guideline, 2019", srcUrl: "https://doi.org/10.1161/CIR.0000000000000678" },
+    { k: "ana", group: "triggered", label: "ANA with reflex panel",
+      why: "A first screen for autoimmune disease when symptoms span systems — joints, skin, dryness, fevers. It’s symptom-triggered for a reason: roughly a third of healthy people test weakly positive (31.7% at 1:40; 13.3% at 1:80), so without a fitting picture it creates more confusion than answers.",
+      srcLabel: "Tan et al., Arthritis & Rheumatism 1997;40(9):1601–11", srcUrl: "https://doi.org/10.1002/art.1780400909" },
+    { k: "ortho", group: "triggered", label: "Orthostatic vitals",
+      why: "Heart rate and blood pressure lying down and then standing, over ten minutes, in the office — when dizziness, a racing heart or worse-when-upright symptoms are part of the story.",
+      srcLabel: "CDC, Evaluation of ME/CFS", srcUrl: "https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html" },
+    { k: "adhd", group: "triggered", label: "Adult-ADHD screener (validated)",
+      why: "When the trouble with focus has been there for life and midlife made it unmanageable. Women are identified years later than men; a validated screener is a short questionnaire, not a guess.",
+      srcLabel: "Skoglund et al., J Child Psychol Psychiatry 2024", srcUrl: "https://doi.org/10.1111/jcpp.13920" }
+  ];
+  var GROUPS = [
+    { id: "routine", title: "Usually part of a first workup",
+      note: "Standard, inexpensive checks that a fatigue or multi-symptom workup commonly includes. The ask: “were these considered?”" },
+    { id: "triggered", title: "When symptoms point there",
+      note: "Not screening tests — they earn their place when the picture fits. The ask: “do my symptoms make this one worth considering?”" }
+  ];
+  // Maps free-text test names in the log onto the ten checks.
+  var MATCHERS = [
+    ["tsh", /tsh|thyroid|\bt3\b|\bt4\b|tpo/i],
+    ["ferritin", /ferritin|\biron\b/i],
+    ["cbc", /\bcbc\b|blood count/i],
+    ["cmp", /\bcmp\b|\bbmp\b|metabolic panel/i],
+    ["dvitb12", /vitamin\s*d\b|\bvit\.?\s*d\b|b[\s-]?12/i],
+    ["crp", /\bcrp\b|\besr\b|sed(imentation)?\s*rate|inflammat/i],
+    ["cvd", /cholesterol|lipid|cardiovascular|cardiac risk|heart risk|blood pressure/i],
+    ["ana", /\bana\b|antinuclear/i],
+    ["ortho", /orthostat|stand(ing)? test|lying.*standing|tilt/i],
+    ["adhd", /adhd|asrs/i]
+  ];
+  // Maps free-text symptom names in the log onto the picker's fixed vocabulary.
+  var SYM_MATCHERS = {
+    fatigue:    /fatigue|tired|exhaust|no energy|low energy/i,
+    fog:        /\bfog\b|brain fog|concentrat|memory|cognit|can'?t focus/i,
+    joint:      /joint|arthralgia/i,
+    palp:       /palpitat|racing heart|heart rac|pounding heart/i,
+    anxiety:    /anxiet|anxious|panic/i,
+    mood:       /low mood|depress|\bsad\b/i,
+    irrit:      /irritab/i,
+    sleep:      /^(?!.*apnea).*(insomnia|poor sleep|can'?t sleep|waking|unrefresh)/i,
+    nightsweat: /night sweat/i,
+    heat:       /hot flash|hot flush|heat intoler/i,
+    cold:       /cold intoler|always cold|feeling cold|cold sensitiv/i,
+    weightgain: /weight gain|gain(ed|ing) weight/i,
+    weightloss: /weight loss|los(t|ing) weight/i,
+    hair:       /hair (loss|thin|shed)|losing hair/i,
+    dryskin:    /dry skin/i,
+    dizzy:      /dizz|light-?headed/i,
+    periods:    /period|menstr|heavy bleed|cycle/i,
+    headache:   /headache|migraine/i,
+    muscle:     /muscle|myalgia/i,
+    breath:     /breath|dyspnea/i
+  };
+
+  var CONDITIONS = {
+    peri:   { name: "Perimenopause", itemKey: null,
+              sep: "The label in question. There is no single confirming test — it’s a pattern of cycle changes plus symptoms, which is why the tested list is its consider-list.",
+              ask: "What have we weighed before settling on perimenopause?" },
+    hashi:  { name: "Hashimoto’s (underactive thyroid)", itemKey: "tsh",
+              sep: "Shows up in blood: TSH with free T4, plus TPO antibodies for the autoimmune cause.",
+              ask: "Was my TSH checked — and did it include free T4 and TPO antibodies?" },
+    graves: { name: "Graves’ (overactive thyroid)", itemKey: "tsh",
+              sep: "Also in blood, the other direction: a suppressed TSH with raised free T4 or T3.",
+              ask: "Could an overactive thyroid explain this? When was my TSH last checked?" },
+    ra:     { name: "Rheumatoid arthritis", itemKey: "crp",
+              sep: "A joint exam plus inflammation markers, then RF and anti-CCP antibodies if the pattern fits — morning stiffness over half an hour, small joints, both sides.",
+              ask: "Given where and when my joints hurt, is an inflammation check worth considering?" },
+    lupus:  { name: "Lupus (SLE)", itemKey: "ana",
+              sep: "An ANA with reflex panel is the screening door when symptoms span systems; a negative makes lupus unlikely, a positive starts a specific work-up.",
+              ask: "With symptoms in several systems, is an ANA with reflex worth considering?" },
+    pots:   { name: "POTS", itemKey: "ortho",
+              sep: "Measured, not drawn: heart rate and blood pressure lying then standing, over ten minutes — checkable in the office.",
+              ask: "Can we do a lying-to-standing heart rate and blood pressure check?" },
+    iron:   { name: "Iron deficiency", itemKey: "ferritin",
+              sep: "Ferritin plus an iron panel. A normal CBC does not rule it out — stores run low long before anemia.",
+              ask: "What is my ferritin number — not just whether it’s in range?" },
+    adhd:   { name: "Adult ADHD", itemKey: "adhd",
+              sep: "A validated adult screener plus a lifelong history — the hinge is whether focus trouble is new, or lifelong and newly unmasked.",
+              ask: "Could a validated adult-ADHD screener be worth considering?" },
+    dep:    { name: "Depression", itemKey: null,
+              sep: "A structured screen and a proper interview — after the look-alikes above are weighed, because thyroid, iron and sleep disorders produce the same picture and don’t respond to antidepressants.",
+              ask: "If we treat this as depression, what should improve by when — and what have we weighed first?" },
+    apnea:  { name: "Sleep apnea", itemKey: null,
+              sep: "A sleep study, at home or in a lab — underdiagnosed in women because it presents as fatigue and mood rather than loud snoring.",
+              ask: "Does unrefreshing sleep here make a sleep study worth considering?" }
+  };
+
+  var SYMPTOMS = [
+    { id: "fatigue",    label: "Fatigue",                 c: ["peri","hashi","graves","ra","lupus","pots","iron","adhd","dep","apnea"] },
+    { id: "fog",        label: "Brain fog",               c: ["peri","hashi","graves","lupus","pots","iron","adhd","dep","apnea"] },
+    { id: "joint",      label: "Joint pain",              c: ["peri","hashi","ra","lupus"] },
+    { id: "palp",       label: "Palpitations",            c: ["peri","graves","pots","iron","apnea"] },
+    { id: "anxiety",    label: "Anxiety",                 c: ["peri","graves","pots","adhd","dep"] },
+    { id: "mood",       label: "Low mood",                c: ["peri","hashi","adhd","dep","apnea"] },
+    { id: "irrit",      label: "Irritability",            c: ["peri","graves","adhd","dep","apnea"] },
+    { id: "sleep",      label: "Poor sleep",              c: ["peri","graves","adhd","dep","apnea"] },
+    { id: "nightsweat", label: "Night sweats",            c: ["peri","graves","lupus","apnea"] },
+    { id: "heat",       label: "Hot flashes / heat intolerance", c: ["peri","graves"] },
+    { id: "cold",       label: "Cold intolerance",        c: ["hashi","iron"] },
+    { id: "weightgain", label: "Weight gain",             c: ["peri","hashi","dep","apnea"] },
+    { id: "weightloss", label: "Weight loss",             c: ["graves","lupus","dep"] },
+    { id: "hair",       label: "Hair thinning",           c: ["peri","hashi","graves","iron","lupus"] },
+    { id: "dryskin",    label: "Dry skin",                c: ["peri","hashi"] },
+    { id: "dizzy",      label: "Dizziness on standing",   c: ["pots","iron"] },
+    { id: "periods",    label: "Irregular or heavy periods", c: ["peri","hashi","graves","iron"] },
+    { id: "headache",   label: "Headaches",               c: ["peri","iron","pots","lupus"] },
+    { id: "muscle",     label: "Muscle aches",            c: ["peri","hashi","ra","lupus"] },
+    { id: "breath",     label: "Short of breath on exertion", c: ["iron","graves","pots","lupus"] }
+  ];
+
+  var PAIRS = {
+    "peri|hashi":  "Both can bring fatigue, brain fog, weight gain and cycle changes. The difference is a blood draw: TSH with TPO antibodies. Thyroid disease shows in blood; perimenopause is a pattern over time.",
+    "peri|graves": "Hot flashes, night sweats, a racing heart — the overlap is almost total. A TSH separates them in one result, which is why it belongs before any “it’s hormones” conclusion.",
+    "peri|iron":   "These co-occur: heavier perimenopausal bleeding drains iron stores. Ferritin decides whether iron is part of the picture — and addressing it can resolve the fatigue even when perimenopause is also real.",
+    "peri|adhd":   "The separating question is “new, or newly impossible to compensate for?” Lifelong focus trouble worsening in midlife points one way; focus trouble arriving with cycle changes points the other.",
+    "peri|apnea":  "Night sweats, fragmented sleep and morning exhaustion fit both. Snoring, witnessed pauses, or waking unrefreshed every day tip toward asking about a sleep study.",
+    "peri|dep":    "Ask whether the low mood tracks the cycle. Mood that moves with hormonal pattern and mood that sits flat for weeks point different ways.",
+    "hashi|iron":  "Twin fatigue engines that often travel together, and both are one draw — TSH and ferritin — so the question is simply whether both were considered.",
+    "hashi|dep":   "The classic miss in both directions. A TSH before (or alongside) an antidepressant is the separating step, because the treatments are entirely different.",
+    "graves|pots": "Both produce a pounding heart, anxiety and heat sensitivity. TSH weighs Graves’; a ten-minute stand test weighs POTS. Neither is a guess.",
+    "ra|lupus":    "Both autoimmune, both hurt joints. RA is a small-joint, both-sides pattern with its own antibodies; lupus is ANA-first with symptoms across systems.",
+    "pots|iron":   "Dizziness on standing plus palpitations fits both, and low iron can worsen POTS. Ferritin and orthostatic vitals are both same-visit checks.",
+    "adhd|dep":    "Both blunt focus and follow-through. Lifelong versus episodic is the hinge: ADHD is a pattern since school; depression has a beginning.",
+    "apnea|dep":   "Months of unrefreshing sleep look exactly like depression — and cause it. A sleep study separates “low because exhausted” from “exhausted because low.”"
+  };
+
+  var SUGGESTIONS = [
+    { tone: "Gentle", text: "What else could explain this picture?" },
+    { tone: "Gentle", text: "Is there anything on the usual rule-out list we haven’t weighed?" },
+    { tone: "Gentle", text: "What should improve first — and by when?" },
+    { tone: "Direct", text: "What would change your assessment?" },
+    { tone: "Direct", text: "If this isn’t what we think, what are the next two most likely explanations?" },
+    { tone: "Direct", text: "Can we agree on a date — if it’s not better by then, what’s the next step?" }
+  ];
+
+  var data = load() || blank();
   var currentType = "symptom";
+  migrateKit();
+
+  function blank() { return { records: [], picks: [], want: "", questions: ["", "", ""] }; }
 
   // ---------- Storage (must never break the page) ----------
   function validDate(s) { return typeof s === "string" && /^\d{4}-\d{2}-\d{2}$/.test(s); }
@@ -338,6 +750,12 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
     d.records = d.records.filter(function (r) {
       return r && FORMS[r.type] && validDate(r.date) && (!r.end || validDate(r.end));
     });
+    d.picks = (Array.isArray(d.picks) ? d.picks : []).filter(function (id) {
+      return SYMPTOMS.some(function (s) { return s.id === id; });
+    });
+    d.want = typeof d.want === "string" ? d.want : "";
+    d.questions = Array.isArray(d.questions) ? d.questions.slice(0, 3).map(function (q) { return typeof q === "string" ? q : ""; }) : ["", "", ""];
+    while (d.questions.length < 3) d.questions.push("");
     return d;
   }
   function load() {
@@ -349,15 +767,117 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
   function save() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (err) { /* storage unavailable: in-memory only */ }
   }
+  function genId() { return Date.now() + "-" + Math.random().toString(36).slice(2, 7); }
+
+  // One-time import of the retired standalone Visit Kit's saved state: its
+  // symptoms, events and tested rows become ordinary log records.
+  function migrateKit() {
+    try {
+      var raw = localStorage.getItem(OLD_KIT_KEY);
+      if (!raw) return;
+      var d = JSON.parse(raw) || {};
+      var today = new Date().toISOString().slice(0, 10);
+      (Array.isArray(d.symptoms) ? d.symptoms : []).forEach(function (s) {
+        if (!s || typeof s.name !== "string" || !validDate(s.start)) return;
+        if (data.records.some(function (r) { return r.type === "symptom" && r.name.toLowerCase() === s.name.toLowerCase() && r.date === s.start; })) return;
+        var rec = { type: "symptom", id: genId(), name: s.name, date: s.start, severity: String(s.severity || 2) };
+        if (s.end && validDate(s.end)) rec.end = s.end;
+        data.records.push(rec);
+      });
+      (Array.isArray(d.events) ? d.events : []).forEach(function (e) {
+        if (!e || typeof e.text !== "string" || !validDate(e.date)) return;
+        if (data.records.some(function (r) { return r.type === "event" && r.name.toLowerCase() === e.text.toLowerCase() && r.date === e.date; })) return;
+        data.records.push({ type: "event", id: genId(), name: e.text, date: e.date });
+      });
+      var tested = (d.tested && typeof d.tested === "object") ? d.tested : {};
+      Object.keys(tested).forEach(function (k) {
+        var row = tested[k];
+        var item = null;
+        for (var i = 0; i < ITEMS.length; i++) if (ITEMS[i].k === k) item = ITEMS[i];
+        if (!item || !row || !row.done) return;
+        var date = (typeof row.when === "string" && /^\d{4}-\d{2}$/.test(row.when)) ? row.when + "-01" : today;
+        if (data.records.some(function (r) { return r.type === "test" && r.name === item.label && r.date.slice(0, 7) === date.slice(0, 7); })) return;
+        var rec = { type: "test", id: genId(), name: item.label, date: date };
+        if (typeof row.result === "string" && row.result.trim()) rec.result = row.result.trim();
+        data.records.push(rec);
+      });
+      (Array.isArray(d.otherTests) ? d.otherTests : []).forEach(function (t) {
+        if (!t || typeof t.name !== "string") return;
+        var date = (typeof t.when === "string" && /^\d{4}-\d{2}$/.test(t.when)) ? t.when + "-01" : today;
+        if (data.records.some(function (r) { return r.type === "test" && r.name.toLowerCase() === t.name.toLowerCase() && r.date.slice(0, 7) === date.slice(0, 7); })) return;
+        var rec = { type: "test", id: genId(), name: t.name, date: date };
+        if (typeof t.result === "string" && t.result.trim()) rec.result = t.result.trim();
+        data.records.push(rec);
+      });
+      if (Array.isArray(d.picks) && !data.picks.length) {
+        data.picks = d.picks.filter(function (id) { return SYMPTOMS.some(function (s) { return s.id === id; }); });
+      }
+      if (typeof d.want === "string" && !data.want) data.want = d.want;
+      if (Array.isArray(d.questions)) {
+        d.questions.slice(0, 3).forEach(function (q, i) { if (typeof q === "string" && q && !data.questions[i]) data.questions[i] = q; });
+      }
+      save();
+      localStorage.removeItem(OLD_KIT_KEY);
+    } catch (err) { /* fine */ }
+  }
 
   function parseDate(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
   function fmtDate(s) { var d = parseDate(s); return MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear(); }
   function monthKey(s) { return s.slice(0, 7); }
   function fmtMonthKey(k) { var p = k.split("-"); return MONTHS[+p[1] - 1] + " " + p[0]; }
+  function today() { var d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function monthStart(d) { return new Date(d.getFullYear(), d.getMonth(), 1); }
+  function addMonths(d, n) { return new Date(d.getFullYear(), d.getMonth() + n, 1); }
+  function monthsBetween(a, b) { return (b.getFullYear() - a.getFullYear()) * 12 + b.getMonth() - a.getMonth(); }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 
+  // ---------- Derivations: every Visit Kit page reads the log ----------
+  function group(type) { return data.records.filter(function (r) { return r.type === type; }).sort(function (a, b) { return a.date < b.date ? 1 : -1; }); }
+  function timelineSymptoms() {
+    return group("symptom").slice().reverse().map(function (r) {
+      return { name: r.name, start: r.date, end: r.end || null, severity: +r.severity || 2, id: r.id };
+    });
+  }
+  function timelineMarkers() {
+    var out = [];
+    group("event").forEach(function (r) { out.push({ text: r.name, date: r.date }); });
+    group("visit").forEach(function (r) { out.push({ text: r.who, date: r.date }); });
+    return out;
+  }
+  // The newest logged test matching each check decides its state.
+  function checkStates() {
+    var states = {};
+    var tests = group("test"); // newest first
+    tests.forEach(function (r) {
+      for (var i = 0; i < MATCHERS.length; i++) {
+        if (MATCHERS[i][1].test(r.name)) {
+          var k = MATCHERS[i][0];
+          if (!states[k]) states[k] = { date: r.date, result: (r.result || "").trim() || (STATUS_LABEL[r.status] || "") };
+          return;
+        }
+      }
+    });
+    return states;
+  }
+  function otherTests() {
+    return group("test").filter(function (r) {
+      return !MATCHERS.some(function (m) { return m[1].test(r.name); });
+    });
+  }
+  function fitKeys() {
+    var fits = {};
+    if (!data.picks.length) return fits;
+    var picked = SYMPTOMS.filter(function (s) { return data.picks.indexOf(s.id) !== -1; });
+    var conds = {};
+    picked.forEach(function (s) { s.c.forEach(function (k) { conds[k] = true; }); });
+    Object.keys(conds).forEach(function (k) {
+      if (CONDITIONS[k].itemKey) fits[CONDITIONS[k].itemKey] = true;
+    });
+    return fits;
+  }
+
   // ---------- Entry form ----------
-  function renderForm() {
+  function renderForm(prefillName) {
     var cfg = FORMS[currentType];
     document.getElementById("fields").innerHTML = cfg.fields.map(function (fl) {
       var inner;
@@ -372,15 +892,22 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
     }).join("");
     document.getElementById("hint").textContent = cfg.hint;
     document.getElementById("err").classList.remove("show");
+    if (prefillName) {
+      var nameEl = document.querySelector('#fields [data-f="name"]');
+      if (nameEl) nameEl.value = prefillName;
+    }
+  }
+  function setType(type) {
+    currentType = type;
+    Array.prototype.forEach.call(document.querySelectorAll("#types button"), function (x) {
+      x.setAttribute("aria-pressed", x.getAttribute("data-type") === type ? "true" : "false");
+    });
   }
 
   document.getElementById("types").addEventListener("click", function (ev) {
     var b = ev.target.closest("button[data-type]");
     if (!b) return;
-    currentType = b.getAttribute("data-type");
-    Array.prototype.forEach.call(this.querySelectorAll("button"), function (x) {
-      x.setAttribute("aria-pressed", x === b ? "true" : "false");
-    });
+    setType(b.getAttribute("data-type"));
     renderForm();
   });
 
@@ -389,7 +916,7 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
     var cfg = FORMS[currentType];
     var errEl = document.getElementById("err");
     errEl.classList.remove("show");
-    var rec = { type: currentType, id: Date.now() + "-" + Math.random().toString(36).slice(2, 7) };
+    var rec = { type: currentType, id: genId() };
     var bad = null;
     cfg.fields.forEach(function (fl) {
       var el = document.querySelector('#fields [data-f="' + fl.f + '"]');
@@ -402,6 +929,12 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
     if (!bad && rec.end && rec.end < rec.date) { var t = rec.date; rec.date = rec.end; rec.end = t; }
     if (bad) { errEl.textContent = bad; errEl.classList.add("show"); return; }
     data.records.push(rec);
+    // A new symptom lights up the picker chips its name matches.
+    if (rec.type === "symptom") {
+      Object.keys(SYM_MATCHERS).forEach(function (id) {
+        if (SYM_MATCHERS[id].test(rec.name) && data.picks.indexOf(id) === -1) data.picks.push(id);
+      });
+    }
     save();
     renderAll();
     renderForm();
@@ -413,9 +946,10 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
     if (r.type === "symptom") return "<b>" + esc(r.name) + "</b> <span>" + (SEVERITY_NAME[r.severity] || "moderate") + (r.end ? ", until " + fmtDate(r.end) : ", ongoing") + "</span>";
     if (r.type === "visit") return "<b>" + esc(r.who) + "</b> <span>“" + esc(r.said) + "”" + (r.next ? " · next: " + esc(r.next) : "") + "</span>";
     if (r.type === "test") {
-      var st = { "told-normal": "told normal", abnormal: "abnormal / follow-up", waiting: "waiting on result", unknown: "never heard back" }[r.status] || "";
+      var st = STATUS_LABEL[r.status] || "";
       return "<b>" + esc(r.name) + "</b> <span>" + (r.result ? esc(r.result) : st) + (r.result && st ? " · " + st : "") + "</span>";
     }
+    if (r.type === "event") return "<b>" + esc(r.name) + "</b>";
     return "<b>" + esc(r.name) + "</b> <span>" + (r.end ? "until " + fmtDate(r.end) : "current") + (r.outcome ? " · " + esc(r.outcome) : "") + "</span>";
   }
 
@@ -443,16 +977,260 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
 
   document.addEventListener("click", function (ev) {
     var rm = ev.target.closest ? ev.target.closest("button[data-rm]") : null;
-    if (!rm) return;
-    var id = rm.getAttribute("data-rm");
-    data.records = data.records.filter(function (r) { return r.id !== id; });
-    save();
-    renderAll();
+    if (rm) {
+      var id = rm.getAttribute("data-rm");
+      data.records = data.records.filter(function (r) { return r.id !== id; });
+      save();
+      renderAll();
+      return;
+    }
+    var logit = ev.target.closest ? ev.target.closest("button[data-logit]") : null;
+    if (logit) {
+      setType("test");
+      renderForm(logit.getAttribute("data-logit"));
+      document.querySelector(".lg-entry").scrollIntoView({ block: "start" });
+      var dateEl = document.querySelector('#fields [data-f="date"]');
+      if (dateEl) dateEl.focus();
+      return;
+    }
+    var jump = ev.target.closest ? ev.target.closest("a[data-jump]") : null;
+    if (jump) {
+      ev.preventDefault();
+      var li = document.querySelector('.vk-tested li[data-k="' + jump.getAttribute("data-jump") + '"]');
+      if (li) li.scrollIntoView({ block: "center" });
+    }
   });
 
-  // ---------- The one-pager ----------
-  function group(type) { return data.records.filter(function (r) { return r.type === type; }).sort(function (a, b) { return a.date < b.date ? 1 : -1; }); }
+  // ---------- The picker ----------
+  var symChipsEl = document.getElementById("symChips");
+  SYMPTOMS.forEach(function (s) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.textContent = s.label;
+    b.setAttribute("data-id", s.id);
+    b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", function () {
+      var i = data.picks.indexOf(s.id);
+      if (i === -1) data.picks.push(s.id); else data.picks.splice(i, 1);
+      save();
+      renderPicker();
+      renderChecks();
+    });
+    symChipsEl.appendChild(b);
+  });
+  document.getElementById("preset").addEventListener("click", function (ev) {
+    ev.preventDefault();
+    data.picks = ["fatigue", "fog", "joint", "palp"];
+    save();
+    renderPicker();
+    renderChecks();
+  });
+  document.getElementById("clearPicks").addEventListener("click", function (ev) {
+    ev.preventDefault();
+    data.picks = [];
+    save();
+    renderPicker();
+    renderChecks();
+  });
 
+  function renderPicker() {
+    Array.prototype.forEach.call(symChipsEl.querySelectorAll("button"), function (b) {
+      b.setAttribute("aria-pressed", data.picks.indexOf(b.getAttribute("data-id")) !== -1 ? "true" : "false");
+    });
+    document.getElementById("clearPicks").hidden = !data.picks.length;
+
+    var resultEl = document.getElementById("condResult");
+    if (!data.picks.length) { resultEl.innerHTML = ""; return; }
+
+    var picked = SYMPTOMS.filter(function (s) { return data.picks.indexOf(s.id) !== -1; });
+    var counts = {};
+    Object.keys(CONDITIONS).forEach(function (k) { counts[k] = 0; });
+    picked.forEach(function (s) { s.c.forEach(function (k) { counts[k] += 1; }); });
+    var ranked = Object.keys(CONDITIONS)
+      .filter(function (k) { return counts[k] > 0; })
+      .sort(function (a, b) { return counts[b] - counts[a]; });
+
+    var out = ['<div class="vk-conds"><p class="lg-kicker" style="margin-top:2rem">What shares your symptoms</p>'];
+    ranked.forEach(function (k) {
+      var c = CONDITIONS[k];
+      out.push('<div class="vk-cond">');
+      out.push('<span class="vk-match">Shares ' + counts[k] + " of your " + picked.length + "</span>");
+      out.push("<h3>" + esc(c.name) + "</h3>");
+      out.push("<p>" + esc(c.sep) + "</p>");
+      out.push('<p class="vk-ask"><b>Ask:</b> “' + esc(c.ask) + "”" +
+        (c.itemKey ? ' <a class="vk-jump" href="#" data-jump="' + c.itemKey + '">→ on the tested list</a>' : "") + "</p>");
+      out.push("</div>");
+    });
+
+    var pairNotes = [];
+    for (var i = 0; i < ranked.length; i++) {
+      for (var j = i + 1; j < ranked.length; j++) {
+        var a = ranked[i], b = ranked[j];
+        if (counts[a] < 2 || counts[b] < 2) continue;
+        var key = PAIRS[a + "|" + b] ? a + "|" + b : (PAIRS[b + "|" + a] ? b + "|" + a : null);
+        if (key) pairNotes.push({ key: key, weight: counts[a] + counts[b] });
+      }
+    }
+    pairNotes.sort(function (x, y) { return y.weight - x.weight; });
+    pairNotes = pairNotes.slice(0, 4);
+    if (pairNotes.length) {
+      out.push('<div class="vk-pairs"><p class="lg-kicker">Telling look-alikes apart</p>');
+      pairNotes.forEach(function (pn) {
+        var ids = pn.key.split("|");
+        out.push('<div class="vk-pair"><h3>' + esc(CONDITIONS[ids[0]].name) + " vs. " + esc(CONDITIONS[ids[1]].name) + "</h3><p>" + esc(PAIRS[pn.key]) + "</p></div>");
+      });
+      out.push("</div>");
+    }
+    out.push("</div>");
+    resultEl.innerHTML = out.join("");
+  }
+
+  // ---------- Timeline SVG ----------
+  function renderSVG(forExport) {
+    var C = forExport ? EXPORT_COLORS : LIVE_COLORS;
+    var now = today();
+    var symptoms = timelineSymptoms();
+    var markers = timelineMarkers();
+    var dates = [];
+    symptoms.forEach(function (s) { dates.push(parseDate(s.start)); dates.push(s.end ? parseDate(s.end) : now); });
+    markers.forEach(function (e) { dates.push(parseDate(e.date)); });
+    if (!dates.length) return null;
+
+    var min = new Date(Math.min.apply(null, dates));
+    var max = new Date(Math.max.apply(null, dates));
+    var d0 = monthStart(min);
+    var d1 = addMonths(monthStart(max), 1);
+    if (monthsBetween(d0, d1) < 2) d1 = addMonths(d0, 2);
+    var totalMonths = monthsBetween(d0, d1);
+
+    var padL = 30, padR = 30;
+    var plotW = Math.max(600, totalMonths * 52);
+    var W = padL + plotW + padR;
+
+    var sortedEvents = markers.slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+    var titleH = forExport ? 54 : 0;
+    var eventsH = sortedEvents.length ? 58 : 14;
+    var rowH = 46;
+    var rowsTop = titleH + eventsH;
+    var axisTop = rowsTop + symptoms.length * rowH + 6;
+    var legendH = forExport ? 40 : 0;
+    var H = axisTop + 34 + legendH;
+
+    var t0 = d0.getTime(), t1 = d1.getTime();
+    function x(d) { return padL + (d.getTime() - t0) / (t1 - t0) * plotW; }
+
+    var out = [];
+    out.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Timeline of symptoms, visits and life events" font-family="Figtree, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">');
+    if (forExport) {
+      out.push('<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="' + C.paper + '"/>');
+      out.push('<text x="' + padL + '" y="26" font-size="19" font-weight="600" fill="' + C.ink + '">My timeline — the Ledger</text>');
+      out.push('<text x="' + padL + '" y="44" font-size="12" fill="' + C.soft + '">Made with Herada · joinherada.com · ' + MONTHS[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear() + "</text>");
+    }
+
+    var pxPerMonth = plotW / totalMonths;
+    var step = [1, 2, 3, 6, 12].filter(function (s) { return s * pxPerMonth >= 46; })[0] || 12;
+    out.push('<line x1="' + padL + '" y1="' + axisTop + '" x2="' + (padL + plotW) + '" y2="' + axisTop + '" stroke="' + C.rule + '" stroke-width="1"/>');
+    for (var m = 0; m <= totalMonths; m += step) {
+      var tickDate = addMonths(d0, m);
+      var tx = x(tickDate);
+      out.push('<line x1="' + tx + '" y1="' + axisTop + '" x2="' + tx + '" y2="' + (axisTop + 6) + '" stroke="' + C.rule + '" stroke-width="1"/>');
+      var label = (m === 0 || tickDate.getMonth() === 0 || step >= 12)
+        ? MONTHS[tickDate.getMonth()] + " ’" + String(tickDate.getFullYear()).slice(2)
+        : MONTHS[tickDate.getMonth()];
+      out.push('<text x="' + tx + '" y="' + (axisTop + 22) + '" font-size="11.5" fill="' + C.soft + '" text-anchor="middle">' + label + "</text>");
+    }
+
+    sortedEvents.forEach(function (e, i) {
+      var ex = x(parseDate(e.date));
+      var labelY = titleH + (i % 2 === 0 ? 16 : 34);
+      var lineTop = titleH + 42;
+      out.push('<line x1="' + ex + '" y1="' + lineTop + '" x2="' + ex + '" y2="' + axisTop + '" stroke="' + C.rule + '" stroke-width="1" stroke-dasharray="2 3"/>');
+      out.push('<path d="M ' + ex + " " + (lineTop - 5) + ' l 4.5 5 l -4.5 5 l -4.5 -5 Z" fill="' + C.ink + '"/>');
+      var anchor = ex > W - 150 ? "end" : "start";
+      var lx = anchor === "start" ? ex + 8 : ex - 8;
+      out.push('<text x="' + lx + '" y="' + labelY + '" font-size="11.5" fill="' + C.ink + '" text-anchor="' + anchor + '">' + esc(e.text) + "</text>");
+    });
+
+    var hasOngoing = symptoms.some(function (s) { return !s.end; });
+    if (hasOngoing) {
+      var txNow = x(now);
+      out.push('<line x1="' + txNow + '" y1="' + rowsTop + '" x2="' + txNow + '" y2="' + axisTop + '" stroke="' + C.accent + '" stroke-width="1" stroke-dasharray="1 3"/>');
+      out.push('<text x="' + txNow + '" y="' + (rowsTop - 4) + '" font-size="10.5" fill="' + C.accent + '" text-anchor="middle">today</text>');
+    }
+
+    symptoms.forEach(function (s, i) {
+      var top = rowsTop + i * rowH;
+      var start = parseDate(s.start);
+      var end = s.end ? parseDate(s.end) : now;
+      if (end < start) { var tmp = start; start = end; end = tmp; }
+      var bx = x(start);
+      var bw = Math.max(x(end) - bx, 4);
+      var bh = BAR_H[s.severity] || 9;
+      var by = top + 30 - bh / 2;
+      var fill = s.end ? C.ink : C.accent;
+      var label = esc(s.name) + " · " + (SEVERITY_NAME[s.severity] || "moderate") + (s.end ? "" : " · ongoing");
+      var anchor2 = bx > W - 240 ? "end" : "start";
+      var lx2 = anchor2 === "start" ? bx : bx + bw;
+      out.push('<text x="' + lx2 + '" y="' + (top + 14) + '" font-size="12" fill="' + C.soft + '" text-anchor="' + anchor2 + '">' + label + "</text>");
+      out.push('<rect x="' + bx + '" y="' + by + '" width="' + bw + '" height="' + bh + '" rx="1" fill="' + fill + '"><title>' + label + ": " + fmtDate(s.start) + " to " + (s.end ? fmtDate(s.end) : "today") + "</title></rect>");
+    });
+
+    if (forExport) {
+      out.push('<text x="' + padL + '" y="' + (H - 12) + '" font-size="11" fill="' + C.soft + '">Thicker line = more severe (1–3). Raspberry = still ongoing. Diamonds = visits and life events. A record to discuss with your clinician — not a diagnosis.</text>');
+    }
+    out.push("</svg>");
+    return out.join("");
+  }
+
+  function renderTimeline() {
+    var chartEl = document.getElementById("chart");
+    var svg = renderSVG(false);
+    if (svg) {
+      chartEl.innerHTML = '<div class="vk-scroll">' + svg + "</div>";
+      document.getElementById("legend").hidden = false;
+    } else {
+      chartEl.innerHTML = '<p class="vk-empty">Log a symptom and the timeline draws itself here.</p>';
+      document.getElementById("legend").hidden = true;
+    }
+  }
+
+  // ---------- Tested & worth asking ----------
+  function renderChecks() {
+    var fits = fitKeys();
+    var states = checkStates();
+    document.getElementById("testedGroups").innerHTML = GROUPS.map(function (g) {
+      var rows = ITEMS.filter(function (t) { return t.group === g.id; }).map(function (t) {
+        var st = states[t.k];
+        var cls = [];
+        if (fits[t.k]) cls.push("vk-fits");
+        if (st) cls.push("vk-done");
+        return '<li data-k="' + t.k + '"' + (cls.length ? ' class="' + cls.join(" ") + '"' : "") + '>' +
+          '<span class="vk-box" aria-hidden="true">' + (st ? "✓" : "") + '</span>' +
+          "<div><b>" + esc(t.label) + ' <span class="vk-fits-tag">fits your picks</span></b></div>' +
+          (st
+            ? '<span class="vk-state"><b>' + fmtDate(st.date) + "</b>" + (st.result ? " · " + esc(st.result) : "") + "</span>"
+            : '<button type="button" class="vk-logit" data-logit="' + esc(t.label) + '">Not in your log — log it</button>') +
+          '<details class="vk-more"><summary>why · source</summary><p class="vk-why">' + esc(t.why) + "</p>" +
+          '<span class="vk-src">Source: <a href="' + esc(t.srcUrl) + '">' + esc(t.srcLabel) + "</a></span></details>" +
+          "</li>";
+      }).join("");
+      return '<div class="vk-group"><h3>' + esc(g.title) + '</h3><p class="vk-groupnote">' + esc(g.note) + '</p><ul class="vk-tested">' + rows + "</ul></div>";
+    }).join("");
+    document.getElementById("listKicker").textContent = data.picks.length
+      ? "The Visit Kit · Page 3 — Tested & worth asking — raspberry-edged items fit your picks"
+      : "The Visit Kit · Page 3 — Tested & worth asking";
+
+    var others = otherTests();
+    var el = document.getElementById("otherTests");
+    if (!others.length) { el.innerHTML = ""; return; }
+    el.innerHTML = '<div class="vk-group"><h3>Other tests in your log</h3><ul class="vk-otherlist">' +
+      others.map(function (r) {
+        var st = STATUS_LABEL[r.status] || "";
+        return "<li><b>" + esc(r.name) + '</b><span class="vk-meta">' + esc([fmtDate(r.date), (r.result || "").trim() || st].filter(Boolean).join(" · ")) + "</span></li>";
+      }).join("") + "</ul></div>";
+  }
+
+  // ---------- The one-pager ----------
   function renderPager() {
     var d = new Date();
     var out = [];
@@ -480,7 +1258,7 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
     }, "No visits logged.");
 
     section("Tests and checks", group("test"), function (r) {
-      var st = { "told-normal": "told normal", abnormal: "abnormal / follow-up", waiting: "waiting on result", unknown: "never heard back" }[r.status] || "";
+      var st = STATUS_LABEL[r.status] || "";
       return "<li><b>" + esc(r.name) + "</b> <span>— " + fmtDate(r.date) + (r.result ? " · " + esc(r.result) : "") + (st ? " · " + st : "") + "</span></li>";
     }, "No tests logged.");
 
@@ -490,14 +1268,69 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
       }, "");
     }
 
-    out.push('<p class="lg-pfoot">Written by the patient with joinherada.com · a personal log and a head start for the visit — not a medical record.</p>');
+    out.push('<p class="lg-pfoot">Written by the patient with joinherada.com · a personal log and a head start for the visit — not a medical record. Draft, pending clinical review.</p>');
     document.getElementById("pager").innerHTML = out.join("");
   }
 
-  function renderAll() { renderLog(); renderPager(); }
+  // ---------- Today's visit ----------
+  function renderToday() {
+    document.getElementById("want").value = data.want;
+    Array.prototype.forEach.call(document.querySelectorAll("#questions input"), function (inp) {
+      inp.value = data.questions[+inp.getAttribute("data-q")] || "";
+    });
+  }
+
+  document.addEventListener("input", function (ev) {
+    var t = ev.target;
+    if (t.id === "want") { data.want = t.value; save(); return; }
+    if (t.hasAttribute && t.hasAttribute("data-q")) { data.questions[+t.getAttribute("data-q")] = t.value; save(); }
+  });
+
+  var qChipsEl = document.getElementById("qChips");
+  SUGGESTIONS.forEach(function (s) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.innerHTML = '<span class="vk-tone">' + s.tone + "</span>" + esc(s.text);
+    b.addEventListener("click", function () {
+      var slot = data.questions.findIndex(function (q) { return !q.trim(); });
+      if (slot === -1) {
+        // Never overwrite a written question silently.
+        var note = document.getElementById("copied");
+        note.textContent = "All three questions are written — clear one to swap in a suggestion.";
+        note.hidden = false;
+        setTimeout(function () { note.hidden = true; note.textContent = "Copied — paste it into your notes or portal."; }, 4000);
+        return;
+      }
+      data.questions[slot] = s.text;
+      save();
+      renderToday();
+    });
+    qChipsEl.appendChild(b);
+  });
+
+  function renderAll() { renderLog(); renderPicker(); renderTimeline(); renderChecks(); renderPager(); renderToday(); }
 
   // ---------- Copy ----------
-  function asText() {
+  function copyWith(noteId, text) {
+    var note = document.getElementById(noteId);
+    function done() { note.hidden = false; setTimeout(function () { note.hidden = true; }, 4000); }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); } catch (err) { alert("Copying is blocked in this browser — select the text and copy it by hand."); }
+      ta.remove();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  }
+
+  function pagerText() {
     var lines = ["MY HEALTH ONE-PAGER — written by the patient (joinherada.com; a personal log, not a medical record)", ""];
     function add(title, rows, line) {
       lines.push(title);
@@ -514,42 +1347,118 @@ input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
       return fmtDate(r.date) + " — " + r.who + ": “" + r.said + "”" + (r.next ? " (next: " + r.next + ")" : "");
     });
     add("TESTS AND CHECKS", group("test"), function (r) {
-      var st = { "told-normal": "told normal", abnormal: "abnormal / follow-up", waiting: "waiting on result", unknown: "never heard back" }[r.status] || "";
+      var st = STATUS_LABEL[r.status] || "";
       return r.name + " — " + fmtDate(r.date) + (r.result ? ": " + r.result : "") + (st ? " (" + st + ")" : "");
     });
     return lines.join("\n").trim();
   }
 
-  document.getElementById("copyPager").addEventListener("click", function () {
-    var text = asText();
-    var note = document.getElementById("copied");
-    function done() { note.hidden = false; setTimeout(function () { note.hidden = true; }, 4000); }
-    function fallback() {
-      var ta = document.createElement("textarea");
-      ta.value = text;
-      ta.setAttribute("readonly", "");
-      ta.style.position = "fixed";
-      ta.style.left = "-9999px";
-      document.body.appendChild(ta);
-      ta.select();
-      try { document.execCommand("copy"); done(); } catch (err) { alert("Copying is blocked in this browser — select the one-pager and copy it by hand."); }
-      ta.remove();
+  function kitText() {
+    var fits = fitKeys();
+    var states = checkStates();
+    var lines = ["THE VISIT KIT — written by the patient (joinherada.com)", "(Draft, pending clinical review · questions to weigh with my clinician — not an order sheet)", ""];
+    if (data.picks.length) {
+      var labels = SYMPTOMS.filter(function (s) { return data.picks.indexOf(s.id) !== -1; }).map(function (s) { return s.label; });
+      lines.push("MY SYMPTOMS: " + labels.join(", "));
+      lines.push("");
     }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, fallback);
-    } else { fallback(); }
+    lines.push("MY TIMELINE");
+    var syms = timelineSymptoms();
+    var marks = timelineMarkers();
+    if (!syms.length && !marks.length) lines.push("(nothing logged)");
+    syms.forEach(function (s) {
+      lines.push("- " + s.name + ": " + fmtDate(s.start) + " – " + (s.end ? fmtDate(s.end) : "ongoing") + " (" + (SEVERITY_NAME[s.severity] || "moderate") + ")");
+    });
+    marks.forEach(function (e) { lines.push("- [marker] " + e.text + " (" + fmtDate(e.date) + ")"); });
+    lines.push("");
+    lines.push("TESTED & WORTH ASKING");
+    GROUPS.forEach(function (g) {
+      lines.push(g.title.toUpperCase());
+      ITEMS.filter(function (t) { return t.group === g.id; }).forEach(function (t) {
+        var st = states[t.k];
+        lines.push((st ? "[x] " : "[ ] ") + t.label + (st ? " (" + fmtDate(st.date) + (st.result ? ": " + st.result : "") + ")" : "") + (fits[t.k] ? " ← fits my symptoms" : ""));
+      });
+    });
+    var others = otherTests();
+    if (others.length) {
+      lines.push("OTHER TESTS IN MY LOG");
+      others.forEach(function (r) {
+        var st = STATUS_LABEL[r.status] || "";
+        lines.push("- " + r.name + " (" + fmtDate(r.date) + ((r.result || st) ? ": " + (r.result || st) : "") + ")");
+      });
+    }
+    lines.push("For each: was it considered — and if not needed, why not?");
+    lines.push("");
+    lines.push("WHAT I WANT FROM TODAY");
+    lines.push(data.want.trim() || "(not filled in)");
+    lines.push("");
+    lines.push("MY THREE QUESTIONS");
+    data.questions.forEach(function (q, i) { if (q.trim()) lines.push((i + 1) + ". " + q.trim()); });
+    return lines.join("\n");
+  }
+
+  document.getElementById("copyPager").addEventListener("click", function () { copyWith("copiedPager", pagerText()); });
+  document.getElementById("copyKit").addEventListener("click", function () { copyWith("copied", kitText()); });
+
+  // ---------- Print ----------
+  function stampPages() {
+    var d = new Date();
+    var stamp = "prepared " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + " · written by the patient · joinherada.com · draft, pending clinical review";
+    ["printDate1", "printDate3", "printDate4"].forEach(function (id) { document.getElementById(id).textContent = stamp; });
+  }
+  // Fresh dates whether printing starts from a button or the browser menu.
+  window.addEventListener("beforeprint", function () { stampPages(); renderPager(); });
+  window.addEventListener("afterprint", function () { document.body.classList.remove("pm-pager"); });
+  document.getElementById("printKit").addEventListener("click", function () {
+    document.body.classList.remove("pm-pager");
+    stampPages();
+    renderPager();
+    window.print();
+  });
+  document.getElementById("printPager").addEventListener("click", function () {
+    document.body.classList.add("pm-pager");
+    renderPager();
+    window.print();
   });
 
-  // Re-render so the "prepared" date is today's even if the tab sat open,
-  // and whether printing starts from the button or the browser menu.
-  window.addEventListener("beforeprint", renderPager);
-  document.getElementById("printPager").addEventListener("click", function () { renderPager(); window.print(); });
+  // ---------- PNG export ----------
+  document.getElementById("exportPng").addEventListener("click", function () {
+    var svgStr = renderSVG(true);
+    if (!svgStr) { alert("Log at least one symptom or event first."); return; }
+    var blob = new Blob([svgStr], { type: "image/svg+xml;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var img = new Image();
+    img.onload = function () {
+      var scale = 2;
+      var canvas = document.createElement("canvas");
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      var ctx = canvas.getContext("2d");
+      ctx.scale(scale, scale);
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(function (png) {
+        if (!png) return;
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(png);
+        a.download = "ledger-timeline.png";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+      }, "image/png");
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); alert("Sorry — the image could not be generated in this browser. Try Print instead."); };
+    img.src = url;
+  });
 
+  // ---------- Clear ----------
   document.getElementById("clearAll").addEventListener("click", function () {
-    if (!data.records.length) return;
-    if (!confirm("Remove every entry from this device? (Save a backup file first if you want to keep it.)")) return;
-    data = { records: [] };
+    if (!data.records.length && !data.picks.length && !data.want && !data.questions.join("")) return;
+    if (!confirm("Remove everything from this device — the log, picks and questions? (Save a backup file first if you want to keep it.)")) return;
+    data = blank();
     try { localStorage.removeItem(STORAGE_KEY); } catch (err) { /* fine */ }
+    try { localStorage.removeItem(OLD_KIT_KEY); } catch (err) { /* fine */ }
     renderAll();
   });
 

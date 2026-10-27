@@ -1,33 +1,55 @@
 # The Ledger
 
-A private, local-only log of a health story: four record types
-(symptom, visit, test, treatment) entered through one small form,
-rendered three ways —
+The portfolio's one interactive record tool, after the Oct 27 merger:
+the Ledger absorbed the Visit Kit (which had itself absorbed the
+Rule-Out Checklist and, before that, the Symptom Timeline, Handoff
+Packet and Script Builder ideas). You log once; everything else is
+derived.
 
-- **The log:** every entry in one chronological feed, newest first,
-  grouped by month — the story so far.
-- **The one-pager:** a live summary (ongoing now / visits newest first /
-  tests and checks / resolved or stopped) that prints on one portrait
-  page and copies as plain text for a portal message.
-- **The backup file:** download/restore the whole ledger as a JSON file;
-  with a passphrase it is encrypted in the browser first (AES-GCM, key
-  derived via PBKDF2-SHA-256, 150k iterations) so it can move between
-  devices without ever touching a server.
+**The log** is the only place data is entered: five record types —
+symptom (start/end/severity), visit (who/said/next), test
+(name/date/result-as-told/status), treatment (start/stop/outcome), and
+life event — shown newest-first, grouped by month.
 
-Framed everywhere as **"a personal log, not a medical record"** — in
-the notice strip, the clinician line, and the printout's footer.
-Visit entries record "what they said" in the user's own words; the
-"who" field is the user's own label.
+**The picker** (screen only): logged symptom names keyword-match a
+20-symptom vocabulary and light up chips; adjusting them shows which of
+10 midlife conditions share the picture, with separating checks,
+curiosity-phrased ask-lines and look-alike pair notes.
+
+**The Visit Kit** is the Ledger's printable output — four pages, every
+one derived from the log:
+
+1. **The timeline** — symptoms as severity-weighted bars (raspberry =
+   ongoing), visits and life events as markers. PNG export on-device.
+2. **The one-pager** — ongoing now / visits / tests / resolved, the
+   handover summary (its own print and copy buttons, too).
+3. **Tested & worth asking** — the ten-check consider-list (7 routine,
+   3 symptom-triggered), each check ticked iff a matching test is in
+   the log (newest match supplies date and result); "log it" prefills
+   the test form for the rest; unmatched tests print as "other tests in
+   your log"; reasoning and per-item sources under "why · source";
+   not-an-order-sheet caveat.
+4. **Today's visit** — what I want from today, three questions with
+   tone-graded suggestion chips (Gentle / Direct — curiosity phrasing
+   only, never "document it in my chart"), who-sees-what routing card.
+
+"Print the Visit Kit" prints all four pages; the one-pager's own button
+prints just that page.
+
+**Flag:** Draft — **pending clinical review.** The symptom map,
+consider-list and separating checks are one knowledge base, reviewed
+together (inherited from the Rule-Out Checklist via the Visit Kit).
 
 ## Data
 
-None external, and no clinical content — the Ledger holds only what the
-user types, so it carries no pending-review flag. State lives in
-`localStorage` (`herada-ledger-v1`, try/catch-wrapped; the page works
-without storage, in memory). Nothing is sent anywhere; Clear all
-removes it (and suggests saving a backup first). The record model
-extends the Visit Kit's and is the shape Journey Submissions would
-aggregate later.
+None external. One `localStorage` record (`herada-ledger-v1`,
+try/catch-wrapped; works without storage): `records[]` plus the Kit's
+`picks`, `want` and `questions`. On first load it imports the retired
+standalone Visit Kit's state (`herada-visit-kit-v1`) — symptoms, events
+and tested rows become ordinary log records — then removes that key.
+Backup file save/load, optionally encrypted in the browser (AES-GCM,
+PBKDF2-SHA-256 at 150k iterations); old backups load fine. Nothing is
+sent anywhere; Clear all removes everything.
 
 ## Files
 
