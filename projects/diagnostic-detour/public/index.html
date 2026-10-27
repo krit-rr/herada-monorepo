@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Diagnostic Detour: a project by Herada</title>
-<meta name="description" content="For midlife-relevant conditions: how long women wait for a diagnosis, how often the first label is wrong, how that compares to men — and whether clinical trials enroll women at the rate conditions affect them. Every figure graded by source strength.">
+<meta name="description" content="For midlife-relevant conditions: how long women wait for a diagnosis, how often the first label is wrong, how that compares to men + whether clinical trials enroll women at the rate conditions affect them. Every figure graded by source strength.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -64,7 +64,7 @@ a:hover { color: var(--accent-hover); }
 .hr-header span.hr-ui { color: var(--ink-soft); }
 
 .hr-notice { background: var(--strip); }
-.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.875rem; color: var(--ink); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink); }
 .hr-notice b { font-weight: 700; }
 
 .hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
@@ -153,7 +153,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 </header>
 
 <div class="hr-notice">
-  <div class="hr-wrap"><p><b>Draft.</b> Every figure is graded by source strength; those marked &ldquo;being verified&rdquo; came from a press summary or abstract and are being checked against the full paper.</p></div>
+  <div class="hr-wrap"><p><b>[ draft ]</b> Every figure is graded by source strength. &ldquo;Being verified&rdquo; = it came from a press summary or abstract + the full-paper check is still pending.</p></div>
 </div>
 
 <main>
@@ -200,7 +200,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     <div class="hr-wrap">
       <p class="dd-kicker">The gap</p>
       <h2>Women vs. men, same condition</h2>
-      <p class="dd-sub">Where a study measured both sexes. Counter-evidence is shown too — the detour is not uniform, and pretending it is would be its own kind of misdiagnosis.</p>
+      <p class="dd-sub">Where a study measured both sexes. Counter-evidence is shown too: the detour is not uniform, and pretending it is would be its own kind of misdiagnosis.</p>
       <ul class="dd-rows" id="gapRows"></ul>
     </div>
   </section>
@@ -225,7 +225,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     <div class="hr-wrap">
       <p class="dd-kicker">Who gets studied</p>
       <h2>The trial gap: patients vs. participants</h2>
-      <p class="dd-sub">For ten conditions whose patients are mostly women: the share of women among clinical-trial participants, against their share among patients — from ClinicalTrials.gov posted results. Below the diagonal, women are underrepresented relative to the patient population.</p>
+      <p class="dd-sub">For ten conditions whose patients are mostly women: the share of women among clinical-trial participants, against their share among patients, from ClinicalTrials.gov posted results. Below the diagonal, women are underrepresented relative to the patient population.</p>
       <div class="dd-plot" id="tgChart"></div>
       <p class="dd-legend" id="tgLegend" hidden><b>Reading it:</b> each circle is a condition, sized by participants counted. On the diagonal, trials enroll women at the rate the condition affects them. Both axes start at 50%. Hover any circle for the numbers.</p>
       <div class="tg-table-wrap" id="tgTable"></div>
@@ -237,7 +237,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     <div class="hr-wrap">
       <p class="dd-kicker">The holes</p>
       <h2>Where the evidence is missing</h2>
-      <p class="dd-sub">Conditions and questions where this research found no usable numbers at all. The biggest hole is the thesis itself — which is a study someone should run.</p>
+      <p class="dd-sub">Conditions and questions where this research found no usable numbers at all. The biggest hole is the thesis itself. That is a study someone should run.</p>
       <ul class="dd-plain" id="gaps"></ul>
     </div>
   </section>
@@ -246,7 +246,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     <div class="hr-wrap">
       <p class="dd-kicker">The receipts we didn&rsquo;t find</p>
       <h2>What you&rsquo;ve heard that doesn&rsquo;t hold up</h2>
-      <p class="dd-sub">Figures that circulate widely but trace to no primary source, plus anything graded &ldquo;secondary.&rdquo; None of these appear as data points anywhere on this page — they are listed so you know we looked, and what to cite instead.</p>
+      <p class="dd-sub">Figures that circulate widely but trace to no primary source, plus anything graded &ldquo;secondary.&rdquo; None of these appear as data points anywhere on this page. They are listed so you know we looked + what to cite instead.</p>
       <ul class="dd-plain" id="untraceable"></ul>
     </div>
   </section>
@@ -335,7 +335,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
       if (hf) {
         document.getElementById(citeId).innerHTML =
           "<b>" + hf.value.toLocaleString("en-US") + "</b> " + esc(hf.unit) +
-          " — " + esc(hf.population) + ". " + badge(hf.source_type) +
+          " · " + esc(hf.population) + ". " + badge(hf.source_type) +
           ' <a href="' + esc(hf.source_url) + '">' + esc(hf.source_title) + " (" + hf.source_year + ")</a>" + verifyTag(hf);
       }
     }
@@ -386,7 +386,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
       var f = r.f;
       var desc = f.unit.replace(/^(weeks|months|years)[,\s]*(median|mean)?[,\s]*/i, "");
       s.push('<text x="' + padL + '" y="' + (top + 15) + '" font-size="13.5" font-weight="600" fill="var(--ink)">' + esc(f.condition) +
-        ' <tspan font-weight="400" fill="var(--ink-soft)">' + esc(desc ? "— " + desc : "") + "</tspan>" +
+        ' <tspan font-weight="400" fill="var(--ink-soft)">' + esc(desc ? "· " + desc : "") + "</tspan>" +
         ' <tspan font-weight="700" fill="var(--ink-soft)" font-size="10" letter-spacing="1">' + f.source_type.toUpperCase() + "</tspan>" +
         (f.verify ? ' <tspan fill="var(--accent)" font-size="10" font-weight="700">⚑</tspan>' : "") + "</text>");
       s.push('<line x1="' + padL + '" y1="' + cy + '" x2="' + (padL + plotW) + '" y2="' + cy + '" stroke="var(--rule)" stroke-width="1"/>');
@@ -434,17 +434,17 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 
     // Gaps + refused numbers.
     document.getElementById("gaps").innerHTML = d.gaps.map(function (g) {
-      return "<li><b>" + esc(g.condition) + "</b> <span>— " + esc(g.note) + "</span></li>";
+      return "<li><b>" + esc(g.condition) + "</b> <span>· " + esc(g.note) + "</span></li>";
     }).join("");
     // The untraceable list, plus any secondary-graded finding that is not
     // already covered by an untraceable entry (an untraceable finding is
     // expected to have its own entry in the untraceable array).
     var refused = d.untraceable.map(function (u) {
-      return "<li><b>“" + esc(u.claim) + "”</b> <span>— " + esc(u.note) + "</span></li>";
+      return "<li><b>“" + esc(u.claim) + "”</b> <span>· " + esc(u.note) + "</span></li>";
     });
     d.findings.forEach(function (f) {
       if (f.source_type !== "secondary" || f.untraceable) return;
-      refused.push("<li><b>“" + esc(f.condition) + ": " + f.value.toLocaleString("en-US") + " " + esc(f.unit) + "”</b> <span>— secondary source only (" +
+      refused.push("<li><b>“" + esc(f.condition) + ": " + f.value.toLocaleString("en-US") + " " + esc(f.unit) + "”</b> <span>· secondary source only (" +
         '<a href="' + esc(f.source_url) + '">' + esc(f.source_title) + ", " + f.source_year + "</a>)" +
         (f.notes ? ". " + esc(f.notes) : "") + "</span></li>");
     });

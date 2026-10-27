@@ -65,7 +65,7 @@ a:hover { color: var(--accent-hover); }
 .hr-header span.hr-ui { color: var(--ink-soft); }
 
 .hr-notice { background: var(--strip); }
-.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.875rem; color: var(--ink); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink); }
 
 .qz-kicker { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); }
 
@@ -149,7 +149,7 @@ a:hover { color: var(--accent-hover); }
 </header>
 
 <div class="hr-notice">
-  <div class="hr-wrap"><p>Nothing you answer is stored or sent anywhere — the page forgets when you close it. For curiosity, not diagnosis.</p></div>
+  <div class="hr-wrap"><p><b>[ nothing stored ]</b> Answers are never saved or sent anywhere + the page forgets when you close it. For curiosity, not diagnosis.</p></div>
 </div>
 
 <main>
@@ -157,7 +157,7 @@ a:hover { color: var(--accent-hover); }
 </main>
 
 <footer class="hr-footer">
-  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice — just receipts, lightly gamified. As of October 2026.</p></div>
+  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice. Just receipts, lightly gamified. As of October 2026.</p></div>
 </footer>
 
 <script>
@@ -167,7 +167,7 @@ a:hover { color: var(--accent-hover); }
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 
   // ====================================================================
-  // Quiz 1: Myth or measured? — every reveal grades a circulating stat
+  // Quiz 1: Myth or measured? Every reveal grades a circulating stat
   // against the Diagnostic Detour's sourced dataset.
   // ====================================================================
   var MYTH = {
@@ -176,50 +176,50 @@ a:hover { color: var(--accent-hover); }
     title: "Myth or measured?",
     blurb: "Eight stats that circulate in women's health. You call it: does the number trace to a real study, or does it fall apart when you pull the thread?",
     meta: "8 rounds · source-grading, the game",
-    optionsLabels: ["Measured — it holds up", "Myth-ish — it doesn’t hold up"],
+    optionsLabels: ["Measured · it holds up", "Myth-ish · it doesn’t hold up"],
     scoreLines: [
       [0, "The internet thanks you for your trust. The receipts disagree."],
-      [4, "A healthy skeptic — you smell a shaky number at close range."],
+      [4, "A healthy skeptic: you smell a shaky number at close range."],
       [7, "You grade sources like it’s your job. (Want a job?)"]
     ],
     questions: [
       { q: "“Women wait 4.6 years and see 4.8 doctors before an autoimmune diagnosis.”",
         answer: 1, verdict: "Doesn’t hold up as stated.",
-        why: "The famous 4.6/4.8 pairing matches no wave of the AARDA survey it’s attributed to. What the 2017 wave actually reports: about 3 years on average, and 4.64 physicians for women — and it’s a self-selected advocacy survey, the weakest grade of evidence.",
+        why: "The famous 4.6/4.8 pairing matches no wave of the AARDA survey it’s attributed to. What the 2017 wave actually reports: about 3 years on average, and 4.64 physicians for women. And it’s a self-selected advocacy survey, the weakest grade of evidence.",
         src: "AARDA Survey Study report, 1996–2017", url: "https://autoimmune.org/wp-content/uploads/5yr-Survey-Study-REPORT-updated-2017.pdf" },
       { q: "“After a heart attack, women are 50% more likely than men to get the wrong initial diagnosis.”",
-        answer: 1, verdict: "The 50% doesn’t hold up — the real numbers are worse-documented and better.",
+        answer: 1, verdict: "The 50% doesn’t hold up. The real numbers are worse-documented + better.",
         why: "The “50%” traces to an unpublished analysis a charity described in a press release. The published registry study of 564,412 heart attacks found women had 59% greater odds of initial misdiagnosis for one type (STEMI) and 41% for the other (NSTEMI). Cite those.",
         src: "Wu et al., MINAP registry, Eur Heart J ACC 2018", url: "https://doi.org/10.1177/2048872616661693" },
       { q: "“Lupus takes nearly six years to diagnose.”",
         answer: 1, verdict: "Doesn’t hold up.",
-        why: "The six-years figure traces only to a patient-advocacy survey. The published systematic review puts the median at about 18 months — and the real, defensible sex finding inside it: women’s median was 29.6 months vs 14.1 for men.",
+        why: "The six-years figure traces only to a patient-advocacy survey. The published systematic review puts the median at about 18 months. The real, defensible sex finding inside it: women’s median was 29.6 months vs 14.1 for men.",
         src: "SLE diagnostic-delay systematic review, Rheumatology 2025", url: "https://doi.org/10.1093/rheumatology/keaf384" },
       { q: "“Women with ADHD are identified about four years later than males.”",
-        answer: 0, verdict: "Measured — registry-grade.",
+        answer: 0, verdict: "Measured [ registry-grade ].",
         why: "A whole-population registry of Stockholm County (37,591 females with an ADHD record) found females get their first ADHD record 3.9 years later, with a tight confidence interval. One of the cleanest numbers in this whole area.",
         src: "Skoglund et al., J Child Psychol Psychiatry 2024", url: "https://doi.org/10.1111/jcpp.13920" },
       { q: "“Nearly a third of heart attacks are given a different diagnosis at first.”",
-        answer: 0, verdict: "Measured — registry-grade.",
-        why: "29.9% — 168,534 of 564,412 heart attacks in the England & Wales national registry carried a different initial diagnosis. Both sexes; the misdiagnosed had about 70% higher 30-day mortality.",
+        answer: 0, verdict: "Measured [ registry-grade ].",
+        why: "29.9% = 168,534 of 564,412 heart attacks in the England & Wales national registry carried a different initial diagnosis. Both sexes; the misdiagnosed had about 70% higher 30-day mortality.",
         src: "Wu et al., MINAP registry, 2018", url: "https://doi.org/10.1177/2048872616661693" },
       { q: "“77% of POTS patients were told it was psychiatric before diagnosis.”",
-        answer: 0, verdict: "Measured — but it’s a survey, so hold it loosely.",
-        why: "It comes from the largest POTS survey ever run (4,835 patients) — real, published, and worth citing. But surveys over-sample the worst journeys, so it’s a weaker grade than a registry. Saying “a large patient survey found” is the honest version.",
+        answer: 0, verdict: "Measured [ survey-grade ]. Hold it loosely.",
+        why: "It comes from the largest POTS survey ever run (4,835 patients): real, published + worth citing. But surveys over-sample the worst journeys, so it’s a weaker grade than a registry. Saying “a large patient survey found” is the honest version.",
         src: "Shaw et al., J Intern Med 2019", url: "https://doi.org/10.1111/joim.12895" },
       { q: "“Sjögren’s takes six-plus years to diagnose.”",
         answer: 1, verdict: "Doesn’t hold up anymore.",
-        why: "That’s a 2012 foundation baseline that keeps getting reprinted. Population-wide insurance-claims data — a strong grade — puts the median around two years (118 weeks for women, 94 for men). Still a detour; just an honest-sized one.",
+        why: "That’s a 2012 foundation baseline that keeps getting reprinted. Population-wide insurance-claims data [ a strong grade ] puts the median around two years (118 weeks for women, 94 for men). Still a detour; just an honest-sized one.",
         src: "Taiwan National Health Insurance claims study, 2021", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8004927/" },
       { q: "“In multiple sclerosis trials, women are enrolled below their share of patients.”",
-        answer: 0, verdict: "Measured — from the public trial registry.",
-        why: "Women are about 75% of MS patients but 66% of trial participants across 548 trials with posted results (139,909 people) — a pull anyone can re-run from ClinicalTrials.gov. The counter-lesson: for some conditions (RA, migraine) enrollment actually runs above the patient share.",
+        answer: 0, verdict: "Measured [ public trial registry ].",
+        why: "Women are about 75% of MS patients but 66% of trial participants across 548 trials with posted results (139,909 people). A pull anyone can re-run from ClinicalTrials.gov. The counter-lesson: for some conditions (RA, migraine) enrollment actually runs above the patient share.",
         src: "Herada’s Trial Gap pull, ClinicalTrials.gov, Oct 2026", url: "/projects/diagnostic-detour/#trial-gap" }
     ]
   };
 
   // ====================================================================
-  // Quiz 2: What's your appointment style? — communication archetypes.
+  // Quiz 2: What's your appointment style? Communication archetypes.
   // ====================================================================
   var STYLE = {
     id: "appointment-style",
@@ -247,7 +247,7 @@ a:hover { color: var(--accent-hover); }
         opts: [["Ask for the actual numbers for the file.", "P"],
                ["Feel a little embarrassed for having asked.", "M"],
                ["Compare them to optimal ranges at 1am.", "R"],
-               ["Ask: “okay — so what do we check next?”", "A"]] },
+               ["Ask: “okay, so what do we check next?”", "A"]] },
       { q: "Waiting-room mood:",
         opts: [["Calm. The notes are printed. Both copies.", "P"],
                ["Wondering if you should just cancel.", "M"],
@@ -266,31 +266,31 @@ a:hover { color: var(--accent-hover); }
     ],
     results: {
       P: { name: "The Preparer",
-           desc: "You arrive with receipts — dates, patterns, printouts. Clinicians quietly love you, because you make the visit work.",
+           desc: "You arrive with receipts: dates + patterns + printouts. Clinicians quietly love you, because you make the visit work.",
            strength: "Your strength: nothing rests on memory. Your record does the talking.",
            watch: "Watch for: the binder crowding out the one big ask. Data is your opener, not your conclusion.",
-           scripts: ["Here’s my timeline — and the one thing I most want answered today is this.",
+           scripts: ["Here’s my timeline. The one thing I most want answered today is this.",
                      "Given this pattern, what else could explain it?"],
-           cta: "Your natural habitat is <a href='/projects/the-ledger/'>the Ledger&rsquo;s Visit Kit</a> — it turns the binder into clean printable pages." },
+           cta: "Your natural habitat is <a href='/projects/the-ledger/'>the Ledger&rsquo;s Visit Kit</a>: it turns the binder into clean printable pages." },
       M: { name: "The Minimizer",
-           desc: "“It’s probably nothing” is your opening line — which means when you do speak up, it’s real. The problem: under-reporting trains under-investigating.",
+           desc: "“It’s probably nothing” is your opening line. Which means when you do speak up, it’s real. The problem: under-reporting trains under-investigating.",
            strength: "Your strength: credibility. Nobody doubts the thing you finally mention.",
            watch: "Watch for: softening symptoms until they sound optional. “Mild” isn’t a personality requirement.",
-           scripts: ["I don’t usually bring things up unless they’re affecting my life — this one is.",
+           scripts: ["I don’t usually bring things up unless they’re affecting my life. This one is.",
                      "If this isn’t worth checking, what would make it worth checking?"],
            cta: "Let a record speak when you’d rather not: <a href='/projects/the-ledger/'>the Ledger</a> keeps the story so you don’t have to perform it." },
       R: { name: "The Researcher",
-           desc: "You’ve read the studies. Possibly tonight. Your pattern-spotting is genuinely valuable — the trick is packaging it so it opens doors instead of raising shields.",
+           desc: "You’ve read the studies. Possibly tonight. Your pattern-spotting is genuinely valuable. The trick is packaging it so it opens doors instead of raising shields.",
            strength: "Your strength: you connect dots across months that a 15-minute visit never could.",
            watch: "Watch for: leading with citations. Curiosity questions get further than evidence dumps.",
            scripts: ["What would change your assessment?",
-                     "I’ve noticed a pattern — can I walk you through it in thirty seconds?"],
-           cta: "Channel the research into <a href='/projects/the-ledger/'>the Ledger&rsquo;s Visit Kit</a> — sourced, printable, and phrased to land." },
+                     "I’ve noticed a pattern. Can I walk you through it in thirty seconds?"],
+           cta: "Channel the research into <a href='/projects/the-ledger/'>the Ledger&rsquo;s Visit Kit</a>: sourced + printable + phrased to land." },
       A: { name: "The Advocate",
-           desc: "You ask, you follow up, you switch clinicians when you must. Nothing falls through on your watch — just mind that pressure can read as adversarial before it reads as thorough.",
+           desc: "You ask, you follow up, you switch clinicians when you must. Nothing falls through on your watch. Just mind that pressure can read as adversarial before it reads as thorough.",
            strength: "Your strength: follow-through. Vague plans don’t survive you.",
            watch: "Watch for: turning every visit into a negotiation. Partnership framing gets the same result with less friction.",
-           scripts: ["Can we agree on a date — if it’s not better by then, what’s the next step?",
+           scripts: ["Can we agree on a date? If it’s not better by then, what’s the next step?",
                      "What would you want checked if it were you?"],
            cta: "Your pace, matched: <a href='/projects/the-ledger/'>the Visit Kit page in the Ledger</a> comes tone-graded, gentle to direct." }
     }
@@ -310,7 +310,7 @@ a:hover { color: var(--accent-hover); }
   function renderHub() {
     state = null;
     var out = ['<div class="qz-hub"><p class="qz-kicker">Pop quiz</p><h1>Tap through. Learn something. Keep the receipts.</h1>',
-      '<p class="qz-lede">Quizzes in women’s health that respect your intelligence — nothing you answer is stored, and every reveal is sourced.</p>',
+      '<p class="qz-lede">Quizzes in women’s health that respect your intelligence. Nothing stored + every reveal sourced.</p>',
       '<div class="qz-cards">'];
     QUIZZES.forEach(function (qz) {
       out.push('<button type="button" class="qz-card" data-quiz="' + qz.id + '"><span class="qz-meta">' + esc(qz.meta) + "</span><h2>" + esc(qz.title) + "</h2><p>" + esc(qz.blurb) + '</p><span class="qz-go">Play →</span></button>');
@@ -365,7 +365,7 @@ a:hover { color: var(--accent-hover); }
     var correct = pick === q.answer;
     if (correct) state.score++;
     var out = ['<p class="qz-kicker" style="margin-top:2rem">' + esc(qz.title) + '</p><h2 class="qz-question">' + q.q + "</h2>"];
-    out.push('<div class="qz-reveal"><p class="qz-verdict' + (correct ? " good" : "") + '">' + (correct ? "You called it. " : "Not quite — ") + esc(q.verdict) + "</p>");
+    out.push('<div class="qz-reveal"><p class="qz-verdict' + (correct ? " good" : "") + '">' + (correct ? "You called it. " : "Not quite. ") + esc(q.verdict) + "</p>");
     out.push("<p>" + esc(q.why) + "</p>");
     out.push('<p class="qz-src">Source: <a href="' + esc(q.url) + '">' + esc(q.src) + "</a></p></div>");
     out.push('<button type="button" class="hr-button" id="nextQ">' + (state.i + 1 < qz.questions.length ? "Next round" : "See my result") + "</button>");
@@ -382,8 +382,8 @@ a:hover { color: var(--accent-hover); }
       out.push('<div class="qz-result"><p class="qz-kicker">Your result</p>');
       out.push('<p class="qz-big">' + state.score + " / " + total + "</p>");
       out.push("<p><b>" + esc(line) + "</b></p>");
-      out.push("<p>The real lesson: in women’s health, the grade of a number matters as much as the number. Registries beat surveys; surveys beat press releases; press releases beat nothing — barely. Every figure Herada publishes carries its grade: see <a href='/projects/diagnostic-detour/'>The Diagnostic Detour</a>.</p>");
-      out.push(resultActions("I scored " + state.score + "/" + total + " on “Myth or measured?” — can you tell which women’s-health stats hold up? joinherada.com/projects/quizzes/"));
+      out.push("<p>The real lesson: in women’s health, the grade of a number matters as much as the number. Registries beat surveys; surveys beat press releases; press releases beat nothing, barely. Every figure Herada publishes carries its grade: see <a href='/projects/diagnostic-detour/'>The Diagnostic Detour</a>.</p>");
+      out.push(resultActions("I scored " + state.score + "/" + total + " on “Myth or measured?” Can you tell which women’s-health stats hold up? joinherada.com/projects/quizzes/"));
       out.push("</div>");
     } else {
       var best = Object.keys(qz.results).sort(function (a, b) { return (state.tally[b] || 0) - (state.tally[a] || 0); })[0];
@@ -395,9 +395,9 @@ a:hover { color: var(--accent-hover); }
       out.push('<p class="qz-watch">' + esc(r.watch) + "</p>");
       out.push('<ul class="qz-scripts">' + r.scripts.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul>");
       out.push('<p class="qz-cta">' + r.cta + "</p>");
-      out.push(resultActions("My exam-room archetype: " + r.name + ". Find yours — joinherada.com/projects/quizzes/"));
+      out.push(resultActions("My exam-room archetype: " + r.name + ". Find yours: joinherada.com/projects/quizzes/"));
       out.push("</div>");
-      out.push('<p class="qz-note">This is a communication-style quiz — it knows nothing about your health, and all four archetypes get taken seriously in a good exam room.</p>');
+      out.push('<p class="qz-note">This is a communication-style quiz. It knows nothing about your health, and all four archetypes get taken seriously in a good exam room.</p>');
     }
     app.innerHTML = chrome(out.join(""));
   }

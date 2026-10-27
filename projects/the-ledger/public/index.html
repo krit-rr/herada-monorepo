@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Ledger: a tool by Herada</title>
-<meta name="description" content="A private, local-only log of your health story — symptoms, visits, tests, treatments — that builds the Visit Kit: your timeline, what's been tested and what's worth asking, and your questions for today. Printable, nothing typed twice.">
+<meta name="description" content="A private, local-only log of your health story [ symptoms + visits + tests + treatments ] that builds the Visit Kit: your timeline, what's been tested + what's worth asking, and your questions for today. Printable, nothing typed twice.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@ a:hover { color: var(--accent-hover); }
 .hr-header span.hr-ui { color: var(--ink-soft); }
 
 .hr-notice { background: var(--strip); }
-.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.875rem; color: var(--ink); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink); }
 .hr-notice b { font-weight: 700; }
 
 .hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
@@ -275,7 +275,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
 .hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
 
-/* Print. Default: the Visit Kit — timeline, one-pager, checks, today, one page each.
+/* Print. Default: the Visit Kit: timeline, one-pager, checks, today, one page each.
    body.pm-pager (the one-pager's own button): just the one-pager. */
 @page { size: letter portrait; margin: 13mm 15mm; }
 @media print {
@@ -336,14 +336,14 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 </header>
 
 <div class="hr-notice">
-  <div class="hr-wrap"><p><b>A personal log, not a medical record — and a draft, pending clinical review.</b> The consider-list and symptom map are compiled from the guidance linked on each item, not yet clinician-reviewed. Everything lives on this device only.</p></div>
+  <div class="hr-wrap"><p><b>[ draft ]</b> A personal log, not a medical record. The consider-list + symptom map come from the guidance linked on each item, clinical review pending. Everything lives on this device only.</p></div>
 </div>
 
 <main>
   <section class="hr-intro">
     <div class="hr-wrap">
-      <h1>Your whole story, kept — and told.</h1>
-      <p class="hr-lede">Log symptoms, visits, tests and treatments once. The Ledger keeps the record, and builds the Visit Kit from it: your timeline, your one-pager, what&rsquo;s been tested and what&rsquo;s worth asking, and your questions for today — printable, nothing typed twice.</p>
+      <h1>Your whole story, kept + told.</h1>
+      <p class="hr-lede">Log symptoms, visits, tests and treatments once. The Ledger keeps the record, and builds the Visit Kit from it: your timeline, your one-pager, what&rsquo;s been tested and what&rsquo;s worth asking, and your questions for today. Printable, nothing typed twice.</p>
     </div>
   </section>
 
@@ -372,7 +372,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     <div class="hr-wrap">
       <p class="lg-kicker">The log</p>
       <h2>The story so far</h2>
-      <div id="log"><p class="lg-empty">Add your first entry above — the log builds itself here, newest first.</p></div>
+      <div id="log"><p class="lg-empty">Add your first entry above. The log builds itself here, newest first.</p></div>
     </div>
   </section>
 
@@ -381,7 +381,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     <div class="hr-wrap">
       <p class="lg-kicker">What shares your symptoms · Optional</p>
       <h2>The look-alikes</h2>
-      <p class="lg-sub">Chips light up from your logged symptoms — adjust them to see which midlife conditions share your picture. The checks that fit get a raspberry edge on the tested list. Worth a look because <a href="https://www.nice.org.uk/guidance/ng23">NICE guidance</a> lets perimenopause be diagnosed from symptoms alone after 45, so the label can settle before the look-alikes are weighed.</p>
+      <p class="lg-sub">Chips light up from your logged symptoms. Adjust them to see which midlife conditions share your picture. The checks that fit get a raspberry edge on the tested list. Worth a look because <a href="https://www.nice.org.uk/guidance/ng23">NICE guidance</a> lets perimenopause be diagnosed from symptoms alone after 45, so the label can settle before the look-alikes are weighed.</p>
       <div class="vk-symchips" id="symChips" role="group" aria-label="Symptoms"></div>
       <p class="vk-preset">Or start from <a href="#" id="preset">the classic cluster</a>: fatigue, brain fog, joint pain, palpitations. <a href="#" id="clearPicks" hidden>Clear picks</a></p>
       <div id="condResult"></div>
@@ -391,50 +391,50 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   <!-- ============ The Visit Kit: four printable pages, all derived from the log ============ -->
   <section class="lg-section lg-printpage" aria-label="Visit Kit page one: the timeline">
     <div class="hr-wrap">
-      <p class="lg-kicker">The Visit Kit · Page 1 — The timeline</p>
+      <p class="lg-kicker">The Visit Kit · Page 1 · The timeline</p>
       <h2>What happened, and when</h2>
       <span class="vk-print-head" id="printDate1"></span>
       <p class="lg-sub">Drawn from your log: symptoms become bars (thicker = more severe, raspberry = ongoing); visits and life events become markers.</p>
       <div id="chart"><p class="vk-empty">Log a symptom and the timeline draws itself here.</p></div>
-      <p class="vk-legend" id="legend" hidden><b>Reading it:</b> each line is a symptom — the thicker the line, the more severe. A raspberry line is still ongoing. Diamonds mark visits and life events.</p>
+      <p class="vk-legend" id="legend" hidden><b>Reading it:</b> each line is a symptom. Thicker = more severe + raspberry = still ongoing. Diamonds mark visits and life events.</p>
     </div>
   </section>
 
   <section class="lg-section lg-printpage lg-pagersec" aria-label="Visit Kit page two: the one-pager">
     <div class="hr-wrap">
-      <p class="lg-kicker">The Visit Kit · Page 2 — The one-pager</p>
+      <p class="lg-kicker">The Visit Kit · Page 2 · The one-pager</p>
       <h2>The handover</h2>
       <div class="lg-pager" id="pager"></div>
       <div class="lg-actions">
         <button type="button" class="lg-ghost" id="printPager">Print just this page</button>
         <button type="button" class="lg-ghost" id="copyPager">Copy as text</button>
-        <span class="lg-copied" id="copiedPager" hidden>Copied — paste it into your notes or portal.</span>
+        <span class="lg-copied" id="copiedPager" hidden>Copied. Paste it into your notes or portal.</span>
       </div>
     </div>
   </section>
 
   <section class="lg-section lg-printpage" aria-label="Visit Kit page three: tested and worth asking">
     <div class="hr-wrap">
-      <p class="lg-kicker" id="listKicker">The Visit Kit · Page 3 — Tested &amp; worth asking</p>
-      <h2>What&rsquo;s been checked — and what hasn&rsquo;t</h2>
+      <p class="lg-kicker" id="listKicker">The Visit Kit · Page 3 · Tested &amp; worth asking</p>
+      <h2>What&rsquo;s been checked + what hasn&rsquo;t</h2>
       <span class="vk-print-head" id="printDate3"></span>
-      <p class="lg-sub">The consider-list for the midlife look-alikes, filled from your logged tests — a check is ticked because a matching test is in your log. The unticked boxes are their own message; &ldquo;log it&rdquo; adds one. Each item&rsquo;s reasoning sits under &ldquo;why · source.&rdquo;</p>
+      <p class="lg-sub">The consider-list for the midlife look-alikes, filled from your logged tests: a check is ticked because a matching test is in your log. The unticked boxes are their own message; &ldquo;log it&rdquo; adds one. Each item&rsquo;s reasoning sits under &ldquo;why · source.&rdquo;</p>
       <div id="testedGroups"></div>
       <div id="otherTests"></div>
 
       <div class="vk-caveat">
-        <p><b>This is not an order sheet.</b> Broad lab panels are low-yield — testing everyone for everything mostly finds noise, which is why <a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">family-medicine guidance</a> keeps the first panel small. The ask is &ldquo;was this considered?&rdquo; — and &ldquo;not needed, because&hellip;&rdquo; is a perfectly good answer. Which of these fit your picture is your clinician&rsquo;s call.</p>
+        <p><b>This is not an order sheet.</b> Broad lab panels are low-yield: testing everyone for everything mostly finds noise, which is why <a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">family-medicine guidance</a> keeps the first panel small. The ask is &ldquo;was this considered?&rdquo;, and &ldquo;not needed, because&hellip;&rdquo; is a perfectly good answer. Which of these fit your picture is your clinician&rsquo;s call.</p>
       </div>
     </div>
   </section>
 
   <section class="lg-section lg-printpage" aria-label="Visit Kit page four: today's visit">
     <div class="hr-wrap">
-      <p class="lg-kicker">The Visit Kit · Page 4 — Today&rsquo;s visit</p>
+      <p class="lg-kicker">The Visit Kit · Page 4 · Today&rsquo;s visit</p>
       <h2>What I want from today</h2>
       <span class="vk-print-head" id="printDate4"></span>
       <div id="wantWrap" style="margin-top: 1rem; max-width: 52rem;">
-        <textarea id="want" maxlength="300" placeholder="e.g. A plan for figuring out my fatigue — not just reassurance. If labs are normal, I want to know what we check next."></textarea>
+        <textarea id="want" maxlength="300" placeholder="e.g. A plan for figuring out my fatigue, not just reassurance. If labs are normal, I want to know what we check next."></textarea>
       </div>
 
       <p class="lg-kicker" style="margin-top: 2rem">My three questions</p>
@@ -448,24 +448,24 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       <div class="vk-route">
         <h4>Who sees what</h4>
         <ul>
-          <li><b>Cycles and hormones</b> — OB-GYN or a menopause specialist</li>
-          <li><b>Thyroid, metabolic</b> — endocrinology</li>
-          <li><b>Joints, immune, multi-system</b> — rheumatology</li>
-          <li><b>Heart, palpitations</b> — cardiology</li>
-          <li><b>Unrefreshing sleep</b> — sleep medicine</li>
-          <li><b>Lifelong focus trouble</b> — psychiatry or an ADHD specialist</li>
+          <li><b>Cycles and hormones</b> → OB-GYN or a menopause specialist</li>
+          <li><b>Thyroid, metabolic</b> → endocrinology</li>
+          <li><b>Joints, immune, multi-system</b> → rheumatology</li>
+          <li><b>Heart, palpitations</b> → cardiology</li>
+          <li><b>Unrefreshing sleep</b> → sleep medicine</li>
+          <li><b>Lifelong focus trouble</b> → psychiatry or an ADHD specialist</li>
         </ul>
-        <p class="vk-routenote">Routes people commonly discuss with a PCP — whether to refer is your clinician&rsquo;s call.</p>
+        <p class="vk-routenote">Routes people commonly discuss with a PCP. Whether to refer is your clinician&rsquo;s call.</p>
       </div>
 
       <div class="lg-actions">
         <button type="button" class="hr-button" id="printKit">Print the Visit Kit</button>
         <button type="button" class="lg-ghost" id="exportPng">Save timeline as image</button>
         <button type="button" class="lg-ghost" id="copyKit">Copy the kit as text</button>
-        <span class="lg-copied" id="copied" hidden>Copied — paste it into your notes or portal.</span>
+        <span class="lg-copied" id="copied" hidden>Copied. Paste it into your notes or portal.</span>
       </div>
 
-      <p class="lg-clinician"><b>Why it works:</b> it saves you retelling the story, and it makes the visit start where you actually are. It is a record of what you noticed and asked — something to discuss with your clinician, not a diagnosis, and not a set of demands.</p>
+      <p class="lg-clinician"><b>Why it works:</b> it saves you retelling the story, and it makes the visit start where you actually are. It is a record of what you noticed and asked. Something to discuss with your clinician, not a diagnosis, not a set of demands.</p>
     </div>
   </section>
 
@@ -476,7 +476,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       <h2>Backup &amp; move devices</h2>
       <div class="lg-backup">
         <h4>Backup file</h4>
-        <p>Save your ledger as a file you keep — add a passphrase and the file is encrypted on your device before it&rsquo;s saved. Load it here on any device to continue.</p>
+        <p>Save your ledger as a file you keep. Add a passphrase + the file is encrypted on your device before it&rsquo;s saved. Load it here on any device to continue.</p>
         <div class="lg-brow">
           <input type="password" id="passphrase" placeholder="Optional passphrase" autocomplete="new-password" aria-label="Backup passphrase">
           <button type="button" class="lg-ghost" id="saveBackup">Save backup file</button>
@@ -487,7 +487,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       <div class="lg-actions">
         <button type="button" class="lg-clear" id="clearAll">Clear all</button>
       </div>
-      <p class="lg-clinician"><b>Hand it over, or read it out.</b> The Ledger is your own account of your own history — a head start for the visit, not a medical record. Your clinician will verify what matters against your chart; what any of it means is a conversation to have with them.</p>
+      <p class="lg-clinician"><b>Hand it over, or read it out.</b> The Ledger is your own account of your own history: a head start for the visit, not a medical record. Your clinician will verify what matters against your chart; what any of it means is a conversation to have with them.</p>
     </div>
   </section>
 
@@ -495,20 +495,20 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     <div class="hr-wrap">
       <h2>Why this page exists</h2>
       <div class="hr-prose">
-        <p>Fatigue, brain fog, joint pain and palpitations are shared symptoms — each appears in at least four of the ten conditions this page maps, fatigue in all ten — which is why pattern-matching on any one of them misroutes people. The fix isn&rsquo;t more testing for everyone; it&rsquo;s keeping your own record and putting the consider-list next to it, so the explanation that remains has actually earned it.</p>
+        <p>Fatigue, brain fog, joint pain and palpitations are shared symptoms: each appears in at least four of the ten conditions this page maps [ fatigue in all ten ], which is why pattern-matching on any one of them misroutes people. The fix isn&rsquo;t more testing for everyone; it&rsquo;s keeping your own record and putting the consider-list next to it, so the explanation that remains has actually earned it.</p>
         <p>Everything stays on your device, saved in your browser only (Clear all removes it); the printouts, image, text copies and backup file are generated locally, and a passphrase-protected backup is encrypted in the browser before saving.</p>
       </div>
-      <p class="hr-sources" style="margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);">Draft compiled by Herada; <b>pending clinical review</b> — the symptom map, consider-list and separating checks are one knowledge base, reviewed together. General information, not medical advice for any individual. Each check links its source above.</p>
+      <p class="hr-sources" style="margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);">Draft compiled by Herada; <b>pending clinical review</b>: the symptom map + consider-list + separating checks are one knowledge base, reviewed together. General information, not medical advice for any individual. Each check links its source above.</p>
       <details class="vk-more" style="margin-top: 0.75rem;">
         <summary>All sources</summary>
         <ul class="hr-sources">
-          <li><a href="https://www.nice.org.uk/guidance/ng23">NICE NG23 — Menopause: identification and management</a></li>
-          <li><a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">Latimer et al., Fatigue in Adults: Evaluation and Management — Am Fam Physician 2023;108(1):58–69</a></li>
-          <li><a href="https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html">CDC — Evaluation of ME/CFS (clinical testing recommendations)</a></li>
-          <li><a href="https://emas-online.org/wp-content/uploads/2024/04/PIIS0378512224000860.pdf">EMAS position statement: Thyroid disease and menopause — Maturitas 2024</a></li>
+          <li><a href="https://www.nice.org.uk/guidance/ng23">NICE NG23 · Menopause: identification and management</a></li>
+          <li><a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">Latimer et al., Fatigue in Adults: Evaluation and Management · Am Fam Physician 2023;108(1):58–69</a></li>
+          <li><a href="https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html">CDC · Evaluation of ME/CFS (clinical testing recommendations)</a></li>
+          <li><a href="https://emas-online.org/wp-content/uploads/2024/04/PIIS0378512224000860.pdf">EMAS position statement: Thyroid disease and menopause · Maturitas 2024</a></li>
           <li><a href="https://doi.org/10.1161/CIR.0000000000000678">2019 ACC/AHA Guideline on the Primary Prevention of Cardiovascular Disease</a></li>
-          <li><a href="https://doi.org/10.1002/art.1780400909">Tan et al., Range of antinuclear antibodies in &ldquo;healthy&rdquo; individuals — Arthritis &amp; Rheumatism 1997</a></li>
-          <li><a href="https://doi.org/10.1111/jcpp.13920">Skoglund et al., Time after time — J Child Psychol Psychiatry 2024</a></li>
+          <li><a href="https://doi.org/10.1002/art.1780400909">Tan et al., Range of antinuclear antibodies in &ldquo;healthy&rdquo; individuals · Arthritis &amp; Rheumatism 1997</a></li>
+          <li><a href="https://doi.org/10.1111/jcpp.13920">Skoglund et al., Time after time · J Child Psychol Psychiatry 2024</a></li>
         </ul>
       </details>
       <p class="hr-sources" style="margin-top: 1rem;">A free tool by <a href="/">Herada</a>. As of October 2026.</p>
@@ -517,7 +517,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 </main>
 
 <footer class="hr-footer">
-  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice — the Ledger starts the conversation; your clinician carries it.</p></div>
+  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice. The Ledger starts the conversation + your clinician carries it.</p></div>
 </footer>
 
 <script>
@@ -535,7 +535,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   var FORMS = {
     symptom: {
-      hint: "Roughly when it started is plenty — the Ledger is remembered history, not a diary.",
+      hint: "Roughly when it started is plenty. The Ledger is remembered history, not a diary.",
       fields: [
         { f: "name", label: "Symptom", type: "text", grow: true, ph: "e.g. Joint pain, mornings", req: true },
         { f: "date", label: "Started", type: "date", req: true },
@@ -544,25 +544,25 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       ]
     },
     visit: {
-      hint: "Who you saw is your own label — a name, a role, whatever you’ll recognize later.",
+      hint: "Who you saw is your own label: a name, a role, whatever you’ll recognize later.",
       fields: [
-        { f: "who", label: "Who", type: "text", grow: true, ph: "e.g. PCP — Dr. S, or “urgent care”", req: true },
+        { f: "who", label: "Who", type: "text", grow: true, ph: "e.g. PCP · Dr. S, or “urgent care”", req: true },
         { f: "date", label: "When", type: "date", req: true },
         { f: "said", label: "What they said", type: "text", grow: true, ph: "e.g. “probably stress; come back in 3 months”", req: true },
         { f: "next", label: "What happens next (optional)", type: "text", grow: true, ph: "e.g. referral promised, labs ordered" }
       ]
     },
     test: {
-      hint: "Record the result as you were told it — “normal, no number given” is itself worth keeping.",
+      hint: "Record the result as you were told it: “normal, no number given” is itself worth keeping.",
       fields: [
         { f: "name", label: "Test or check", type: "text", grow: true, ph: "e.g. TSH, ferritin, orthostatic vitals", req: true },
         { f: "date", label: "When", type: "date", req: true },
-        { f: "result", label: "Result as told", type: "text", grow: true, ph: "e.g. “normal” — number not given" },
+        { f: "result", label: "Result as told", type: "text", grow: true, ph: "e.g. “normal” [ number not given ]" },
         { f: "status", label: "Status", type: "select", options: [["told-normal", "Told normal"], ["abnormal", "Abnormal / follow-up"], ["waiting", "Waiting on result"], ["unknown", "Never heard back"]], def: "told-normal" }
       ]
     },
     treatment: {
-      hint: "Anything tried on purpose counts — prescriptions, supplements, physio, a change you made.",
+      hint: "Anything tried on purpose counts: prescriptions + supplements + physio + a change you made.",
       fields: [
         { f: "name", label: "Treatment", type: "text", grow: true, ph: "e.g. Sertraline 50mg", req: true },
         { f: "date", label: "Started", type: "date", req: true },
@@ -571,7 +571,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       ]
     },
     event: {
-      hint: "Context the timeline should show — a move, a job change, a loss, a new medication elsewhere.",
+      hint: "Context the timeline should show: a move, a job change, a loss, a new medication elsewhere.",
       fields: [
         { f: "name", label: "Life event", type: "text", grow: true, ph: "e.g. Changed jobs", req: true },
         { f: "date", label: "When", type: "date", req: true }
@@ -583,31 +583,31 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   // ---------- The knowledge base (ex Rule-Out Checklist; pending clinical review) ----------
   var ITEMS = [
     { k: "tsh", group: "routine", label: "Thyroid panel (TSH, free T4, TPO antibodies)",
-      why: "Thyroid disease and menopause share symptoms almost one for one — cycle changes, mood, sweats, sleep, hair. European menopause guidance treats the thyroid as part of telling them apart; ask whether free T4 and antibodies were included, not just TSH.",
+      why: "Thyroid disease and menopause share symptoms almost one for one: cycle changes, mood, sweats, sleep, hair. European menopause guidance treats the thyroid as part of telling them apart; ask whether free T4 and antibodies were included, not just TSH.",
       srcLabel: "EMAS position statement, Maturitas 2024", srcUrl: "https://emas-online.org/wp-content/uploads/2024/04/PIIS0378512224000860.pdf" },
     { k: "ferritin", group: "routine", label: "Ferritin and iron panel",
       why: "Low iron stores can drive fatigue, brain fog and palpitations before anemia shows up, and a normal CBC doesn’t rule them out. Ask for the ferritin number, not just “normal.”",
       srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
-    { k: "cbc", group: "routine", label: "CBC — complete blood count",
+    { k: "cbc", group: "routine", label: "CBC [ complete blood count ]",
       why: "The basic screen for anemia and other blood conditions that commonly present as exhaustion; a standard anchor of a first fatigue workup.",
       srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
-    { k: "cmp", group: "routine", label: "CMP — comprehensive metabolic panel",
-      why: "Kidneys, liver, glucose and electrolytes in one draw — the other standard anchor of the initial workup.",
+    { k: "cmp", group: "routine", label: "CMP [ comprehensive metabolic panel ]",
+      why: "Kidneys, liver, glucose and electrolytes in one draw: the other standard anchor of the initial workup.",
       srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
     { k: "dvitb12", group: "routine", label: "Vitamin D and B12",
       why: "Deficiencies in either are common, cheap to check, and can drive fatigue, aches, low mood and cognitive complaints; clinicians evaluating unexplained fatigue often include them early.",
       srcLabel: "CDC, Evaluation of ME/CFS", srcUrl: "https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html" },
-    { k: "crp", group: "routine", label: "hs-CRP or ESR — inflammation markers",
+    { k: "crp", group: "routine", label: "hs-CRP or ESR [ inflammation markers ]",
       why: "Persistent joint pain or symptoms across systems make an inflammation marker worth asking about; a raised result is a question to pursue with your clinician, not an answer by itself.",
       srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
     { k: "cvd", group: "routine", label: "Cardiovascular risk calculation",
-      why: "Palpitations and fatigue in midlife women deserve a formally calculated risk score — cholesterol, blood pressure, the estimate itself — rather than reassurance by age or sex.",
+      why: "Palpitations and fatigue in midlife women deserve a formally calculated risk score [ cholesterol + blood pressure + the estimate itself ] rather than reassurance by age or sex.",
       srcLabel: "ACC/AHA primary-prevention guideline, 2019", srcUrl: "https://doi.org/10.1161/CIR.0000000000000678" },
     { k: "ana", group: "triggered", label: "ANA with reflex panel",
-      why: "A first screen for autoimmune disease when symptoms span systems — joints, skin, dryness, fevers. It’s symptom-triggered for a reason: roughly a third of healthy people test weakly positive (31.7% at 1:40; 13.3% at 1:80), so without a fitting picture it creates more confusion than answers.",
+      why: "A first screen for autoimmune disease when symptoms span systems: joints, skin, dryness, fevers. It’s symptom-triggered for a reason: roughly a third of healthy people test weakly positive (31.7% at 1:40; 13.3% at 1:80), so without a fitting picture it creates more confusion than answers.",
       srcLabel: "Tan et al., Arthritis & Rheumatism 1997;40(9):1601–11", srcUrl: "https://doi.org/10.1002/art.1780400909" },
     { k: "ortho", group: "triggered", label: "Orthostatic vitals",
-      why: "Heart rate and blood pressure lying down and then standing, over ten minutes, in the office — when dizziness, a racing heart or worse-when-upright symptoms are part of the story.",
+      why: "Heart rate and blood pressure lying down and then standing, over ten minutes, in the office. For when dizziness, a racing heart or worse-when-upright symptoms are part of the story.",
       srcLabel: "CDC, Evaluation of ME/CFS", srcUrl: "https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html" },
     { k: "adhd", group: "triggered", label: "Adult-ADHD screener (validated)",
       why: "When the trouble with focus has been there for life and midlife made it unmanageable. Women are identified years later than men; a validated screener is a short questionnaire, not a guess.",
@@ -617,7 +617,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     { id: "routine", title: "Usually part of a first workup",
       note: "Standard, inexpensive checks that a fatigue or multi-symptom workup commonly includes. The ask: “were these considered?”" },
     { id: "triggered", title: "When symptoms point there",
-      note: "Not screening tests — they earn their place when the picture fits. The ask: “do my symptoms make this one worth considering?”" }
+      note: "Not screening tests. They earn their place when the picture fits. The ask: “do my symptoms make this one worth considering?”" }
   ];
   // Maps free-text test names in the log onto the ten checks.
   var MATCHERS = [
@@ -658,34 +658,34 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   var CONDITIONS = {
     peri:   { name: "Perimenopause", itemKey: null,
-              sep: "The label in question. There is no single confirming test — it’s a pattern of cycle changes plus symptoms, which is why the tested list is its consider-list.",
+              sep: "The label in question. There is no single confirming test: it’s a pattern of cycle changes plus symptoms, which is why the tested list is its consider-list.",
               ask: "What have we weighed before settling on perimenopause?" },
     hashi:  { name: "Hashimoto’s (underactive thyroid)", itemKey: "tsh",
               sep: "Shows up in blood: TSH with free T4, plus TPO antibodies for the autoimmune cause.",
-              ask: "Was my TSH checked — and did it include free T4 and TPO antibodies?" },
+              ask: "Was my TSH checked, and did it include free T4 and TPO antibodies?" },
     graves: { name: "Graves’ (overactive thyroid)", itemKey: "tsh",
               sep: "Also in blood, the other direction: a suppressed TSH with raised free T4 or T3.",
               ask: "Could an overactive thyroid explain this? When was my TSH last checked?" },
     ra:     { name: "Rheumatoid arthritis", itemKey: "crp",
-              sep: "A joint exam plus inflammation markers, then RF and anti-CCP antibodies if the pattern fits — morning stiffness over half an hour, small joints, both sides.",
+              sep: "A joint exam plus inflammation markers, then RF and anti-CCP antibodies if the pattern fits: morning stiffness over half an hour + small joints + both sides.",
               ask: "Given where and when my joints hurt, is an inflammation check worth considering?" },
     lupus:  { name: "Lupus (SLE)", itemKey: "ana",
               sep: "An ANA with reflex panel is the screening door when symptoms span systems; a negative makes lupus unlikely, a positive starts a specific work-up.",
               ask: "With symptoms in several systems, is an ANA with reflex worth considering?" },
     pots:   { name: "POTS", itemKey: "ortho",
-              sep: "Measured, not drawn: heart rate and blood pressure lying then standing, over ten minutes — checkable in the office.",
+              sep: "Measured, not drawn: heart rate and blood pressure lying then standing, over ten minutes, checkable in the office.",
               ask: "Can we do a lying-to-standing heart rate and blood pressure check?" },
     iron:   { name: "Iron deficiency", itemKey: "ferritin",
-              sep: "Ferritin plus an iron panel. A normal CBC does not rule it out — stores run low long before anemia.",
-              ask: "What is my ferritin number — not just whether it’s in range?" },
+              sep: "Ferritin plus an iron panel. A normal CBC does not rule it out: stores run low long before anemia.",
+              ask: "What is my ferritin number, not just whether it’s in range?" },
     adhd:   { name: "Adult ADHD", itemKey: "adhd",
-              sep: "A validated adult screener plus a lifelong history — the hinge is whether focus trouble is new, or lifelong and newly unmasked.",
+              sep: "A validated adult screener plus a lifelong history. The hinge is whether focus trouble is new, or lifelong and newly unmasked.",
               ask: "Could a validated adult-ADHD screener be worth considering?" },
     dep:    { name: "Depression", itemKey: null,
-              sep: "A structured screen and a proper interview — after the look-alikes above are weighed, because thyroid, iron and sleep disorders produce the same picture and don’t respond to antidepressants.",
-              ask: "If we treat this as depression, what should improve by when — and what have we weighed first?" },
+              sep: "A structured screen and a proper interview, after the look-alikes above are weighed, because thyroid, iron and sleep disorders produce the same picture and don’t respond to antidepressants.",
+              ask: "If we treat this as depression, what should improve by when, and what have we weighed first?" },
     apnea:  { name: "Sleep apnea", itemKey: null,
-              sep: "A sleep study, at home or in a lab — underdiagnosed in women because it presents as fatigue and mood rather than loud snoring.",
+              sep: "A sleep study, at home or in a lab. Underdiagnosed in women because it presents as fatigue and mood rather than loud snoring.",
               ask: "Does unrefreshing sleep here make a sleep study worth considering?" }
   };
 
@@ -714,27 +714,27 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   var PAIRS = {
     "peri|hashi":  "Both can bring fatigue, brain fog, weight gain and cycle changes. The difference is a blood draw: TSH with TPO antibodies. Thyroid disease shows in blood; perimenopause is a pattern over time.",
-    "peri|graves": "Hot flashes, night sweats, a racing heart — the overlap is almost total. A TSH separates them in one result, which is why it belongs before any “it’s hormones” conclusion.",
-    "peri|iron":   "These co-occur: heavier perimenopausal bleeding drains iron stores. Ferritin decides whether iron is part of the picture — and addressing it can resolve the fatigue even when perimenopause is also real.",
+    "peri|graves": "Hot flashes, night sweats, a racing heart: the overlap is almost total. A TSH separates them in one result, which is why it belongs before any “it’s hormones” conclusion.",
+    "peri|iron":   "These co-occur: heavier perimenopausal bleeding drains iron stores. Ferritin decides whether iron is part of the picture. Addressing it can resolve the fatigue even when perimenopause is also real.",
     "peri|adhd":   "The separating question is “new, or newly impossible to compensate for?” Lifelong focus trouble worsening in midlife points one way; focus trouble arriving with cycle changes points the other.",
     "peri|apnea":  "Night sweats, fragmented sleep and morning exhaustion fit both. Snoring, witnessed pauses, or waking unrefreshed every day tip toward asking about a sleep study.",
     "peri|dep":    "Ask whether the low mood tracks the cycle. Mood that moves with hormonal pattern and mood that sits flat for weeks point different ways.",
-    "hashi|iron":  "Twin fatigue engines that often travel together, and both are one draw — TSH and ferritin — so the question is simply whether both were considered.",
+    "hashi|iron":  "Twin fatigue engines that often travel together, and both are one draw [ TSH + ferritin ], so the question is simply whether both were considered.",
     "hashi|dep":   "The classic miss in both directions. A TSH before (or alongside) an antidepressant is the separating step, because the treatments are entirely different.",
     "graves|pots": "Both produce a pounding heart, anxiety and heat sensitivity. TSH weighs Graves’; a ten-minute stand test weighs POTS. Neither is a guess.",
     "ra|lupus":    "Both autoimmune, both hurt joints. RA is a small-joint, both-sides pattern with its own antibodies; lupus is ANA-first with symptoms across systems.",
     "pots|iron":   "Dizziness on standing plus palpitations fits both, and low iron can worsen POTS. Ferritin and orthostatic vitals are both same-visit checks.",
     "adhd|dep":    "Both blunt focus and follow-through. Lifelong versus episodic is the hinge: ADHD is a pattern since school; depression has a beginning.",
-    "apnea|dep":   "Months of unrefreshing sleep look exactly like depression — and cause it. A sleep study separates “low because exhausted” from “exhausted because low.”"
+    "apnea|dep":   "Months of unrefreshing sleep look exactly like depression + cause it. A sleep study separates “low because exhausted” from “exhausted because low.”"
   };
 
   var SUGGESTIONS = [
     { tone: "Gentle", text: "What else could explain this picture?" },
     { tone: "Gentle", text: "Is there anything on the usual rule-out list we haven’t weighed?" },
-    { tone: "Gentle", text: "What should improve first — and by when?" },
+    { tone: "Gentle", text: "What should improve first, and by when?" },
     { tone: "Direct", text: "What would change your assessment?" },
     { tone: "Direct", text: "If this isn’t what we think, what are the next two most likely explanations?" },
-    { tone: "Direct", text: "Can we agree on a date — if it’s not better by then, what’s the next step?" }
+    { tone: "Direct", text: "Can we agree on a date? If it’s not better by then, what’s the next step?" }
   ];
 
   var data = load() || blank();
@@ -956,7 +956,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   function renderLog() {
     var logEl = document.getElementById("log");
     if (!data.records.length) {
-      logEl.innerHTML = '<p class="lg-empty">Add your first entry above — the log builds itself here, newest first.</p>';
+      logEl.innerHTML = '<p class="lg-empty">Add your first entry above. The log builds itself here, newest first.</p>';
       return;
     }
     var sorted = data.records.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; });
@@ -1123,7 +1123,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     out.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Timeline of symptoms, visits and life events" font-family="Figtree, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">');
     if (forExport) {
       out.push('<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="' + C.paper + '"/>');
-      out.push('<text x="' + padL + '" y="26" font-size="19" font-weight="600" fill="' + C.ink + '">My timeline — the Ledger</text>');
+      out.push('<text x="' + padL + '" y="26" font-size="19" font-weight="600" fill="' + C.ink + '">My timeline · the Ledger</text>');
       out.push('<text x="' + padL + '" y="44" font-size="12" fill="' + C.soft + '">Made with Herada · joinherada.com · ' + MONTHS[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear() + "</text>");
     }
 
@@ -1176,7 +1176,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     });
 
     if (forExport) {
-      out.push('<text x="' + padL + '" y="' + (H - 12) + '" font-size="11" fill="' + C.soft + '">Thicker line = more severe (1–3). Raspberry = still ongoing. Diamonds = visits and life events. A record to discuss with your clinician — not a diagnosis.</text>');
+      out.push('<text x="' + padL + '" y="' + (H - 12) + '" font-size="11" fill="' + C.soft + '">Thicker line = more severe (1–3). Raspberry = still ongoing. Diamonds = visits and life events. A record to discuss with your clinician, not a diagnosis.</text>');
     }
     out.push("</svg>");
     return out.join("");
@@ -1209,7 +1209,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
           "<div><b>" + esc(t.label) + ' <span class="vk-fits-tag">fits your picks</span></b></div>' +
           (st
             ? '<span class="vk-state"><b>' + fmtDate(st.date) + "</b>" + (st.result ? " · " + esc(st.result) : "") + "</span>"
-            : '<button type="button" class="vk-logit" data-logit="' + esc(t.label) + '">Not in your log — log it</button>') +
+            : '<button type="button" class="vk-logit" data-logit="' + esc(t.label) + '">Not in your log → log it</button>') +
           '<details class="vk-more"><summary>why · source</summary><p class="vk-why">' + esc(t.why) + "</p>" +
           '<span class="vk-src">Source: <a href="' + esc(t.srcUrl) + '">' + esc(t.srcLabel) + "</a></span></details>" +
           "</li>";
@@ -1217,8 +1217,8 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       return '<div class="vk-group"><h3>' + esc(g.title) + '</h3><p class="vk-groupnote">' + esc(g.note) + '</p><ul class="vk-tested">' + rows + "</ul></div>";
     }).join("");
     document.getElementById("listKicker").textContent = data.picks.length
-      ? "The Visit Kit · Page 3 — Tested & worth asking — raspberry-edged items fit your picks"
-      : "The Visit Kit · Page 3 — Tested & worth asking";
+      ? "The Visit Kit · Page 3 · Tested & worth asking · raspberry-edged items fit your picks"
+      : "The Visit Kit · Page 3 · Tested & worth asking";
 
     var others = otherTests();
     var el = document.getElementById("otherTests");
@@ -1249,26 +1249,26 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     }
 
     section("Ongoing now", ongoing.concat(current), function (r) {
-      if (r.type === "symptom") return "<li><b>" + esc(r.name) + "</b> <span>— since " + fmtDate(r.date) + ", " + (SEVERITY_NAME[r.severity] || "moderate") + "</span></li>";
-      return "<li><b>" + esc(r.name) + "</b> <span>— treatment since " + fmtDate(r.date) + (r.outcome ? " · " + esc(r.outcome) : "") + "</span></li>";
+      if (r.type === "symptom") return "<li><b>" + esc(r.name) + "</b> <span>· since " + fmtDate(r.date) + ", " + (SEVERITY_NAME[r.severity] || "moderate") + "</span></li>";
+      return "<li><b>" + esc(r.name) + "</b> <span>· treatment since " + fmtDate(r.date) + (r.outcome ? " · " + esc(r.outcome) : "") + "</span></li>";
     }, "Nothing marked ongoing.");
 
     section("Visits, newest first", group("visit"), function (r) {
-      return "<li><b>" + fmtDate(r.date) + " — " + esc(r.who) + ":</b> <span>“" + esc(r.said) + "”" + (r.next ? " · next: " + esc(r.next) : "") + "</span></li>";
+      return "<li><b>" + fmtDate(r.date) + " · " + esc(r.who) + ":</b> <span>“" + esc(r.said) + "”" + (r.next ? " · next: " + esc(r.next) : "") + "</span></li>";
     }, "No visits logged.");
 
     section("Tests and checks", group("test"), function (r) {
       var st = STATUS_LABEL[r.status] || "";
-      return "<li><b>" + esc(r.name) + "</b> <span>— " + fmtDate(r.date) + (r.result ? " · " + esc(r.result) : "") + (st ? " · " + st : "") + "</span></li>";
+      return "<li><b>" + esc(r.name) + "</b> <span>· " + fmtDate(r.date) + (r.result ? " · " + esc(r.result) : "") + (st ? " · " + st : "") + "</span></li>";
     }, "No tests logged.");
 
     if (resolved.length || past.length) {
       section("Resolved or stopped", resolved.concat(past), function (r) {
-        return "<li><b>" + esc(r.name) + "</b> <span>— " + fmtDate(r.date) + " to " + fmtDate(r.end) + (r.outcome ? " · " + esc(r.outcome) : "") + "</span></li>";
+        return "<li><b>" + esc(r.name) + "</b> <span>· " + fmtDate(r.date) + " to " + fmtDate(r.end) + (r.outcome ? " · " + esc(r.outcome) : "") + "</span></li>";
       }, "");
     }
 
-    out.push('<p class="lg-pfoot">Written by the patient with joinherada.com · a personal log and a head start for the visit — not a medical record. Draft, pending clinical review.</p>');
+    out.push('<p class="lg-pfoot">Written by the patient with joinherada.com · a personal log and a head start for the visit, not a medical record. Draft, pending clinical review.</p>');
     document.getElementById("pager").innerHTML = out.join("");
   }
 
@@ -1296,9 +1296,9 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       if (slot === -1) {
         // Never overwrite a written question silently.
         var note = document.getElementById("copied");
-        note.textContent = "All three questions are written — clear one to swap in a suggestion.";
+        note.textContent = "All three questions are written. Clear one to swap in a suggestion.";
         note.hidden = false;
-        setTimeout(function () { note.hidden = true; note.textContent = "Copied — paste it into your notes or portal."; }, 4000);
+        setTimeout(function () { note.hidden = true; note.textContent = "Copied. Paste it into your notes or portal."; }, 4000);
         return;
       }
       data.questions[slot] = s.text;
@@ -1322,7 +1322,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       ta.style.left = "-9999px";
       document.body.appendChild(ta);
       ta.select();
-      try { document.execCommand("copy"); done(); } catch (err) { alert("Copying is blocked in this browser — select the text and copy it by hand."); }
+      try { document.execCommand("copy"); done(); } catch (err) { alert("Copying is blocked in this browser. Select the text and copy it by hand."); }
       ta.remove();
     }
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1331,7 +1331,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   }
 
   function pagerText() {
-    var lines = ["MY HEALTH ONE-PAGER — written by the patient (joinherada.com; a personal log, not a medical record)", ""];
+    var lines = ["MY HEALTH ONE-PAGER · written by the patient (joinherada.com; a personal log, not a medical record)", ""];
     function add(title, rows, line) {
       lines.push(title);
       if (!rows.length) lines.push("(none)");
@@ -1344,11 +1344,11 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
         : r.name + " (treatment since " + fmtDate(r.date) + (r.outcome ? "; " + r.outcome : "") + ")";
     });
     add("VISITS, NEWEST FIRST", group("visit"), function (r) {
-      return fmtDate(r.date) + " — " + r.who + ": “" + r.said + "”" + (r.next ? " (next: " + r.next + ")" : "");
+      return fmtDate(r.date) + " · " + r.who + ": “" + r.said + "”" + (r.next ? " (next: " + r.next + ")" : "");
     });
     add("TESTS AND CHECKS", group("test"), function (r) {
       var st = STATUS_LABEL[r.status] || "";
-      return r.name + " — " + fmtDate(r.date) + (r.result ? ": " + r.result : "") + (st ? " (" + st + ")" : "");
+      return r.name + " · " + fmtDate(r.date) + (r.result ? ": " + r.result : "") + (st ? " (" + st + ")" : "");
     });
     return lines.join("\n").trim();
   }
@@ -1356,7 +1356,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   function kitText() {
     var fits = fitKeys();
     var states = checkStates();
-    var lines = ["THE VISIT KIT — written by the patient (joinherada.com)", "(Draft, pending clinical review · questions to weigh with my clinician — not an order sheet)", ""];
+    var lines = ["THE VISIT KIT · written by the patient (joinherada.com)", "(Draft, pending clinical review · questions to weigh with my clinician, not an order sheet)", ""];
     if (data.picks.length) {
       var labels = SYMPTOMS.filter(function (s) { return data.picks.indexOf(s.id) !== -1; }).map(function (s) { return s.label; });
       lines.push("MY SYMPTOMS: " + labels.join(", "));
@@ -1387,7 +1387,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
         lines.push("- " + r.name + " (" + fmtDate(r.date) + ((r.result || st) ? ": " + (r.result || st) : "") + ")");
       });
     }
-    lines.push("For each: was it considered — and if not needed, why not?");
+    lines.push("For each: was it considered, and if not needed, why not?");
     lines.push("");
     lines.push("WHAT I WANT FROM TODAY");
     lines.push(data.want.trim() || "(not filled in)");
@@ -1448,14 +1448,14 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
         setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
       }, "image/png");
     };
-    img.onerror = function () { URL.revokeObjectURL(url); alert("Sorry — the image could not be generated in this browser. Try Print instead."); };
+    img.onerror = function () { URL.revokeObjectURL(url); alert("Sorry, the image could not be generated in this browser. Try Print instead."); };
     img.src = url;
   });
 
   // ---------- Clear ----------
   document.getElementById("clearAll").addEventListener("click", function () {
     if (!data.records.length && !data.picks.length && !data.want && !data.questions.join("")) return;
-    if (!confirm("Remove everything from this device — the log, picks and questions? (Save a backup file first if you want to keep it.)")) return;
+    if (!confirm("Remove everything from this device [ the log + picks + questions ]? (Save a backup file first if you want to keep it.)")) return;
     data = blank();
     try { localStorage.removeItem(STORAGE_KEY); } catch (err) { /* fine */ }
     try { localStorage.removeItem(OLD_KIT_KEY); } catch (err) { /* fine */ }
@@ -1505,7 +1505,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     }).then(function (ct) {
       download(JSON.stringify({ herada_ledger: 1, encrypted: true, salt: b64(salt), iv: b64(iv), data: b64(ct) }), "herada-ledger-" + stamp + ".json");
       document.getElementById("passphrase").value = "";
-    }).catch(function () { alert("Encryption isn’t available in this browser — clear the passphrase to save an unencrypted backup."); });
+    }).catch(function () { alert("Encryption isn’t available in this browser. Clear the passphrase to save an unencrypted backup."); });
   });
 
   document.getElementById("loadBackupBtn").addEventListener("click", function () {
