@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Ledger: a tool by Herada</title>
-<meta name="description" content="A private, local-only log of your health story [ symptoms + visits + tests + treatments ] that builds the Visit Kit: your timeline, what's been tested + what's worth asking, and your questions for today. Printable, nothing typed twice.">
+<meta name="description" content="A private, local-only log of your health story (symptoms + visits + tests + treatments) that builds the Visit Kit: your timeline, what's been tested + what's worth asking, and your questions for today. Printable, nothing typed twice.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -47,9 +47,9 @@ body {
   margin: 0; background: var(--bg); color: var(--ink);
   font-family: var(--body); font-size: 1.125rem; line-height: 1.55;
 }
-h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; line-height: 1.15; margin: 0; text-wrap: balance; }
-h1 { font-size: clamp(2.25rem, 6vw, 3.75rem); letter-spacing: -0.02em; }
-h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); letter-spacing: -0.01em; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.75rem, 7.5vw, 5rem); letter-spacing: -0.025em; }
+h2 { font-size: clamp(1.875rem, 4vw, 2.625rem); letter-spacing: -0.015em; }
 p { margin: 0; }
 a { color: var(--accent); text-underline-offset: 0.18em; }
 a:hover { color: var(--accent-hover); }
@@ -68,10 +68,12 @@ a:hover { color: var(--accent-hover); }
 
 .hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
 .hr-intro h1 { max-width: 22ch; }
-.hr-lede { max-width: 40rem; margin-top: 1.25rem; font-size: 1.3125rem; line-height: 1.5; color: var(--ink-soft); }
+.hr-lede { max-width: 40rem; margin-top: 1.5rem; font-size: 1.375rem; line-height: 1.45; color: var(--ink); }
 
-.lg-section { border-top: 1px solid var(--ink); padding: 2rem 0 2.5rem; }
-.lg-kicker { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); margin-bottom: 0.75rem; }
+.lg-section { border-top: 3px solid var(--ink); padding: 2.25rem 0 2.75rem; }
+.lg-kicker { font-family: var(--ui); font-size: 1rem; font-weight: 700; text-transform: lowercase; color: var(--ink); margin-bottom: 0.85rem; }
+.lg-kicker::before { content: "["; color: var(--accent); }
+.lg-kicker::after { content: "]"; color: var(--accent); }
 .lg-sub { margin-top: 0.5rem; max-width: 44rem; font-size: 1.0625rem; color: var(--ink-soft); }
 
 /* Record-type picker + forms */
@@ -336,7 +338,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 </header>
 
 <div class="hr-notice">
-  <div class="hr-wrap"><p><b>[ draft ]</b> A personal log, not a medical record. The consider-list + symptom map come from the guidance linked on each item, clinical review pending. Everything lives on this device only.</p></div>
+  <div class="hr-wrap"><p><b>[draft]</b> A personal log, not a medical record. The consider-list + symptom map come from the guidance linked on each item, clinical review pending. Everything lives on this device only.</p></div>
 </div>
 
 <main>
@@ -495,7 +497,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     <div class="hr-wrap">
       <h2>Why this page exists</h2>
       <div class="hr-prose">
-        <p>Fatigue, brain fog, joint pain and palpitations are shared symptoms: each appears in at least four of the ten conditions this page maps [ fatigue in all ten ], which is why pattern-matching on any one of them misroutes people. The fix isn&rsquo;t more testing for everyone; it&rsquo;s keeping your own record and putting the consider-list next to it, so the explanation that remains has actually earned it.</p>
+        <p>Fatigue, brain fog, joint pain and palpitations are shared symptoms: each appears in at least four of the ten conditions this page maps (fatigue in all ten), which is why pattern-matching on any one of them misroutes people. The fix isn&rsquo;t more testing for everyone; it&rsquo;s keeping your own record and putting the consider-list next to it, so the explanation that remains has actually earned it.</p>
         <p>Everything stays on your device, saved in your browser only (Clear all removes it); the printouts, image, text copies and backup file are generated locally, and a passphrase-protected backup is encrypted in the browser before saving.</p>
       </div>
       <p class="hr-sources" style="margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);">Draft compiled by Herada; <b>pending clinical review</b>: the symptom map + consider-list + separating checks are one knowledge base, reviewed together. General information, not medical advice for any individual. Each check links its source above.</p>
@@ -557,7 +559,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       fields: [
         { f: "name", label: "Test or check", type: "text", grow: true, ph: "e.g. TSH, ferritin, orthostatic vitals", req: true },
         { f: "date", label: "When", type: "date", req: true },
-        { f: "result", label: "Result as told", type: "text", grow: true, ph: "e.g. “normal” [ number not given ]" },
+        { f: "result", label: "Result as told", type: "text", grow: true, ph: "e.g. “normal” (number not given)" },
         { f: "status", label: "Status", type: "select", options: [["told-normal", "Told normal"], ["abnormal", "Abnormal / follow-up"], ["waiting", "Waiting on result"], ["unknown", "Never heard back"]], def: "told-normal" }
       ]
     },
@@ -588,20 +590,20 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     { k: "ferritin", group: "routine", label: "Ferritin and iron panel",
       why: "Low iron stores can drive fatigue, brain fog and palpitations before anemia shows up, and a normal CBC doesn’t rule them out. Ask for the ferritin number, not just “normal.”",
       srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
-    { k: "cbc", group: "routine", label: "CBC [ complete blood count ]",
+    { k: "cbc", group: "routine", label: "CBC [complete blood count]",
       why: "The basic screen for anemia and other blood conditions that commonly present as exhaustion; a standard anchor of a first fatigue workup.",
       srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
-    { k: "cmp", group: "routine", label: "CMP [ comprehensive metabolic panel ]",
+    { k: "cmp", group: "routine", label: "CMP [comprehensive metabolic panel]",
       why: "Kidneys, liver, glucose and electrolytes in one draw: the other standard anchor of the initial workup.",
       srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
     { k: "dvitb12", group: "routine", label: "Vitamin D and B12",
       why: "Deficiencies in either are common, cheap to check, and can drive fatigue, aches, low mood and cognitive complaints; clinicians evaluating unexplained fatigue often include them early.",
       srcLabel: "CDC, Evaluation of ME/CFS", srcUrl: "https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html" },
-    { k: "crp", group: "routine", label: "hs-CRP or ESR [ inflammation markers ]",
+    { k: "crp", group: "routine", label: "hs-CRP or ESR [inflammation markers]",
       why: "Persistent joint pain or symptoms across systems make an inflammation marker worth asking about; a raised result is a question to pursue with your clinician, not an answer by itself.",
       srcLabel: "AAFP, Fatigue in Adults, 2023", srcUrl: "https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html" },
     { k: "cvd", group: "routine", label: "Cardiovascular risk calculation",
-      why: "Palpitations and fatigue in midlife women deserve a formally calculated risk score [ cholesterol + blood pressure + the estimate itself ] rather than reassurance by age or sex.",
+      why: "Palpitations and fatigue in midlife women deserve a formally calculated risk score (cholesterol + blood pressure + the estimate itself) rather than reassurance by age or sex.",
       srcLabel: "ACC/AHA primary-prevention guideline, 2019", srcUrl: "https://doi.org/10.1161/CIR.0000000000000678" },
     { k: "ana", group: "triggered", label: "ANA with reflex panel",
       why: "A first screen for autoimmune disease when symptoms span systems: joints, skin, dryness, fevers. It’s symptom-triggered for a reason: roughly a third of healthy people test weakly positive (31.7% at 1:40; 13.3% at 1:80), so without a fitting picture it creates more confusion than answers.",
@@ -719,7 +721,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     "peri|adhd":   "The separating question is “new, or newly impossible to compensate for?” Lifelong focus trouble worsening in midlife points one way; focus trouble arriving with cycle changes points the other.",
     "peri|apnea":  "Night sweats, fragmented sleep and morning exhaustion fit both. Snoring, witnessed pauses, or waking unrefreshed every day tip toward asking about a sleep study.",
     "peri|dep":    "Ask whether the low mood tracks the cycle. Mood that moves with hormonal pattern and mood that sits flat for weeks point different ways.",
-    "hashi|iron":  "Twin fatigue engines that often travel together, and both are one draw [ TSH + ferritin ], so the question is simply whether both were considered.",
+    "hashi|iron":  "Twin fatigue engines that often travel together, and both are one draw (TSH + ferritin), so the question is simply whether both were considered.",
     "hashi|dep":   "The classic miss in both directions. A TSH before (or alongside) an antidepressant is the separating step, because the treatments are entirely different.",
     "graves|pots": "Both produce a pounding heart, anxiety and heat sensitivity. TSH weighs Graves’; a ten-minute stand test weighs POTS. Neither is a guess.",
     "ra|lupus":    "Both autoimmune, both hurt joints. RA is a small-joint, both-sides pattern with its own antibodies; lupus is ANA-first with symptoms across systems.",
@@ -1455,7 +1457,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   // ---------- Clear ----------
   document.getElementById("clearAll").addEventListener("click", function () {
     if (!data.records.length && !data.picks.length && !data.want && !data.questions.join("")) return;
-    if (!confirm("Remove everything from this device [ the log + picks + questions ]? (Save a backup file first if you want to keep it.)")) return;
+    if (!confirm("Remove everything from this device (the log + picks + questions)? (Save a backup file first if you want to keep it.)")) return;
     data = blank();
     try { localStorage.removeItem(STORAGE_KEY); } catch (err) { /* fine */ }
     try { localStorage.removeItem(OLD_KIT_KEY); } catch (err) { /* fine */ }

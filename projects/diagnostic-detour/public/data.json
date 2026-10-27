@@ -1,6 +1,6 @@
 {
   "title": "The Diagnostic Detour",
-  "lede": "How long midlife-relevant conditions [ thyroid and autoimmune disease, heart disease, ADHD, sleep apnea, POTS ] take to diagnose in women, how often the first label is wrong, and how that compares to men. Every figure is graded by source strength, and the counter-evidence stays on the page.",
+  "lede": "How long midlife-relevant conditions (thyroid and autoimmune disease, heart disease, ADHD, sleep apnea, POTS) take to diagnose in women, how often the first label is wrong, and how that compares to men. Every figure is graded by source strength, and the counter-evidence stays on the page.",
   "as_of": "2026-10-27",
   "source_type_scale": {
     "registry": "National health registry or population database",
@@ -33,7 +33,7 @@
       "source_title": "Population-wide analysis of differences in disease progression patterns in men and women (Westergaard et al., Nature Communications)",
       "source_year": 2019,
       "source_url": "https://doi.org/10.1038/s41467-019-08475-9",
-      "notes": "Age at first hospital diagnosis, not symptom-to-diagnosis delay. Verified in the full text Oct 27, 2026: main text reports 986 diagnoses with a sex difference (the Fig. 1 caption says 963 [ an internal inconsistency ]; cite 986). Neoplasms, blood/immune and genitourinary diseases were exceptions to the women-later pattern.",
+      "notes": "Age at first hospital diagnosis, not symptom-to-diagnosis delay. Verified in the full text Oct 27, 2026: main text reports 986 diagnoses with a sex difference (the Fig. 1 caption says 963, an internal inconsistency; cite 986). Neoplasms, blood/immune and genitourinary diseases were exceptions to the women-later pattern.",
       "verify": false,
       "midlife": false
     },
@@ -902,7 +902,7 @@
       "value": 27.74,
       "unit": "percent of women aged 40–64 with an antidepressant prescription (any class, not just SSRIs)",
       "sex": "women",
-      "population": "USA, Rochester Epidemiology Project catchment (Minnesota region), 2019 [ regional, not national ]",
+      "population": "USA, Rochester Epidemiology Project catchment (Minnesota region), 2019 (regional, not national)",
       "source_type": "registry",
       "source_title": "Age-Dependent Sex Differences in the Prevalence of SSRI Treatment (Sanchez-Ruiz et al., J Womens Health)",
       "source_year": 2023,
