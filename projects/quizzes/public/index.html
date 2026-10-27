@@ -79,6 +79,8 @@ a:hover { color: var(--accent-hover); }
 .qz-card .qz-meta { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--kicker); }
 .qz-card h2 { margin-top: 0.3rem; }
 .qz-card p { margin-top: 0.4rem; font-size: 1.0625rem; color: var(--ink-soft); max-width: 38rem; }
+.qz-go { display: inline-block; margin-top: 0.6rem; font-family: var(--ui); font-size: 0.9375rem; font-weight: 600; color: var(--accent); }
+.qz-card:hover .qz-go { color: var(--accent-hover); }
 .qz-card.qz-soon { cursor: default; }
 .qz-card.qz-soon:hover h2 { color: var(--ink); }
 .qz-card.qz-soon h2, .qz-card.qz-soon p { opacity: 0.55; }
@@ -311,7 +313,7 @@ a:hover { color: var(--accent-hover); }
       '<p class="qz-lede">Quizzes in women’s health that respect your intelligence — nothing you answer is stored, and every reveal is sourced.</p>',
       '<div class="qz-cards">'];
     QUIZZES.forEach(function (qz) {
-      out.push('<button type="button" class="qz-card" data-quiz="' + qz.id + '"><span class="qz-meta">' + esc(qz.meta) + "</span><h2>" + esc(qz.title) + "</h2><p>" + esc(qz.blurb) + "</p></button>");
+      out.push('<button type="button" class="qz-card" data-quiz="' + qz.id + '"><span class="qz-meta">' + esc(qz.meta) + "</span><h2>" + esc(qz.title) + "</h2><p>" + esc(qz.blurb) + '</p><span class="qz-go">Play →</span></button>');
     });
     COMING.forEach(function (c) {
       out.push('<div class="qz-card qz-soon"><span class="qz-meta">' + esc(c.meta) + "</span><h2>" + esc(c.title) + "</h2></div>");
