@@ -33,7 +33,7 @@
       "source_title": "Population-wide analysis of differences in disease progression patterns in men and women (Westergaard et al., Nature Communications)",
       "source_year": 2019,
       "source_url": "https://doi.org/10.1038/s41467-019-08475-9",
-      "notes": "Age at first hospital diagnosis, not symptom-to-diagnosis delay. Verified in the full text Oct 27, 2026: main text reports 986 diagnoses with a sex difference (the Fig. 1 caption says 963 — an internal inconsistency; cite 986). Neoplasms, blood/immune and genitourinary diseases were exceptions to the women-later pattern.",
+      "notes": "Age at first hospital diagnosis, not symptom-to-diagnosis delay. Verified in the full text Oct 27, 2026: main text reports 986 diagnoses with a sex difference (the Fig. 1 caption says 963 [ an internal inconsistency ]; cite 986). Neoplasms, blood/immune and genitourinary diseases were exceptions to the women-later pattern.",
       "verify": false,
       "midlife": false
     },
@@ -67,7 +67,7 @@
       "source_title": "University of Copenhagen press release on Westergaard et al. (via ScienceDaily)",
       "source_year": 2019,
       "source_url": "https://www.sciencedaily.com/releases/2019/03/190311103059.htm",
-      "notes": "Checked against the full paper Oct 27, 2026: not in the paper, and the paper contradicts it — neoplasms are listed as one of the exceptions to the women-diagnosed-later pattern. Press-release figure only. Do not use.",
+      "notes": "Checked against the full paper Oct 27, 2026: not in the paper, and the paper contradicts it: neoplasms are listed as one of the exceptions to the women-diagnosed-later pattern. Press-release figure only. Do not use.",
       "verify": false,
       "midlife": false,
       "untraceable": true
@@ -793,7 +793,7 @@
       "source_title": "Shaw et al.",
       "source_year": 2019,
       "source_url": "https://doi.org/10.1111/joim.12895",
-      "notes": "Verified against the full text Oct 27, 2026: 3,471 of 4,835. A physician's suggestion, not a formal diagnosis — only 28% reported actually having a psychiatric or psychological problem pre-diagnosis; separately, 75% reported being misdiagnosed with anything before POTS.",
+      "notes": "Verified against the full text Oct 27, 2026: 3,471 of 4,835. A physician's suggestion, not a formal diagnosis: only 28% reported actually having a psychiatric or psychological problem pre-diagnosis; separately, 75% reported being misdiagnosed with anything before POTS.",
       "verify": false,
       "midlife": true
     },
@@ -875,7 +875,7 @@
       "source_title": "Newson clinic survey, via drlouisenewson.co.uk (last reviewed 17 Feb 2025; not peer-reviewed)",
       "source_year": 2025,
       "source_url": "https://drlouisenewson.co.uk/knowledge/antidepressants-and-menopause",
-      "notes": "Verified against the clinic's page Oct 27, 2026: “over a third of respondents (39%) said they were offered antidepressants instead of HRT as the first course of treatment.” Trade press reports the same survey as 38.5%. Clinic-run, self-selected, commercial interest in HRT — use only with that label.",
+      "notes": "Verified against the clinic's page Oct 27, 2026: “over a third of respondents (39%) said they were offered antidepressants instead of HRT as the first course of treatment.” Trade press reports the same survey as 38.5%. Clinic-run + self-selected + commercial interest in HRT. Use only with that label.",
       "verify": false,
       "midlife": true
     },
@@ -902,7 +902,7 @@
       "value": 27.74,
       "unit": "percent of women aged 40–64 with an antidepressant prescription (any class, not just SSRIs)",
       "sex": "women",
-      "population": "USA, Rochester Epidemiology Project catchment (Minnesota region), 2019 — regional, not national",
+      "population": "USA, Rochester Epidemiology Project catchment (Minnesota region), 2019 [ regional, not national ]",
       "source_type": "registry",
       "source_title": "Age-Dependent Sex Differences in the Prevalence of SSRI Treatment (Sanchez-Ruiz et al., J Womens Health)",
       "source_year": 2023,
