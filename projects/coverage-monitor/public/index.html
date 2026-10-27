@@ -96,16 +96,17 @@ a { color: var(--accent); text-underline-offset: 0.18em; }
 .hr-when { grid-column: 1 / -1; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 .hr-service { font-family: var(--display); font-size: 1.25rem; line-height: 1.25; }
 .hr-who { grid-column: 1; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); }
-.hr-level { grid-row: 2 / span 2; grid-column: 2; align-self: start; text-align: right; font-family: var(--ui); font-size: 0.875rem; white-space: nowrap; padding-top: 0.25rem; }
+.hr-level { grid-column: 1 / -1; font-family: var(--ui); font-size: 0.875rem; padding-top: 0.15rem; }
 .hr-level b { font-weight: 700; color: var(--accent); }
-.hr-level .hr-kinds { display: block; color: var(--ink-soft); font-size: 0.8125rem; }
+.hr-level .hr-kinds { color: var(--ink-soft); font-size: 0.8125rem; margin-left: 0.5rem; }
 .hr-level.is-clear, .hr-level.is-handled { color: var(--ink-soft); }
 @media (min-width: 48rem) {
   .hr-queue summary { grid-template-columns: 9.5rem 1fr 13rem; align-items: baseline; }
   .hr-when { grid-column: 1; grid-row: 1 / span 2; font-size: 0.875rem; }
   .hr-service { grid-column: 2; }
   .hr-who { grid-column: 2; }
-  .hr-level { grid-column: 3; grid-row: 1 / span 2; }
+  .hr-level { grid-column: 3; grid-row: 1 / span 2; align-self: start; text-align: right; white-space: nowrap; padding-top: 0.25rem; }
+  .hr-level .hr-kinds { display: block; margin-left: 0; }
 }
 .hr-detail { padding: 0 0 1.5rem; }
 @media (min-width: 48rem) { .hr-detail { padding-left: 9.5rem; padding-right: 13rem; } }
