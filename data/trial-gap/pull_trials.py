@@ -12,7 +12,7 @@ pull every interventional study with posted results and read the baseline
 
 Writes:
   data/trial-gap/trial_gap_raw.json           (per-trial rows, for checking)
-  projects/trial-gap-explorer/public/data.json (aggregates the page reads)
+  projects/diagnostic-detour/public/trial-gap.json (aggregates the page reads)
 
 API: https://clinicaltrials.gov/api/v2/studies (public domain, no key).
 Run from the repo root: python3 data/trial-gap/pull_trials.py
@@ -278,7 +278,7 @@ def main():
     out_raw = REPO / "data" / "trial-gap" / "trial_gap_raw.json"
     out_raw.write_text(json.dumps({"pulled": pulled, "rows": raw_rows}, indent=1))
 
-    out_page = REPO / "projects" / "trial-gap-explorer" / "public" / "data.json"
+    out_page = REPO / "projects" / "diagnostic-detour" / "public" / "trial-gap.json"
     out_page.parent.mkdir(parents=True, exist_ok=True)
     out_page.write_text(json.dumps({
         "pulled": pulled,

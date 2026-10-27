@@ -20,7 +20,8 @@ affected populations are predominantly female.
 - `pull_trials.py` — the pull and aggregation script.
 - `trial_gap_raw.json` — one row per trial (NCT id, parsed female/male
   counts), for checking the aggregation.
-- Output read by the site: `projects/trial-gap-explorer/public/data.json`.
+- Output read by the site: `projects/diagnostic-detour/public/trial-gap.json`
+  (the Trial Gap Explorer merged into the Diagnostic Detour, Oct 2026).
 
 ## Synthetic rows
 

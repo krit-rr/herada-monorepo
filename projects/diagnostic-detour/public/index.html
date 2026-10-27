@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Diagnostic Detour: a project by Herada</title>
-<meta name="description" content="How long women wait for a diagnosis, how often the first one is wrong, and how that compares to men — every figure graded by source strength.">
+<meta name="description" content="For midlife-relevant conditions: how long women wait for a diagnosis, how often the first label is wrong, how that compares to men — and whether clinical trials enroll women at the rate conditions affect them. Every figure graded by source strength.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -71,11 +71,13 @@ a:hover { color: var(--accent-hover); }
 .hr-intro h1 { max-width: 22ch; }
 .hr-lede { max-width: 42rem; margin-top: 1.25rem; font-size: 1.3125rem; line-height: 1.5; color: var(--ink-soft); }
 
-/* The headline */
+/* The two headline findings */
 .dd-headline { border-top: 1px solid var(--ink); padding: clamp(2rem, 5vw, 3rem) 0; }
+.dd-leads { display: grid; grid-template-columns: 1fr; gap: 2.25rem 3rem; }
+@media (min-width: 58rem) { .dd-leads { grid-template-columns: 1fr 1fr; } }
 .dd-headline p.dd-big {
-  max-width: 30ch; font-family: var(--display); font-weight: 500;
-  font-size: clamp(1.625rem, 4.5vw, 2.5rem); line-height: 1.18; letter-spacing: -0.015em;
+  max-width: 26ch; font-family: var(--display); font-weight: 500;
+  font-size: clamp(1.625rem, 4vw, 2.25rem); line-height: 1.18; letter-spacing: -0.015em;
 }
 .dd-headline .dd-cite { margin-top: 1.25rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); max-width: 44rem; }
 
@@ -118,6 +120,16 @@ a:hover { color: var(--accent-hover); }
 .dd-plain b { font-weight: 600; }
 .dd-plain span { color: var(--ink-soft); }
 
+/* Trial gap table */
+.tg-table-wrap { margin-top: 2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0.875rem; min-width: 46rem; }
+.tg-table th, .tg-table td { text-align: right; padding: 0.6rem 0.9rem 0.6rem 0; border-bottom: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.tg-table th:first-child, .tg-table td:first-child { text-align: left; }
+.tg-table thead th { font-weight: 600; color: var(--ink-soft); border-bottom: 1px solid var(--ink); vertical-align: bottom; }
+.tg-table td:first-child { font-weight: 600; }
+.tg-table .tg-src { font-weight: 400; color: var(--ink-soft); }
+.tg-table .tg-gap-neg { color: var(--accent); font-weight: 700; }
+
 .hr-section { border-top: 1px solid var(--rule); padding: clamp(2.5rem, 6vw, 4rem) 0; }
 .hr-prose { max-width: 44rem; }
 .hr-prose p { margin-top: 1rem; font-size: 1.0625rem; color: var(--ink-soft); }
@@ -150,10 +162,18 @@ a:hover { color: var(--accent-hover); }
     </div>
   </section>
 
-  <section class="dd-headline" aria-label="The headline finding">
+  <section class="dd-headline" aria-label="The headline findings">
     <div class="hr-wrap">
-      <p class="dd-big" id="headline"></p>
-      <p class="dd-cite" id="headlineCite"></p>
+      <div class="dd-leads">
+        <div>
+          <p class="dd-big" id="headline"></p>
+          <p class="dd-cite" id="headlineCite"></p>
+        </div>
+        <div>
+          <p class="dd-big" id="headline2"></p>
+          <p class="dd-cite" id="headline2Cite"></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -163,7 +183,7 @@ a:hover { color: var(--accent-hover); }
       <h2>How long the detour runs</h2>
       <p class="dd-sub">Published delays from symptom onset (or first visit) to diagnosis, in years. Only time-based figures appear here; each row carries its source grade.</p>
       <div class="dd-plot" id="plot"></div>
-      <p class="dd-legend" id="plotLegend" hidden><b>Reading it:</b> raspberry = women, ink = men, violet = both sexes together. A hollow circle is the median where the solid dot is a skewed mean; a violet line is the range across studies in a review. Hover any dot for the source.</p>
+      <p class="dd-legend" id="plotLegend" hidden><b>Reading it:</b> raspberry = women, ink = men, violet = both sexes together. A hollow circle is the median where the solid dot is a skewed mean; a violet line is the range across studies in a review. Solid markers are registry or claims data; cohorts and reviews are lighter; surveys are the faintest. Hover any dot for the source.</p>
     </div>
   </section>
 
@@ -192,6 +212,18 @@ a:hover { color: var(--accent-hover); }
     </div>
   </section>
 
+  <section class="dd-section" id="trial-gap" aria-label="Who gets studied">
+    <div class="hr-wrap">
+      <p class="dd-kicker">Who gets studied</p>
+      <h2>The trial gap: patients vs. participants</h2>
+      <p class="dd-sub">For ten conditions whose patients are mostly women: the share of women among clinical-trial participants, against their share among patients — from ClinicalTrials.gov posted results. Below the diagonal, women are underrepresented relative to the patient population.</p>
+      <div class="dd-plot" id="tgChart"></div>
+      <p class="dd-legend" id="tgLegend" hidden><b>Reading it:</b> each circle is a condition, sized by participants counted. On the diagonal, trials enroll women at the rate the condition affects them. Both axes start at 50%. Hover any circle for the numbers.</p>
+      <div class="tg-table-wrap" id="tgTable"></div>
+      <p class="dd-legend" id="tgMethod" hidden><b>Caveats:</b> results are posted for only a fraction of registered trials (the last column shows how many per condition), and the patient shares are approximations of commonly cited sex ratios, each from the review linked in the table. Single-sex trials are included. Trials reporting sex in a custom format are counted as unparsed.</p>
+    </div>
+  </section>
+
   <section class="dd-section" aria-label="Missing evidence">
     <div class="hr-wrap">
       <p class="dd-kicker">The holes</p>
@@ -217,7 +249,7 @@ a:hover { color: var(--accent-hover); }
       <div class="hr-prose">
         <p>Registry and claims figures count whole populations and are the strongest; cohorts count one clinic's patients; surveys count the people who answered, who are usually the people with the worst journeys. Where a widely quoted number failed verification, the traceable number is shown instead.</p>
       </div>
-      <p class="hr-sources" id="sources">Compiled by <a href="/">Herada</a> from the published sources linked on each row. The dataset, with every source and flag, ships in the repository as <code>findings.json</code>.</p>
+      <p class="hr-sources" id="sources">Compiled by <a href="/">Herada</a> from the published sources linked on each row. The delay dataset, with every source and flag, ships in the repository as <code>findings.json</code>; the trial-enrollment aggregates as <code>trial-gap.json</code>.</p>
     </div>
   </section>
 </main>
@@ -248,6 +280,17 @@ a:hover { color: var(--accent-hover); }
   // only in the "what you've heard that doesn't hold up" section.
   function isData(f) { return !f.untraceable && f.source_type !== "secondary"; }
 
+  // Scope (Oct 2026): the page shows midlife-relevant findings plus every
+  // counter-evidence row, whatever its condition. Out-of-scope findings stay
+  // in the data file with midlife: false.
+  function isCounter(f) { return !!f.direction && /^(no|men)\b/.test(f.direction); }
+  function inScope(f) { return f.midlife === true || isCounter(f); }
+
+  // Marker opacity by source strength: registry and claims solid, surveys
+  // faded, cohorts and reviews in between.
+  var FADE = { registry: 1, claims: 1, cohort: 0.7, review: 0.7, survey: 0.4 };
+  function fade(f) { return FADE[f.source_type] != null ? FADE[f.source_type] : 1; }
+
   function badge(t) { return '<span class="dd-badge b-' + t + '">' + t + "</span>"; }
   function verifyTag(f) { return f.verify ? ' <span class="dd-verify">⚑ being verified</span>' : ""; }
 
@@ -260,9 +303,9 @@ a:hover { color: var(--accent-hover); }
   }
 
   function statRow(f, counterDirections) {
-    var isCounter = counterDirections && f.direction && /^(no|men)\b/.test(f.direction);
+    var counter = counterDirections && isCounter(f);
     var out = ["<li>"];
-    out.push('<span class="dd-cond">' + esc(f.condition) + (isCounter ? '<span class="dd-counter">counter-evidence</span>' : "") + "</span>");
+    out.push('<span class="dd-cond">' + esc(f.condition) + (counter ? '<span class="dd-counter">counter-evidence</span>' : "") + "</span>");
     out.push('<p class="dd-stat"><b>' + f.value.toLocaleString("en-US") + "</b> " + esc(f.unit) + "</p>");
     out.push(metaLine(f));
     out.push("</li>");
@@ -274,22 +317,26 @@ a:hover { color: var(--accent-hover); }
     var byId = {};
     d.findings.forEach(function (f) { byId[f.id] = f; });
 
-    // Headline.
-    var hf = byId[d.headline.finding_id];
-    document.getElementById("headline").textContent = d.headline.text + ".";
-    if (hf) {
-      // Built from the finding's own fields so a changed headline.finding_id
-      // can never leave a stale sentence around a new number.
-      document.getElementById("headlineCite").innerHTML =
-        "<b>" + hf.value.toLocaleString("en-US") + "</b> " + esc(hf.unit) +
-        " — " + esc(hf.population) + ". " + badge(hf.source_type) +
-        ' <a href="' + esc(hf.source_url) + '">' + esc(hf.source_title) + " (" + hf.source_year + ")</a>" + verifyTag(hf);
+    // Headlines. Built from each finding's own fields so a changed
+    // headline.finding_id can never leave a stale sentence around a new number.
+    function lead(h, bigId, citeId) {
+      if (!h) return;
+      var hf = byId[h.finding_id];
+      document.getElementById(bigId).textContent = h.text + ".";
+      if (hf) {
+        document.getElementById(citeId).innerHTML =
+          "<b>" + hf.value.toLocaleString("en-US") + "</b> " + esc(hf.unit) +
+          " — " + esc(hf.population) + ". " + badge(hf.source_type) +
+          ' <a href="' + esc(hf.source_url) + '">' + esc(hf.source_title) + " (" + hf.source_year + ")</a>" + verifyTag(hf);
+      }
     }
+    lead(d.headline, "headline", "headlineCite");
+    lead(d.headline_2, "headline2", "headline2Cite");
 
     // ---------- Dot plot: time-based delays ----------
     var plotRows = [];
     d.findings.forEach(function (f) {
-      if (f.measure !== "time_to_diagnosis" || !isData(f)) return;
+      if (f.measure !== "time_to_diagnosis" || !isData(f) || !inScope(f)) return;
       if (f.unit.indexOf("percent") === 0 || f.unit.indexOf("age at diagnosis") !== -1) return;
       var y = toYears(f);
       if (!y) return;
@@ -334,11 +381,11 @@ a:hover { color: var(--accent-hover); }
       s.push('<line x1="' + padL + '" y1="' + cy + '" x2="' + (padL + plotW) + '" y2="' + cy + '" stroke="var(--rule)" stroke-width="1"/>');
       function dot(val, sex, hollow, title) {
         var c = COLORS[sex] || COLORS.both;
-        s.push('<circle cx="' + x(val) + '" cy="' + cy + '" r="7" fill="' + (hollow ? "var(--bg)" : c) + '" stroke="' + c + '" stroke-width="2"><title>' + esc(title) + "</title></circle>");
+        s.push('<circle cx="' + x(val) + '" cy="' + cy + '" r="7" opacity="' + fade(f) + '" fill="' + (hollow ? "var(--bg)" : c) + '" stroke="' + c + '" stroke-width="2"><title>' + esc(title) + "</title></circle>");
       }
       var title = f.condition + ": " + f.value + " " + f.unit + "\n" + f.population + "\n" + f.source_title + " (" + f.source_year + ") · " + f.source_type;
       if (r.y.max != null) {
-        s.push('<line x1="' + x(r.y.v) + '" y1="' + cy + '" x2="' + x(r.y.max) + '" y2="' + cy + '" stroke="' + COLORS[f.sex] + '" stroke-width="5"><title>' + esc(title) + "</title></line>");
+        s.push('<line x1="' + x(r.y.v) + '" y1="' + cy + '" x2="' + x(r.y.max) + '" y2="' + cy + '" opacity="' + fade(f) + '" stroke="' + COLORS[f.sex] + '" stroke-width="5"><title>' + esc(title) + "</title></line>");
         dot(r.y.v, f.sex, false, title);
         dot(r.y.max, f.sex, false, title);
       } else {
@@ -357,11 +404,12 @@ a:hover { color: var(--accent-hover); }
     // ---------- Stat sections ----------
     function fill(id, filter, counter) {
       document.getElementById(id).innerHTML = d.findings
-        .filter(function (f) { return isData(f) && filter(f); })
+        .filter(function (f) { return isData(f) && inScope(f) && filter(f); })
         .map(function (f) { return statRow(f, counter); })
         .join("");
     }
-    fill("gapRows", function (f) { return f.measure === "sex_difference" && f.id !== d.headline.finding_id; }, true);
+    var leadIds = [d.headline && d.headline.finding_id, d.headline_2 && d.headline_2.finding_id];
+    fill("gapRows", function (f) { return f.measure === "sex_difference" && leadIds.indexOf(f.id) === -1; }, true);
     fill("wrongRows", function (f) { return f.measure === "misdiagnosis_rate" || f.measure === "common_misdiagnosis" || f.measure === "psychosomatic_attribution"; }, false);
     fill("costRows", function (f) { return f.measure === "visits_before_diagnosis" || f.measure === "pre_diagnosis_cost"; }, false);
 
@@ -390,11 +438,81 @@ a:hover { color: var(--accent-hover); }
     document.getElementById("sources").insertAdjacentHTML("beforeend", " As of " + esc(d.as_of) + ".");
   }
 
+  // ---------- Trial gap (absorbed from the Trial Gap Explorer, Oct 2026) ----------
+  function pct(x) { return (x * 100).toFixed(x * 100 >= 99.95 ? 0 : 1) + "%"; }
+  function num(x) { return x.toLocaleString("en-US"); }
+
+  function renderTrialGap(data) {
+    var conds = data.conditions.filter(function (c) { return c.femaleEnrollShare !== null; });
+
+    var W = 860, H = 560;
+    var padL = 64, padR = 150, padT = 24, padB = 56;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var min = 0.5, max = 1.0;
+    function x(v) { return padL + (Math.max(v, min) - min) / (max - min) * plotW; }
+    function y(v) { return padT + plotH - (Math.max(v, min) - min) / (max - min) * plotH; }
+    var maxPart = Math.max.apply(null, conds.map(function (c) { return c.participants; }));
+    function r(p) { return 6 + Math.sqrt(p / maxPart) * 24; }
+
+    var s = [];
+    s.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Female share of patients vs female share of trial participants" font-family="Figtree, Helvetica, Arial, sans-serif">');
+    for (var v = 0.5; v <= 1.001; v += 0.1) {
+      var vv = Math.round(v * 10) / 10;
+      s.push('<line x1="' + x(vv) + '" y1="' + padT + '" x2="' + x(vv) + '" y2="' + (padT + plotH) + '" stroke="var(--rule)" stroke-width="1" ' + (vv === 0.5 ? "" : 'stroke-dasharray="2 4"') + "/>");
+      s.push('<line x1="' + padL + '" y1="' + y(vv) + '" x2="' + (padL + plotW) + '" y2="' + y(vv) + '" stroke="var(--rule)" stroke-width="1" ' + (vv === 0.5 ? "" : 'stroke-dasharray="2 4"') + "/>");
+      s.push('<text x="' + x(vv) + '" y="' + (padT + plotH + 22) + '" font-size="12" fill="var(--ink-soft)" text-anchor="middle">' + Math.round(vv * 100) + "%</text>");
+      s.push('<text x="' + (padL - 10) + '" y="' + (y(vv) + 4) + '" font-size="12" fill="var(--ink-soft)" text-anchor="end">' + Math.round(vv * 100) + "%</text>");
+    }
+    s.push('<text x="' + (padL + plotW / 2) + '" y="' + (H - 12) + '" font-size="13" fill="var(--ink)" text-anchor="middle" font-weight="600">Women as a share of patients (published reviews)</text>');
+    s.push('<text x="18" y="' + (padT + plotH / 2) + '" font-size="13" fill="var(--ink)" text-anchor="middle" font-weight="600" transform="rotate(-90 18 ' + (padT + plotH / 2) + ')">Women as a share of trial participants</text>');
+    s.push('<line x1="' + x(0.5) + '" y1="' + y(0.5) + '" x2="' + x(1) + '" y2="' + y(1) + '" stroke="var(--ink)" stroke-width="1.5"/>');
+    s.push('<text x="' + (x(0.97)) + '" y="' + (y(0.97) + 20) + '" font-size="11.5" fill="var(--ink-soft)" text-anchor="end" transform="rotate(-37 ' + x(0.97) + " " + (y(0.97) + 20) + ')">parity: enrolled like they’re affected</text>');
+
+    conds.slice().sort(function (a, b) { return b.participants - a.participants; }).forEach(function (c) {
+      var below = c.femaleEnrollShare < c.femalePrevShare;
+      var cx = x(c.femalePrevShare), cy = y(c.femaleEnrollShare), cr = r(c.participants);
+      var fill = below ? "var(--accent)" : "var(--peri)";
+      s.push('<circle cx="' + cx + '" cy="' + cy + '" r="' + cr + '" fill="' + fill + '" fill-opacity="0.85" stroke="var(--bg)" stroke-width="1.5">');
+      s.push("<title>" + esc(c.name) + "\nWomen among patients: " + pct(c.femalePrevShare) + " (" + esc(c.prevNote) + ")\nWomen among participants: " + pct(c.femaleEnrollShare) + "\n" + num(c.participants) + " participants in " + num(c.trialsParsed) + " trials with readable results\n(" + num(c.trialsWithResults) + " of " + num(c.trialsTotal) + " registered trials post results)</title></circle>");
+      var flip = cx + cr + 6 > W - 20;
+      s.push('<text x="' + (flip ? cx - cr - 6 : cx + cr + 6) + '" y="' + (cy + 4) + '" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="' + (flip ? "end" : "start") + '">' + esc(c.name) + "</text>");
+    });
+    s.push("</svg>");
+    document.getElementById("tgChart").innerHTML = s.join("");
+    document.getElementById("tgLegend").hidden = false;
+
+    var t = [];
+    t.push('<table class="tg-table"><thead><tr><th>Condition</th><th>Women among<br>patients</th><th>Women among<br>participants</th><th>Gap</th><th>Participants<br>counted</th><th>Trials: results posted<br>/ registered</th></tr></thead><tbody>');
+    conds.slice().sort(function (a, b) { return (a.femaleEnrollShare - a.femalePrevShare) - (b.femaleEnrollShare - b.femalePrevShare); }).forEach(function (c) {
+      var gap = c.femaleEnrollShare - c.femalePrevShare;
+      var gapStr = (gap >= 0 ? "+" : "−") + Math.abs(gap * 100).toFixed(1) + " pts";
+      t.push("<tr><td>" + esc(c.name) + '<br><span class="tg-src"><a href="' + esc(c.prevSourceUrl) + '">' + esc(c.prevSourceLabel) + "</a></span></td>");
+      t.push("<td>" + pct(c.femalePrevShare) + '<br><span class="tg-src">' + esc(c.prevNote) + "</span></td>");
+      t.push("<td>" + pct(c.femaleEnrollShare) + "</td>");
+      t.push('<td class="' + (gap < -0.02 ? "tg-gap-neg" : "") + '">' + gapStr + "</td>");
+      t.push("<td>" + num(c.participants) + "</td>");
+      t.push("<td>" + num(c.trialsWithResults) + " / " + num(c.trialsTotal) + "</td></tr>");
+    });
+    t.push("</tbody></table>");
+    document.getElementById("tgTable").innerHTML = t.join("");
+
+    var m = document.getElementById("tgMethod");
+    m.insertAdjacentHTML("beforeend", ' Enrollment data: <a href="https://clinicaltrials.gov/data-api/api">ClinicalTrials.gov API v2</a> (public domain), pulled ' + esc(data.pulled) + "; the pull script ships in the repository as <code>data/trial-gap/pull_trials.py</code>.");
+    m.hidden = false;
+  }
+
   fetch("data.json")
     .then(function (resp) { if (!resp.ok) throw new Error(resp.status); return resp.json(); })
     .then(render)
     .catch(function () {
       document.getElementById("plot").innerHTML = '<p style="color:var(--ink-soft); padding:1.5rem 0">The data file could not be loaded. It is generated from <code>data/diagnostic-delay/findings.json</code> in the repository.</p>';
+    });
+
+  fetch("trial-gap.json")
+    .then(function (resp) { if (!resp.ok) throw new Error(resp.status); return resp.json(); })
+    .then(renderTrialGap)
+    .catch(function () {
+      document.getElementById("tgChart").innerHTML = '<p style="color:var(--ink-soft); padding:1.5rem 0">The trial-enrollment file could not be loaded. It is generated by <code>data/trial-gap/pull_trials.py</code> in the repository.</p>';
     });
 })();
 </script>
