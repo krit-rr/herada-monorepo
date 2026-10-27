@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Ledger: a tool by Herada</title>
+<meta name="description" content="A private, local-only log of your health story: symptoms, visits, tests, treatments. Prints to one page for the next appointment. A personal log, not a medical record.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* Herada design system (v3 palette, Oct 2026), inlined so this page stands alone. */
+:root {
+  --bg: #FDFCFE;
+  --strip: #B7B5E4;
+  --ink: #2B2733;
+  --ink-soft: #5B5666;
+  --accent: #AD1457;
+  --accent-hover: #8A0E45;
+  --accent-ink: #FDFCFE;
+  --rule: #CFCCD6;
+  --kicker: #6B68A0;
+  --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --ui: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --page: 68rem;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+    --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+    --kicker: #B7B5E4;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+  --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+  --kicker: #B7B5E4;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1.125rem; line-height: 1.55;
+}
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; line-height: 1.15; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.25rem, 6vw, 3.75rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hr-wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
+.hr-ui { font-family: var(--ui); font-size: 0.875rem; }
+
+.hr-header { border-bottom: 1px solid var(--rule); }
+.hr-header .hr-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 2rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+.hr-wordmark { font-family: var(--display); font-size: 1.375rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); text-decoration: none; }
+.hr-header span.hr-ui { color: var(--ink-soft); }
+
+.hr-notice { background: var(--strip); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.875rem; color: var(--ink); }
+.hr-notice b { font-weight: 700; }
+
+.hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
+.hr-intro h1 { max-width: 22ch; }
+.hr-lede { max-width: 40rem; margin-top: 1.25rem; font-size: 1.3125rem; line-height: 1.5; color: var(--ink-soft); }
+
+.lg-section { border-top: 1px solid var(--ink); padding: 2rem 0 2.5rem; }
+.lg-kicker { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); margin-bottom: 0.75rem; }
+.lg-sub { margin-top: 0.5rem; max-width: 44rem; font-size: 1.0625rem; color: var(--ink-soft); }
+
+/* Record-type picker + forms */
+.lg-types { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; }
+.lg-types button {
+  font-family: var(--ui); font-size: 0.9375rem; font-weight: 600;
+  padding: 0.55rem 1rem; min-height: 2.75rem;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 2px; cursor: pointer;
+}
+.lg-types button:hover { border-color: var(--accent); color: var(--accent); }
+.lg-types button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+input, select, textarea {
+  font-family: var(--ui); font-size: 1rem; color: var(--ink);
+  background: var(--bg); border: 1px solid var(--rule); border-radius: 2px;
+  padding: 0.5rem 0.65rem; min-height: 2.75rem;
+}
+input:hover, select:hover, textarea:hover { border-color: var(--ink-soft); }
+.lg-fields { display: flex; flex-wrap: wrap; gap: 0.9rem 1.25rem; margin-top: 1.25rem; }
+.lg-field { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+.lg-field > span { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; color: var(--ink-soft); }
+.lg-field input[type="text"] { width: 100%; }
+.lg-grow { flex: 1 1 15rem; }
+.lg-add {
+  margin-top: 1.25rem; font-family: var(--ui); font-size: 0.9375rem; font-weight: 600;
+  padding: 0.6rem 1.2rem; min-height: 2.75rem; cursor: pointer;
+  background: transparent; color: var(--ink); border: 1px solid var(--ink); border-radius: 2px;
+}
+.lg-add:hover { border-color: var(--accent); color: var(--accent); }
+.lg-err { display: none; margin-top: 0.75rem; font-family: var(--ui); font-size: 0.875rem; color: var(--accent); }
+.lg-err.show { display: block; }
+.lg-hint { margin-top: 0.75rem; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); max-width: 44rem; }
+
+/* The log */
+.lg-month { margin-top: 2rem; }
+.lg-month h3 { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); }
+.lg-feed { margin: 0.5rem 0 0; padding: 0; list-style: none; max-width: 54rem; }
+.lg-feed li { display: grid; grid-template-columns: 5.5rem auto 1fr auto; gap: 0.2rem 1rem; padding: 0.8rem 0; border-top: 1px solid var(--rule); align-items: baseline; }
+.lg-feed li:last-child { border-bottom: 1px solid var(--rule); }
+.lg-date { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lg-tag { font-family: var(--ui); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.1rem 0.45rem; border: 1px solid var(--rule); border-radius: 2px; color: var(--ink-soft); white-space: nowrap; }
+.lg-tag.t-symptom { border-color: var(--accent); color: var(--accent); }
+.lg-tag.t-visit { border-color: var(--kicker); color: var(--kicker); }
+.lg-body b { font-weight: 600; }
+.lg-body span { color: var(--ink-soft); font-size: 1rem; }
+.lg-feed button {
+  font-family: var(--ui); font-size: 0.8125rem; font-weight: 600;
+  background: none; border: none; padding: 0.1rem 0.3rem; min-height: 0;
+  color: var(--ink-soft); cursor: pointer; text-decoration: underline; text-underline-offset: 0.18em;
+}
+.lg-feed button:hover { color: var(--accent); }
+.lg-empty { margin-top: 1.5rem; padding: 2rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); color: var(--ink-soft); max-width: 44rem; }
+@media (max-width: 40rem) {
+  .lg-feed li { grid-template-columns: auto 1fr auto; }
+  .lg-date { grid-column: 1 / -1; }
+}
+
+/* The one-pager */
+.lg-pager { max-width: 54rem; border: 1px solid var(--rule); padding: clamp(1.25rem, 4vw, 2.25rem); margin-top: 1.5rem; }
+.lg-pager header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.25rem 2rem; border-bottom: 2px solid var(--ink); padding-bottom: 0.6rem; }
+.lg-pager header h3 { font-size: 1.375rem; }
+.lg-pager header span { font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); }
+.lg-pgroup { margin-top: 1.25rem; }
+.lg-pgroup h4 { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--kicker); margin-bottom: 0.3rem; }
+.lg-pgroup ul { margin: 0; padding: 0; list-style: none; }
+.lg-pgroup li { padding: 0.35rem 0; border-top: 1px solid var(--rule); font-size: 1rem; }
+.lg-pgroup li:first-child { border-top: none; }
+.lg-pgroup b { font-weight: 600; }
+.lg-pgroup span { color: var(--ink-soft); }
+.lg-pempty { color: var(--ink-soft); font-style: italic; font-size: 0.9375rem; }
+.lg-pfoot { margin-top: 1.5rem; padding-top: 0.6rem; border-top: 1px solid var(--rule); font-family: var(--ui); font-size: 0.75rem; color: var(--ink-soft); }
+
+/* Actions + backup */
+.lg-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; margin-top: 2rem; }
+.hr-button {
+  display: inline-block; padding: 0.8rem 1.4rem; background: var(--accent); color: var(--accent-ink);
+  border: none; border-radius: 2px; font-family: var(--ui); font-size: 1rem; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+}
+.hr-button:hover { background: var(--accent-hover); color: var(--accent-ink); }
+.lg-ghost {
+  display: inline-block; padding: 0.75rem 1.35rem; background: transparent; color: var(--ink);
+  border: 1px solid var(--ink); border-radius: 2px; font-family: var(--ui); font-size: 1rem; font-weight: 600; cursor: pointer;
+}
+.lg-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.lg-clear {
+  font-family: var(--ui); font-size: 0.9375rem; font-weight: 600; background: none; border: none;
+  padding: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 0.18em;
+}
+.lg-clear:hover { color: var(--accent-hover); }
+.lg-copied { font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); }
+.lg-backup { margin-top: 2rem; max-width: 46rem; padding: 1rem 1.25rem; border: 1px solid var(--rule); }
+.lg-backup h4 { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--kicker); }
+.lg-backup p { margin-top: 0.4rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); }
+.lg-backup .lg-brow { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.9rem; align-items: center; }
+.lg-backup input[type="password"] { flex: 1 1 12rem; }
+.lg-backup input[type="file"] { display: none; }
+
+.lg-clinician { margin-top: 2rem; max-width: 46rem; font-size: 1rem; color: var(--ink-soft); }
+.lg-clinician b { color: var(--ink); font-weight: 600; }
+
+.hr-section { border-top: 1px solid var(--rule); padding: clamp(2.5rem, 6vw, 4rem) 0; }
+.hr-sources { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
+
+.hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
+
+/* Print: the one-pager alone, one portrait page */
+@page { size: letter portrait; margin: 13mm 15mm; }
+@media print {
+  :root, :root[data-theme="dark"] {
+    --bg: #FDFCFE; --strip: #B7B5E4; --ink: #2B2733; --ink-soft: #5B5666;
+    --accent: #AD1457; --accent-hover: #8A0E45; --accent-ink: #FDFCFE; --rule: #CFCCD6; --kicker: #6B68A0;
+  }
+  body { font-size: 9.5pt; }
+  .hr-header, .hr-notice, .hr-intro, .lg-entry, .lg-logsec, .lg-actions, .lg-backup, .lg-clinician, .hr-section, .hr-footer, .lg-pager-kicker, .lg-pager-h2 { display: none !important; }
+  .lg-section { border-top: none; padding: 0; }
+  .lg-section .hr-wrap { padding: 0; max-width: none; }
+  .lg-pager { border: none; padding: 0; margin-top: 0; max-width: none; }
+  .lg-pgroup h4 { font-size: 7.5pt; }
+  .lg-pgroup li { font-size: 9pt; padding: 0.25rem 0; }
+}
+</style>
+</head>
+<body>
+<header class="hr-header">
+  <div class="hr-wrap">
+    <a class="hr-wordmark" href="/">HERADA</a>
+    <span class="hr-ui">Tool · The Ledger</span>
+  </div>
+</header>
+
+<div class="hr-notice">
+  <div class="hr-wrap"><p><b>A personal log, not a medical record.</b> Everything lives on this device only — nothing is sent anywhere, and Clear all erases it. Back it up yourself with the backup file below.</p></div>
+</div>
+
+<main>
+  <section class="hr-intro">
+    <div class="hr-wrap">
+      <h1>Your whole story, kept.</h1>
+      <p class="hr-lede">Every new clinician starts from zero — unless you don&rsquo;t. The Ledger is a private log of symptoms, visits, tests and treatments that builds the one-pager you hand over at the next appointment.</p>
+    </div>
+  </section>
+
+  <section class="lg-section lg-entry" aria-label="Add to the ledger">
+    <div class="hr-wrap">
+      <p class="lg-kicker">Add to the ledger</p>
+      <h2>What happened?</h2>
+      <div class="lg-types" id="types" role="group" aria-label="Record type">
+        <button type="button" data-type="symptom" aria-pressed="true">Symptom</button>
+        <button type="button" data-type="visit" aria-pressed="false">Visit</button>
+        <button type="button" data-type="test" aria-pressed="false">Test</button>
+        <button type="button" data-type="treatment" aria-pressed="false">Treatment</button>
+      </div>
+      <form id="form" novalidate>
+        <div class="lg-fields" id="fields"></div>
+        <p class="lg-err" id="err"></p>
+        <button type="submit" class="lg-add" id="addBtn">Add to the ledger</button>
+      </form>
+      <p class="lg-hint" id="hint"></p>
+    </div>
+  </section>
+
+  <section class="lg-section lg-logsec" aria-label="The log">
+    <div class="hr-wrap">
+      <p class="lg-kicker">The log</p>
+      <h2>The story so far</h2>
+      <div id="log"><p class="lg-empty">Add your first entry above — the log builds itself here, newest first.</p></div>
+    </div>
+  </section>
+
+  <section class="lg-section" aria-label="The one-pager">
+    <div class="hr-wrap">
+      <p class="lg-kicker lg-pager-kicker">The handover</p>
+      <h2 class="lg-pager-h2">Your one-pager</h2>
+      <div class="lg-pager" id="pager"></div>
+      <div class="lg-actions">
+        <button type="button" class="hr-button" id="printPager">Print the one-pager</button>
+        <button type="button" class="lg-ghost" id="copyPager">Copy as text</button>
+        <button type="button" class="lg-clear" id="clearAll">Clear all</button>
+        <span class="lg-copied" id="copied" hidden>Copied — paste it into your notes or portal.</span>
+      </div>
+
+      <div class="lg-backup">
+        <h4>Backup &amp; move devices</h4>
+        <p>Save your ledger as a file you keep — add a passphrase and the file is encrypted on your device before it&rsquo;s saved. Load it here on any device to continue.</p>
+        <div class="lg-brow">
+          <input type="password" id="passphrase" placeholder="Optional passphrase" autocomplete="new-password" aria-label="Backup passphrase">
+          <button type="button" class="lg-ghost" id="saveBackup">Save backup file</button>
+          <button type="button" class="lg-ghost" id="loadBackupBtn">Load backup</button>
+          <input type="file" id="loadBackup" accept=".json,application/json">
+        </div>
+      </div>
+
+      <p class="lg-clinician"><b>Hand it over, or read it out.</b> The Ledger is your own account of your own history — a head start for the visit, not a medical record and not a diagnosis. Your clinician will verify what matters against your chart; what any of it means is a conversation to have with them.</p>
+    </div>
+  </section>
+
+  <section class="hr-section" aria-label="Sources">
+    <div class="hr-wrap">
+      <p class="hr-sources">No external data is used on this page: everything shown is what you typed, stored only in your browser. The printout, text copy and backup file are generated on your device; a passphrase-protected backup is encrypted in the browser before saving. A free tool by <a href="/">Herada</a>. As of October 2026.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="hr-footer">
+  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice — discuss your ledger with your clinician.</p></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "herada-ledger-v1";
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var SEVERITY_NAME = { 1: "mild", 2: "moderate", 3: "severe" };
+
+  var FORMS = {
+    symptom: {
+      hint: "Roughly when it started is plenty — the Ledger is remembered history, not a diary.",
+      fields: [
+        { f: "name", label: "Symptom", type: "text", grow: true, ph: "e.g. Joint pain, mornings", req: true },
+        { f: "date", label: "Started", type: "date", req: true },
+        { f: "end", label: "Ended (blank = ongoing)", type: "date" },
+        { f: "severity", label: "Severity", type: "select", options: [["1", "1 · Mild"], ["2", "2 · Moderate"], ["3", "3 · Severe"]], def: "2" }
+      ]
+    },
+    visit: {
+      hint: "Who you saw is your own label — a name, a role, whatever you’ll recognize later.",
+      fields: [
+        { f: "who", label: "Who", type: "text", grow: true, ph: "e.g. PCP — Dr. S, or “urgent care”", req: true },
+        { f: "date", label: "When", type: "date", req: true },
+        { f: "said", label: "What they said", type: "text", grow: true, ph: "e.g. “probably stress; come back in 3 months”", req: true },
+        { f: "next", label: "What happens next (optional)", type: "text", grow: true, ph: "e.g. referral promised, labs ordered" }
+      ]
+    },
+    test: {
+      hint: "Record the result as you were told it — “normal, no number given” is itself worth keeping.",
+      fields: [
+        { f: "name", label: "Test or check", type: "text", grow: true, ph: "e.g. TSH, ferritin, orthostatic vitals", req: true },
+        { f: "date", label: "When", type: "date", req: true },
+        { f: "result", label: "Result as told", type: "text", grow: true, ph: "e.g. “normal” — number not given" },
+        { f: "status", label: "Status", type: "select", options: [["told-normal", "Told normal"], ["abnormal", "Abnormal / follow-up"], ["waiting", "Waiting on result"], ["unknown", "Never heard back"]], def: "told-normal" }
+      ]
+    },
+    treatment: {
+      hint: "Anything tried on purpose counts — prescriptions, supplements, physio, a change you made.",
+      fields: [
+        { f: "name", label: "Treatment", type: "text", grow: true, ph: "e.g. Sertraline 50mg", req: true },
+        { f: "date", label: "Started", type: "date", req: true },
+        { f: "end", label: "Stopped (blank = current)", type: "date" },
+        { f: "outcome", label: "What happened", type: "text", grow: true, ph: "e.g. no change after 3 months" }
+      ]
+    }
+  };
+  var TAG_LABEL = { symptom: "Symptom", visit: "Visit", test: "Test", treatment: "Treatment" };
+
+  var data = load() || { records: [] };
+  var currentType = "symptom";
+
+  // ---------- Storage (must never break the page) ----------
+  function validDate(s) { return typeof s === "string" && /^\d{4}-\d{2}-\d{2}$/.test(s); }
+  function sanitize(d) {
+    if (!d || !Array.isArray(d.records)) return null;
+    d.records = d.records.filter(function (r) {
+      return r && FORMS[r.type] && validDate(r.date) && (!r.end || validDate(r.end));
+    });
+    return d;
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? sanitize(JSON.parse(raw)) : null;
+    } catch (err) { return null; }
+  }
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (err) { /* storage unavailable: in-memory only */ }
+  }
+
+  function parseDate(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function fmtDate(s) { var d = parseDate(s); return MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear(); }
+  function monthKey(s) { return s.slice(0, 7); }
+  function fmtMonthKey(k) { var p = k.split("-"); return MONTHS[+p[1] - 1] + " " + p[0]; }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+  // ---------- Entry form ----------
+  function renderForm() {
+    var cfg = FORMS[currentType];
+    document.getElementById("fields").innerHTML = cfg.fields.map(function (fl) {
+      var inner;
+      if (fl.type === "select") {
+        inner = '<select data-f="' + fl.f + '">' + fl.options.map(function (o) {
+          return '<option value="' + o[0] + '"' + (fl.def === o[0] ? " selected" : "") + ">" + o[1] + "</option>";
+        }).join("") + "</select>";
+      } else {
+        inner = '<input type="' + fl.type + '" data-f="' + fl.f + '" maxlength="110"' + (fl.ph ? ' placeholder="' + esc(fl.ph) + '"' : "") + ' autocomplete="off">';
+      }
+      return '<label class="lg-field' + (fl.grow ? " lg-grow" : "") + '"><span>' + fl.label + "</span>" + inner + "</label>";
+    }).join("");
+    document.getElementById("hint").textContent = cfg.hint;
+    document.getElementById("err").classList.remove("show");
+  }
+
+  document.getElementById("types").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-type]");
+    if (!b) return;
+    currentType = b.getAttribute("data-type");
+    Array.prototype.forEach.call(this.querySelectorAll("button"), function (x) {
+      x.setAttribute("aria-pressed", x === b ? "true" : "false");
+    });
+    renderForm();
+  });
+
+  document.getElementById("form").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var cfg = FORMS[currentType];
+    var errEl = document.getElementById("err");
+    errEl.classList.remove("show");
+    var rec = { type: currentType, id: Date.now() + "-" + Math.random().toString(36).slice(2, 7) };
+    var bad = null;
+    cfg.fields.forEach(function (fl) {
+      var el = document.querySelector('#fields [data-f="' + fl.f + '"]');
+      var v = el.value;
+      if (fl.type === "text") v = v.trim();
+      if (fl.req && !v) bad = bad || (fl.label.replace(/ \(.*\)/, "") + " is needed.");
+      if (fl.type === "date" && v && !validDate(v)) bad = bad || "Check the date.";
+      if (v) rec[fl.f === "date" ? "date" : fl.f] = v;
+    });
+    if (!bad && rec.end && rec.end < rec.date) { var t = rec.date; rec.date = rec.end; rec.end = t; }
+    if (bad) { errEl.textContent = bad; errEl.classList.add("show"); return; }
+    data.records.push(rec);
+    save();
+    renderAll();
+    renderForm();
+    document.querySelector("#fields input, #fields select").focus();
+  });
+
+  // ---------- The log ----------
+  function recTitle(r) {
+    if (r.type === "symptom") return "<b>" + esc(r.name) + "</b> <span>" + (SEVERITY_NAME[r.severity] || "moderate") + (r.end ? ", until " + fmtDate(r.end) : ", ongoing") + "</span>";
+    if (r.type === "visit") return "<b>" + esc(r.who) + "</b> <span>“" + esc(r.said) + "”" + (r.next ? " · next: " + esc(r.next) : "") + "</span>";
+    if (r.type === "test") {
+      var st = { "told-normal": "told normal", abnormal: "abnormal / follow-up", waiting: "waiting on result", unknown: "never heard back" }[r.status] || "";
+      return "<b>" + esc(r.name) + "</b> <span>" + (r.result ? esc(r.result) : st) + (r.result && st ? " · " + st : "") + "</span>";
+    }
+    return "<b>" + esc(r.name) + "</b> <span>" + (r.end ? "until " + fmtDate(r.end) : "current") + (r.outcome ? " · " + esc(r.outcome) : "") + "</span>";
+  }
+
+  function renderLog() {
+    var logEl = document.getElementById("log");
+    if (!data.records.length) {
+      logEl.innerHTML = '<p class="lg-empty">Add your first entry above — the log builds itself here, newest first.</p>';
+      return;
+    }
+    var sorted = data.records.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+    var out = [];
+    var lastMonth = null;
+    sorted.forEach(function (r) {
+      var mk = monthKey(r.date);
+      if (mk !== lastMonth) {
+        if (lastMonth !== null) out.push("</ul></div>");
+        out.push('<div class="lg-month"><h3>' + fmtMonthKey(mk) + '</h3><ul class="lg-feed">');
+        lastMonth = mk;
+      }
+      out.push('<li><span class="lg-date">' + fmtDate(r.date).replace(", " + r.date.slice(0, 4), "") + '</span><span class="lg-tag t-' + r.type + '">' + TAG_LABEL[r.type] + '</span><span class="lg-body">' + recTitle(r) + '</span><button type="button" data-rm="' + r.id + '" aria-label="Remove entry">Remove</button></li>');
+    });
+    out.push("</ul></div>");
+    logEl.innerHTML = out.join("");
+  }
+
+  document.addEventListener("click", function (ev) {
+    var rm = ev.target.closest ? ev.target.closest("button[data-rm]") : null;
+    if (!rm) return;
+    var id = rm.getAttribute("data-rm");
+    data.records = data.records.filter(function (r) { return r.id !== id; });
+    save();
+    renderAll();
+  });
+
+  // ---------- The one-pager ----------
+  function group(type) { return data.records.filter(function (r) { return r.type === type; }).sort(function (a, b) { return a.date < b.date ? 1 : -1; }); }
+
+  function renderPager() {
+    var d = new Date();
+    var out = [];
+    out.push("<header><h3>My health one-pager</h3><span>prepared " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + " · written by the patient</span></header>");
+
+    var ongoing = group("symptom").filter(function (r) { return !r.end; });
+    var resolved = group("symptom").filter(function (r) { return r.end; });
+    var current = group("treatment").filter(function (r) { return !r.end; });
+    var past = group("treatment").filter(function (r) { return r.end; });
+
+    function section(title, rows, line, emptyText) {
+      out.push('<div class="lg-pgroup"><h4>' + title + "</h4>");
+      if (!rows.length) { out.push('<p class="lg-pempty">' + emptyText + "</p>"); }
+      else { out.push("<ul>" + rows.map(line).join("") + "</ul>"); }
+      out.push("</div>");
+    }
+
+    section("Ongoing now", ongoing.concat(current), function (r) {
+      if (r.type === "symptom") return "<li><b>" + esc(r.name) + "</b> <span>— since " + fmtDate(r.date) + ", " + (SEVERITY_NAME[r.severity] || "moderate") + "</span></li>";
+      return "<li><b>" + esc(r.name) + "</b> <span>— treatment since " + fmtDate(r.date) + (r.outcome ? " · " + esc(r.outcome) : "") + "</span></li>";
+    }, "Nothing marked ongoing.");
+
+    section("Visits, newest first", group("visit"), function (r) {
+      return "<li><b>" + fmtDate(r.date) + " — " + esc(r.who) + ":</b> <span>“" + esc(r.said) + "”" + (r.next ? " · next: " + esc(r.next) : "") + "</span></li>";
+    }, "No visits logged.");
+
+    section("Tests and checks", group("test"), function (r) {
+      var st = { "told-normal": "told normal", abnormal: "abnormal / follow-up", waiting: "waiting on result", unknown: "never heard back" }[r.status] || "";
+      return "<li><b>" + esc(r.name) + "</b> <span>— " + fmtDate(r.date) + (r.result ? " · " + esc(r.result) : "") + (st ? " · " + st : "") + "</span></li>";
+    }, "No tests logged.");
+
+    if (resolved.length || past.length) {
+      section("Resolved or stopped", resolved.concat(past), function (r) {
+        return "<li><b>" + esc(r.name) + "</b> <span>— " + fmtDate(r.date) + " to " + fmtDate(r.end) + (r.outcome ? " · " + esc(r.outcome) : "") + "</span></li>";
+      }, "");
+    }
+
+    out.push('<p class="lg-pfoot">Written by the patient with joinherada.com · a personal log and a head start for the visit — not a medical record.</p>');
+    document.getElementById("pager").innerHTML = out.join("");
+  }
+
+  function renderAll() { renderLog(); renderPager(); }
+
+  // ---------- Copy ----------
+  function asText() {
+    var lines = ["MY HEALTH ONE-PAGER — written by the patient (joinherada.com; a personal log, not a medical record)", ""];
+    function add(title, rows, line) {
+      lines.push(title);
+      if (!rows.length) lines.push("(none)");
+      rows.forEach(function (r) { lines.push("- " + line(r)); });
+      lines.push("");
+    }
+    add("ONGOING NOW", group("symptom").filter(function (r) { return !r.end; }).concat(group("treatment").filter(function (r) { return !r.end; })), function (r) {
+      return r.type === "symptom"
+        ? r.name + " (since " + fmtDate(r.date) + ", " + (SEVERITY_NAME[r.severity] || "moderate") + ")"
+        : r.name + " (treatment since " + fmtDate(r.date) + (r.outcome ? "; " + r.outcome : "") + ")";
+    });
+    add("VISITS, NEWEST FIRST", group("visit"), function (r) {
+      return fmtDate(r.date) + " — " + r.who + ": “" + r.said + "”" + (r.next ? " (next: " + r.next + ")" : "");
+    });
+    add("TESTS AND CHECKS", group("test"), function (r) {
+      var st = { "told-normal": "told normal", abnormal: "abnormal / follow-up", waiting: "waiting on result", unknown: "never heard back" }[r.status] || "";
+      return r.name + " — " + fmtDate(r.date) + (r.result ? ": " + r.result : "") + (st ? " (" + st + ")" : "");
+    });
+    return lines.join("\n").trim();
+  }
+
+  document.getElementById("copyPager").addEventListener("click", function () {
+    var text = asText();
+    var note = document.getElementById("copied");
+    function done() { note.hidden = false; setTimeout(function () { note.hidden = true; }, 4000); }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); } catch (err) { alert("Copying is blocked in this browser — select the one-pager and copy it by hand."); }
+      ta.remove();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  });
+
+  // Re-render so the "prepared" date is today's even if the tab sat open,
+  // and whether printing starts from the button or the browser menu.
+  window.addEventListener("beforeprint", renderPager);
+  document.getElementById("printPager").addEventListener("click", function () { renderPager(); window.print(); });
+
+  document.getElementById("clearAll").addEventListener("click", function () {
+    if (!data.records.length) return;
+    if (!confirm("Remove every entry from this device? (Save a backup file first if you want to keep it.)")) return;
+    data = { records: [] };
+    try { localStorage.removeItem(STORAGE_KEY); } catch (err) { /* fine */ }
+    renderAll();
+  });
+
+  // ---------- Backup: save/load, optionally encrypted in the browser ----------
+  function b64(buf) {
+    // Chunked: fromCharCode.apply blows the argument limit on large ledgers.
+    var bytes = new Uint8Array(buf);
+    var out = "";
+    for (var i = 0; i < bytes.length; i += 0x8000) {
+      out += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(out);
+  }
+  function unb64(s) { var bin = atob(s); var a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); return a; }
+
+  function deriveKey(pass, salt) {
+    return crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]).then(function (km) {
+      return crypto.subtle.deriveKey({ name: "PBKDF2", salt: salt, iterations: 150000, hash: "SHA-256" }, km, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+    });
+  }
+
+  function download(text, name) {
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], { type: "application/json" }));
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+  }
+
+  document.getElementById("saveBackup").addEventListener("click", function () {
+    var pass = document.getElementById("passphrase").value;
+    var payload = JSON.stringify(data);
+    var stamp = new Date().toISOString().slice(0, 10);
+    if (!pass) {
+      download(JSON.stringify({ herada_ledger: 1, encrypted: false, data: data }), "herada-ledger-" + stamp + ".json");
+      return;
+    }
+    var salt = crypto.getRandomValues(new Uint8Array(16));
+    var iv = crypto.getRandomValues(new Uint8Array(12));
+    deriveKey(pass, salt).then(function (key) {
+      return crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, key, new TextEncoder().encode(payload));
+    }).then(function (ct) {
+      download(JSON.stringify({ herada_ledger: 1, encrypted: true, salt: b64(salt), iv: b64(iv), data: b64(ct) }), "herada-ledger-" + stamp + ".json");
+      document.getElementById("passphrase").value = "";
+    }).catch(function () { alert("Encryption isn’t available in this browser — clear the passphrase to save an unencrypted backup."); });
+  });
+
+  document.getElementById("loadBackupBtn").addEventListener("click", function () {
+    document.getElementById("loadBackup").click();
+  });
+  document.getElementById("loadBackup").addEventListener("change", function () {
+    var file = this.files && this.files[0];
+    this.value = "";
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed;
+      try { parsed = JSON.parse(reader.result); } catch (err) { alert("That doesn’t look like a Ledger backup file."); return; }
+      if (!parsed || parsed.herada_ledger !== 1) { alert("That doesn’t look like a Ledger backup file."); return; }
+      function apply(d) {
+        var clean = sanitize(d);
+        if (!clean) { alert("The backup didn’t contain a readable ledger."); return; }
+        if (data.records.length && !confirm("Replace the " + data.records.length + " entries on this device with the backup?")) return;
+        data = clean;
+        save();
+        renderAll();
+      }
+      if (!parsed.encrypted) { apply(parsed.data); return; }
+      var pass = prompt("This backup is encrypted. Passphrase:");
+      if (pass == null) return;
+      deriveKey(pass, unb64(parsed.salt)).then(function (key) {
+        return crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(parsed.iv) }, key, unb64(parsed.data));
+      }).then(function (pt) {
+        apply(JSON.parse(new TextDecoder().decode(pt)));
+      }).catch(function () { alert("That passphrase didn’t unlock this backup."); });
+    };
+    reader.readAsText(file);
+  });
+
+  renderForm();
+  renderAll();
+})();
+</script>
+</body>
+</html>

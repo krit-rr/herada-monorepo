@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coverage Monitor: a prototype by Herada</title>
+<meta name="description" content="A prototype that flags upcoming clinic visits at risk of insurance denials, delays and surprise bills. Synthetic data only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* Herada design system (v3 palette, Oct 2026), inlined so this page stands alone. */
+:root {
+  --bg: #FDFCFE;
+  --strip: #B7B5E4;
+  --ink: #2B2733;
+  --ink-soft: #5B5666;
+  --accent: #AD1457;
+  --accent-hover: #8A0E45;
+  --accent-ink: #FDFCFE;
+  --rule: #CFCCD6;
+  --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --ui: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --page: 68rem;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+    --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+  --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1.125rem; line-height: 1.55;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.15; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.25rem, 6vw, 3.75rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 0.18em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hr-wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
+.hr-ui { font-family: var(--ui); font-size: 0.875rem; }
+
+.hr-header { border-bottom: 1px solid var(--rule); }
+.hr-header .hr-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 2rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+.hr-wordmark { font-family: var(--display); font-size: 1.375rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); }
+.hr-header span.hr-ui { color: var(--ink-soft); }
+
+.hr-notice { background: var(--strip); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.875rem; color: var(--ink); }
+
+.hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
+.hr-lede { max-width: 38rem; margin-top: 1.25rem; font-size: 1.3125rem; line-height: 1.5; color: var(--ink-soft); }
+
+/* Summary figures */
+.hr-figures { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--rule); }
+.hr-figures div { padding: 1.25rem 1rem 1.25rem 0; border-bottom: 1px solid var(--rule); }
+.hr-figures dt { font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); }
+.hr-figures dd { margin: 0.25rem 0 0; font-family: var(--display); font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.1; font-variant-numeric: tabular-nums; }
+@media (min-width: 48rem) { .hr-figures { grid-template-columns: repeat(4, 1fr); } }
+
+/* Filters */
+.hr-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; padding: 2rem 0 1rem; }
+.hr-filters button, .hr-handle {
+  font-family: var(--ui); font-size: 0.875rem; font-weight: 600;
+  padding: 0.55rem 0.9rem; min-height: 2.5rem;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 2px; cursor: pointer;
+}
+.hr-filters button:hover, .hr-handle:hover { border-color: var(--accent); color: var(--accent); }
+.hr-filters button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.hr-filters label { display: inline-flex; align-items: center; gap: 0.5rem; margin-left: auto; min-height: 2.5rem; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); cursor: pointer; }
+.hr-filters input { width: 1.05rem; height: 1.05rem; accent-color: var(--accent); }
+
+/* Queue */
+.hr-queue { border-top: 1px solid var(--ink); }
+.hr-queue details { border-bottom: 1px solid var(--rule); }
+.hr-queue summary {
+  display: grid; grid-template-columns: 1fr auto; gap: 0.15rem 1rem;
+  padding: 1rem 0; cursor: pointer; list-style: none;
+}
+.hr-queue summary::-webkit-details-marker { display: none; }
+.hr-queue summary:hover .hr-service { color: var(--accent); }
+.hr-when { grid-column: 1 / -1; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.hr-service { font-family: var(--display); font-size: 1.25rem; line-height: 1.25; }
+.hr-who { grid-column: 1; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); }
+.hr-level { grid-row: 2 / span 2; grid-column: 2; align-self: start; text-align: right; font-family: var(--ui); font-size: 0.875rem; white-space: nowrap; padding-top: 0.25rem; }
+.hr-level b { font-weight: 700; color: var(--accent); }
+.hr-level .hr-kinds { display: block; color: var(--ink-soft); font-size: 0.8125rem; }
+.hr-level.is-clear, .hr-level.is-handled { color: var(--ink-soft); }
+@media (min-width: 48rem) {
+  .hr-queue summary { grid-template-columns: 9.5rem 1fr 13rem; align-items: baseline; }
+  .hr-when { grid-column: 1; grid-row: 1 / span 2; font-size: 0.875rem; }
+  .hr-service { grid-column: 2; }
+  .hr-who { grid-column: 2; }
+  .hr-level { grid-column: 3; grid-row: 1 / span 2; }
+}
+.hr-detail { padding: 0 0 1.5rem; }
+@media (min-width: 48rem) { .hr-detail { padding-left: 9.5rem; padding-right: 13rem; } }
+.hr-flag { padding: 1rem 0 0; }
+.hr-flag + .hr-flag { margin-top: 1rem; border-top: 1px solid var(--rule); }
+.hr-flag h3 { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; color: var(--accent); }
+.hr-flag p { margin-top: 0.35rem; }
+.hr-flag .hr-act { color: var(--ink-soft); }
+.hr-flag .hr-act strong { color: var(--ink); font-weight: 600; }
+.hr-handle { margin-top: 1.25rem; }
+.hr-none { padding: 1rem 0 0; color: var(--ink-soft); }
+.hr-empty { padding: 2rem 0; color: var(--ink-soft); border-bottom: 1px solid var(--rule); }
+
+/* How it works */
+.hr-section { padding: clamp(3rem, 8vw, 5rem) 0; }
+.hr-cols { display: grid; gap: 2rem; margin-top: 2rem; }
+.hr-cols > div { border-top: 1px solid var(--ink); padding-top: 1rem; }
+.hr-cols h3 { font-size: 1.25rem; }
+.hr-cols p { margin-top: 0.5rem; color: var(--ink-soft); }
+@media (min-width: 48rem) { .hr-cols { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
+.hr-rules { margin: 2rem 0 0; padding: 0; list-style: none; max-width: 44rem; }
+.hr-rules li { padding: 0.9rem 0; border-top: 1px solid var(--rule); }
+.hr-rules li:last-child { border-bottom: 1px solid var(--rule); }
+.hr-rules b { font-family: var(--ui); font-size: 0.8125rem; color: var(--accent); display: block; }
+
+.hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<header class="hr-header">
+  <div class="hr-wrap">
+    <span class="hr-wordmark">HERADA</span>
+    <span class="hr-ui">Prototype · Coverage Monitor</span>
+  </div>
+</header>
+
+<div class="hr-notice">
+  <div class="hr-wrap"><p>Demo with synthetic data. The patients, clinicians, health plans and plan rules on this page are invented.</p></div>
+</div>
+
+<main>
+  <section class="hr-intro">
+    <div class="hr-wrap">
+      <h1>See coverage problems before the visit.</h1>
+      <p class="hr-lede">Coverage Monitor checks a clinic's upcoming schedule against each health plan's rules and lists the visits likely to end in a denial, a delay or a surprise bill, with what to do and by when.</p>
+    </div>
+  </section>
+
+  <section aria-label="Schedule check">
+    <div class="hr-wrap">
+      <dl class="hr-figures" id="figures"></dl>
+
+      <div class="hr-filters" role="group" aria-label="Filter visits">
+        <button type="button" data-kind="all" aria-pressed="true">All</button>
+        <button type="button" data-kind="Denial" aria-pressed="false">Denials</button>
+        <button type="button" data-kind="Delay" aria-pressed="false">Delays</button>
+        <button type="button" data-kind="Surprise" aria-pressed="false">Surprises</button>
+        <label><input type="checkbox" id="showClear"> Show visits with no flags</label>
+      </div>
+
+      <div class="hr-queue" id="queue"></div>
+    </div>
+  </section>
+
+  <section class="hr-section">
+    <div class="hr-wrap">
+      <h2>How it works</h2>
+      <div class="hr-cols">
+        <div><h3>Connect</h3><p>Reads the schedule, the authorizations on file and each plan's coverage rules. In this demo all three are sample data built into the page.</p></div>
+        <div><h3>Anticipate</h3><p>Runs every upcoming visit through a set of rules and works out which problems will land before the visit date.</p></div>
+        <div><h3>Act</h3><p>Gives front-office staff one list, ordered by urgency, with the next step and the last day it can still work.</p></div>
+      </div>
+
+      <h2 style="margin-top: clamp(3rem, 8vw, 5rem);">The rules behind the flags</h2>
+      <ul class="hr-rules">
+        <li><b>Delay</b>Prior authorization is required and has not been requested, or was requested too late for the plan's usual turnaround.</li>
+        <li><b>Denial</b>An approved authorization expires before the visit date.</li>
+        <li><b>Denial</b>The plan covers the service once in a set period and the last one was too recent.</li>
+        <li><b>Denial</b>The plan requires a referral or a documented first-line treatment, and neither is on file.</li>
+        <li><b>Denial</b>Coverage showed as inactive at the last eligibility check.</li>
+        <li><b>Surprise</b>Eligibility has not been checked in over 30 days, or the clinician is out of network for the patient's plan.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="hr-footer">
+  <div class="hr-wrap"><p class="hr-ui">A Herada prototype. Not connected to any clinic, health plan or patient record.</p></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- Sample data (all invented) ----------
+  var SERVICES = {
+    dexa:    { name: "Bone density scan (DEXA)", value: 120 },
+    bmri:    { name: "Breast MRI", value: 640 },
+    pus:     { name: "Pelvic ultrasound", value: 180 },
+    hyst:    { name: "Hysteroscopy", value: 1450 },
+    lap:     { name: "Laparoscopy for endometriosis", value: 3900 },
+    iud:     { name: "IUD insertion", value: 310 },
+    embx:    { name: "Endometrial biopsy", value: 240 },
+    pfpt:    { name: "Pelvic floor physical therapy", value: 110 },
+    inj:     { name: "Osteoporosis injection, in office", value: 1150 },
+    gene:    { name: "Hereditary cancer genetic test", value: 890 },
+    well:    { name: "Annual well-woman visit", value: 210 },
+    pmri:    { name: "Pelvic MRI", value: 720 }
+  };
+
+  // Per plan: usual prior-auth turnaround in days, and rules per service.
+  var PLANS = {
+    north: { name: "Northfield Health Plan", turnaround: 7, rules: {
+      bmri: { pa: true }, pmri: { pa: true }, hyst: { pa: true }, lap: { pa: true },
+      dexa: { freqMonths: 24 }, inj: { pa: true, step: true }, gene: { pa: true }, pfpt: { referral: true } } },
+    cedar: { name: "Cedar Mutual", turnaround: 5, rules: {
+      bmri: { pa: true }, pmri: { pa: true }, lap: { pa: true }, hyst: {},
+      dexa: { freqMonths: 24 }, inj: { pa: true }, gene: { pa: true }, well: { freqMonths: 12 } } },
+    harbor: { name: "Harbor Community Plan", turnaround: 10, rules: {
+      bmri: { pa: true }, pmri: { pa: true }, hyst: { pa: true }, lap: { pa: true }, pus: { referral: true },
+      dexa: { freqMonths: 24, pa: true }, inj: { pa: true, step: true }, gene: { pa: true }, pfpt: { pa: true, referral: true }, well: { freqMonths: 12 } } },
+    summit: { name: "Summit Senior Advantage", turnaround: 7, rules: {
+      bmri: { pa: true }, pmri: { pa: true }, hyst: { pa: true },
+      dexa: { freqMonths: 24 }, inj: { pa: true, step: true }, pfpt: { referral: true }, well: { freqMonths: 12 } } }
+  };
+
+  // day: days from today. auth.status: none | pending | approved.
+  var VISITS = [
+    { id: 1042, day: 1,  time: "9:20 AM",  svc: "bmri", plan: "north",  dr: "Dr. Okafor",  inNet: true,  auth: { status: "none" }, eligDays: 6,  active: true },
+    { id: 1107, day: 2,  time: "11:00 AM", svc: "dexa", plan: "summit", dr: "Dr. Lindqvist", inNet: true, auth: { status: "none" }, eligDays: 12, active: true, lastSame: 19 },
+    { id: 1013, day: 2,  time: "2:40 PM",  svc: "hyst", plan: "harbor", dr: "Dr. Okafor",  inNet: true,  auth: { status: "pending", sentDaysAgo: 3 }, eligDays: 3, active: true },
+    { id: 1188, day: 3,  time: "8:30 AM",  svc: "well", plan: "cedar",  dr: "Dr. Reyes",   inNet: true,  auth: { status: "none" }, eligDays: 41, active: true, lastSame: 14 },
+    { id: 1051, day: 3,  time: "10:15 AM", svc: "iud",  plan: "north",  dr: "Dr. Reyes",   inNet: true,  auth: { status: "none" }, eligDays: 2,  active: true },
+    { id: 1164, day: 4,  time: "1:00 PM",  svc: "lap",  plan: "cedar",  dr: "Dr. Haddad",  inNet: false, auth: { status: "approved", expiresDay: 20 }, eligDays: 9, active: true },
+    { id: 1029, day: 5,  time: "9:00 AM",  svc: "inj",  plan: "north",  dr: "Dr. Lindqvist", inNet: true, auth: { status: "approved", expiresDay: 30 }, eligDays: 5, active: true, priorTrial: false },
+    { id: 1210, day: 5,  time: "3:30 PM",  svc: "pfpt", plan: "summit", dr: "M. Castellanos, PT", inNet: true, auth: { status: "none" }, eligDays: 15, active: true, referral: false },
+    { id: 1076, day: 6,  time: "10:45 AM", svc: "pmri", plan: "harbor", dr: "Dr. Okafor",  inNet: true,  auth: { status: "approved", expiresDay: 4 }, eligDays: 8, active: true },
+    { id: 1133, day: 7,  time: "8:50 AM",  svc: "embx", plan: "cedar",  dr: "Dr. Reyes",   inNet: true,  auth: { status: "none" }, eligDays: 4,  active: true },
+    { id: 1095, day: 8,  time: "11:30 AM", svc: "gene", plan: "north",  dr: "Dr. Haddad",  inNet: true,  auth: { status: "none" }, eligDays: 10, active: true },
+    { id: 1221, day: 8,  time: "2:00 PM",  svc: "pus",  plan: "harbor", dr: "Dr. Reyes",   inNet: true,  auth: { status: "none" }, eligDays: 7,  active: false, referral: true },
+    { id: 1008, day: 9,  time: "9:40 AM",  svc: "dexa", plan: "cedar",  dr: "Dr. Lindqvist", inNet: true, auth: { status: "none" }, eligDays: 1, active: true, lastSame: 31 },
+    { id: 1149, day: 10, time: "1:15 PM",  svc: "lap",  plan: "harbor", dr: "Dr. Okafor",  inNet: true,  auth: { status: "pending", sentDaysAgo: 13 }, eligDays: 13, active: true },
+    { id: 1062, day: 11, time: "10:00 AM", svc: "well", plan: "summit", dr: "Dr. Reyes",   inNet: true,  auth: { status: "none" }, eligDays: 3,  active: true, lastSame: 13 },
+    { id: 1177, day: 12, time: "3:00 PM",  svc: "bmri", plan: "cedar",  dr: "Dr. Haddad",  inNet: true,  auth: { status: "approved", expiresDay: 45 }, eligDays: 36, active: true },
+    { id: 1034, day: 13, time: "9:10 AM",  svc: "pfpt", plan: "harbor", dr: "M. Castellanos, PT", inNet: true, auth: { status: "none" }, eligDays: 6, active: true, referral: true },
+    { id: 1201, day: 14, time: "11:20 AM", svc: "hyst", plan: "cedar",  dr: "Dr. Okafor",  inNet: true,  auth: { status: "none" }, eligDays: 5,  active: true }
+  ];
+
+  // ---------- Dates ----------
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  function dateAt(offset) { var d = new Date(today); d.setDate(d.getDate() + offset); return d; }
+  function fmt(offset) {
+    return dateAt(offset).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  }
+  function actBy(offset) { return offset <= 0 ? "today" : "by " + fmt(offset); }
+  function isWeekend(offset) { var d = dateAt(offset).getDay(); return d === 0 || d === 6; }
+  // The sample clinic is open on weekdays: visits roll forward to Monday, deadlines back to Friday.
+  VISITS.forEach(function (v) { while (isWeekend(v.day)) v.day += 1; });
+  function workday(offset) { offset = Math.max(0, offset); while (offset > 0 && isWeekend(offset)) offset -= 1; return offset; }
+  function plural(n, word) { return n + " " + word + (n === 1 ? "" : "s"); }
+
+  // ---------- Rules ----------
+  // Each rule returns a flag or nothing. level: 2 = high, 1 = medium.
+  function evaluate(v) {
+    var plan = PLANS[v.plan], rule = plan.rules[v.svc] || {}, flags = [];
+    var t = plan.turnaround;
+
+    if (rule.pa && v.auth.status === "none") {
+      if (v.day < t) {
+        flags.push({ kind: "Delay", level: 2,
+          what: "Prior authorization has not been requested. " + plan.name + " usually takes " + plural(t, "day") + " to decide and the visit is in " + plural(v.day, "day") + ".",
+          act: "Submit the request and ask for expedited review, or move the visit to " + fmt(t) + " or later.", by: 0 });
+      } else {
+        flags.push({ kind: "Delay", level: 1,
+          what: "Prior authorization is required and none is on file. There is still time for a standard review.",
+          act: "Submit the request.", by: v.day - t });
+      }
+    }
+    if (rule.pa && v.auth.status === "pending") {
+      var left = t - v.auth.sentDaysAgo;
+      if (left > v.day) {
+        flags.push({ kind: "Delay", level: 2,
+          what: "Authorization was requested " + plural(v.auth.sentDaysAgo, "day") + " ago. At the plan's usual pace the decision arrives around " + fmt(left) + ", after the visit.",
+          act: "Call the plan to request expedited review, or reschedule.", by: 0 });
+      } else if (left < 0) {
+        flags.push({ kind: "Delay", level: 1,
+          what: "Authorization has been pending " + plural(v.auth.sentDaysAgo, "day") + ", longer than the plan's usual " + plural(t, "day") + ".",
+          act: "Call the plan for a status update.", by: Math.max(0, v.day - 3) });
+      }
+    }
+    if (rule.pa && v.auth.status === "approved" && v.auth.expiresDay < v.day) {
+      flags.push({ kind: "Denial", level: 2,
+        what: "The approved authorization expires " + fmt(v.auth.expiresDay) + ", before the visit on " + fmt(v.day) + ".",
+        act: "Request an extension, or move the visit to " + fmt(v.auth.expiresDay) + " or earlier.", by: v.auth.expiresDay });
+    }
+    if (rule.freqMonths && v.lastSame != null && v.lastSame < rule.freqMonths) {
+      flags.push({ kind: "Denial", level: 2,
+        what: "The plan covers this once every " + rule.freqMonths + " months. The last one was " + v.lastSame + " months ago.",
+        act: "Reschedule for " + plural(rule.freqMonths - v.lastSame, "month") + " from now, or attach documentation of medical necessity.", by: v.day - 1 });
+    }
+    if (rule.referral && v.referral === false) {
+      flags.push({ kind: "Denial", level: 1,
+        what: "The plan requires a referral for this service and none is on file.",
+        act: "Request the referral from the patient's primary care office.", by: v.day - 2 });
+    }
+    if (rule.step && v.priorTrial === false) {
+      flags.push({ kind: "Denial", level: 1,
+        what: "The plan requires a documented trial of a first-line treatment before covering this one. No trial is recorded in the chart.",
+        act: "Add the treatment history to the chart, or request an exception.", by: v.day - 2 });
+    }
+    if (!v.active) {
+      flags.push({ kind: "Denial", level: 2,
+        what: "Coverage showed as inactive at the last eligibility check, " + plural(v.eligDays, "day") + " ago.",
+        act: "Re-check eligibility and call the patient to confirm current insurance.", by: v.day - 2 });
+    } else if (v.eligDays > 30) {
+      flags.push({ kind: "Surprise", level: 1,
+        what: "Eligibility was last checked " + v.eligDays + " days ago. Coverage or cost-sharing may have changed.",
+        act: "Re-check eligibility.", by: v.day - 1 });
+    }
+    if (!v.inNet) {
+      flags.push({ kind: "Surprise", level: 2,
+        what: v.dr + " is out of network for " + plan.name + ". The patient could be billed the difference.",
+        act: "Reassign to an in-network clinician, or give the patient a written cost estimate.", by: v.day - 2 });
+    }
+    flags.forEach(function (f) { f.by = workday(f.by); });
+    return flags;
+  }
+
+  var rows = VISITS.map(function (v) {
+    var flags = evaluate(v);
+    var level = flags.reduce(function (m, f) { return Math.max(m, f.level); }, 0);
+    var by = flags.reduce(function (m, f) { return Math.min(m, Math.max(0, f.by)); }, 99);
+    return { v: v, flags: flags, level: level, by: by, handled: false };
+  }).sort(function (a, b) { return (b.level - a.level) || (a.by - b.by) || (a.v.day - b.v.day); });
+
+  // ---------- Rendering ----------
+  var state = { kind: "all", showClear: false };
+  var queue = document.getElementById("queue");
+  var figures = document.getElementById("figures");
+  var money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+
+  function open(r) { return r.flags.length > 0 && !r.handled; }
+
+  function renderFigures() {
+    var need = rows.filter(open);
+    var value = need.reduce(function (s, r) { return s + SERVICES[r.v.svc].value; }, 0);
+    var dueToday = need.filter(function (r) { return r.by === 0; }).length;
+    figures.innerHTML =
+      "<div><dt>Visits in the next two weeks</dt><dd>" + rows.length + "</dd></div>" +
+      "<div><dt>Need action</dt><dd>" + need.length + "</dd></div>" +
+      "<div><dt>Need action today</dt><dd>" + dueToday + "</dd></div>" +
+      "<div><dt>Expected payment on flagged visits</dt><dd>" + money.format(value) + "</dd></div>";
+  }
+
+  function levelCell(r) {
+    if (r.handled) return '<span class="hr-level is-handled">Handled</span>';
+    if (!r.flags.length) return '<span class="hr-level is-clear">No flags</span>';
+    var kinds = r.flags.map(function (f) { return f.kind; }).filter(function (k, i, a) { return a.indexOf(k) === i; }).join(", ");
+    var label = r.level === 2 ? "<b>■ High</b>" : "□ Medium";
+    return '<span class="hr-level">' + label + ' <span class="hr-kinds">' + kinds + " · act " + actBy(r.by) + "</span></span>";
+  }
+
+  function rowHtml(r) {
+    var v = r.v, body;
+    if (!r.flags.length) {
+      body = '<p class="hr-none">Authorization, eligibility and plan limits all check out for this visit.</p>';
+    } else {
+      body = r.flags.map(function (f) {
+        return '<div class="hr-flag"><h3>' + f.kind + " risk</h3><p>" + f.what + '</p><p class="hr-act"><strong>Next step, ' + actBy(Math.max(0, f.by)) + ":</strong> " + f.act + "</p></div>";
+      }).join("") + '<button type="button" class="hr-handle" data-id="' + v.id + '">' + (r.handled ? "Reopen" : "Mark handled") + "</button>";
+    }
+    return '<details data-id="' + v.id + '"><summary>' +
+      '<span class="hr-when">' + fmt(v.day) + " · " + v.time + "</span>" +
+      '<span class="hr-service">' + SERVICES[v.svc].name + "</span>" +
+      '<span class="hr-who">Patient ' + v.id + " · " + PLANS[v.plan].name + " · " + v.dr + "</span>" +
+      levelCell(r) + "</summary>" +
+      '<div class="hr-detail">' + body + "</div></details>";
+  }
+
+  function renderQueue(keepOpen) {
+    var list = rows.filter(function (r) {
+      if (!r.flags.length) return state.showClear && state.kind === "all";
+      if (state.kind === "all") return true;
+      return r.flags.some(function (f) { return f.kind === state.kind; });
+    });
+    queue.innerHTML = list.length ? list.map(rowHtml).join("")
+      : '<p class="hr-empty">No visits match this filter.</p>';
+    if (keepOpen != null) {
+      var el = queue.querySelector('details[data-id="' + keepOpen + '"]');
+      if (el) el.open = true;
+    }
+  }
+
+  document.querySelector(".hr-filters").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-kind]");
+    if (!b) return;
+    state.kind = b.dataset.kind;
+    this.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+    renderQueue();
+  });
+  document.getElementById("showClear").addEventListener("change", function () {
+    state.showClear = this.checked; renderQueue();
+  });
+  queue.addEventListener("click", function (e) {
+    var b = e.target.closest(".hr-handle");
+    if (!b) return;
+    var id = Number(b.dataset.id);
+    rows.forEach(function (r) { if (r.v.id === id) r.handled = !r.handled; });
+    renderFigures(); renderQueue(id);
+  });
+
+  renderFigures();
+  renderQueue();
+})();
+</script>
+</body>
+</html>

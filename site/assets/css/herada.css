@@ -1,0 +1,372 @@
+/* Herada design system: minimal (Oct 2026).
+   Static-site port of the live WordPress "minimal" design; the WordPress
+   originals are archived in docs/wordpress-export/minimal/. Radicchio
+   homepage with paper type and square project tiles; paper ground
+   elsewhere. Rules: no shadows, gradients, pill buttons or animations.
+   See docs/design-system.md. */
+
+:root {
+  --paper: #FDFCFE;
+  --paper-dim: #EFEDF5;
+  --accent: #AD1457;      /* radicchio */
+  --accent-dark: #8A0E45;
+  --ink: #2B2733;
+  --ink-soft: #5B5666;
+  --kicker: #6B68A0;
+  --rule: #CFCCD6;
+  --peri: #B7B5E4;
+  --band-soft: #BBC2E2;
+  --paper-fade: rgba(253, 252, 254, 0.86);
+  --paper-line: rgba(253, 252, 254, 0.36);
+
+  --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --page: 68rem;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+main { flex: 1 0 auto; }
+
+img { max-width: 100%; height: auto; display: block; }
+p { margin: 0; }
+
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:hover { color: var(--accent-dark); }
+a:focus-visible, .hr-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.hr-wrap {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Kickers: small uppercase labels */
+.hr-kicker {
+  margin: 0 0 1.25rem;
+  font-family: var(--body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kicker);
+}
+
+/* Header */
+.hr-header { border-bottom: 1px solid var(--rule); }
+.hr-header .hr-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+/* The logo file is white; masking it over currentColor shows it radicchio
+   on paper pages and paper on the homepage. */
+.hr-logo {
+  display: block;
+  text-decoration: none;
+  color: var(--accent);
+  background: currentColor;
+  -webkit-mask: url("/assets/img/full-logo-white.png") center / contain no-repeat;
+  mask: url("/assets/img/full-logo-white.png") center / contain no-repeat;
+}
+.hr-logo img { display: block; height: 46px; width: auto; opacity: 0; }
+.hr-wordmark {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+.hr-nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; }
+.hr-nav a {
+  font-family: var(--body);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+.hr-nav a:hover { color: var(--accent); text-decoration: underline; }
+.hr-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.5em;
+}
+
+/* Hero: the mission, and nothing else */
+.hr-hero { padding: clamp(5rem, 15vw, 11rem) 0; }
+.hr-hero h1 {
+  font-size: clamp(2.75rem, 10vw, 7.5rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+.hr-lede {
+  max-width: 38rem;
+  margin-top: 1.75rem;
+  font-size: 1.3125rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.hr-hero .hr-lede {
+  max-width: none;
+  margin-top: 2rem;
+  font-size: clamp(1.375rem, 2.6vw, 1.875rem);
+  line-height: 1.45;
+}
+
+/* Sections */
+.hr-section { padding: clamp(3.5rem, 9vw, 6.5rem) 0; }
+.hr-section + .hr-section { border-top: 1px solid var(--rule); }
+.hr-section h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); letter-spacing: -0.02em; }
+.hr-section h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+
+/* The "in progress" line */
+.hr-note {
+  max-width: 32ch;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.hr-note + .hr-kicker { margin-top: clamp(3rem, 7vw, 4.5rem); }
+
+/* Small square tiles: projects (homepage) */
+.hr-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 14rem));
+  gap: 1.25rem;
+}
+@media (min-width: 640px) {
+  .hr-tiles { grid-template-columns: repeat(auto-fill, 14rem); }
+}
+.hr-tile {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  background: var(--accent);
+  min-width: 0;
+}
+.hr-tile .hr-status {
+  font-family: var(--body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.hr-tile h3 { font-size: 1.25rem; line-height: 1.15; }
+
+/* Buttons: square, flat */
+.hr-button {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  background: var(--accent);
+  color: var(--paper);
+  border-radius: 2px;
+  font-family: var(--body);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.hr-button:hover { background: var(--accent-dark); color: var(--paper); }
+.hr-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+  margin-top: 2.25rem;
+}
+.hr-textlink { font-family: var(--body); font-size: 0.9375rem; font-weight: 600; }
+
+/* Square photo tiles: news */
+.hr-news {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 2.5rem 1rem;
+  margin: 2.5rem 0 0;
+  padding: 0;
+}
+.hr-news li { min-width: 0; }
+.hr-news-img {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--peri);
+}
+.hr-news-img img { width: 100%; height: 100%; object-fit: cover; }
+.hr-news-date {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.hr-news h3 {
+  margin-top: 0.35rem;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+.hr-news h3 a { color: var(--ink); text-decoration: none; }
+.hr-news h3 a:hover { color: var(--accent); text-decoration: underline; }
+
+/* Post pages: title, date, content */
+.hr-post h1 {
+  max-width: 22ch;
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  letter-spacing: -0.02em;
+}
+.hr-post-date { margin-top: 1.25rem; font-size: 0.9375rem; color: var(--ink-soft); }
+.hr-post-content {
+  margin-top: 3rem;
+  max-width: 42rem;
+  font-size: 1.1875rem;
+  line-height: 1.65;
+}
+.hr-post-content > * + * { margin-top: 1.25rem; }
+.hr-post-content a { overflow-wrap: anywhere; }
+.hr-post-content ul, .hr-post-content ol { padding-left: 1.25rem; margin-bottom: 0; }
+.hr-post-content li + li { margin-top: 0.5rem; }
+
+/* Contact page: statement, button, three columns */
+.hr-contact .hr-note { margin-top: 1.75rem; max-width: none; }
+.hr-contact .hr-actions { margin-top: 2.75rem; }
+.hr-contact .hr-button { font-size: 1.25rem; padding: 1.1rem 2rem; }
+.hr-cols3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-top: 3.5rem;
+}
+@media (min-width: 900px) {
+  .hr-cols3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; }
+}
+.hr-cols3 > * { min-width: 0; border-top: 2px solid var(--ink); padding-top: 1.25rem; }
+.hr-cols3 p { margin: 0 0 1rem; font-size: 1.125rem; line-height: 1.6; color: var(--ink-soft); }
+.hr-cols3 .hr-kicker { margin: 0 0 1rem; color: var(--kicker); }
+.hr-cols3 .hr-who {
+  margin: 0;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  font-size: 1.125rem;
+}
+
+/* Footer: logo, email, Instagram */
+.hr-footer {
+  border-top: 1px solid var(--rule);
+  padding: 2rem 0;
+  font-family: var(--body);
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+.hr-footer .hr-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+}
+.hr-footer .hr-logo img { height: 36px; }
+.hr-footer .hr-wordmark { font-size: 1.125rem; }
+.hr-footer nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.hr-footer a { color: var(--ink-soft); }
+.hr-footer a:hover { color: var(--accent); }
+
+/* ============================================================
+   Homepage: radicchio ground, paper type
+   ============================================================ */
+.hr-home { background: var(--accent); color: var(--paper); }
+.hr-home a { color: var(--paper); }
+.hr-home a:hover { color: var(--paper-dim); }
+.hr-home a:focus-visible { outline-color: var(--paper); }
+.hr-home h1, .hr-home h2, .hr-home h3 { color: var(--paper); }
+.hr-home .hr-lede, .hr-home .hr-kicker { color: var(--paper-fade); }
+
+.hr-home .hr-header { border-bottom-color: var(--paper-line); }
+.hr-home .hr-logo { color: var(--paper); }
+.hr-home .hr-nav a { color: var(--paper); }
+.hr-home .hr-nav a:hover { color: var(--paper); text-decoration: underline; }
+
+.hr-home .hr-footer { border-top-color: var(--paper-line); color: var(--paper-fade); }
+.hr-home .hr-footer a { color: var(--paper-fade); }
+.hr-home .hr-footer a:hover { color: var(--paper); }
+.hr-home .hr-footer .hr-logo { color: var(--paper); }
+
+/* The flipped section: paper ground, radicchio type */
+.hr-flip { background: var(--paper); color: var(--accent); }
+.hr-flip .hr-kicker, .hr-flip .hr-note,
+.hr-flip h2, .hr-flip h3 { color: var(--accent); }
+
+/* Tile colors cycle: radicchio, periwinkle, violet-black */
+.hr-flip .hr-tile .hr-status, .hr-flip .hr-tile h3 { color: var(--paper); }
+.hr-flip .hr-tile:nth-child(3n + 2) { background: var(--peri); }
+.hr-flip .hr-tile:nth-child(3n + 2) .hr-status,
+.hr-flip .hr-tile:nth-child(3n + 2) h3 { color: var(--ink); }
+.hr-flip .hr-tile:nth-child(3n) { background: var(--ink); }
+.hr-flip .hr-tile:nth-child(3n) h3 { color: var(--paper); }
+.hr-flip .hr-tile:nth-child(3n) .hr-status { color: var(--band-soft); }
+
+/* ============================================================
+   Kept for the unlinked projects and bible pages
+   ============================================================ */
+.hr-list { list-style: none; margin: 2.5rem 0 0; padding: 0; }
+.hr-list li {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem 2.5rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--rule);
+}
+.hr-list li:last-child { border-bottom: 1px solid var(--rule); }
+.hr-list p { max-width: 38rem; color: var(--ink-soft); }
+.hr-list h3 { font-size: 1.375rem; }
+.hr-list h3 a { color: var(--ink); text-decoration: none; }
+.hr-list h3 a:hover { color: var(--accent); text-decoration: underline; }
+.hr-list .hr-status { font-family: var(--body); font-size: 0.875rem; color: var(--ink-soft); }
+@media (min-width: 48rem) {
+  .hr-list li { grid-template-columns: 11rem 1fr; }
+  .hr-list .hr-status { padding-top: 0.4rem; }
+}
+
+.hr-prose { max-width: 38rem; }
+.hr-prose > * + * { margin-top: 1.25rem; }
+.hr-prose h2 { margin-top: 3rem; }
+.hr-prose ul, .hr-prose ol { padding-left: 1.25rem; margin-bottom: 0; }
+.hr-prose li + li { margin-top: 0.5rem; }

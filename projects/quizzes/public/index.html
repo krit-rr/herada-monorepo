@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pop Quiz: a tool by Herada</title>
+<meta name="description" content="Quizzes in women's health worth your tap: guess which circulating stats hold up, find your exam-room style, and more. Nothing you answer leaves your device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* Herada design system (v3 palette, Oct 2026), inlined so this page stands alone. */
+:root {
+  --bg: #FDFCFE;
+  --strip: #B7B5E4;
+  --ink: #2B2733;
+  --ink-soft: #5B5666;
+  --accent: #AD1457;
+  --accent-hover: #8A0E45;
+  --accent-ink: #FDFCFE;
+  --rule: #CFCCD6;
+  --kicker: #6B68A0;
+  --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --ui: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --page: 48rem;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+    --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+    --kicker: #B7B5E4;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+  --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+  --kicker: #B7B5E4;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1.125rem; line-height: 1.55;
+}
+main { flex: 1 0 auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.15; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.25rem, 7vw, 3.5rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.375rem, 3.5vw, 1.75rem); letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hr-wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
+.hr-ui { font-family: var(--ui); font-size: 0.875rem; }
+
+.hr-header { border-bottom: 1px solid var(--rule); }
+.hr-header .hr-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 2rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+.hr-wordmark { font-family: var(--display); font-size: 1.375rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); text-decoration: none; }
+.hr-header span.hr-ui { color: var(--ink-soft); }
+
+.hr-notice { background: var(--strip); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.875rem; color: var(--ink); }
+
+.qz-kicker { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); }
+
+/* Hub */
+.qz-hub { padding: clamp(2.5rem, 7vw, 4.5rem) 0; }
+.qz-lede { max-width: 36rem; margin-top: 1.25rem; font-size: 1.25rem; line-height: 1.5; color: var(--ink-soft); }
+.qz-cards { margin-top: 2.5rem; }
+.qz-card { display: block; width: 100%; text-align: left; padding: 1.5rem 0; border: none; border-top: 1px solid var(--rule); background: none; cursor: pointer; font-family: var(--body); color: var(--ink); }
+.qz-card:last-child { border-bottom: 1px solid var(--rule); }
+.qz-card:hover h2 { color: var(--accent); }
+.qz-card .qz-meta { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--kicker); }
+.qz-card h2 { margin-top: 0.3rem; }
+.qz-card p { margin-top: 0.4rem; font-size: 1.0625rem; color: var(--ink-soft); max-width: 38rem; }
+.qz-card.qz-soon { cursor: default; }
+.qz-card.qz-soon:hover h2 { color: var(--ink); }
+.qz-card.qz-soon h2, .qz-card.qz-soon p { opacity: 0.55; }
+
+/* Quiz play */
+.qz-play { padding: clamp(2rem, 6vw, 3.5rem) 0; }
+.qz-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.qz-back { font-family: var(--ui); font-size: 0.875rem; font-weight: 600; background: none; border: none; color: var(--ink-soft); cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 0.18em; }
+.qz-back:hover { color: var(--accent); }
+.qz-progress { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.qz-bar { margin-top: 0.75rem; height: 2px; background: var(--rule); }
+.qz-bar span { display: block; height: 2px; background: var(--accent); }
+.qz-question { margin-top: clamp(2rem, 6vw, 3rem); font-family: var(--display); font-weight: 600; font-size: clamp(1.5rem, 4.5vw, 2.25rem); line-height: 1.2; letter-spacing: -0.015em; max-width: 26ch; }
+.qz-qnote { margin-top: 0.75rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); max-width: 36rem; }
+.qz-options { margin-top: 1.75rem; display: grid; gap: 0.75rem; max-width: 40rem; }
+.qz-options button {
+  text-align: left; font-family: var(--body); font-size: 1.0625rem; line-height: 1.4; color: var(--ink);
+  background: transparent; border: 1px solid var(--rule); border-radius: 2px;
+  padding: 0.9rem 1.1rem; cursor: pointer; min-height: 3rem;
+}
+.qz-options button:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Reveal */
+.qz-reveal { margin-top: 1.75rem; max-width: 40rem; border-top: 2px solid var(--ink); padding-top: 1rem; }
+.qz-verdict { font-family: var(--display); font-weight: 600; font-size: 1.375rem; }
+.qz-verdict.good { color: var(--accent); }
+.qz-reveal p { margin-top: 0.6rem; font-size: 1.0625rem; color: var(--ink-soft); }
+.qz-src { margin-top: 0.75rem; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); }
+.hr-button {
+  display: inline-block; padding: 0.8rem 1.6rem; background: var(--accent); color: var(--accent-ink);
+  border: none; border-radius: 2px; font-family: var(--ui); font-size: 1rem; font-weight: 600;
+  text-decoration: none; cursor: pointer; margin-top: 1.5rem;
+}
+.hr-button:hover { background: var(--accent-hover); color: var(--accent-ink); }
+
+/* Result */
+.qz-result { margin-top: clamp(2rem, 6vw, 3rem); border: 2px solid var(--ink); padding: clamp(1.5rem, 5vw, 2.5rem); max-width: 42rem; }
+.qz-result .qz-kicker { color: var(--kicker); }
+.qz-result h2 { margin-top: 0.5rem; font-size: clamp(1.75rem, 5vw, 2.5rem); color: var(--accent); }
+.qz-result .qz-big { font-family: var(--display); font-weight: 600; font-size: clamp(2.5rem, 9vw, 4rem); line-height: 1; color: var(--accent); margin-top: 0.5rem; }
+.qz-result p { margin-top: 0.9rem; font-size: 1.0625rem; color: var(--ink-soft); }
+.qz-result .qz-strength b, .qz-result .qz-watch b { color: var(--ink); font-weight: 600; }
+.qz-scripts { margin: 1.25rem 0 0; padding: 0; list-style: none; }
+.qz-scripts li { padding: 0.7rem 0; border-top: 1px solid var(--rule); font-family: var(--display); font-weight: 500; font-size: 1.125rem; }
+.qz-scripts li::before { content: "\201C"; color: var(--accent); }
+.qz-scripts li::after { content: "\201D"; color: var(--accent); }
+.qz-cta { margin-top: 1.25rem; font-size: 1rem; }
+.qz-result-actions { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: center; margin-top: 1.5rem; }
+.qz-ghost {
+  display: inline-block; padding: 0.7rem 1.3rem; background: transparent; color: var(--ink);
+  border: 1px solid var(--ink); border-radius: 2px; font-family: var(--ui); font-size: 0.9375rem; font-weight: 600; cursor: pointer;
+}
+.qz-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.qz-copied { font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); }
+.qz-note { margin-top: 1.5rem; max-width: 40rem; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); }
+
+.hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<header class="hr-header">
+  <div class="hr-wrap">
+    <a class="hr-wordmark" href="/">HERADA</a>
+    <span class="hr-ui">Tool · Pop Quiz</span>
+  </div>
+</header>
+
+<div class="hr-notice">
+  <div class="hr-wrap"><p>Nothing you answer is stored or sent anywhere — the page forgets when you close it. For curiosity, not diagnosis.</p></div>
+</div>
+
+<main>
+  <div class="hr-wrap" id="app"></div>
+</main>
+
+<footer class="hr-footer">
+  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice — just receipts, lightly gamified. As of October 2026.</p></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+  // ====================================================================
+  // Quiz 1: Myth or measured? — every reveal grades a circulating stat
+  // against the Diagnostic Detour's sourced dataset.
+  // ====================================================================
+  var MYTH = {
+    id: "myth-or-measured",
+    kind: "graded",
+    title: "Myth or measured?",
+    blurb: "Eight stats that circulate in women's health. You call it: does the number trace to a real study, or does it fall apart when you pull the thread?",
+    meta: "8 rounds · source-grading, the game",
+    optionsLabels: ["Measured — it holds up", "Myth-ish — it doesn’t hold up"],
+    scoreLines: [
+      [0, "The internet thanks you for your trust. The receipts disagree."],
+      [4, "A healthy skeptic — you smell a shaky number at close range."],
+      [7, "You grade sources like it’s your job. (Want a job?)"]
+    ],
+    questions: [
+      { q: "“Women wait 4.6 years and see 4.8 doctors before an autoimmune diagnosis.”",
+        answer: 1, verdict: "Doesn’t hold up as stated.",
+        why: "The famous 4.6/4.8 pairing matches no wave of the AARDA survey it’s attributed to. What the 2017 wave actually reports: about 3 years on average, and 4.64 physicians for women — and it’s a self-selected advocacy survey, the weakest grade of evidence.",
+        src: "AARDA Survey Study report, 1996–2017", url: "https://autoimmune.org/wp-content/uploads/5yr-Survey-Study-REPORT-updated-2017.pdf" },
+      { q: "“After a heart attack, women are 50% more likely than men to get the wrong initial diagnosis.”",
+        answer: 1, verdict: "The 50% doesn’t hold up — the real numbers are worse-documented and better.",
+        why: "The “50%” traces to an unpublished analysis a charity described in a press release. The published registry study of 564,412 heart attacks found women had 59% greater odds of initial misdiagnosis for one type (STEMI) and 41% for the other (NSTEMI). Cite those.",
+        src: "Wu et al., MINAP registry, Eur Heart J ACC 2018", url: "https://doi.org/10.1177/2048872616661693" },
+      { q: "“Lupus takes nearly six years to diagnose.”",
+        answer: 1, verdict: "Doesn’t hold up.",
+        why: "The six-years figure traces only to a patient-advocacy survey. The published systematic review puts the median at about 18 months — and the real, defensible sex finding inside it: women’s median was 29.6 months vs 14.1 for men.",
+        src: "SLE diagnostic-delay systematic review, Rheumatology 2025", url: "https://doi.org/10.1093/rheumatology/keaf384" },
+      { q: "“Women with ADHD are identified about four years later than males.”",
+        answer: 0, verdict: "Measured — registry-grade.",
+        why: "A whole-population registry of Stockholm County (37,591 females with an ADHD record) found females get their first ADHD record 3.9 years later, with a tight confidence interval. One of the cleanest numbers in this whole area.",
+        src: "Skoglund et al., J Child Psychol Psychiatry 2024", url: "https://doi.org/10.1111/jcpp.13920" },
+      { q: "“Nearly a third of heart attacks are given a different diagnosis at first.”",
+        answer: 0, verdict: "Measured — registry-grade.",
+        why: "29.9% — 168,534 of 564,412 heart attacks in the England & Wales national registry carried a different initial diagnosis. Both sexes; the misdiagnosed had about 70% higher 30-day mortality.",
+        src: "Wu et al., MINAP registry, 2018", url: "https://doi.org/10.1177/2048872616661693" },
+      { q: "“77% of POTS patients were told it was psychiatric before diagnosis.”",
+        answer: 0, verdict: "Measured — but it’s a survey, so hold it loosely.",
+        why: "It comes from the largest POTS survey ever run (4,835 patients) — real, published, and worth citing. But surveys over-sample the worst journeys, so it’s a weaker grade than a registry. Saying “a large patient survey found” is the honest version.",
+        src: "Shaw et al., J Intern Med 2019", url: "https://doi.org/10.1111/joim.12895" },
+      { q: "“Sjögren’s takes six-plus years to diagnose.”",
+        answer: 1, verdict: "Doesn’t hold up anymore.",
+        why: "That’s a 2012 foundation baseline that keeps getting reprinted. Population-wide insurance-claims data — a strong grade — puts the median around two years (118 weeks for women, 94 for men). Still a detour; just an honest-sized one.",
+        src: "Taiwan National Health Insurance claims study, 2021", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8004927/" },
+      { q: "“In multiple sclerosis trials, women are enrolled below their share of patients.”",
+        answer: 0, verdict: "Measured — from the public trial registry.",
+        why: "Women are about 75% of MS patients but 66% of trial participants across 548 trials with posted results (139,909 people) — a pull anyone can re-run from ClinicalTrials.gov. The counter-lesson: for some conditions (RA, migraine) enrollment actually runs above the patient share.",
+        src: "Herada’s Trial Gap pull, ClinicalTrials.gov, Oct 2026", url: "/projects/trial-gap-explorer/" }
+    ]
+  };
+
+  // ====================================================================
+  // Quiz 2: What's your appointment style? — communication archetypes.
+  // ====================================================================
+  var STYLE = {
+    id: "appointment-style",
+    kind: "archetype",
+    title: "What’s your appointment style?",
+    blurb: "Seven questions, four exam-room archetypes, zero judgment. Find yours and get the scripts that fit how you actually talk.",
+    meta: "7 questions · for fun, with useful ends",
+    questions: [
+      { q: "It’s the night before the appointment. You are…",
+        opts: [["Writing the list. There is always a list.", "P"],
+               ["Deciding half of it isn’t worth mentioning.", "M"],
+               ["Forty tabs deep and arguing with a journal paywall.", "R"],
+               ["Rehearsing what you’ll say if they brush you off.", "A"]] },
+      { q: "The clinician says “it’s probably stress.” Your first instinct:",
+        opts: [["Pull out the symptom log. Exhibit A.", "P"],
+               ["Nod, say thanks, be furious in the parking lot.", "M"],
+               ["Mention the study you read. You have the DOI.", "R"],
+               ["Ask what else is on the list besides stress.", "A"]] },
+      { q: "When you describe symptoms, it sounds like…",
+        opts: [["Dates. Patterns. A timeline with ticks.", "P"],
+               ["“It’s probably nothing, but…”", "M"],
+               ["A differential diagnosis with citations.", "R"],
+               ["A request, with a deadline attached.", "A"]] },
+      { q: "The labs come back “normal.” You…",
+        opts: [["Ask for the actual numbers for the file.", "P"],
+               ["Feel a little embarrassed for having asked.", "M"],
+               ["Compare them to optimal ranges at 1am.", "R"],
+               ["Ask: “okay — so what do we check next?”", "A"]] },
+      { q: "Waiting-room mood:",
+        opts: [["Calm. The notes are printed. Both copies.", "P"],
+               ["Wondering if you should just cancel.", "M"],
+               ["Quietly knowing more about this than you should.", "R"],
+               ["Ready. Someone’s getting a follow-up date today.", "A"]] },
+      { q: "After a visit where you felt dismissed, you…",
+        opts: [["Write it down, verbatim, for the record.", "P"],
+               ["Let it go. For months. It festers politely.", "M"],
+               ["Deep-dive the condition they didn’t rule out.", "R"],
+               ["Have a new clinician by Friday.", "A"]] },
+      { q: "A friend would describe your health style as…",
+        opts: [["“She has a binder. A good binder.”", "P"],
+               ["“She never complains. Ever. Worryingly.”", "M"],
+               ["“The group chat’s medical librarian.”", "R"],
+               ["“Fierce. Bring her to your appointments.”", "A"]] }
+    ],
+    results: {
+      P: { name: "The Preparer",
+           desc: "You arrive with receipts — dates, patterns, printouts. Clinicians quietly love you, because you make the visit work.",
+           strength: "Your strength: nothing rests on memory. Your record does the talking.",
+           watch: "Watch for: the binder crowding out the one big ask. Data is your opener, not your conclusion.",
+           scripts: ["Here’s my timeline — and the one thing I most want answered today is this.",
+                     "Given this pattern, what else could explain it?"],
+           cta: "Your natural habitat is <a href='/projects/visit-kit/'>the Visit Kit</a> — it turns the binder into three clean pages." },
+      M: { name: "The Minimizer",
+           desc: "“It’s probably nothing” is your opening line — which means when you do speak up, it’s real. The problem: under-reporting trains under-investigating.",
+           strength: "Your strength: credibility. Nobody doubts the thing you finally mention.",
+           watch: "Watch for: softening symptoms until they sound optional. “Mild” isn’t a personality requirement.",
+           scripts: ["I don’t usually bring things up unless they’re affecting my life — this one is.",
+                     "If this isn’t worth checking, what would make it worth checking?"],
+           cta: "Let a record speak when you’d rather not: <a href='/projects/the-ledger/'>the Ledger</a> keeps the story so you don’t have to perform it." },
+      R: { name: "The Researcher",
+           desc: "You’ve read the studies. Possibly tonight. Your pattern-spotting is genuinely valuable — the trick is packaging it so it opens doors instead of raising shields.",
+           strength: "Your strength: you connect dots across months that a 15-minute visit never could.",
+           watch: "Watch for: leading with citations. Curiosity questions get further than evidence dumps.",
+           scripts: ["What would change your assessment?",
+                     "I’ve noticed a pattern — can I walk you through it in thirty seconds?"],
+           cta: "Channel the research into <a href='/projects/rule-out-checklist/'>the Rule-Out Checklist</a> — sourced, printable, and phrased to land." },
+      A: { name: "The Advocate",
+           desc: "You ask, you follow up, you switch clinicians when you must. Nothing falls through on your watch — just mind that pressure can read as adversarial before it reads as thorough.",
+           strength: "Your strength: follow-through. Vague plans don’t survive you.",
+           watch: "Watch for: turning every visit into a negotiation. Partnership framing gets the same result with less friction.",
+           scripts: ["Can we agree on a date — if it’s not better by then, what’s the next step?",
+                     "What would you want checked if it were you?"],
+           cta: "Your pace, matched: <a href='/projects/visit-kit/'>the Visit Kit’s</a> question page comes tone-graded, gentle to direct." }
+    }
+  };
+
+  var QUIZZES = [MYTH, STYLE];
+  var COMING = [
+    { title: "How much do you actually know about perimenopause?", meta: "Coming soon" },
+    { title: "How complete was your workup?", meta: "Coming soon · will ship after clinical review" },
+    { title: "Who should I actually see?", meta: "Coming soon · will ship after clinical review" }
+  ];
+
+  var app = document.getElementById("app");
+  var state = null;
+
+  // ---------- Hub ----------
+  function renderHub() {
+    state = null;
+    var out = ['<div class="qz-hub"><p class="qz-kicker">Pop quiz</p><h1>Tap through. Learn something. Keep the receipts.</h1>',
+      '<p class="qz-lede">Quizzes in women’s health that respect your intelligence — nothing you answer is stored, and every reveal is sourced.</p>',
+      '<div class="qz-cards">'];
+    QUIZZES.forEach(function (qz) {
+      out.push('<button type="button" class="qz-card" data-quiz="' + qz.id + '"><span class="qz-meta">' + esc(qz.meta) + "</span><h2>" + esc(qz.title) + "</h2><p>" + esc(qz.blurb) + "</p></button>");
+    });
+    COMING.forEach(function (c) {
+      out.push('<div class="qz-card qz-soon"><span class="qz-meta">' + esc(c.meta) + "</span><h2>" + esc(c.title) + "</h2></div>");
+    });
+    out.push("</div></div>");
+    app.innerHTML = out.join("");
+  }
+
+  // ---------- Play ----------
+  function startQuiz(qz) {
+    state = { quiz: qz, i: 0, score: 0, tally: {}, revealed: false };
+    renderQuestion();
+  }
+
+  function chrome(innerHtml) {
+    var qz = state.quiz;
+    var total = qz.questions.length;
+    // The bar fills per answered question, so it advances during a reveal.
+    var answered = Math.min(state.i + (state.revealed ? 1 : 0), total);
+    var label = Math.min(state.i + 1, total);
+    return '<div class="qz-play"><div class="qz-top"><button type="button" class="qz-back" id="backHub">← All quizzes</button>' +
+      '<span class="qz-progress">' + label + " / " + total + "</span></div>" +
+      '<div class="qz-bar"><span style="width:' + (answered / total * 100) + '%"></span></div>' + innerHtml + "</div>";
+  }
+
+  function renderQuestion() {
+    state.revealed = false;
+    var qz = state.quiz;
+    var q = qz.questions[state.i];
+    var out = ['<p class="qz-kicker" style="margin-top:2rem">' + esc(qz.title) + '</p><h2 class="qz-question">' + q.q + "</h2>"];
+    out.push('<div class="qz-options">');
+    if (qz.kind === "graded") {
+      qz.optionsLabels.forEach(function (label, oi) {
+        out.push('<button type="button" data-pick="' + oi + '">' + esc(label) + "</button>");
+      });
+    } else {
+      q.opts.forEach(function (o, oi) {
+        out.push('<button type="button" data-pick="' + oi + '">' + esc(o[0]) + "</button>");
+      });
+    }
+    out.push("</div>");
+    app.innerHTML = chrome(out.join(""));
+  }
+
+  function renderReveal(pick) {
+    state.revealed = true;
+    var qz = state.quiz;
+    var q = qz.questions[state.i];
+    var correct = pick === q.answer;
+    if (correct) state.score++;
+    var out = ['<p class="qz-kicker" style="margin-top:2rem">' + esc(qz.title) + '</p><h2 class="qz-question">' + q.q + "</h2>"];
+    out.push('<div class="qz-reveal"><p class="qz-verdict' + (correct ? " good" : "") + '">' + (correct ? "You called it. " : "Not quite — ") + esc(q.verdict) + "</p>");
+    out.push("<p>" + esc(q.why) + "</p>");
+    out.push('<p class="qz-src">Source: <a href="' + esc(q.url) + '">' + esc(q.src) + "</a></p></div>");
+    out.push('<button type="button" class="hr-button" id="nextQ">' + (state.i + 1 < qz.questions.length ? "Next round" : "See my result") + "</button>");
+    app.innerHTML = chrome(out.join(""));
+  }
+
+  function renderResult() {
+    var qz = state.quiz;
+    var out = [];
+    if (qz.kind === "graded") {
+      var total = qz.questions.length;
+      var line = qz.scoreLines[0][1];
+      qz.scoreLines.forEach(function (sl) { if (state.score >= sl[0]) line = sl[1]; });
+      out.push('<div class="qz-result"><p class="qz-kicker">Your result</p>');
+      out.push('<p class="qz-big">' + state.score + " / " + total + "</p>");
+      out.push("<p><b>" + esc(line) + "</b></p>");
+      out.push("<p>The real lesson: in women’s health, the grade of a number matters as much as the number. Registries beat surveys; surveys beat press releases; press releases beat nothing — barely. Every figure Herada publishes carries its grade: see <a href='/projects/diagnostic-detour/'>The Diagnostic Detour</a>.</p>");
+      out.push(resultActions("I scored " + state.score + "/" + total + " on “Myth or measured?” — can you tell which women’s-health stats hold up? joinherada.com/projects/quizzes/"));
+      out.push("</div>");
+    } else {
+      var best = Object.keys(qz.results).sort(function (a, b) { return (state.tally[b] || 0) - (state.tally[a] || 0); })[0];
+      var r = qz.results[best];
+      out.push('<div class="qz-result"><p class="qz-kicker">Your exam-room archetype</p>');
+      out.push("<h2>" + esc(r.name) + "</h2>");
+      out.push("<p>" + esc(r.desc) + "</p>");
+      out.push('<p class="qz-strength"><b>' + esc(r.strength) + "</b></p>");
+      out.push('<p class="qz-watch">' + esc(r.watch) + "</p>");
+      out.push('<ul class="qz-scripts">' + r.scripts.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul>");
+      out.push('<p class="qz-cta">' + r.cta + "</p>");
+      out.push(resultActions("My exam-room archetype: " + r.name + ". Find yours — joinherada.com/projects/quizzes/"));
+      out.push("</div>");
+      out.push('<p class="qz-note">This is a communication-style quiz — it knows nothing about your health, and all four archetypes get taken seriously in a good exam room.</p>');
+    }
+    app.innerHTML = chrome(out.join(""));
+  }
+
+  function resultActions(copyText) {
+    return '<div class="qz-result-actions"><button type="button" class="qz-ghost" id="copyResult" data-copy="' + esc(copyText) + '">Copy my result</button>' +
+      '<button type="button" class="qz-ghost" id="retake">Retake</button>' +
+      '<span class="qz-copied" id="copied" hidden>Copied!</span></div>';
+  }
+
+  // ---------- Events ----------
+  app.addEventListener("click", function (ev) {
+    var t = ev.target;
+    var card = t.closest ? t.closest("button.qz-card[data-quiz]") : null;
+    if (card) {
+      var qz = QUIZZES.find(function (z) { return z.id === card.getAttribute("data-quiz"); });
+      if (qz) startQuiz(qz);
+      return;
+    }
+    if (t.closest && t.closest("#backHub")) { renderHub(); window.scrollTo(0, 0); return; }
+    var pickBtn = t.closest ? t.closest(".qz-options button[data-pick]") : null;
+    if (pickBtn && state) {
+      var pick = +pickBtn.getAttribute("data-pick");
+      if (state.quiz.kind === "graded") {
+        renderReveal(pick);
+      } else {
+        var key = state.quiz.questions[state.i].opts[pick][1];
+        state.tally[key] = (state.tally[key] || 0) + 1;
+        state.i++;
+        if (state.i < state.quiz.questions.length) renderQuestion(); else renderResult();
+        window.scrollTo(0, 0);
+      }
+      return;
+    }
+    if (t.closest && t.closest("#nextQ") && state) {
+      state.i++;
+      if (state.i < state.quiz.questions.length) renderQuestion(); else renderResult();
+      window.scrollTo(0, 0);
+      return;
+    }
+    if (t.closest && t.closest("#retake") && state) { startQuiz(state.quiz); window.scrollTo(0, 0); return; }
+    var copyBtn = t.closest ? t.closest("#copyResult") : null;
+    if (copyBtn) {
+      var text = copyBtn.getAttribute("data-copy");
+      var note = document.getElementById("copied");
+      function done() { if (note) { note.hidden = false; setTimeout(function () { note.hidden = true; }, 3000); } }
+      function fallback() {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); done(); } catch (err) { /* shrug */ }
+        ta.remove();
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+    }
+  });
+
+  renderHub();
+})();
+</script>
+</body>
+</html>

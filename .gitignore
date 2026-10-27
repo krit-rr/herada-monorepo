@@ -1,0 +1,8 @@
+_site/
+.DS_Store
+node_modules/
+.claude/
+data/trial-gap/cache/
+QUALITY-REVIEW.md
+CLAUDE.md
+CLAUDE.strategy.md

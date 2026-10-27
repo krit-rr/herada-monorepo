@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Diagnostic Detour: a project by Herada</title>
+<meta name="description" content="How long women wait for a diagnosis, how often the first one is wrong, and how that compares to men — every figure graded by source strength.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* Herada design system (v3 palette, Oct 2026), inlined so this page stands alone. */
+:root {
+  --bg: #FDFCFE;
+  --strip: #B7B5E4;
+  --ink: #2B2733;
+  --ink-soft: #5B5666;
+  --accent: #AD1457;
+  --accent-hover: #8A0E45;
+  --accent-ink: #FDFCFE;
+  --rule: #CFCCD6;
+  --kicker: #6B68A0;
+  --peri: #B7B5E4;
+  --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --ui: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --page: 68rem;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+    --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+    --kicker: #B7B5E4; --peri: #56528A;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+  --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+  --kicker: #B7B5E4; --peri: #56528A;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1.125rem; line-height: 1.55;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.15; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.25rem, 6vw, 3.75rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 0.18em; overflow-wrap: anywhere; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hr-wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
+.hr-ui { font-family: var(--ui); font-size: 0.875rem; }
+
+.hr-header { border-bottom: 1px solid var(--rule); }
+.hr-header .hr-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 2rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+.hr-wordmark { font-family: var(--display); font-size: 1.375rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); text-decoration: none; }
+.hr-header span.hr-ui { color: var(--ink-soft); }
+
+.hr-notice { background: var(--strip); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.875rem; color: var(--ink); }
+.hr-notice b { font-weight: 700; }
+
+.hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
+.hr-intro h1 { max-width: 22ch; }
+.hr-lede { max-width: 42rem; margin-top: 1.25rem; font-size: 1.3125rem; line-height: 1.5; color: var(--ink-soft); }
+
+/* The headline */
+.dd-headline { border-top: 1px solid var(--ink); padding: clamp(2rem, 5vw, 3rem) 0; }
+.dd-headline p.dd-big {
+  max-width: 30ch; font-family: var(--display); font-weight: 500;
+  font-size: clamp(1.625rem, 4.5vw, 2.5rem); line-height: 1.18; letter-spacing: -0.015em;
+}
+.dd-headline .dd-cite { margin-top: 1.25rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); max-width: 44rem; }
+
+/* Badges */
+.dd-badge {
+  display: inline-block; font-family: var(--ui); font-size: 0.6875rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 0.12rem 0.45rem;
+  border: 1px solid var(--rule); border-radius: 2px; color: var(--ink-soft); white-space: nowrap;
+}
+.dd-badge.b-registry, .dd-badge.b-claims { border-color: var(--ink); color: var(--ink); }
+.dd-badge.b-survey, .dd-badge.b-secondary { font-style: italic; }
+.dd-verify { font-family: var(--ui); font-size: 0.75rem; font-weight: 600; color: var(--accent); white-space: nowrap; }
+
+/* Sections */
+.dd-section { border-top: 1px solid var(--rule); padding: clamp(2rem, 5vw, 3rem) 0; }
+.dd-kicker { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); margin-bottom: 0.75rem; }
+.dd-section .dd-sub { margin-top: 0.75rem; max-width: 42rem; font-size: 1.0625rem; color: var(--ink-soft); }
+
+/* Dot plot */
+.dd-plot { margin-top: 1.75rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.dd-plot svg { display: block; }
+.dd-legend { margin-top: 1rem; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 48rem; }
+.dd-legend b { color: var(--ink); font-weight: 600; }
+
+/* Stat rows */
+.dd-rows { margin: 1.5rem 0 0; padding: 0; list-style: none; max-width: 54rem; }
+.dd-rows li { padding: 1.1rem 0; border-top: 1px solid var(--rule); }
+.dd-rows li:last-child { border-bottom: 1px solid var(--rule); }
+.dd-cond { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--kicker); }
+.dd-counter { color: var(--ink-soft); border: 1px solid var(--rule); border-radius: 2px; padding: 0.1rem 0.4rem; font-size: 0.6875rem; letter-spacing: 0.08em; margin-left: 0.5rem; }
+.dd-stat { margin-top: 0.3rem; font-size: 1.0625rem; line-height: 1.45; max-width: 48rem; }
+.dd-stat b { font-family: var(--display); font-weight: 600; font-size: 1.5rem; }
+.dd-meta { margin-top: 0.45rem; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.75rem; max-width: 48rem; }
+.dd-notes { margin-top: 0.3rem; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); max-width: 46rem; }
+
+/* Gaps and refused numbers */
+.dd-plain { margin: 1.5rem 0 0; padding: 0; list-style: none; max-width: 48rem; }
+.dd-plain li { padding: 0.9rem 0; border-top: 1px solid var(--rule); font-size: 1.0625rem; }
+.dd-plain li:last-child { border-bottom: 1px solid var(--rule); }
+.dd-plain b { font-weight: 600; }
+.dd-plain span { color: var(--ink-soft); }
+
+.hr-section { border-top: 1px solid var(--rule); padding: clamp(2.5rem, 6vw, 4rem) 0; }
+.hr-prose { max-width: 44rem; }
+.hr-prose p { margin-top: 1rem; font-size: 1.0625rem; color: var(--ink-soft); }
+.dd-scale { margin: 1.25rem 0 0; padding: 0; list-style: none; max-width: 44rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); }
+.dd-scale li { padding: 0.45rem 0; border-top: 1px solid var(--rule); display: flex; gap: 0.75rem; align-items: baseline; }
+.dd-scale li:last-child { border-bottom: 1px solid var(--rule); }
+.dd-scale .dd-badge { flex: none; width: 7.5rem; text-align: center; }
+.hr-sources { margin-top: clamp(2rem, 5vw, 3rem); padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
+
+.hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<header class="hr-header">
+  <div class="hr-wrap">
+    <a class="hr-wordmark" href="/">HERADA</a>
+    <span class="hr-ui">Project · The Diagnostic Detour</span>
+  </div>
+</header>
+
+<div class="hr-notice">
+  <div class="hr-wrap"><p><b>Draft.</b> Every figure is graded by source strength; those marked &ldquo;being verified&rdquo; came from a press summary or abstract and are being checked against the full paper.</p></div>
+</div>
+
+<main>
+  <section class="hr-intro">
+    <div class="hr-wrap">
+      <h1 id="title">The Diagnostic Detour</h1>
+      <p class="hr-lede" id="lede"></p>
+    </div>
+  </section>
+
+  <section class="dd-headline" aria-label="The headline finding">
+    <div class="hr-wrap">
+      <p class="dd-big" id="headline"></p>
+      <p class="dd-cite" id="headlineCite"></p>
+    </div>
+  </section>
+
+  <section class="dd-section" aria-label="Years to a diagnosis">
+    <div class="hr-wrap">
+      <p class="dd-kicker">Years to a diagnosis</p>
+      <h2>How long the detour runs</h2>
+      <p class="dd-sub">Published delays from symptom onset (or first visit) to diagnosis, in years. Only time-based figures appear here; each row carries its source grade.</p>
+      <div class="dd-plot" id="plot"></div>
+      <p class="dd-legend" id="plotLegend" hidden><b>Reading it:</b> raspberry = women, ink = men, violet = both sexes together. A hollow circle is the median where the solid dot is a skewed mean; a violet line is the range across studies in a review. Hover any dot for the source.</p>
+    </div>
+  </section>
+
+  <section class="dd-section" aria-label="Women vs men">
+    <div class="hr-wrap">
+      <p class="dd-kicker">The gap</p>
+      <h2>Women vs. men, same condition</h2>
+      <p class="dd-sub">Where a study measured both sexes. Counter-evidence is shown too — the detour is not uniform, and pretending it is would be its own kind of misdiagnosis.</p>
+      <ul class="dd-rows" id="gapRows"></ul>
+    </div>
+  </section>
+
+  <section class="dd-section" aria-label="The wrong label first">
+    <div class="hr-wrap">
+      <p class="dd-kicker">The wrong label first</p>
+      <h2>Misdiagnosis and &ldquo;it&rsquo;s in your head&rdquo;</h2>
+      <ul class="dd-rows" id="wrongRows"></ul>
+    </div>
+  </section>
+
+  <section class="dd-section" aria-label="Visits and cost">
+    <div class="hr-wrap">
+      <p class="dd-kicker">The meter running</p>
+      <h2>Visits and cost before the answer</h2>
+      <ul class="dd-rows" id="costRows"></ul>
+    </div>
+  </section>
+
+  <section class="dd-section" aria-label="Missing evidence">
+    <div class="hr-wrap">
+      <p class="dd-kicker">The holes</p>
+      <h2>Where the evidence is missing</h2>
+      <p class="dd-sub">Conditions and questions where this research found no usable numbers at all. The biggest hole is the thesis itself — which is a study someone should run.</p>
+      <ul class="dd-plain" id="gaps"></ul>
+    </div>
+  </section>
+
+  <section class="dd-section" aria-label="Refused numbers">
+    <div class="hr-wrap">
+      <p class="dd-kicker">The receipts we didn&rsquo;t find</p>
+      <h2>What you&rsquo;ve heard that doesn&rsquo;t hold up</h2>
+      <p class="dd-sub">Figures that circulate widely but trace to no primary source, plus anything graded &ldquo;secondary.&rdquo; None of these appear as data points anywhere on this page — they are listed so you know we looked, and what to cite instead.</p>
+      <ul class="dd-plain" id="untraceable"></ul>
+    </div>
+  </section>
+
+  <section class="hr-section" aria-label="Method">
+    <div class="hr-wrap">
+      <h2>How to read the grades</h2>
+      <ul class="dd-scale" id="scale"></ul>
+      <div class="hr-prose">
+        <p>Registry and claims figures count whole populations and are the strongest; cohorts count one clinic's patients; surveys count the people who answered, who are usually the people with the worst journeys. Where a widely quoted number failed verification, the traceable number is shown instead.</p>
+      </div>
+      <p class="hr-sources" id="sources">Compiled by <a href="/">Herada</a> from the published sources linked on each row. The dataset, with every source and flag, ships in the repository as <code>findings.json</code>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="hr-footer">
+  <div class="hr-wrap"><p class="hr-ui">A Herada project. Graded sources, counter-evidence included. Not medical advice.</p></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function host(url) {
+    try { return new URL(url).hostname.replace(/^www\./, ""); } catch (err) { return url; }
+  }
+  function toYears(f) {
+    var u = f.unit.toLowerCase();
+    var k = u.indexOf("week") === 0 ? 1 / 52 : u.indexOf("month") === 0 ? 1 / 12 : u.indexOf("year") === 0 ? 1 : null;
+    if (k === null) return null;
+    return { v: f.value * k, max: f.value_max != null ? f.value_max * k : null, median: f.median != null ? f.median * k : null };
+  }
+
+  // A finding may appear as a data point only if it is traceable to a primary
+  // source: never untraceable, never source_type "secondary". Those belong
+  // only in the "what you've heard that doesn't hold up" section.
+  function isData(f) { return !f.untraceable && f.source_type !== "secondary"; }
+
+  function badge(t) { return '<span class="dd-badge b-' + t + '">' + t + "</span>"; }
+  function verifyTag(f) { return f.verify ? ' <span class="dd-verify">⚑ being verified</span>' : ""; }
+
+  function metaLine(f) {
+    return '<p class="dd-meta">' + badge(f.source_type) +
+      "<span>" + esc(f.population) + "</span>" +
+      '<span><a href="' + esc(f.source_url) + '">' + esc(f.source_title) + " (" + f.source_year + ")</a></span>" +
+      verifyTag(f) + "</p>" +
+      (f.notes ? '<p class="dd-notes">' + esc(f.notes) + "</p>" : "");
+  }
+
+  function statRow(f, counterDirections) {
+    var isCounter = counterDirections && f.direction && /^(no|men)\b/.test(f.direction);
+    var out = ["<li>"];
+    out.push('<span class="dd-cond">' + esc(f.condition) + (isCounter ? '<span class="dd-counter">counter-evidence</span>' : "") + "</span>");
+    out.push('<p class="dd-stat"><b>' + f.value.toLocaleString("en-US") + "</b> " + esc(f.unit) + "</p>");
+    out.push(metaLine(f));
+    out.push("</li>");
+    return out.join("");
+  }
+
+  function render(d) {
+    document.getElementById("lede").textContent = d.lede;
+    var byId = {};
+    d.findings.forEach(function (f) { byId[f.id] = f; });
+
+    // Headline.
+    var hf = byId[d.headline.finding_id];
+    document.getElementById("headline").textContent = d.headline.text + ".";
+    if (hf) {
+      // Built from the finding's own fields so a changed headline.finding_id
+      // can never leave a stale sentence around a new number.
+      document.getElementById("headlineCite").innerHTML =
+        "<b>" + hf.value.toLocaleString("en-US") + "</b> " + esc(hf.unit) +
+        " — " + esc(hf.population) + ". " + badge(hf.source_type) +
+        ' <a href="' + esc(hf.source_url) + '">' + esc(hf.source_title) + " (" + hf.source_year + ")</a>" + verifyTag(hf);
+    }
+
+    // ---------- Dot plot: time-based delays ----------
+    var plotRows = [];
+    d.findings.forEach(function (f) {
+      if (f.measure !== "time_to_diagnosis" || !isData(f)) return;
+      if (f.unit.indexOf("percent") === 0 || f.unit.indexOf("age at diagnosis") !== -1) return;
+      var y = toYears(f);
+      if (!y) return;
+      plotRows.push({ f: f, y: y });
+    });
+    // Merge a women+men pair from the same study into one row.
+    var rows = [];
+    plotRows.forEach(function (r) {
+      var mate = rows.find(function (x) {
+        return x.f.condition === r.f.condition && x.f.source_url === r.f.source_url && x.f.sex !== r.f.sex && !x.pair;
+      });
+      if (mate && (r.f.sex === "men" || r.f.sex === "women")) { mate.pair = r; } else { rows.push(r); }
+    });
+
+    var maxY = 0;
+    rows.forEach(function (r) {
+      maxY = Math.max(maxY, r.y.max || r.y.v, r.pair ? r.pair.y.v : 0);
+    });
+    maxY = Math.ceil(maxY + 0.5);
+
+    var padL = 16, padR = 40, labelH = 20, rowH = 50, axisH = 34;
+    var plotW = 800, W = padL + plotW + padR, H = rows.length * rowH + axisH + 8;
+    function x(v) { return padL + v / maxY * plotW; }
+    var COLORS = { women: "var(--accent)", men: "var(--ink)", both: "var(--kicker)" };
+
+    var s = [];
+    s.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Published diagnostic delays in years" font-family="Figtree, Helvetica, Arial, sans-serif">');
+    var axisY = rows.length * rowH + 4;
+    for (var t = 0; t <= maxY; t += 2) {
+      s.push('<line x1="' + x(t) + '" y1="0" x2="' + x(t) + '" y2="' + axisY + '" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 4"/>');
+      s.push('<text x="' + x(t) + '" y="' + (axisY + 18) + '" font-size="11.5" fill="var(--ink-soft)" text-anchor="middle">' + t + (t === 0 ? "" : " yr") + "</text>");
+    }
+    rows.forEach(function (r, i) {
+      var top = i * rowH;
+      var cy = top + labelH + 14;
+      var f = r.f;
+      var desc = f.unit.replace(/^(weeks|months|years)[,\s]*(median|mean)?[,\s]*/i, "");
+      s.push('<text x="' + padL + '" y="' + (top + 13) + '" font-size="12.5" font-weight="600" fill="var(--ink)">' + esc(f.condition) +
+        ' <tspan font-weight="400" fill="var(--ink-soft)">' + esc(desc ? "— " + desc : "") + "</tspan>" +
+        ' <tspan font-weight="700" fill="var(--ink-soft)" font-size="9.5" letter-spacing="1">' + f.source_type.toUpperCase() + "</tspan>" +
+        (f.verify ? ' <tspan fill="var(--accent)" font-size="9.5" font-weight="700">⚑</tspan>' : "") + "</text>");
+      s.push('<line x1="' + padL + '" y1="' + cy + '" x2="' + (padL + plotW) + '" y2="' + cy + '" stroke="var(--rule)" stroke-width="1"/>');
+      function dot(val, sex, hollow, title) {
+        var c = COLORS[sex] || COLORS.both;
+        s.push('<circle cx="' + x(val) + '" cy="' + cy + '" r="7" fill="' + (hollow ? "var(--bg)" : c) + '" stroke="' + c + '" stroke-width="2"><title>' + esc(title) + "</title></circle>");
+      }
+      var title = f.condition + ": " + f.value + " " + f.unit + "\n" + f.population + "\n" + f.source_title + " (" + f.source_year + ") · " + f.source_type;
+      if (r.y.max != null) {
+        s.push('<line x1="' + x(r.y.v) + '" y1="' + cy + '" x2="' + x(r.y.max) + '" y2="' + cy + '" stroke="' + COLORS[f.sex] + '" stroke-width="5"><title>' + esc(title) + "</title></line>");
+        dot(r.y.v, f.sex, false, title);
+        dot(r.y.max, f.sex, false, title);
+      } else {
+        dot(r.y.v, f.sex, false, title);
+        if (r.y.median != null) dot(r.y.median, f.sex, true, f.condition + ": median " + f.median + " years\n(same study as the mean shown)");
+      }
+      if (r.pair) {
+        var pf = r.pair.f;
+        dot(r.pair.y.v, pf.sex, false, pf.condition + ": " + pf.value + " " + pf.unit + "\n" + pf.source_title + " (" + pf.source_year + ")");
+      }
+    });
+    s.push("</svg>");
+    document.getElementById("plot").innerHTML = s.join("");
+    document.getElementById("plotLegend").hidden = false;
+
+    // ---------- Stat sections ----------
+    function fill(id, filter, counter) {
+      document.getElementById(id).innerHTML = d.findings
+        .filter(function (f) { return isData(f) && filter(f); })
+        .map(function (f) { return statRow(f, counter); })
+        .join("");
+    }
+    fill("gapRows", function (f) { return f.measure === "sex_difference" && f.id !== d.headline.finding_id; }, true);
+    fill("wrongRows", function (f) { return f.measure === "misdiagnosis_rate" || f.measure === "common_misdiagnosis" || f.measure === "psychosomatic_attribution"; }, false);
+    fill("costRows", function (f) { return f.measure === "visits_before_diagnosis" || f.measure === "pre_diagnosis_cost"; }, false);
+
+    // Gaps + refused numbers.
+    document.getElementById("gaps").innerHTML = d.gaps.map(function (g) {
+      return "<li><b>" + esc(g.condition) + "</b> <span>— " + esc(g.note) + "</span></li>";
+    }).join("");
+    // The untraceable list, plus any secondary-graded finding that is not
+    // already covered by an untraceable entry (an untraceable finding is
+    // expected to have its own entry in the untraceable array).
+    var refused = d.untraceable.map(function (u) {
+      return "<li><b>“" + esc(u.claim) + "”</b> <span>— " + esc(u.note) + "</span></li>";
+    });
+    d.findings.forEach(function (f) {
+      if (f.source_type !== "secondary" || f.untraceable) return;
+      refused.push("<li><b>“" + esc(f.condition) + ": " + f.value.toLocaleString("en-US") + " " + esc(f.unit) + "”</b> <span>— secondary source only (" +
+        '<a href="' + esc(f.source_url) + '">' + esc(f.source_title) + ", " + f.source_year + "</a>)" +
+        (f.notes ? ". " + esc(f.notes) : "") + "</span></li>");
+    });
+    document.getElementById("untraceable").innerHTML = refused.join("");
+
+    // Source-type legend.
+    document.getElementById("scale").innerHTML = Object.keys(d.source_type_scale).map(function (k) {
+      return "<li>" + badge(k) + "<span>" + esc(d.source_type_scale[k]) + "</span></li>";
+    }).join("");
+    document.getElementById("sources").insertAdjacentHTML("beforeend", " As of " + esc(d.as_of) + ".");
+  }
+
+  fetch("data.json")
+    .then(function (resp) { if (!resp.ok) throw new Error(resp.status); return resp.json(); })
+    .then(render)
+    .catch(function () {
+      document.getElementById("plot").innerHTML = '<p style="color:var(--ink-soft); padding:1.5rem 0">The data file could not be loaded. It is generated from <code>data/diagnostic-delay/findings.json</code> in the repository.</p>';
+    });
+})();
+</script>
+</body>
+</html>
