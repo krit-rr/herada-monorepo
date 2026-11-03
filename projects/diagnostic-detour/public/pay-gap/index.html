@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Procedure Pay Gap Explorer: a project by Herada</title>
-<meta name="description" content="What Medicare assigns to matched procedures on female and male anatomy, from the public 2026 physician fee schedule: physician work and national payment, pair by pair, with the published pairs marked and the rest open to correction.">
+<title>The Diagnostic Detour, the money: a project by Herada</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="The money chapter of the Diagnostic Detour. What Medicare assigns to matched procedures on female and male anatomy, from the public 2026 physician fee schedule: physician work and national payment, pair by pair, with the published pairs marked and the rest open to correction.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -71,6 +72,15 @@ a:hover { color: var(--accent-hover); }
 .hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
 .hr-intro h1 { max-width: 22ch; }
 .hr-lede { max-width: 44rem; margin-top: 1.5rem; font-size: 1.375rem; line-height: 1.45; color: var(--ink); }
+/* Chapter strip: this page is the money chapter of the Detour; the rest live on the first page. */
+.pg-chapters { margin-top: 1.75rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.9rem; }
+.pg-chapters .pg-chapter-label { font-weight: 700; color: var(--ink); }
+.pg-chapters .pg-chapter-label::before { content: "["; color: var(--accent); }
+.pg-chapters .pg-chapter-label::after { content: "]"; color: var(--accent); }
+.pg-chapters a { color: var(--accent); }
+.pg-chapters [aria-current="page"] { color: var(--ink); font-weight: 700; }
+.pg-chapters .pg-held { color: var(--ink-soft); }
+.pg-chapters .pg-held .pg-badge { margin-left: 0.3rem; }
 
 /* The two headline counts */
 .pg-headline { border-top: 3px solid var(--ink); padding: clamp(2rem, 5vw, 3rem) 0; }
@@ -95,6 +105,7 @@ a:hover { color: var(--accent-hover); }
 /* Sections */
 .pg-section { border-top: 3px solid var(--ink); padding: clamp(2.25rem, 5vw, 3.5rem) 0; }
 .pg-kicker { font-family: var(--ui); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.85rem; }
+.hr-intro .pg-kicker { margin-bottom: 1rem; }
 .pg-kicker::before { content: "["; color: var(--accent); }
 .pg-kicker::after { content: "]"; color: var(--accent); }
 .pg-section .pg-sub { margin-top: 0.75rem; max-width: 44rem; font-size: 1.0625rem; color: var(--ink-soft); }
@@ -150,19 +161,31 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 <header class="hr-header">
   <div class="hr-wrap">
     <a class="hr-wordmark" href="/">HERADA</a>
-    <span class="hr-ui">Project · The Procedure Pay Gap Explorer</span>
+    <span class="hr-ui">Project · The Diagnostic Detour · The money</span>
   </div>
 </header>
 
 <aside class="hr-notice" aria-label="Page notice">
-  <div class="hr-wrap"><p><b>[Draft, held back]</b> Pairs marked published come from the literature. Pairs marked proposed are Herada&rsquo;s own + wait on a clinician&rsquo;s check. Nothing here is advice about any bill.</p></div>
+  <div class="hr-wrap"><p><b>[Draft, held back]</b> The money chapter of the Diagnostic Detour, reachable by this address only until the pair review is done. Pairs marked published come from the literature. Pairs marked proposed are Herada&rsquo;s own + wait on a clinician&rsquo;s check. Nothing here is advice about any bill.</p></div>
 </aside>
 
 <main>
   <section class="hr-intro">
     <div class="hr-wrap">
+      <p class="pg-kicker">The Diagnostic Detour · the money</p>
       <h1 id="title">The Procedure Pay Gap Explorer</h1>
       <p class="hr-lede" id="lede"></p>
+      <nav class="pg-chapters" aria-label="Chapters">
+        <span class="pg-chapter-label">Chapters</span>
+        <a href="../#years">Years to a diagnosis</a>
+        <a href="../#gap">The gap</a>
+        <a href="../#wrong">The wrong label</a>
+        <a href="../#cost">The meter running</a>
+        <a href="../#trial-gap">Who gets studied</a>
+        <a href="../#holes">The holes</a>
+        <a href="../#refused">What doesn&rsquo;t hold up</a>
+        <span aria-current="page">The money</span>
+      </nav>
     </div>
   </section>
 
@@ -267,7 +290,7 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 </main>
 
 <footer class="hr-footer">
-  <div class="hr-wrap"><p class="hr-ui">A Herada project. Public data, every pair labelled, corrections invited. Not medical or billing advice.</p></div>
+  <div class="hr-wrap"><p class="hr-ui">A chapter of the Diagnostic Detour, a Herada project. Public data, every pair labelled, corrections invited. Not medical or billing advice.</p></div>
 </footer>
 
 <script>

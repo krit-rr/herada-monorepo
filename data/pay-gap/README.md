@@ -1,8 +1,9 @@
 # Procedure pay gap data
 
 What Medicare assigns to matched procedures on female and male anatomy,
-from the public physician fee schedule. Feeds the Procedure Pay Gap
-Explorer (`projects/pay-gap-explorer/`).
+from the public physician fee schedule. Feeds the money chapter of the
+Diagnostic Detour (`projects/diagnostic-detour/public/pay-gap/`), also
+known as the Procedure Pay Gap Explorer.
 
 ## Source
 
@@ -50,8 +51,9 @@ python3 data/pay-gap/pull_pfs.py
 ```
 
 Downloads the zip into `cache/` (gitignored), reads the table, joins it
-to `pairs.json`, and writes `projects/pay-gap-explorer/public/pay-gap.json`
-(what the page reads) and `data/pay-gap/pfs_rows.json` (the raw rows for
+to `pairs.json`, and writes
+`projects/diagnostic-detour/public/pay-gap/pay-gap.json` (what the chapter
+reads) and `data/pay-gap/pfs_rows.json` (the raw rows for
 every code used). Standard library only. It prints a table of every pair
 and warns about any code missing from the file.
 
@@ -61,8 +63,10 @@ and warns about any code missing from the file.
    the paper, not here. Add, drop or re-match pairs in `pairs.json`.
 2. A clinician's check of every `proposed` pair and of the plain-language
    labels.
-3. Re-run the script, re-read the page, then move the held-back entry
-   from `projects/_entries-for-projects-page.html` into the projects page.
+3. Re-run the script and re-read the page. Then publish the chapter by
+   turning the "The money" item in the Detour's chapter strip into a link
+   (the HTML comment in `projects/diagnostic-detour/public/index.html`
+   says how) and dropping the `noindex` meta tag from the chapter page.
 
 ## Synthetic rows
 

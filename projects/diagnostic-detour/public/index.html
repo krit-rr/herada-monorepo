@@ -70,6 +70,15 @@ a:hover { color: var(--accent-hover); }
 .hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
 .hr-intro h1 { max-width: 22ch; }
 .hr-lede { max-width: 44rem; margin-top: 1.5rem; font-size: 1.375rem; line-height: 1.45; color: var(--ink); }
+/* Chapter strip: the Detour is one project in two pages, plus anchors on the first. */
+.dd-chapters { margin-top: 1.75rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.9rem; }
+.dd-chapters .dd-chapter-label { font-weight: 700; color: var(--ink); }
+.dd-chapters .dd-chapter-label::before { content: "["; color: var(--accent); }
+.dd-chapters .dd-chapter-label::after { content: "]"; color: var(--accent); }
+.dd-chapters a { color: var(--accent); }
+.dd-chapters [aria-current="page"] { color: var(--ink); font-weight: 700; }
+.dd-chapters .dd-held { color: var(--ink-soft); }
+.dd-chapters .dd-held .dd-badge { margin-left: 0.3rem; }
 
 /* The two headline findings */
 .dd-headline { border-top: 3px solid var(--ink); padding: clamp(2rem, 5vw, 3rem) 0; }
@@ -164,6 +173,20 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     <div class="hr-wrap">
       <h1 id="title">The Diagnostic Detour</h1>
       <p class="hr-lede" id="lede"></p>
+      <nav class="dd-chapters" aria-label="Chapters">
+        <span class="dd-chapter-label">Chapters</span>
+        <a href="#years">Years to a diagnosis</a>
+        <a href="#gap">The gap</a>
+        <a href="#wrong">The wrong label</a>
+        <a href="#cost">The meter running</a>
+        <a href="#trial-gap">Who gets studied</a>
+        <a href="#holes">The holes</a>
+        <a href="#refused">What doesn&rsquo;t hold up</a>
+        <!-- The money chapter is written and lives at pay-gap/, held back until
+             the pair review and a clinician's check. To publish it, replace the
+             span below with: <a href="pay-gap/">The money</a> -->
+        <span class="dd-held">The money<span class="dd-badge">reviewing</span></span>
+      </nav>
     </div>
   </section>
 
@@ -182,7 +205,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     </div>
   </section>
 
-  <section class="dd-section" aria-label="Years to a diagnosis">
+  <section class="dd-section" id="years" aria-label="Years to a diagnosis">
     <div class="hr-wrap">
       <p class="dd-kicker">Years to a diagnosis</p>
       <h2>How long the detour runs</h2>
@@ -200,7 +223,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     </div>
   </section>
 
-  <section class="dd-section" aria-label="Women vs men">
+  <section class="dd-section" id="gap" aria-label="Women vs men">
     <div class="hr-wrap">
       <p class="dd-kicker">The gap</p>
       <h2>Women vs. men, same condition</h2>
@@ -209,7 +232,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     </div>
   </section>
 
-  <section class="dd-section" aria-label="The wrong label first">
+  <section class="dd-section" id="wrong" aria-label="The wrong label first">
     <div class="hr-wrap">
       <p class="dd-kicker">The wrong label first</p>
       <h2>Misdiagnosis and &ldquo;it&rsquo;s in your head&rdquo;</h2>
@@ -217,7 +240,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     </div>
   </section>
 
-  <section class="dd-section" aria-label="Visits and cost">
+  <section class="dd-section" id="cost" aria-label="Visits and cost">
     <div class="hr-wrap">
       <p class="dd-kicker">The meter running</p>
       <h2>Visits and cost before the answer</h2>
@@ -238,7 +261,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     </div>
   </section>
 
-  <section class="dd-section" aria-label="Missing evidence">
+  <section class="dd-section" id="holes" aria-label="Missing evidence">
     <div class="hr-wrap">
       <p class="dd-kicker">The holes</p>
       <h2>Where the evidence is missing</h2>
@@ -247,7 +270,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     </div>
   </section>
 
-  <section class="dd-section" aria-label="Refused numbers">
+  <section class="dd-section" id="refused" aria-label="Refused numbers">
     <div class="hr-wrap">
       <p class="dd-kicker">The receipts we didn&rsquo;t find</p>
       <h2>What you&rsquo;ve heard that doesn&rsquo;t hold up</h2>
@@ -256,7 +279,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     </div>
   </section>
 
-  <section class="hr-section" aria-label="Method">
+  <section class="hr-section" id="method" aria-label="Method">
     <div class="hr-wrap">
       <h2>How to read the grades</h2>
       <ul class="dd-scale" id="scale"></ul>

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Build the Procedure Pay Gap Explorer's data from the CMS physician fee schedule.
+"""Build the data for the Diagnostic Detour's money chapter (the Procedure Pay Gap Explorer).
 
 Downloads one release of the CMS "PFS Relative Value File" (public domain,
 https://www.cms.gov/medicare/payment/fee-schedules/physician/pfs-relative-value-files),
 reads the national RVU table it contains, joins it to the matched pairs in
 pairs.json and writes:
 
-  projects/pay-gap-explorer/public/pay-gap.json   what the page reads
+  projects/diagnostic-detour/public/pay-gap/pay-gap.json   what the money chapter reads
   data/pay-gap/pfs_rows.json                      the raw rows for every code used, for checking
 
 Run from the repository root:
@@ -21,7 +21,7 @@ import argparse, csv, datetime, io, json, os, re, sys, urllib.request, zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 HERE = os.path.join(ROOT, "data", "pay-gap")
-OUT_PAGE = os.path.join(ROOT, "projects", "pay-gap-explorer", "public", "pay-gap.json")
+OUT_PAGE = os.path.join(ROOT, "projects", "diagnostic-detour", "public", "pay-gap", "pay-gap.json")
 OUT_ROWS = os.path.join(HERE, "pfs_rows.json")
 DEFAULT_RELEASE = "rvu26d"   # October 2026 release of the 2026 schedule
 CMS_ZIP = "https://www.cms.gov/files/zip/{release}.zip"

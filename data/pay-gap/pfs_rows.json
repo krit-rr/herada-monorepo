@@ -2,7 +2,7 @@
  "source": {
   "name": "2026 National Physician Fee Schedule Relative Value File October Release",
   "release": "RVU26D",
-  "file": "rvu26d.zip",
+  "file": "rvu26d-updated-08-26-2026.zip",
   "table": "PPRRVU2026_Oct_nonQPP.csv",
   "released": "2026-08-26",
   "url": "https://www.cms.gov/medicare/payment/fee-schedules/physician/pfs-relative-value-files/rvu26d",
