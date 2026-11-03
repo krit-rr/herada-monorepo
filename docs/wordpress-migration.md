@@ -5,10 +5,13 @@ is in progress.
 
 ## 1. Get the repo online
 
-- [ ] Create a GitHub repository named `herada` and push this folder to `main`.
-- [ ] In the repo: Settings → Pages → Source → **GitHub Actions**.
+- [x] Create a GitHub repository and push this folder to `main` (it became
+      `herada-monorepo`).
+- [ ] In the repo: Settings → Pages → Source → **GitHub Actions**. Until this
+      is set, every "Deploy site" run fails at its configure-pages step with
+      "Not Found"; nothing else is wrong with the workflow.
 - [ ] Wait for the "Deploy site" action to finish, then open the preview URL
-      it reports. Note: on the preview URL (`<user>.github.io/herada/`) styles
+      it reports. Note: on the preview URL (`<user>.github.io/herada-monorepo/`) styles
       and links will be broken, because the site uses paths that start at the
       domain root. They work once the custom domain is attached in step 4. To
       check the design before then, open the files locally (see README).
@@ -16,14 +19,17 @@ is in progress.
 ## 2. Bring over what's on WordPress
 
 - [ ] Add the four logo PNGs to `site/assets/img/` and swap them in
-      (instructions in that folder's README).
-- [ ] Copy `herada-additional-css.css` and `herada-page-blocks.html` from the
+      (instructions in that folder's README). One is in place
+      (`full-logo-white.png`); the raspberry and paper wordmarks and the
+      monogram favicon are still missing, so pages have no favicon yet.
+- [x] Copy `herada-additional-css.css` and `herada-page-blocks.html` from the
       Aug 25 redesign into `docs/wordpress-export/` for reference.
 - [ ] Decide what happens to the existing pages: **Product**, **News**,
       **Contact Us**. Each one is either rebuilt under `site/`, folded into
-      another page, or dropped.
-- [ ] Rewrite the homepage hero for the new direction (it still describes the
-      insurance-monitoring product).
+      another page, or dropped. So far News and Contact Us are rebuilt;
+      Product is not, since the direction changed (Coverage Monitor keeps
+      the idea as a prototype under `projects/`).
+- [x] Rewrite the homepage hero for the new direction.
 - [ ] WordPress → Tools → Export, and save the export file in
       `docs/wordpress-export/` as a backup of posts and pages.
 
@@ -40,7 +46,10 @@ is in progress.
 - [ ] Find out where `joinherada.com` is registered. If it was bought through
       WordPress.com, it can stay registered there with DNS pointed elsewhere,
       or be transferred to another registrar.
-- [ ] In the repo: Settings → Pages → Custom domain → `joinherada.com`.
+- [ ] In the repo: Settings → Pages → Custom domain → `joinherada.com`. The
+      domain lives in that setting, not in the repo: when a site is published
+      from a GitHub Actions workflow, GitHub ignores any `CNAME` file, so
+      there is none in `site/`.
 - [ ] At the DNS provider, replace the WordPress records with GitHub's: four
       `A` records for the root domain and a `CNAME` for `www` pointing to
       `<user>.github.io`. GitHub's Pages documentation lists the current IP
