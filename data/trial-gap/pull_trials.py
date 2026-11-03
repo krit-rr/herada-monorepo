@@ -100,7 +100,7 @@ CONDITIONS = [
         "name": "Fibromyalgia",
         "query": "fibromyalgia",
         "female_prev_share": 0.80,
-        "prev_note": "≈2:1 in surveys; ~80% of the diagnosed — the share used here",
+        "prev_note": "≈2:1 in surveys; ~80% of the diagnosed (the share used here)",
         "prev_source_label": "Wolfe et al., PLoS ONE 2018 (diagnosis and sex)",
         "prev_source_url": "https://pubmed.ncbi.nlm.nih.gov/30212526/",
     },
