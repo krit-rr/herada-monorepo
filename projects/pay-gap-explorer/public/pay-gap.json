@@ -1,0 +1,1605 @@
+{
+ "title": "Procedure Pay Gap Explorer",
+ "lede": "What Medicare assigns to matched procedures on female and male anatomy, from the public 2026 physician fee schedule. Pairs from the published literature are marked as such; the rest are Herada's own proposals, listed so they can be checked, not because they have been.",
+ "status": "Draft. Held back until the pair review against Penn et al. (2025) and a clinician's check are done.",
+ "compiled_by": "Krit, with Herada tooling, 2026-11-03",
+ "as_of": "2026-11-03",
+ "groups": {
+  "same": "One operation, two codes: the CPT code itself names the sex. The cleanest comparison there is, because the specialty, the setting and the operation are the same.",
+  "published": "Pairs from Goff, Muntz and Cain (1997), as re-used by Polan and Barber (2021). Matched for anatomic and technical similarity by the original authors.",
+  "proposed": "Herada's own anatomically matched pairs, not yet reviewed by a clinician. Each carries a match strength and the reason for it.",
+  "popular": "A comparison that circulates widely but is not a fair pair. Shown with its numbers so the mismatch is visible."
+ },
+ "literature": [
+  {
+   "year": 1997,
+   "authors": "Goff BA, Muntz HG, Cain JM",
+   "title": "Comparison of 1997 Medicare relative value units for gender-specific procedures: is Adam still worth more than Eve?",
+   "journal": "Gynecologic Oncology 1997;66(2):313-319",
+   "url": "https://doi.org/10.1006/gyno.1997.4775",
+   "pmid": "9264582",
+   "finding": "24 matched pairs, 1997 values. The male-specific procedure carried the higher work RVU in 19 (80%) and the higher total RVU in 20 (83%); work RVUs averaged 49% higher and reimbursement 37% higher for the male-specific procedure."
+  },
+  {
+   "year": 2017,
+   "authors": "Benoit MF, Ma JF, Upperman BA",
+   "title": "Comparison of 2015 Medicare relative value units for gender-specific procedures: gynecologic and gynecologic-oncologic versus urologic CPT coding. Has time healed gender-worth?",
+   "journal": "Gynecologic Oncology 2017;144(2):336-342",
+   "url": "https://doi.org/10.1016/j.ygyno.2016.12.006",
+   "pmid": "28024653",
+   "finding": "50 matched pairs, 2015 values. The male-specific procedure carried higher work and total RVUs in 36 (72%) and a higher fee in 42 (84%); male-specific surgeries averaged 27.67% higher reimbursement."
+  },
+  {
+   "year": 2021,
+   "authors": "Polan RM, Barber EL",
+   "title": "Reimbursement for female-specific compared with male-specific procedures over time",
+   "journal": "Obstetrics & Gynecology 2021;138(6):878-883",
+   "url": "https://doi.org/10.1097/AOG.0000000000004599",
+   "pmid": "34736273",
+   "finding": "12 of the 1997 pairs, with operating times from the NSQIP registry. The male-specific procedure carried the higher RVU in 9 of 12 pairs in 1997 and 6 of 12 in 2015. Per hour of operating, female-specific procedures earned more RVUs (10.6 vs 9.7) but fewer dollars ($555 vs $599), because specialties are paid different amounts per RVU."
+  },
+  {
+   "year": 2025,
+   "authors": "Penn M, Colley D, Koirala P, King L, Fitzgerald J",
+   "title": "Price and prejudice: reimbursement of surgical care on male versus female anatomies",
+   "journal": "Journal of Women's Health 2025;34(5):665-676",
+   "url": "https://doi.org/10.1089/jwh.2024.0984",
+   "pmid": "39978776",
+   "finding": "55 anatomically matched procedures (110 CPT codes), 2023 values, pairs verified by gynecologists and urologists. The female-anatomy procedure had the lower RVU in 41 (75%); male-anatomy RVUs averaged 30% higher; facility reimbursement was higher for the male procedure in 35 (64%), by 25.6% on average. Across 2003 to 2023 the average male advantage stayed at 31 to 34%."
+  }
+ ],
+ "source": {
+  "name": "2026 National Physician Fee Schedule Relative Value File October Release",
+  "release": "RVU26D",
+  "file": "rvu26d.zip",
+  "table": "PPRRVU2026_Oct_nonQPP.csv",
+  "released": "2026-08-26",
+  "url": "https://www.cms.gov/medicare/payment/fee-schedules/physician/pfs-relative-value-files/rvu26d",
+  "conversion_factor": 33.4009,
+  "conversion_factor_note": "Non-qualifying APM participant conversion factor for 2026; qualifying participants use a factor about half a percent higher. Payments here are national amounts: RVUs times the conversion factor, before geographic adjustment.",
+  "payment_formula": "payment = (work RVU + practice-expense RVU + malpractice RVU) x conversion factor, with every geographic index set to 1"
+ },
+ "pairs": [
+  {
+   "id": "urethrectomy",
+   "group": "same",
+   "match": "same-operation",
+   "label": "Total urethrectomy",
+   "note": "Identical descriptor apart from the sex. Both sit in the urology chapter.",
+   "female": {
+    "codes": [
+     "53210"
+    ],
+    "plain": "Removal of the entire urethra, female, with cystostomy",
+    "cms_short_descriptors": [
+     "Removal of urethra"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 13.38,
+    "mp_rvu": 1.72,
+    "fac_pe_rvu": 5.73,
+    "fac_total_rvu": 20.83,
+    "fac_payment": 695.74,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "53215"
+    ],
+    "plain": "Removal of the entire urethra, male, with cystostomy",
+    "cms_short_descriptors": [
+     "Removal of urethra"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 16.43,
+    "mp_rvu": 2.13,
+    "fac_pe_rvu": 6.37,
+    "fac_total_rvu": 24.93,
+    "fac_payment": 832.68,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.1856,
+   "gap_fac_payment": -0.1645,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "urethral-diverticulum",
+   "group": "same",
+   "match": "same-operation",
+   "label": "Excision of a urethral diverticulum",
+   "note": "Identical descriptor apart from the sex.",
+   "female": {
+    "codes": [
+     "53230"
+    ],
+    "plain": "Removal of a urethral diverticulum, female",
+    "cms_short_descriptors": [
+     "Removal of urethra lesion"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 10.18,
+    "mp_rvu": 1.47,
+    "fac_pe_rvu": 4.94,
+    "fac_total_rvu": 16.59,
+    "fac_payment": 554.12,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "53235"
+    ],
+    "plain": "Removal of a urethral diverticulum, male",
+    "cms_short_descriptors": [
+     "Removal of urethra lesion"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 10.72,
+    "mp_rvu": 1.36,
+    "fac_pe_rvu": 5.21,
+    "fac_total_rvu": 17.29,
+    "fac_payment": 577.5,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.0504,
+   "gap_fac_payment": -0.0405,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "urethral-dilation",
+   "group": "same",
+   "match": "same-operation",
+   "label": "Dilation of a urethral stricture, first visit",
+   "note": "Office procedures with no global period. The female descriptor bundles a suppository or instillation; the male one names a stricture.",
+   "female": {
+    "codes": [
+     "53660"
+    ],
+    "plain": "Dilation of the female urethra, initial, including suppository or instillation",
+    "cms_short_descriptors": [
+     "Dilation of urethra"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "000"
+    ],
+    "work_rvu": 0.69,
+    "mp_rvu": 0.08,
+    "fac_pe_rvu": 0.35,
+    "fac_total_rvu": 1.12,
+    "fac_payment": 37.41,
+    "nonfac_total_rvu": 2.36,
+    "nonfac_payment": 78.83,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "53600"
+    ],
+    "plain": "Dilation of a urethral stricture by sound or dilator, male, initial",
+    "cms_short_descriptors": [
+     "Dilate urethra stricture"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "000"
+    ],
+    "work_rvu": 1.18,
+    "mp_rvu": 0.15,
+    "fac_pe_rvu": 0.35,
+    "fac_total_rvu": 1.68,
+    "fac_payment": 56.11,
+    "nonfac_total_rvu": 2.73,
+    "nonfac_payment": 91.18,
+    "averaged": false
+   },
+   "gap_work": -0.4153,
+   "gap_fac_payment": -0.3333,
+   "gap_nonfac_payment": -0.1354,
+   "global_mismatch": false
+  },
+  {
+   "id": "urethroplasty",
+   "group": "same",
+   "match": "same-operation",
+   "label": "One-stage reconstruction of the urethra",
+   "note": "Same chapter, same global period. The male code is limited to the anterior urethra.",
+   "female": {
+    "codes": [
+     "53430"
+    ],
+    "plain": "Reconstruction of the female urethra",
+    "cms_short_descriptors": [
+     "Reconstruction of urethra"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 16.99,
+    "mp_rvu": 2.44,
+    "fac_pe_rvu": 6.71,
+    "fac_total_rvu": 26.14,
+    "fac_payment": 873.1,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "53410"
+    ],
+    "plain": "One-stage reconstruction of the male anterior urethra",
+    "cms_short_descriptors": [
+     "Reconstruction of urethra"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 17.24,
+    "mp_rvu": 2.22,
+    "fac_pe_rvu": 6.87,
+    "fac_total_rvu": 26.33,
+    "fac_payment": 879.45,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.0145,
+   "gap_fac_payment": -0.0072,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "incontinence-sling",
+   "group": "same",
+   "match": "same-operation",
+   "label": "Sling operation for stress incontinence",
+   "note": "Same operation and indication. The female code lives in the vagina chapter, the male code in the urethra chapter, so the two were valued separately.",
+   "female": {
+    "codes": [
+     "57288"
+    ],
+    "plain": "Sling operation for stress urinary incontinence, female (fascia or synthetic)",
+    "cms_short_descriptors": [
+     "Repair bladder defect"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 11.83,
+    "mp_rvu": 1.91,
+    "fac_pe_rvu": 6.13,
+    "fac_total_rvu": 19.87,
+    "fac_payment": 663.68,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "53440"
+    ],
+    "plain": "Sling operation for male urinary incontinence (fascia or synthetic)",
+    "cms_short_descriptors": [
+     "Male sling procedure"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 13.03,
+    "mp_rvu": 1.67,
+    "fac_pe_rvu": 5.7,
+    "fac_total_rvu": 20.4,
+    "fac_payment": 681.38,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.0921,
+   "gap_fac_payment": -0.026,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "drain-abscess",
+   "group": "published",
+   "match": "published",
+   "label": "Draining a deep abscess",
+   "note": "Both carry a 10-day global period.",
+   "female": {
+    "codes": [
+     "56405"
+    ],
+    "plain": "Incision and drainage of a vulvar or perineal abscess",
+    "cms_short_descriptors": [
+     "I&d vulva/perineal abscess"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "010"
+    ],
+    "work_rvu": 1.45,
+    "mp_rvu": 0.26,
+    "fac_pe_rvu": 1.79,
+    "fac_total_rvu": 3.5,
+    "fac_payment": 116.9,
+    "nonfac_total_rvu": 4.37,
+    "nonfac_payment": 145.96,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54015"
+    ],
+    "plain": "Incision and drainage of a deep abscess of the penis",
+    "cms_short_descriptors": [
+     "I&d penis deep"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "010"
+    ],
+    "work_rvu": 5.23,
+    "mp_rvu": 0.66,
+    "fac_pe_rvu": 2.41,
+    "fac_total_rvu": 8.3,
+    "fac_payment": 277.23,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.7228,
+   "gap_fac_payment": -0.5783,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "cyst-removal",
+   "group": "published",
+   "match": "published",
+   "label": "Removing fluid-filled sacs",
+   "note": "The ovarian procedure is intra-abdominal; the hydrocele repair is scrotal. The original authors still paired them.",
+   "female": {
+    "codes": [
+     "58925"
+    ],
+    "plain": "Removal of ovarian cyst(s), one or both sides",
+    "cms_short_descriptors": [
+     "Removal of ovarian cyst(s)"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 12.12,
+    "mp_rvu": 2.41,
+    "fac_pe_rvu": 6.37,
+    "fac_total_rvu": 20.9,
+    "fac_payment": 698.08,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55041"
+    ],
+    "plain": "Removal of hydroceles, both sides",
+    "cms_short_descriptors": [
+     "Removal of hydroceles"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 8.33,
+    "mp_rvu": 1.1,
+    "fac_pe_rvu": 4.67,
+    "fac_total_rvu": 14.1,
+    "fac_payment": 470.95,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.455,
+   "gap_fac_payment": 0.4823,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "perineum-scrotum-repair",
+   "group": "published",
+   "match": "published",
+   "label": "Reconstructing the perineum or scrotum",
+   "note": "Global periods differ: 10 days for the perineoplasty, 90 for the scrotoplasties.",
+   "female": {
+    "codes": [
+     "56810"
+    ],
+    "plain": "Perineoplasty, non-obstetric repair of the perineum",
+    "cms_short_descriptors": [
+     "Perineoplasty rpr per nonob"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "010"
+    ],
+    "work_rvu": 4.18,
+    "mp_rvu": 0.71,
+    "fac_pe_rvu": 2.33,
+    "fac_total_rvu": 7.22,
+    "fac_payment": 241.15,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55175",
+     "55180"
+    ],
+    "plain": "Scrotoplasty, simple and complicated, averaged as the published analysis did",
+    "cms_short_descriptors": [
+     "Revision of scrotum",
+     "Revision of scrotum"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 8.605,
+    "mp_rvu": 1.125,
+    "fac_pe_rvu": 4.695,
+    "fac_total_rvu": 14.425,
+    "fac_payment": 481.81,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": true
+   },
+   "gap_work": -0.5142,
+   "gap_fac_payment": -0.4995,
+   "gap_nonfac_payment": null,
+   "global_mismatch": true
+  },
+  {
+   "id": "organ-removal",
+   "group": "published",
+   "match": "published",
+   "label": "Removing the penis or the vagina",
+   "note": null,
+   "female": {
+    "codes": [
+     "57110"
+    ],
+    "plain": "Vaginectomy, complete removal of the vaginal wall",
+    "cms_short_descriptors": [
+     "Vagnc compl rmvl vag wall"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 15.09,
+    "mp_rvu": 2.55,
+    "fac_pe_rvu": 6.25,
+    "fac_total_rvu": 23.89,
+    "fac_payment": 797.95,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54125"
+    ],
+    "plain": "Amputation of the penis, complete",
+    "cms_short_descriptors": [
+     "Removal of penis"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 14.2,
+    "mp_rvu": 1.96,
+    "fac_pe_rvu": 6.21,
+    "fac_total_rvu": 22.37,
+    "fac_payment": 747.18,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.0627,
+   "gap_fac_payment": 0.0679,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "partial-resection",
+   "group": "published",
+   "match": "published",
+   "label": "Removing part of the vulva or the scrotum",
+   "note": null,
+   "female": {
+    "codes": [
+     "56620"
+    ],
+    "plain": "Simple partial vulvectomy",
+    "cms_short_descriptors": [
+     "Vulvectomy simple partial"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 7.34,
+    "mp_rvu": 1.51,
+    "fac_pe_rvu": 7.52,
+    "fac_total_rvu": 16.37,
+    "fac_payment": 546.77,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55150"
+    ],
+    "plain": "Resection of the scrotum",
+    "cms_short_descriptors": [
+     "Removal of scrotum"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 7.94,
+    "mp_rvu": 1.08,
+    "fac_pe_rvu": 4.62,
+    "fac_total_rvu": 13.64,
+    "fac_payment": 455.59,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.0756,
+   "gap_fac_payment": 0.2001,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "radical-groin-nodes",
+   "group": "published",
+   "match": "published",
+   "label": "Radical removal with groin lymph nodes",
+   "note": null,
+   "female": {
+    "codes": [
+     "56637"
+    ],
+    "plain": "Radical complete vulvectomy with groin lymph node removal on both sides",
+    "cms_short_descriptors": [
+     "Vlvctmy rad comp bi lymphad"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 24.13,
+    "mp_rvu": 5.59,
+    "fac_pe_rvu": 13.16,
+    "fac_total_rvu": 42.88,
+    "fac_payment": 1432.23,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54130"
+    ],
+    "plain": "Radical penectomy with groin lymph node removal",
+    "cms_short_descriptors": [
+     "Remove penis & nodes"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 21.29,
+    "mp_rvu": 2.74,
+    "fac_pe_rvu": 7.96,
+    "fac_total_rvu": 31.99,
+    "fac_payment": 1068.49,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.1334,
+   "gap_fac_payment": 0.3404,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "radical-groin-pelvic-nodes",
+   "group": "published",
+   "match": "published",
+   "label": "Radical removal with groin and pelvic lymph nodes",
+   "note": null,
+   "female": {
+    "codes": [
+     "56640"
+    ],
+    "plain": "Radical complete vulvectomy with groin and pelvic lymph node removal",
+    "cms_short_descriptors": [
+     "Vlvctmy rad comp w/lymphadec"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 24.16,
+    "mp_rvu": 5.59,
+    "fac_pe_rvu": 13.13,
+    "fac_total_rvu": 42.88,
+    "fac_payment": 1432.23,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54135"
+    ],
+    "plain": "Radical penectomy with groin and pelvic lymph node removal",
+    "cms_short_descriptors": [
+     "Remove penis & nodes"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 27.47,
+    "mp_rvu": 3.54,
+    "fac_pe_rvu": 9.24,
+    "fac_total_rvu": 40.25,
+    "fac_payment": 1344.39,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.1205,
+   "gap_fac_payment": 0.0653,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "cervix-prostate-subtotal",
+   "group": "published",
+   "match": "published",
+   "label": "Removing the cervix or part of the prostate",
+   "note": "The loosest of the published pairs anatomically; kept because it is in the published set.",
+   "female": {
+    "codes": [
+     "57530"
+    ],
+    "plain": "Trachelectomy, removal of the cervix",
+    "cms_short_descriptors": [
+     "Removal of cervix"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 5.14,
+    "mp_rvu": 0.95,
+    "fac_pe_rvu": 4.08,
+    "fac_total_rvu": 10.17,
+    "fac_payment": 339.69,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55821"
+    ],
+    "plain": "Subtotal prostatectomy, suprapubic",
+    "cms_short_descriptors": [
+     "Removal of prostate"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 14.8,
+    "mp_rvu": 1.91,
+    "fac_pe_rvu": 5.9,
+    "fac_total_rvu": 22.61,
+    "fac_payment": 755.19,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.6527,
+   "gap_fac_payment": -0.5502,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "cancer-limited-nodes",
+   "group": "published",
+   "match": "published",
+   "label": "Cancer surgery with limited lymph node sampling",
+   "note": null,
+   "female": {
+    "codes": [
+     "58200"
+    ],
+    "plain": "Total abdominal hysterectomy with pelvic and para-aortic node sampling, tubes and ovaries optional",
+    "cms_short_descriptors": [
+     "Extensive hysterectomy"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 22.52,
+    "mp_rvu": 4.92,
+    "fac_pe_rvu": 10.18,
+    "fac_total_rvu": 37.62,
+    "fac_payment": 1256.54,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55842"
+    ],
+    "plain": "Radical retropubic prostatectomy with limited pelvic lymph node removal",
+    "cms_short_descriptors": [
+     "Extensive prostate surgery"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 20.83,
+    "mp_rvu": 2.68,
+    "fac_pe_rvu": 7.71,
+    "fac_total_rvu": 31.22,
+    "fac_payment": 1042.78,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.0811,
+   "gap_fac_payment": 0.205,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "radical-cancer-surgery",
+   "group": "published",
+   "match": "published",
+   "label": "Radical cancer surgery with full pelvic lymph node removal",
+   "note": null,
+   "female": {
+    "codes": [
+     "58210"
+    ],
+    "plain": "Radical abdominal hysterectomy with bilateral pelvic lymphadenectomy and para-aortic node sampling",
+    "cms_short_descriptors": [
+     "Extensive hysterectomy"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 30.14,
+    "mp_rvu": 6.53,
+    "fac_pe_rvu": 13.56,
+    "fac_total_rvu": 50.23,
+    "fac_payment": 1677.73,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55845"
+    ],
+    "plain": "Radical retropubic prostatectomy with bilateral pelvic lymphadenectomy",
+    "cms_short_descriptors": [
+     "Extensive prostate surgery"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 24.55,
+    "mp_rvu": 3.17,
+    "fac_pe_rvu": 8.49,
+    "fac_total_rvu": 36.21,
+    "fac_payment": 1209.45,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.2277,
+   "gap_fac_payment": 0.3872,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "radical-perineal-vaginal",
+   "group": "published",
+   "match": "published",
+   "label": "Radical cancer surgery through the perineum or the vagina",
+   "note": null,
+   "female": {
+    "codes": [
+     "58285"
+    ],
+    "plain": "Radical vaginal hysterectomy",
+    "cms_short_descriptors": [
+     "Extensive hysterectomy"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 22.8,
+    "mp_rvu": 5.27,
+    "fac_pe_rvu": 11.71,
+    "fac_total_rvu": 39.78,
+    "fac_payment": 1328.69,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55810"
+    ],
+    "plain": "Radical perineal prostatectomy",
+    "cms_short_descriptors": [
+     "Extensive prostate surgery"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 23.68,
+    "mp_rvu": 3.04,
+    "fac_pe_rvu": 8.16,
+    "fac_total_rvu": 34.88,
+    "fac_payment": 1165.02,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.0372,
+   "gap_fac_payment": 0.1405,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "exenteration",
+   "group": "published",
+   "match": "published",
+   "label": "Pelvic exenteration for cancer",
+   "note": "The male-side code covers bladder and urethral cancer in anyone; the published analysis treated it as the prostate-cancer pair.",
+   "female": {
+    "codes": [
+     "58240"
+    ],
+    "plain": "Pelvic exenteration for gynecologic cancer",
+    "cms_short_descriptors": [
+     "Removal of pelvis contents"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 48.1,
+    "mp_rvu": 9.82,
+    "fac_pe_rvu": 22.25,
+    "fac_total_rvu": 80.17,
+    "fac_payment": 2677.75,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "51597"
+    ],
+    "plain": "Pelvic exenteration for bladder, prostate or urethral cancer",
+    "cms_short_descriptors": [
+     "Removal of pelvic structures"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 41.79,
+    "mp_rvu": 5.73,
+    "fac_pe_rvu": 13.56,
+    "fac_total_rvu": 61.08,
+    "fac_payment": 2040.13,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.151,
+   "gap_fac_payment": 0.3125,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "skin-biopsy",
+   "group": "proposed",
+   "match": "strong",
+   "label": "Biopsy of the external genitals",
+   "note": "Both are office biopsies with no global period.",
+   "female": {
+    "codes": [
+     "56605"
+    ],
+    "plain": "Biopsy of the vulva or perineum, one lesion",
+    "cms_short_descriptors": [
+     "Biopsy of vulva/perineum"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "000"
+    ],
+    "work_rvu": 1.07,
+    "mp_rvu": 0.19,
+    "fac_pe_rvu": 0.29,
+    "fac_total_rvu": 1.55,
+    "fac_payment": 51.77,
+    "nonfac_total_rvu": 2.8,
+    "nonfac_payment": 93.52,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54100"
+    ],
+    "plain": "Biopsy of the penis",
+    "cms_short_descriptors": [
+     "Biopsy of penis"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "000"
+    ],
+    "work_rvu": 1.85,
+    "mp_rvu": 0.2,
+    "fac_pe_rvu": 1.06,
+    "fac_total_rvu": 3.11,
+    "fac_payment": 103.88,
+    "nonfac_total_rvu": 6.08,
+    "nonfac_payment": 203.08,
+    "averaged": false
+   },
+   "gap_work": -0.4216,
+   "gap_fac_payment": -0.5016,
+   "gap_nonfac_payment": -0.5395,
+   "global_mismatch": false
+  },
+  {
+   "id": "lesion-destruction-simple",
+   "group": "proposed",
+   "match": "moderate",
+   "label": "Destroying lesions such as warts, simple",
+   "note": "The vulvar code covers any method; the penile codes are split by method, and the chemical one is used here.",
+   "female": {
+    "codes": [
+     "56501"
+    ],
+    "plain": "Destruction of vulvar lesions, simple, any method",
+    "cms_short_descriptors": [
+     "Destroy vulva lesions sim"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "010"
+    ],
+    "work_rvu": 1.54,
+    "mp_rvu": 0.25,
+    "fac_pe_rvu": 1.8,
+    "fac_total_rvu": 3.59,
+    "fac_payment": 119.91,
+    "nonfac_total_rvu": 5.54,
+    "nonfac_payment": 185.04,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54050"
+    ],
+    "plain": "Destruction of penile lesions, simple, chemical",
+    "cms_short_descriptors": [
+     "Destruction penis lesion(s)"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "010"
+    ],
+    "work_rvu": 1.26,
+    "mp_rvu": 0.14,
+    "fac_pe_rvu": 1.5,
+    "fac_total_rvu": 2.9,
+    "fac_payment": 96.86,
+    "nonfac_total_rvu": 4.37,
+    "nonfac_payment": 145.96,
+    "averaged": false
+   },
+   "gap_work": 0.2222,
+   "gap_fac_payment": 0.238,
+   "gap_nonfac_payment": 0.2677,
+   "global_mismatch": false
+  },
+  {
+   "id": "lesion-destruction-extensive",
+   "group": "proposed",
+   "match": "strong",
+   "label": "Destroying lesions such as warts, extensive",
+   "note": null,
+   "female": {
+    "codes": [
+     "56515"
+    ],
+    "plain": "Destruction of vulvar lesions, extensive, any method",
+    "cms_short_descriptors": [
+     "Destroy vulva lesion/s compl"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "010"
+    ],
+    "work_rvu": 3.0,
+    "mp_rvu": 0.51,
+    "fac_pe_rvu": 2.18,
+    "fac_total_rvu": 5.69,
+    "fac_payment": 190.05,
+    "nonfac_total_rvu": 8.18,
+    "nonfac_payment": 273.22,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54065"
+    ],
+    "plain": "Destruction of penile lesions, extensive, any method",
+    "cms_short_descriptors": [
+     "Destruction penis lesion(s)"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "010"
+    ],
+    "work_rvu": 2.41,
+    "mp_rvu": 0.25,
+    "fac_pe_rvu": 1.85,
+    "fac_total_rvu": 4.51,
+    "fac_payment": 150.64,
+    "nonfac_total_rvu": 6.67,
+    "nonfac_payment": 222.78,
+    "averaged": false
+   },
+   "gap_work": 0.2448,
+   "gap_fac_payment": 0.2616,
+   "gap_nonfac_payment": 0.2264,
+   "global_mismatch": false
+  },
+  {
+   "id": "gonad-biopsy",
+   "group": "proposed",
+   "match": "moderate",
+   "label": "Biopsy of the ovary or the testis",
+   "note": "The ovarian biopsy is an abdominal operation with a 90-day global; the testicular biopsy is a scrotal incision with a 10-day global.",
+   "female": {
+    "codes": [
+     "58900"
+    ],
+    "plain": "Biopsy of the ovary, one or both sides",
+    "cms_short_descriptors": [
+     "Biopsy of ovary(s)"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 6.43,
+    "mp_rvu": 1.13,
+    "fac_pe_rvu": 4.09,
+    "fac_total_rvu": 11.65,
+    "fac_payment": 389.12,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54505"
+    ],
+    "plain": "Biopsy of the testis, incisional",
+    "cms_short_descriptors": [
+     "Biopsy of testis"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "010"
+    ],
+    "work_rvu": 3.41,
+    "mp_rvu": 0.43,
+    "fac_pe_rvu": 1.94,
+    "fac_total_rvu": 5.78,
+    "fac_payment": 193.06,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.8856,
+   "gap_fac_payment": 1.0155,
+   "gap_nonfac_payment": null,
+   "global_mismatch": true
+  },
+  {
+   "id": "gonad-removal-open",
+   "group": "proposed",
+   "match": "strong",
+   "label": "Removing the ovary or the testis, open",
+   "note": "Polan and Barber named this as a pair worth studying that their data could not cover.",
+   "female": {
+    "codes": [
+     "58940"
+    ],
+    "plain": "Oophorectomy, partial or total, one or both sides",
+    "cms_short_descriptors": [
+     "Removal of ovary(s)"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 8.01,
+    "mp_rvu": 1.67,
+    "fac_pe_rvu": 5.75,
+    "fac_total_rvu": 15.43,
+    "fac_payment": 515.38,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54520"
+    ],
+    "plain": "Simple orchiectomy, with or without a prosthesis",
+    "cms_short_descriptors": [
+     "Removal of testis"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 5.17,
+    "mp_rvu": 0.73,
+    "fac_pe_rvu": 3.25,
+    "fac_total_rvu": 9.15,
+    "fac_payment": 305.62,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.5493,
+   "gap_fac_payment": 0.6863,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "gonad-removal-laparoscopic",
+   "group": "proposed",
+   "match": "strong",
+   "label": "Removing the ovary or the testis, laparoscopic",
+   "note": "Global periods differ: 10 days for the female code, 90 for the male one.",
+   "female": {
+    "codes": [
+     "58661"
+    ],
+    "plain": "Laparoscopic removal of the ovary and/or tube",
+    "cms_short_descriptors": [
+     "Laparoscopy remove adnexa"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "010"
+    ],
+    "work_rvu": 11.07,
+    "mp_rvu": 2.13,
+    "fac_pe_rvu": 4.35,
+    "fac_total_rvu": 17.55,
+    "fac_payment": 586.19,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54690"
+    ],
+    "plain": "Laparoscopic orchiectomy",
+    "cms_short_descriptors": [
+     "Laparoscopy orchiectomy"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 11.41,
+    "mp_rvu": 1.46,
+    "fac_pe_rvu": 4.89,
+    "fac_total_rvu": 17.76,
+    "fac_payment": 593.2,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": -0.0298,
+   "gap_fac_payment": -0.0118,
+   "gap_nonfac_payment": null,
+   "global_mismatch": true
+  },
+  {
+   "id": "duct-removal",
+   "group": "proposed",
+   "match": "moderate",
+   "label": "Removing the fallopian tube or the epididymis",
+   "note": "Analogous structures, different approaches: abdominal versus scrotal.",
+   "female": {
+    "codes": [
+     "58700"
+    ],
+    "plain": "Salpingectomy, complete or partial, one or both sides",
+    "cms_short_descriptors": [
+     "Removal of fallopian tube"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 12.63,
+    "mp_rvu": 2.49,
+    "fac_pe_rvu": 6.75,
+    "fac_total_rvu": 21.87,
+    "fac_payment": 730.48,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "54860"
+    ],
+    "plain": "Epididymectomy",
+    "cms_short_descriptors": [
+     "Removal of epididymis"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 6.78,
+    "mp_rvu": 0.88,
+    "fac_pe_rvu": 3.95,
+    "fac_total_rvu": 11.61,
+    "fac_payment": 387.78,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.8628,
+   "gap_fac_payment": 0.8837,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "sterilization-reversal",
+   "group": "proposed",
+   "match": "strong",
+   "label": "Reversing a sterilization",
+   "note": "Both are microsurgical re-anastomoses of a duct.",
+   "female": {
+    "codes": [
+     "58750"
+    ],
+    "plain": "Tubotubal anastomosis, rejoining the fallopian tubes",
+    "cms_short_descriptors": [
+     "Repair oviduct"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 15.25,
+    "mp_rvu": 2.67,
+    "fac_pe_rvu": 6.09,
+    "fac_total_rvu": 24.01,
+    "fac_payment": 801.96,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55400"
+    ],
+    "plain": "Vasovasostomy, rejoining the vas deferens",
+    "cms_short_descriptors": [
+     "Repair of sperm duct"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 8.39,
+    "mp_rvu": 1.08,
+    "fac_pe_rvu": 4.2,
+    "fac_total_rvu": 13.67,
+    "fac_payment": 456.59,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "gap_work": 0.8176,
+   "gap_fac_payment": 0.7564,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  },
+  {
+   "id": "organ-biopsy",
+   "group": "proposed",
+   "match": "moderate",
+   "label": "Biopsy of the uterine lining or the prostate",
+   "note": "Both are office sampling procedures with no global period, but the techniques differ: a suction catheter versus needle cores. CPT 2026 split the old single prostate-biopsy code into five by approach; the non-imaging one is used here, and the image-guided codes (55707 to 55709) carry more work.",
+   "female": {
+    "codes": [
+     "58100"
+    ],
+    "plain": "Endometrial biopsy, without cervical dilation",
+    "cms_short_descriptors": [
+     "Biopsy of uterus lining"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "000"
+    ],
+    "work_rvu": 1.18,
+    "mp_rvu": 0.21,
+    "fac_pe_rvu": 0.26,
+    "fac_total_rvu": 1.65,
+    "fac_payment": 55.11,
+    "nonfac_total_rvu": 2.94,
+    "nonfac_payment": 98.2,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55705"
+    ],
+    "plain": "Prostate biopsy, any approach, without imaging guidance",
+    "cms_short_descriptors": [
+     "Bx prst8 any approach nonimg"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "000"
+    ],
+    "work_rvu": 1.88,
+    "mp_rvu": 0.23,
+    "fac_pe_rvu": 0.88,
+    "fac_total_rvu": 2.99,
+    "fac_payment": 99.87,
+    "nonfac_total_rvu": 6.98,
+    "nonfac_payment": 233.14,
+    "averaged": false
+   },
+   "gap_work": -0.3723,
+   "gap_fac_payment": -0.4482,
+   "gap_nonfac_payment": -0.5788,
+   "global_mismatch": false
+  },
+  {
+   "id": "sterilization",
+   "group": "popular",
+   "match": "not-a-pair",
+   "label": "Sterilization: tubal ligation vs. vasectomy",
+   "note": "Not a fair pair. A vasectomy is an office procedure under local anesthetic; laparoscopic sterilization is an operating-room procedure under general anesthesia. The gap here reflects the operation, not the sex.",
+   "female": {
+    "codes": [
+     "58670"
+    ],
+    "plain": "Laparoscopic tubal sterilization by fulguration",
+    "cms_short_descriptors": [
+     "Laparoscopy tubal cautery"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 5.76,
+    "mp_rvu": 1.02,
+    "fac_pe_rvu": 3.19,
+    "fac_total_rvu": 9.97,
+    "fac_payment": 333.01,
+    "nonfac_total_rvu": null,
+    "nonfac_payment": null,
+    "averaged": false
+   },
+   "male": {
+    "codes": [
+     "55250"
+    ],
+    "plain": "Vasectomy, one or both sides",
+    "cms_short_descriptors": [
+     "Removal of sperm duct(s)"
+    ],
+    "status": [
+     "A"
+    ],
+    "global_days": [
+     "090"
+    ],
+    "work_rvu": 3.29,
+    "mp_rvu": 0.42,
+    "fac_pe_rvu": 2.82,
+    "fac_total_rvu": 6.53,
+    "fac_payment": 218.11,
+    "nonfac_total_rvu": 10.38,
+    "nonfac_payment": 346.7,
+    "averaged": false
+   },
+   "gap_work": 0.7508,
+   "gap_fac_payment": 0.5268,
+   "gap_nonfac_payment": null,
+   "global_mismatch": false
+  }
+ ]
+}
