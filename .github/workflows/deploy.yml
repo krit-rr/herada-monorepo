@@ -43,12 +43,15 @@ jobs:
 
       - name: Write sitemap.xml
         # One <url> per index.html in _site, dated by the last commit that
-        # touched its source file. 404.html is left out on purpose.
+        # touched its source file. 404.html is left out on purpose, and so is
+        # any page that carries a robots noindex tag: those deploy, and can be
+        # shared by address, but are not announced to search engines.
         run: |
           {
             echo '<?xml version="1.0" encoding="UTF-8"?>'
             echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
             find _site -name index.html | sort | while read -r page; do
+              grep -q 'name="robots" content="noindex' "$page" && continue
               path="${page#_site}"
               case "$path" in
                 /projects/*/*) rest="${path#/projects/}"; name="${rest%%/*}"; src="projects/$name/public/${rest#"$name"/}" ;;
