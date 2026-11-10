@@ -145,6 +145,52 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 .hr-sources { margin-top: clamp(2rem, 5vw, 3rem); padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
 
 .hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
+
+/* Narrow-screen key for the trial-gap bubbles (names move off the chart). */
+.tg-key { margin: 0.75rem 0 0; padding-left: 1.5rem; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); }
+.tg-key li { padding: 0.15rem 0; }
+.tg-key b { color: var(--ink); font-weight: 600; }
+
+/* Print: a handout, not a screen. Paper colors in every scheme, no chrome, charts at page width. */
+.dd-printstamp { display: none; }
+@media print {
+  :root, :root[data-theme="dark"] {
+    --bg: #FDFCFE; --strip: #B7B5E4; --ink: #2B2733; --ink-soft: #5B5666;
+    --accent: #AD1457; --accent-hover: #8A0E45; --accent-ink: #FDFCFE; --rule: #CFCCD6; --kicker: #6B68A0; --peri: #B7B5E4;
+  }
+  @page { margin: 0.6in; }
+  body { font-size: 10pt; line-height: 1.4; }
+  .hr-header, .hr-notice, .hr-footer, .dd-scrollhint, .dd-chapters, .dd-screen { display: none !important; }
+  .dd-printstamp { display: block; margin-top: 0.6rem; font-family: var(--ui); font-size: 8.5pt; color: var(--ink-soft); }
+  .hr-wrap { max-width: none; padding: 0; }
+  .hr-intro { padding: 0 0 0.9rem; }
+  h1 { font-size: 24pt; }
+  h2 { font-size: 15pt; }
+  .hr-lede { font-size: 11pt; margin-top: 0.6rem; max-width: none; }
+  .dd-headline, .dd-section, .hr-section { padding: 0.6rem 0; }
+  .dd-leads { grid-template-columns: 1fr 1fr; gap: 0.8rem 2rem; }
+  .dd-headline p.dd-big { font-size: 13.5pt; max-width: none; }
+  .dd-headline .dd-cite, .dd-section .dd-sub, .dd-meta, .dd-notes, .dd-legend, .hr-sources, .hr-prose p, .dd-scale, .tg-key { font-size: 8.5pt; margin-top: 0.3rem; }
+  .dd-plot { overflow: visible; margin-top: 0.4rem; }
+  .dd-plot svg { width: 100% !important; height: auto !important; }
+  #plot svg { width: 86% !important; }
+  #tgChart svg { width: 64% !important; margin: 0 auto; }
+  #tgChart .tg-key { columns: 2; column-gap: 2rem; }
+  .dd-plot, .dd-rows li, .dd-plain li, .dd-scale li, .dd-leads > div, .tg-table tr { page-break-inside: avoid; break-inside: avoid; }
+  .tg-table thead { display: table-header-group; }
+  .dd-rows, .dd-plain, .dd-scale { max-width: none; columns: 2; column-gap: 2rem; margin-top: 0.5rem; }
+  .dd-scale .dd-badge { width: 6rem; }
+  .dd-rows li, .dd-plain li { padding: 0.35rem 0; }
+  .dd-stat { font-size: 9pt; margin-top: 0.1rem; line-height: 1.35; }
+  .dd-stat b { font-size: 11pt; }
+  .dd-meta, .dd-notes { font-size: 8pt; line-height: 1.35; }
+  .dd-plain li { font-size: 9pt; }
+  .tg-table-wrap { overflow: visible; margin-top: 0.6rem; }
+  .hr-sources { margin-top: 0.8rem; padding-top: 0.5rem; }
+  table.tg-table { font-size: 8pt; min-width: 0; width: 100%; }
+  .tg-table th, .tg-table td { padding: 0.25rem 0.5rem 0.25rem 0; }
+  .dd-plot[tabindex], .tg-table-wrap[tabindex] { outline: none; }
+}
 </style>
 </head>
 <body>
@@ -160,6 +206,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 </aside>
 
 <main>
+  <p class="dd-printstamp" id="printStamp"></p>
   <section class="hr-intro">
     <div class="hr-wrap">
       <h1 id="title">The Diagnostic Detour</h1>
@@ -186,7 +233,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     <div class="hr-wrap">
       <p class="dd-kicker">Years to a diagnosis</p>
       <h2>How long the detour runs</h2>
-      <p class="dd-sub">Published delays from symptom onset (or first visit) to diagnosis, in years, longest first. Only time-based figures appear here; each row carries its source grade. Hover any dot for the source.</p>
+      <p class="dd-sub">Published delays from symptom onset (or first visit) to diagnosis, in years, longest first. Only time-based figures appear here; each row carries its source grade. <span class="dd-screen">Hover any dot for the source.</span></p>
       <div class="dd-legend" id="plotLegend" hidden>
         <span class="dd-key"><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="var(--accent)"/></svg>Women</span>
         <span class="dd-key" id="keyMen"><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="var(--ink)"/></svg>Men</span>
@@ -232,7 +279,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
       <p class="dd-sub">For ten conditions whose patients are mostly women: the share of women among clinical-trial participants, against their share among patients, from ClinicalTrials.gov posted results. Below the diagonal, women are underrepresented relative to the patient population.</p>
       <div class="dd-plot" id="tgChart" tabindex="0" role="region" aria-label="Trial enrollment chart. Scrolls sideways on small screens."></div>
       <p class="dd-scrollhint" hidden>Scroll sideways for the full chart.</p>
-      <p class="dd-legend" id="tgLegend" hidden><b>Reading it:</b> each circle is a condition, sized by participants counted. On the diagonal, trials enroll women at the rate the condition affects them. Both axes start at 50%. Hover any circle for the numbers.</p>
+      <p class="dd-legend" id="tgLegend" hidden><b>Reading it:</b> each circle is a condition, sized by participants counted. On the diagonal, trials enroll women at the rate the condition affects them. Both axes start at 50%. <span class="dd-screen">Hover any circle for the numbers.</span></p>
       <div class="tg-table-wrap" id="tgTable"></div>
       <p class="dd-legend" id="tgMethod" hidden><b>Caveats:</b> results are posted for only a fraction of registered trials (the last column shows how many per condition), and the patient shares are approximations of commonly cited sex ratios, each from the review linked in the table. Single-sex trials are included. Trials reporting sex in a custom format are counted as unparsed.</p>
     </div>
@@ -373,51 +420,8 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     rows.forEach(function (r) { maxY = Math.max(maxY, rowMax(r)); });
     maxY = Math.ceil(maxY + 0.5);
 
-    var padL = 16, padR = 40, labelH = 24, rowH = 64, axisH = 38;
-    var plotW = 800, W = padL + plotW + padR, H = rows.length * rowH + axisH + 8;
-    function x(v) { return padL + v / maxY * plotW; }
-    var COLORS = { women: "var(--accent)", men: "var(--ink)", both: "var(--kicker)" };
-
-    var s = [];
-    s.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Published diagnostic delays in years" font-family="Figtree, Helvetica, Arial, sans-serif">');
-    var axisY = rows.length * rowH + 4;
-    for (var t = 0; t <= maxY; t += 2) {
-      s.push('<line x1="' + x(t) + '" y1="0" x2="' + x(t) + '" y2="' + axisY + '" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 4"/>');
-      s.push('<text x="' + x(t) + '" y="' + (axisY + 20) + '" font-size="12.5" fill="var(--ink-soft)" text-anchor="middle">' + t + (t === 0 ? "" : " yr") + "</text>");
-    }
-    rows.forEach(function (r, i) {
-      var top = i * rowH;
-      var cy = top + labelH + 16;
-      var f = r.f;
-      var desc = f.unit.replace(/^(weeks|months|years)[,\s]*(median|mean)?[,\s]*/i, "");
-      s.push('<text x="' + padL + '" y="' + (top + 15) + '" font-size="13.5" font-weight="600" fill="var(--ink)">' + esc(f.condition) +
-        ' <tspan font-weight="400" fill="var(--ink-soft)">' + esc(desc ? "· " + desc : "") + "</tspan>" +
-        ' <tspan font-weight="700" fill="var(--ink-soft)" font-size="10" letter-spacing="1">' + f.source_type.toUpperCase() + "</tspan>" +
-        (f.verify ? ' <tspan fill="var(--accent)" font-size="10" font-weight="700">⚑</tspan>' : "") + "</text>");
-      s.push('<line x1="' + padL + '" y1="' + cy + '" x2="' + (padL + plotW) + '" y2="' + cy + '" stroke="var(--rule)" stroke-width="1"/>');
-      function dot(val, sex, hollow, title) {
-        var c = COLORS[sex] || COLORS.both;
-        // Surface-colored halo keeps touching dots separable.
-        s.push('<circle cx="' + x(val) + '" cy="' + cy + '" r="9.5" fill="var(--bg)"/>');
-        s.push('<circle cx="' + x(val) + '" cy="' + cy + '" r="7" opacity="' + fade(f) + '" fill="' + (hollow ? "var(--bg)" : c) + '" stroke="' + c + '" stroke-width="2"><title>' + esc(title) + "</title></circle>");
-      }
-      var title = f.condition + ": " + f.value + " " + f.unit + "\n" + f.population + "\n" + f.source_title + " (" + f.source_year + ") · " + f.source_type;
-      if (r.y.max != null) {
-        s.push('<line x1="' + x(r.y.v) + '" y1="' + cy + '" x2="' + x(r.y.max) + '" y2="' + cy + '" opacity="' + fade(f) + '" stroke="' + COLORS[f.sex] + '" stroke-width="4" stroke-linecap="round"><title>' + esc(title) + "</title></line>");
-        dot(r.y.v, f.sex, false, title);
-        dot(r.y.max, f.sex, false, title);
-      } else {
-        dot(r.y.v, f.sex, false, title);
-        if (r.y.median != null) dot(r.y.median, f.sex, true, f.condition + ": median " + f.median + " years\n(same study as the mean shown)");
-      }
-      if (r.pair) {
-        var pf = r.pair.f;
-        dot(r.pair.y.v, pf.sex, false, pf.condition + ": " + pf.value + " " + pf.unit + "\n" + pf.source_title + " (" + pf.source_year + ")");
-      }
-    });
-    s.push("</svg>");
-    document.getElementById("plot").innerHTML = s.join("");
-    updateScrollHints();
+    plotState = { rows: rows, maxY: maxY };
+    drawPlot();
     // Only show legend keys for marks the current data actually draws.
     function hasSex(sx) { return rows.some(function (r) { return r.f.sex === sx || (r.pair && r.pair.f.sex === sx); }); }
     document.getElementById("keyMen").hidden = !hasSex("men");
@@ -470,41 +474,8 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
   function renderTrialGap(data) {
     var conds = data.conditions.filter(function (c) { return c.femaleEnrollShare !== null; });
 
-    var W = 860, H = 560;
-    var padL = 64, padR = 150, padT = 24, padB = 56;
-    var plotW = W - padL - padR, plotH = H - padT - padB;
-    var min = 0.5, max = 1.0;
-    function x(v) { return padL + (Math.max(v, min) - min) / (max - min) * plotW; }
-    function y(v) { return padT + plotH - (Math.max(v, min) - min) / (max - min) * plotH; }
-    var maxPart = Math.max.apply(null, conds.map(function (c) { return c.participants; }));
-    function r(p) { return 6 + Math.sqrt(p / maxPart) * 24; }
-
-    var s = [];
-    s.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Female share of patients vs female share of trial participants" font-family="Figtree, Helvetica, Arial, sans-serif">');
-    for (var v = 0.5; v <= 1.001; v += 0.1) {
-      var vv = Math.round(v * 10) / 10;
-      s.push('<line x1="' + x(vv) + '" y1="' + padT + '" x2="' + x(vv) + '" y2="' + (padT + plotH) + '" stroke="var(--rule)" stroke-width="1" ' + (vv === 0.5 ? "" : 'stroke-dasharray="2 4"') + "/>");
-      s.push('<line x1="' + padL + '" y1="' + y(vv) + '" x2="' + (padL + plotW) + '" y2="' + y(vv) + '" stroke="var(--rule)" stroke-width="1" ' + (vv === 0.5 ? "" : 'stroke-dasharray="2 4"') + "/>");
-      s.push('<text x="' + x(vv) + '" y="' + (padT + plotH + 22) + '" font-size="12" fill="var(--ink-soft)" text-anchor="middle">' + Math.round(vv * 100) + "%</text>");
-      s.push('<text x="' + (padL - 10) + '" y="' + (y(vv) + 4) + '" font-size="12" fill="var(--ink-soft)" text-anchor="end">' + Math.round(vv * 100) + "%</text>");
-    }
-    s.push('<text x="' + (padL + plotW / 2) + '" y="' + (H - 12) + '" font-size="13" fill="var(--ink)" text-anchor="middle" font-weight="600">Women as a share of patients (published reviews)</text>');
-    s.push('<text x="18" y="' + (padT + plotH / 2) + '" font-size="13" fill="var(--ink)" text-anchor="middle" font-weight="600" transform="rotate(-90 18 ' + (padT + plotH / 2) + ')">Women as a share of trial participants</text>');
-    s.push('<line x1="' + x(0.5) + '" y1="' + y(0.5) + '" x2="' + x(1) + '" y2="' + y(1) + '" stroke="var(--ink)" stroke-width="1.5"/>');
-    s.push('<text x="' + (x(0.97)) + '" y="' + (y(0.97) + 20) + '" font-size="11.5" fill="var(--ink-soft)" text-anchor="end" transform="rotate(-37 ' + x(0.97) + " " + (y(0.97) + 20) + ')">parity: enrolled like they’re affected</text>');
-
-    conds.slice().sort(function (a, b) { return b.participants - a.participants; }).forEach(function (c) {
-      var below = c.femaleEnrollShare < c.femalePrevShare;
-      var cx = x(c.femalePrevShare), cy = y(c.femaleEnrollShare), cr = r(c.participants);
-      var fill = below ? "var(--accent)" : "var(--peri)";
-      s.push('<circle cx="' + cx + '" cy="' + cy + '" r="' + cr + '" fill="' + fill + '" fill-opacity="0.85" stroke="var(--bg)" stroke-width="1.5">');
-      s.push("<title>" + esc(c.name) + "\nWomen among patients: " + pct(c.femalePrevShare) + " (" + esc(c.prevNote) + ")\nWomen among participants: " + pct(c.femaleEnrollShare) + "\n" + num(c.participants) + " participants in " + num(c.trialsParsed) + " trials with readable results\n(" + num(c.trialsWithResults) + " of " + num(c.trialsTotal) + " registered trials post results)</title></circle>");
-      var flip = cx + cr + 6 > W - 20;
-      s.push('<text x="' + (flip ? cx - cr - 6 : cx + cr + 6) + '" y="' + (cy + 4) + '" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="' + (flip ? "end" : "start") + '">' + esc(c.name) + "</text>");
-    });
-    s.push("</svg>");
-    document.getElementById("tgChart").innerHTML = s.join("");
-    updateScrollHints();
+    tgState = { conds: conds, maxPart: Math.max.apply(null, conds.map(function (c) { return c.participants; })) };
+    drawTrialGap();
     document.getElementById("tgLegend").hidden = false;
 
     var t = [];
@@ -525,6 +496,162 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     var m = document.getElementById("tgMethod");
     m.insertAdjacentHTML("beforeend", ' Enrollment data: <a href="https://clinicaltrials.gov/data-api/api">ClinicalTrials.gov API v2</a> (public domain), pulled ' + esc(data.pulled) + "; the pull script ships in the repository as <code>data/trial-gap/pull_trials.py</code>.");
     m.hidden = false;
+  }
+
+
+  // ---------- Drawing: both charts fit their container and redraw on resize ----------
+  // A phone gets a narrower chart, not a sideways scroll. The scroll hint under
+  // each chart still appears if a chart ever ends up wider than its box.
+  var plotState = null, tgState = null;
+  function boxWidth(id, fallback) {
+    var el = document.getElementById(id);
+    var w = el ? el.clientWidth : 0;
+    return w > 0 ? w : fallback;
+  }
+  function niceStep(maxV, target) {
+    var raw = maxV / target, steps = [0.5, 1, 2, 5, 10, 20];
+    for (var i = 0; i < steps.length; i++) if (steps[i] >= raw) return steps[i];
+    return steps[steps.length - 1];
+  }
+  // Rough text width for Figtree: enough to decide when a row label needs two lines.
+  function textWidth(str, px) { return String(str).length * px * 0.56; }
+
+  function drawPlot() {
+    if (!plotState) return;
+    var rows = plotState.rows, maxY = plotState.maxY;
+    var COLORS = { women: "var(--accent)", men: "var(--ink)", both: "var(--kicker)" };
+    var padL = 16, padR = 40, axisH = 38;
+    var avail = boxWidth("plot", 856);
+    var plotW = Math.min(800, Math.max(240, avail - padL - padR));
+    var W = padL + plotW + padR;
+    var narrow = W < 560;
+    var step = niceStep(maxY, narrow ? 4 : 6);
+    var labelPx = narrow ? 13 : 13.5;
+    function x(v) { return padL + v / maxY * plotW; }
+    // One label line when it fits; on a narrow chart the description drops to a second line.
+    var layout = rows.map(function (r) {
+      var f = r.f;
+      var desc = f.unit.replace(/^(weeks|months|years)[,\s]*(median|mean)?[,\s]*/i, "");
+      var oneLine = f.condition + (desc ? " · " + desc : "") + "  " + f.source_type.toUpperCase();
+      var wrap = !!desc && textWidth(oneLine, labelPx) > W - padL - 8;
+      return { r: r, desc: desc, wrap: wrap, h: wrap ? 80 : 64 };
+    });
+    var H = layout.reduce(function (acc, l) { return acc + l.h; }, 0) + axisH + 8;
+    var axisY = H - axisH - 4;
+    var s = [];
+    s.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Published diagnostic delays in years" font-family="Figtree, Helvetica, Arial, sans-serif">');
+    for (var t = 0; t <= maxY + 1e-9; t += step) {
+      var tv = Math.round(t * 100) / 100;
+      s.push('<line x1="' + x(tv) + '" y1="0" x2="' + x(tv) + '" y2="' + axisY + '" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 4"/>');
+      s.push('<text x="' + x(tv) + '" y="' + (axisY + 20) + '" font-size="12.5" fill="var(--ink-soft)" text-anchor="middle">' + tv + (tv === 0 ? "" : " yr") + "</text>");
+    }
+    var top = 0;
+    layout.forEach(function (l) {
+      var r = l.r, f = r.f, desc = l.desc;
+      var cy = top + (l.wrap ? 56 : 40);
+      var grade = ' <tspan font-weight="700" fill="var(--ink-soft)" font-size="12" letter-spacing="1">' + f.source_type.toUpperCase() + "</tspan>" +
+        (f.verify ? ' <tspan fill="var(--accent)" font-size="12" font-weight="700">⚑</tspan>' : "");
+      if (l.wrap) {
+        s.push('<text x="' + padL + '" y="' + (top + 15) + '" font-size="' + labelPx + '" font-weight="600" fill="var(--ink)">' + esc(f.condition) + grade + "</text>");
+        s.push('<text x="' + padL + '" y="' + (top + 32) + '" font-size="12.5" fill="var(--ink-soft)">' + esc(desc) + "</text>");
+      } else {
+        s.push('<text x="' + padL + '" y="' + (top + 15) + '" font-size="' + labelPx + '" font-weight="600" fill="var(--ink)">' + esc(f.condition) +
+          ' <tspan font-weight="400" fill="var(--ink-soft)">' + esc(desc ? "· " + desc : "") + "</tspan>" + grade + "</text>");
+      }
+      s.push('<line x1="' + padL + '" y1="' + cy + '" x2="' + (padL + plotW) + '" y2="' + cy + '" stroke="var(--rule)" stroke-width="1"/>');
+      function dot(val, sex, hollow, title) {
+        var c = COLORS[sex] || COLORS.both;
+        // Surface-colored halo keeps touching dots separable.
+        s.push('<circle cx="' + x(val) + '" cy="' + cy + '" r="9.5" fill="var(--bg)"/>');
+        s.push('<circle cx="' + x(val) + '" cy="' + cy + '" r="7" opacity="' + fade(f) + '" fill="' + (hollow ? "var(--bg)" : c) + '" stroke="' + c + '" stroke-width="2"><title>' + esc(title) + "</title></circle>");
+      }
+      var title = f.condition + ": " + f.value + " " + f.unit + "\n" + f.population + "\n" + f.source_title + " (" + f.source_year + ") · " + f.source_type;
+      if (r.y.max != null) {
+        s.push('<line x1="' + x(r.y.v) + '" y1="' + cy + '" x2="' + x(r.y.max) + '" y2="' + cy + '" opacity="' + fade(f) + '" stroke="' + COLORS[f.sex] + '" stroke-width="4" stroke-linecap="round"><title>' + esc(title) + "</title></line>");
+        dot(r.y.v, f.sex, false, title);
+        dot(r.y.max, f.sex, false, title);
+      } else {
+        dot(r.y.v, f.sex, false, title);
+        if (r.y.median != null) dot(r.y.median, f.sex, true, f.condition + ": median " + f.median + " years\n(same study as the mean shown)");
+      }
+      if (r.pair) {
+        var pf = r.pair.f;
+        dot(r.pair.y.v, pf.sex, false, pf.condition + ": " + pf.value + " " + pf.unit + "\n" + pf.source_title + " (" + pf.source_year + ")");
+      }
+      top += l.h;
+    });
+    s.push("</svg>");
+    document.getElementById("plot").innerHTML = s.join("");
+    updateScrollHints();
+  }
+
+  function drawTrialGap() {
+    if (!tgState) return;
+    var conds = tgState.conds, maxPart = tgState.maxPart;
+    var avail = boxWidth("tgChart", 860);
+    var narrow = avail < 600;
+    var W, H, padL, padR, padT, padB;
+    if (narrow) { W = Math.max(280, Math.min(600, avail)); H = Math.round(W * 1.05) + 36; padL = 42; padR = 14; padT = 30; padB = 46; }
+    else { W = Math.min(860, avail); H = 560; padL = 64; padR = 150; padT = 24; padB = 56; }
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var min = 0.5, max = 1.0;
+    function x(v) { return padL + (Math.max(v, min) - min) / (max - min) * plotW; }
+    function y(v) { return padT + plotH - (Math.max(v, min) - min) / (max - min) * plotH; }
+    function r(p) { return (narrow ? 4 : 6) + Math.sqrt(p / maxPart) * (narrow ? 14 : 24); }
+    var tick = narrow ? 11 : 12;
+
+    var s = [];
+    s.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Female share of patients vs female share of trial participants" font-family="Figtree, Helvetica, Arial, sans-serif">');
+    for (var v = 0.5; v <= 1.001; v += 0.1) {
+      var vv = Math.round(v * 10) / 10;
+      s.push('<line x1="' + x(vv) + '" y1="' + padT + '" x2="' + x(vv) + '" y2="' + (padT + plotH) + '" stroke="var(--rule)" stroke-width="1" ' + (vv === 0.5 ? "" : 'stroke-dasharray="2 4"') + "/>");
+      s.push('<line x1="' + padL + '" y1="' + y(vv) + '" x2="' + (padL + plotW) + '" y2="' + y(vv) + '" stroke="var(--rule)" stroke-width="1" ' + (vv === 0.5 ? "" : 'stroke-dasharray="2 4"') + "/>");
+      s.push('<text x="' + x(vv) + '" y="' + (padT + plotH + 20) + '" font-size="' + tick + '" fill="var(--ink-soft)" text-anchor="middle">' + Math.round(vv * 100) + "%</text>");
+      s.push('<text x="' + (padL - 8) + '" y="' + (y(vv) + 4) + '" font-size="' + tick + '" fill="var(--ink-soft)" text-anchor="end">' + Math.round(vv * 100) + "%</text>");
+    }
+    if (narrow) {
+      s.push('<text x="' + (padL + plotW / 2) + '" y="' + (H - 10) + '" font-size="11.5" fill="var(--ink)" text-anchor="middle" font-weight="600">Women among patients</text>');
+      s.push('<text x="' + padL + '" y="' + (padT - 12) + '" font-size="11.5" fill="var(--ink)" text-anchor="start" font-weight="600">Women among trial participants ↑</text>');
+    } else {
+      s.push('<text x="' + (padL + plotW / 2) + '" y="' + (H - 12) + '" font-size="13" fill="var(--ink)" text-anchor="middle" font-weight="600">Women as a share of patients (published reviews)</text>');
+      s.push('<text x="18" y="' + (padT + plotH / 2) + '" font-size="13" fill="var(--ink)" text-anchor="middle" font-weight="600" transform="rotate(-90 18 ' + (padT + plotH / 2) + ')">Women as a share of trial participants</text>');
+    }
+    s.push('<line x1="' + x(0.5) + '" y1="' + y(0.5) + '" x2="' + x(1) + '" y2="' + y(1) + '" stroke="var(--ink)" stroke-width="1.5"/>');
+    // The parity label sits along the diagonal, whatever the chart's proportions.
+    var angle = -Math.atan2(plotH, plotW) * 180 / Math.PI;
+    var lx = x(narrow ? 0.86 : 0.97), ly = y(narrow ? 0.86 : 0.97) + (narrow ? 14 : 20);
+    s.push('<text x="' + lx + '" y="' + ly + '" font-size="' + (narrow ? 10.5 : 11.5) + '" fill="var(--ink-soft)" text-anchor="end" transform="rotate(' + angle.toFixed(1) + " " + lx + " " + ly + ')">' + (narrow ? "parity" : "parity: enrolled like they’re affected") + "</text>");
+
+    var ordered = conds.slice().sort(function (a, b) { return b.participants - a.participants; });
+    ordered.forEach(function (c, i) {
+      var below = c.femaleEnrollShare < c.femalePrevShare;
+      var cx = x(c.femalePrevShare), cy = y(c.femaleEnrollShare), cr = r(c.participants);
+      var fill = below ? "var(--accent)" : "var(--peri)";
+      s.push('<circle cx="' + cx + '" cy="' + cy + '" r="' + cr + '" fill="' + fill + '" fill-opacity="0.85" stroke="var(--bg)" stroke-width="1.5">');
+      s.push("<title>" + esc(c.name) + "\nWomen among patients: " + pct(c.femalePrevShare) + " (" + esc(c.prevNote) + ")\nWomen among participants: " + pct(c.femaleEnrollShare) + "\n" + num(c.participants) + " participants in " + num(c.trialsParsed) + " trials with readable results\n(" + num(c.trialsWithResults) + " of " + num(c.trialsTotal) + " registered trials post results)</title></circle>");
+      if (narrow) {
+        // Numbers on the chart, names in the key below: names would collide at this width.
+        var n = String(i + 1);
+        if (cr >= 9) {
+          s.push('<text x="' + cx + '" y="' + (cy + 3.5) + '" font-size="10" font-weight="700" text-anchor="middle" fill="' + (below ? "var(--accent-ink)" : "var(--ink)") + '">' + n + "</text>");
+        } else {
+          s.push('<text x="' + (cx + cr + 3) + '" y="' + (cy + 3.5) + '" font-size="10" font-weight="700" text-anchor="start" fill="var(--ink)" stroke="var(--bg)" stroke-width="3" paint-order="stroke">' + n + "</text>");
+        }
+      } else {
+        var flip = cx + cr + 6 > W - 20;
+        s.push('<text x="' + (flip ? cx - cr - 6 : cx + cr + 6) + '" y="' + (cy + 4) + '" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="' + (flip ? "end" : "start") + '">' + esc(c.name) + "</text>");
+      }
+    });
+    s.push("</svg>");
+    if (narrow) {
+      s.push('<ol class="tg-key" aria-label="Key to the numbered circles">');
+      ordered.forEach(function (c) {
+        s.push("<li><b>" + esc(c.name) + "</b> · " + pct(c.femaleEnrollShare) + " of participants vs. " + pct(c.femalePrevShare) + " of patients</li>");
+      });
+      s.push("</ol>");
+    }
+    document.getElementById("tgChart").innerHTML = s.join("");
+    updateScrollHints();
   }
 
   fetch("data.json")
@@ -549,7 +676,20 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
       hint.hidden = box.scrollWidth <= box.clientWidth + 1;
     });
   }
-  window.addEventListener("resize", updateScrollHints);
+  var resizeTimer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { drawPlot(); drawTrialGap(); updateScrollHints(); }, 150);
+  });
+
+  // The printed handout says where and when it came from.
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  window.addEventListener("beforeprint", function () {
+    var el = document.getElementById("printStamp");
+    if (!el) return;
+    var d = new Date();
+    el.textContent = "Printed from joinherada.com/projects/diagnostic-detour/ on " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + ". Every figure links to its source on the page.";
+  });
 })();
 </script>
 </body>
