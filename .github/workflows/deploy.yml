@@ -3,7 +3,8 @@
 #   site/                      -> /
 #   projects/<name>/public/    -> /projects/<name>/
 # then listing those pages in a sitemap and checking the internal links.
-# That is a few lines of shell and Python, not a build tool.
+# Those steps are a few lines of shell and Python in tools/qa, shared with
+# the QA workflow that runs on pull requests. Not a build tool.
 name: Deploy site
 
 on:
@@ -30,16 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: Assemble site
-        run: |
-          mkdir -p _site
-          cp -r site/. _site/
-          for dir in projects/*/public; do
-            [ -d "$dir" ] || continue
-            name=$(basename "$(dirname "$dir")")
-            case "$name" in _*) continue ;; esac
-            mkdir -p "_site/projects/$name"
-            cp -r "$dir/." "_site/projects/$name/"
-          done
+        run: bash tools/qa/assemble.sh _site
 
       - name: Write sitemap.xml
         # One <url> per index.html in _site, dated by the last commit that
@@ -47,60 +39,14 @@ jobs:
         # any page that carries a robots noindex tag: those deploy, and can be
         # shared by address, but are not announced to search engines.
         run: |
-          {
-            echo '<?xml version="1.0" encoding="UTF-8"?>'
-            echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-            find _site -name index.html | sort | while read -r page; do
-              grep -q 'name="robots" content="noindex' "$page" && continue
-              path="${page#_site}"
-              case "$path" in
-                /projects/*/*) rest="${path#/projects/}"; name="${rest%%/*}"; src="projects/$name/public/${rest#"$name"/}" ;;
-                *)             src="site$path" ;;
-              esac
-              date=$(git log -1 --format=%cs -- "$src")
-              echo "  <url><loc>https://joinherada.com${path%index.html}</loc><lastmod>${date:-$(date -u +%F)}</lastmod></url>"
-            done
-            echo '</urlset>'
-          } > _site/sitemap.xml
+          bash tools/qa/sitemap.sh _site
           cat _site/sitemap.xml
 
       - name: Check internal links
         # Fails the deploy if any href, src or CSS url() points at a file that
         # is not in _site. External links, mailto, tel, data URIs, bare anchors
         # and the contents of <script> blocks are skipped.
-        run: |
-          python3 - <<'PY'
-          import os, re, sys
-          import xml.dom.minidom
-          root = "_site"
-          xml.dom.minidom.parse(os.path.join(root, "sitemap.xml"))
-          assert os.path.isfile(os.path.join(root, "robots.txt")), "robots.txt missing"
-          ref = re.compile(r'''(?i:href|src)\s*=\s*["']([^"'#?]+)|url\(\s*["']?([^"')#?]+)''')
-          script = re.compile(r"<script\b.*?</script>", re.S | re.I)
-          skip = ("http://", "https://", "mailto:", "tel:", "data:", "//", "javascript:")
-          broken = []
-          for dirpath, _, files in os.walk(root):
-              for fn in files:
-                  if not fn.endswith((".html", ".css")):
-                      continue
-                  page = os.path.join(dirpath, fn)
-                  text = open(page, encoding="utf-8", errors="replace").read()
-                  if fn.endswith(".html"):
-                      text = script.sub("", text)
-                  for m in ref.finditer(text):
-                      u = (m.group(1) or m.group(2) or "").strip()
-                      if not u or u.startswith(skip):
-                          continue
-                      if u.startswith("/"):
-                          target = os.path.join(root, u.lstrip("/"))
-                      else:
-                          target = os.path.normpath(os.path.join(dirpath, u))
-                      if not (os.path.isfile(target) or os.path.isfile(os.path.join(target, "index.html"))):
-                          broken.append(f"{os.path.relpath(page, root)}: {u}")
-          print(f"checked {root}: {len(broken)} broken reference(s)")
-          print("\n".join(broken))
-          sys.exit(1 if broken else 0)
-          PY
+        run: python3 tools/qa/linkcheck.py _site
 
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
