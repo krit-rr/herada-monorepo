@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Herada news</title>
+    <link>https://joinherada.com/news/</link>
+    <description>News and milestones from Herada.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 15 Nov 2025 09:00:00 GMT</lastBuildDate>
+    <atom:link href="https://joinherada.com/news/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Herada Featured in the Pittsburgh Post-Gazette</title>
+      <link>https://joinherada.com/2025/11/15/herada-featured-in-the-pittsburgh-post-gazette/</link>
+      <guid isPermaLink="true">https://joinherada.com/2025/11/15/herada-featured-in-the-pittsburgh-post-gazette/</guid>
+      <pubDate>Sat, 15 Nov 2025 09:00:00 GMT</pubDate>
+      <description>Herada was recently featured in the Pittsburgh Post-Gazette as one of six startups to watch following completion of the Anvil Founder Coaching Program.</description>
+    </item>
+    <item>
+      <title>Completing the Anvil Founder Coaching Program</title>
+      <link>https://joinherada.com/2025/11/11/completing-the-anvil-founder-coaching-program/</link>
+      <guid isPermaLink="true">https://joinherada.com/2025/11/11/completing-the-anvil-founder-coaching-program/</guid>
+      <pubDate>Tue, 11 Nov 2025 09:00:00 GMT</pubDate>
+      <description>Herada recently completed the Anvil Founder Coaching Program, an experience that provided structured support during a critical stage of our development.</description>
+    </item>
+    <item>
+      <title>Reaching an Early Funding Milestone</title>
+      <link>https://joinherada.com/2025/10/25/reaching-a-early-funding-milestone/</link>
+      <guid isPermaLink="true">https://joinherada.com/2025/10/25/reaching-a-early-funding-milestone/</guid>
+      <pubDate>Sat, 25 Oct 2025 09:00:00 GMT</pubDate>
+      <description>We're excited to share that Herada has raised $100,000 in early funding.</description>
+    </item>
+    <item>
+      <title>Pittsburgh Techstars Startup Weekend 2025: Second Place</title>
+      <link>https://joinherada.com/2025/02/12/pittsburgh-techstars-startup-weekend-2025-second-place/</link>
+      <guid isPermaLink="true">https://joinherada.com/2025/02/12/pittsburgh-techstars-startup-weekend-2025-second-place/</guid>
+      <pubDate>Wed, 12 Feb 2025 09:00:00 GMT</pubDate>
+      <description>Herada participated in Pittsburgh Techstars Startup Weekend 2025, where we were honored to win second place.</description>
+    </item>
+  </channel>
+</rss>

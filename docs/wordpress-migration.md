@@ -70,8 +70,11 @@ records to preserve, and `www` is an alias of the apex.
 - **Subscribers:** WordPress.com has a built-in "Subscribe" feature. If anyone
   has subscribed, export that list before leaving.
 - **Editing:** every change is now a file edit and a commit.
-- **RSS:** WordPress served `/feed/`. The static site has no feed yet; a
-  hand-written `news/feed.xml` is a small follow-up if anyone asks for it.
+- **RSS:** WordPress served `/feed/`. The static site serves
+  `news/feed.xml`, hand-written with one item per post (add an item when a
+  post is added), and announces it from the home and news pages. `/feed/`
+  shows a short note pointing readers there, so the old address does not
+  404.
 
 ## 4. Switch the domain
 
