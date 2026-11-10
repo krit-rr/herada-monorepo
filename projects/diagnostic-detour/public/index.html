@@ -97,7 +97,7 @@ a:hover { color: var(--accent-hover); }
 
 /* Badges */
 .dd-badge {
-  display: inline-block; font-family: var(--ui); font-size: 0.6875rem; font-weight: 700;
+  display: inline-block; font-family: var(--ui); font-size: 0.75rem; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase; padding: 0.12rem 0.45rem;
   border: 1px solid var(--rule); border-radius: 2px; color: var(--ink-soft); white-space: nowrap;
 }
@@ -115,6 +115,7 @@ a:hover { color: var(--accent-hover); }
 /* Dot plot */
 .dd-plot { margin-top: 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .dd-plot svg { display: block; }
+.dd-scrollhint { margin: 0.5rem 0 0; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); }
 .dd-legend { margin-top: 1.5rem; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.5rem; }
 .dd-key { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--ink); white-space: nowrap; }
 .dd-key[hidden] { display: none; }
@@ -173,9 +174,9 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
   </div>
 </header>
 
-<div class="hr-notice">
+<aside class="hr-notice" aria-label="Page notice">
   <div class="hr-wrap"><p><b>[Draft]</b> Every figure is graded by source strength. &ldquo;Being verified&rdquo; = it came from a press summary or abstract + the full-paper check is still pending.</p></div>
-</div>
+</aside>
 
 <main>
   <section class="hr-intro">
@@ -213,7 +214,8 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
         <span class="dd-key" id="keyRange"><svg width="24" height="14" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7" stroke="var(--ink-soft)" stroke-width="4" stroke-linecap="round"/></svg>Range across studies</span>
         <span class="dd-key"><svg width="40" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="var(--kicker)"/><circle cx="20" cy="7" r="5.5" fill="var(--kicker)" opacity="0.7"/><circle cx="33" cy="7" r="5.5" fill="var(--kicker)" opacity="0.4"/></svg>Fainter = weaker source grade</span>
       </div>
-      <div class="dd-plot" id="plot"></div>
+      <div class="dd-plot" id="plot" tabindex="0" role="region" aria-label="Delay chart. Scrolls sideways on small screens."></div>
+      <p class="dd-scrollhint" hidden>Scroll sideways for the full chart.</p>
     </div>
   </section>
 
@@ -247,7 +249,8 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
       <p class="dd-kicker">Who gets studied</p>
       <h2>The trial gap: patients vs. participants</h2>
       <p class="dd-sub">For ten conditions whose patients are mostly women: the share of women among clinical-trial participants, against their share among patients, from ClinicalTrials.gov posted results. Below the diagonal, women are underrepresented relative to the patient population.</p>
-      <div class="dd-plot" id="tgChart"></div>
+      <div class="dd-plot" id="tgChart" tabindex="0" role="region" aria-label="Trial enrollment chart. Scrolls sideways on small screens."></div>
+      <p class="dd-scrollhint" hidden>Scroll sideways for the full chart.</p>
       <p class="dd-legend" id="tgLegend" hidden><b>Reading it:</b> each circle is a condition, sized by participants counted. On the diagonal, trials enroll women at the rate the condition affects them. Both axes start at 50%. Hover any circle for the numbers.</p>
       <div class="tg-table-wrap" id="tgTable"></div>
       <p class="dd-legend" id="tgMethod" hidden><b>Caveats:</b> results are posted for only a fraction of registered trials (the last column shows how many per condition), and the patient shares are approximations of commonly cited sex ratios, each from the review linked in the table. Single-sex trials are included. Trials reporting sex in a custom format are counted as unparsed.</p>
@@ -433,6 +436,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     });
     s.push("</svg>");
     document.getElementById("plot").innerHTML = s.join("");
+    updateScrollHints();
     // Only show legend keys for marks the current data actually draws.
     function hasSex(sx) { return rows.some(function (r) { return r.f.sex === sx || (r.pair && r.pair.f.sex === sx); }); }
     document.getElementById("keyMen").hidden = !hasSex("men");
@@ -519,6 +523,7 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     });
     s.push("</svg>");
     document.getElementById("tgChart").innerHTML = s.join("");
+    updateScrollHints();
     document.getElementById("tgLegend").hidden = false;
 
     var t = [];
@@ -554,6 +559,16 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
     .catch(function () {
       document.getElementById("tgChart").innerHTML = '<p style="color:var(--ink-soft); padding:1.5rem 0">The trial-enrollment file could not be loaded. It is generated by <code>data/trial-gap/pull_trials.py</code> in the repository.</p>';
     });
+  // Charts keep their natural width and scroll sideways on narrow screens;
+  // the hint under each one shows only when it actually overflows.
+  function updateScrollHints() {
+    Array.prototype.forEach.call(document.querySelectorAll(".dd-plot"), function (box) {
+      var hint = box.nextElementSibling;
+      if (!hint || !hint.classList.contains("dd-scrollhint")) return;
+      hint.hidden = box.scrollWidth <= box.clientWidth + 1;
+    });
+  }
+  window.addEventListener("resize", updateScrollHints);
 })();
 </script>
 </body>
