@@ -10,7 +10,9 @@ the lavender-mist palette and supersedes that design's paper-ground layout.
 - Homepage: radicchio ground with paper type; hero holds only the mission
   line. Below it one flipped section (paper ground, radicchio type) with the
   pivot note and the projects as small square tiles whose colors cycle
-  radicchio, periwinkle, violet-black. Tiles show status and name, no links.
+  radicchio, periwinkle, violet-black. Since Nov 2026 there are three tiles,
+  Rule-Out Checklist, the Ledger and the Diagnostic Detour, and each links
+  to its project (the Checklist to the Ledger's "tested" page).
 - News: paper ground, a grid of square photo tiles (image, date, title).
 - Posts: title, date, content; nothing else.
 - Contact: statement, large email button, three bordered columns.
