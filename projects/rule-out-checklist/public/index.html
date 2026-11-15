@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Rule-Out Checklist: a page by Herada</title>
+<meta name="description" content="Before accepting a perimenopause or anxiety explanation for fatigue, brain fog, joint pain or palpitations: the ten checks that should have been considered, each with why it matters and where the guidance comes from. One printable page.">
+<link rel="canonical" href="https://joinherada.com/projects/rule-out-checklist/">
+<meta name="theme-color" content="#FDFCFE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#211E28" media="(prefers-color-scheme: dark)">
+<meta property="og:site_name" content="Herada">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Rule-Out Checklist">
+<meta property="og:description" content="Before accepting a perimenopause or anxiety explanation for fatigue, brain fog, joint pain or palpitations: ten checks that should have been considered, each with its source. One printable page.">
+<meta property="og:url" content="https://joinherada.com/projects/rule-out-checklist/">
+<meta property="og:image" content="https://joinherada.com/assets/img/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Herada: women aren’t getting what they’re owed in healthcare.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* Herada design system (v3 palette, Oct 2026), inlined so this page stands alone. */
+:root {
+  --bg: #FDFCFE;
+  --strip: #B7B5E4;
+  --ink: #2B2733;
+  --ink-soft: #5B5666;
+  --accent: #AD1457;
+  --accent-hover: #8A0E45;
+  --accent-ink: #FDFCFE;
+  --rule: #CFCCD6;
+  --kicker: #6B68A0;
+  --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --ui: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --page: 68rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+    --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+    --kicker: #B7B5E4;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+  --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+  --kicker: #B7B5E4;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1.1875rem; line-height: 1.55;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.5rem, 5.5vw, 4rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.625rem, 3.5vw, 2.25rem); letter-spacing: -0.015em; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hr-wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
+.hr-ui { font-family: var(--ui); font-size: 0.875rem; }
+
+.hr-header { border-bottom: 1px solid var(--rule); }
+.hr-header .hr-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 2rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+.hr-wordmark { font-family: var(--display); font-size: 1.375rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); text-decoration: none; }
+.hr-header span.hr-ui { color: var(--ink-soft); }
+
+.hr-notice { background: var(--strip); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.9375rem; color: #2B2733; }
+.hr-notice b { font-weight: 700; }
+
+.hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
+.hr-intro h1 { max-width: 22ch; }
+.hr-lede { max-width: 44rem; margin-top: 1.5rem; font-size: 1.375rem; line-height: 1.45; color: var(--ink); }
+.rc-context { margin-top: 1.25rem; max-width: 44rem; font-size: 1.0625rem; color: var(--ink-soft); }
+.rc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.5rem; margin-top: 1.75rem; }
+.hr-button {
+  display: inline-block; padding: 0.8rem 1.4rem; background: var(--accent); color: var(--accent-ink);
+  border: none; border-radius: 2px; font-family: var(--ui); font-size: 1rem; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+}
+.hr-button:hover { background: var(--accent-hover); color: var(--accent-ink); }
+.rc-ghost {
+  display: inline-block; padding: 0.75rem 1.35rem; background: transparent; color: var(--ink);
+  border: 1px solid var(--ink); border-radius: 2px; font-family: var(--ui); font-size: 1rem; font-weight: 600; cursor: pointer;
+}
+.rc-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.rc-copied { font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); min-height: 1.4em; }
+
+.lg-section { border-top: 3px solid var(--ink); padding: 2.25rem 0 2.75rem; }
+.lg-kicker { font-family: var(--ui); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.85rem; }
+.lg-kicker::before { content: "["; color: var(--accent); }
+.lg-kicker::after { content: "]"; color: var(--accent); }
+.lg-sub { margin-top: 0.5rem; max-width: 44rem; font-size: 1.0625rem; color: var(--ink-soft); }
+.rc-print-head { display: none; }
+
+/* The list */
+.rc-group { margin-top: 2.25rem; }
+.rc-group:first-of-type { margin-top: 1.5rem; }
+.rc-group h3 { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); }
+.rc-group .rc-groupnote { margin-top: 0.3rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); max-width: 44rem; }
+.rc-items { margin: 1rem 0 0; padding: 0; list-style: none; max-width: 56rem; }
+.rc-items li { display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 1rem; padding: 1rem 0; border-top: 1px solid var(--rule); align-items: start; }
+.rc-items li:last-child { border-bottom: 1px solid var(--rule); }
+.rc-items input[type="checkbox"] { width: 1.5rem; height: 1.5rem; margin: 0.15rem 0 0; accent-color: var(--accent); cursor: pointer; }
+.rc-items label { font-weight: 600; font-size: 1.0625rem; cursor: pointer; }
+.rc-why { grid-column: 2; font-size: 0.9875rem; color: var(--ink-soft); max-width: 46rem; }
+.rc-src { grid-column: 2; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); }
+.rc-caveat { margin-top: 2.25rem; max-width: 46rem; padding: 1rem 1.25rem; border: 1px solid var(--ink); }
+.rc-caveat p { font-size: 1rem; color: var(--ink-soft); }
+.rc-caveat b { color: var(--ink); font-weight: 700; }
+.rc-clinician { margin-top: 1.5rem; max-width: 46rem; font-size: 1rem; color: var(--ink-soft); }
+.rc-clinician b { color: var(--ink); font-weight: 600; }
+
+/* Next steps: one for her, one for the clinician */
+.rc-next { display: grid; grid-template-columns: 1fr; gap: 2.25rem; margin-top: 1.5rem; }
+@media (min-width: 52rem) { .rc-next { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; } }
+.rc-next > div { min-width: 0; border-top: 2px solid var(--ink); padding-top: 1.1rem; }
+.rc-next h3 { font-size: 1.375rem; }
+.rc-next p { margin-top: 0.6rem; max-width: 30rem; font-size: 1.0625rem; color: var(--ink-soft); }
+.rc-next .rc-cta { margin-top: 1.25rem; }
+.rc-textlink { font-family: var(--ui); font-size: 1rem; font-weight: 600; }
+
+.hr-section { border-top: 1px solid var(--rule); padding: clamp(2.5rem, 6vw, 4rem) 0; }
+.hr-sources { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
+.hr-sources ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+.hr-sources li { margin-top: 0.25rem; }
+.hr-sources a { overflow-wrap: anywhere; }
+.hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
+
+/* Print: the list on one letter page, with each item's why and source. */
+@page { size: letter portrait; margin: 12mm 14mm; }
+@media print {
+  :root, :root[data-theme="dark"] {
+    --bg: #FDFCFE; --strip: #B7B5E4; --ink: #2B2733; --ink-soft: #5B5666;
+    --accent: #AD1457; --accent-hover: #8A0E45; --accent-ink: #FDFCFE; --rule: #CFCCD6; --kicker: #6B68A0;
+  }
+  body { font-size: 8.5pt; line-height: 1.35; }
+  .hr-header, .hr-notice, .rc-actions, .rc-nextsec, .hr-section, .hr-footer, .lg-sub, .rc-clinician, .hr-lede, .rc-groupnote { display: none !important; }
+  .hr-intro { padding: 0 0 0.4rem; }
+  .hr-intro h1 { font-size: 15pt; max-width: none; }
+  .hr-lede { font-size: 9.5pt; margin-top: 0.4rem; max-width: none; }
+  .rc-context { font-size: 8pt; margin-top: 0.3rem; max-width: none; line-height: 1.3; }
+  .lg-section { border-top: 2px solid var(--ink); padding: 0.5rem 0 0; }
+  .lg-section .hr-wrap, .hr-intro .hr-wrap { padding-left: 0; padding-right: 0; max-width: none; }
+  .lg-kicker { font-size: 7.5pt; margin-bottom: 0.1rem; }
+  .rc-print-head { display: block; font-family: var(--ui); font-size: 7.5pt; color: var(--ink-soft); }
+  .rc-group { margin-top: 0.4rem; }
+  .rc-group h3 { font-size: 7pt; }
+  .rc-group .rc-groupnote { font-size: 7.5pt; margin-top: 0.1rem; }
+  .rc-items { margin-top: 0.2rem; max-width: none; }
+  .rc-items li { padding: 0.2rem 0; gap: 0 0.45rem; }
+  .rc-items input[type="checkbox"] { width: 0.85rem; height: 0.85rem; margin-top: 0.1rem; }
+  .rc-items label { font-size: 8.5pt; }
+  .rc-why { font-size: 7.2pt; max-width: none; line-height: 1.3; }
+  .rc-src { font-size: 6.8pt; }
+  .rc-src a { color: var(--ink-soft); text-decoration: none; }
+  .rc-caveat { margin-top: 0.4rem; padding: 0.25rem 0.5rem; max-width: none; }
+  .rc-caveat p { font-size: 6.8pt; line-height: 1.3; }
+}
+</style>
+<meta name="robots" content="noindex">
+<!-- Hidden while the projects are unlinked from the main site: deployed, shareable by
+     address, kept out of search engines and the sitemap. Remove this tag to go public. -->
+<link rel="icon" type="image/png" href="/assets/img/herada-monogram-lavender.png">
+<link rel="apple-touch-icon" href="/assets/img/herada-monogram-tile.png">
+</head>
+<body>
+<header class="hr-header">
+  <div class="hr-wrap">
+    <a class="hr-wordmark" href="/">HERADA</a>
+    <span class="hr-ui">Page · The Rule-Out Checklist</span>
+  </div>
+</header>
+
+<aside class="hr-notice" aria-label="Page notice">
+  <div class="hr-wrap"><p><b>[Draft]</b> Ten checks and their sources, compiled by Herada; clinical review pending. Questions to weigh with your clinician, not an order sheet. Nothing on this page is stored or sent.</p></div>
+</aside>
+
+<main>
+  <section class="hr-intro">
+    <div class="hr-wrap">
+      <h1>Before it&rsquo;s called perimenopause, or anxiety.</h1>
+      <p class="hr-lede">Fatigue, brain fog, joint pain or palpitations in midlife are often given a perimenopause or anxiety explanation at the first visit. Before accepting one, these ten checks should have been considered. Print it, tick what&rsquo;s been done, and ask about the rest.</p>
+      <p class="rc-context"><a href="https://www.nice.org.uk/guidance/ng23">NICE guideline NG23</a> lets clinicians diagnose perimenopause in women over 45 from symptoms alone, without labs. This page is what should be weighed before that label settles: ask whether each was considered, not for the panel.</p>
+      <div class="rc-actions">
+        <button type="button" class="hr-button" id="printBtn">Print this page</button>
+        <button type="button" class="rc-ghost" id="copyBtn">Copy to notes</button>
+        <span class="rc-copied" id="copied" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-section" id="list" aria-label="The checklist">
+    <div class="hr-wrap">
+      <p class="lg-kicker">The checklist</p>
+      <h2>Was each of these considered?</h2>
+      <span class="rc-print-head">joinherada.com/projects/rule-out-checklist/ · draft, pending clinical review · questions to weigh with my clinician, not an order sheet</span>
+      <p class="lg-sub">Tick what has already been done. Each item says why it belongs here and where the guidance comes from. &ldquo;Not needed, because&hellip;&rdquo; is a perfectly good answer to any of them.</p>
+
+      <div class="rc-group">
+        <h3>Usually part of a first workup</h3>
+        <p class="rc-groupnote">Standard, inexpensive checks that a fatigue or multi-symptom workup commonly includes. The ask: &ldquo;were these considered?&rdquo;</p>
+        <ul class="rc-items">
+          <li>
+            <input type="checkbox" id="c-tsh"><label for="c-tsh">Thyroid panel (TSH, free T4, TPO antibodies)</label>
+            <p class="rc-why">Thyroid disease and menopause share symptoms almost one for one: cycle changes, mood, sweats, sleep, hair. European menopause guidance treats the thyroid as part of telling them apart; ask whether free T4 and antibodies were included, not just TSH.</p>
+            <span class="rc-src">Source: <a href="https://emas-online.org/wp-content/uploads/2024/04/PIIS0378512224000860.pdf">EMAS position statement, Maturitas 2024</a></span>
+          </li>
+          <li>
+            <input type="checkbox" id="c-ferritin"><label for="c-ferritin">Ferritin and iron panel</label>
+            <p class="rc-why">Low iron stores can drive fatigue, brain fog and palpitations before anemia shows up, and a normal CBC doesn&rsquo;t rule them out. Ask for the ferritin number, not just &ldquo;normal.&rdquo;</p>
+            <span class="rc-src">Source: <a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">AAFP, Fatigue in Adults, 2023</a></span>
+          </li>
+          <li>
+            <input type="checkbox" id="c-cbc"><label for="c-cbc">CBC [complete blood count]</label>
+            <p class="rc-why">The basic screen for anemia and other blood conditions that commonly present as exhaustion; a standard anchor of a first fatigue workup.</p>
+            <span class="rc-src">Source: <a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">AAFP, Fatigue in Adults, 2023</a></span>
+          </li>
+          <li>
+            <input type="checkbox" id="c-cmp"><label for="c-cmp">CMP [comprehensive metabolic panel]</label>
+            <p class="rc-why">Kidneys, liver, glucose and electrolytes in one draw: the other standard anchor of the initial workup.</p>
+            <span class="rc-src">Source: <a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">AAFP, Fatigue in Adults, 2023</a></span>
+          </li>
+          <li>
+            <input type="checkbox" id="c-dvitb12"><label for="c-dvitb12">Vitamin D and B12</label>
+            <p class="rc-why">Deficiencies in either are common, cheap to check, and can drive fatigue, aches, low mood and cognitive complaints; clinicians evaluating unexplained fatigue often include them early.</p>
+            <span class="rc-src">Source: <a href="https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html">CDC, Evaluation of ME/CFS</a></span>
+          </li>
+          <li>
+            <input type="checkbox" id="c-crp"><label for="c-crp">hs-CRP or ESR [inflammation markers]</label>
+            <p class="rc-why">Persistent joint pain or symptoms across systems make an inflammation marker worth asking about; a raised result is a question to pursue with your clinician, not an answer by itself.</p>
+            <span class="rc-src">Source: <a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">AAFP, Fatigue in Adults, 2023</a></span>
+          </li>
+          <li>
+            <input type="checkbox" id="c-cvd"><label for="c-cvd">Cardiovascular risk calculation</label>
+            <p class="rc-why">Palpitations and fatigue in midlife women deserve a formally calculated risk score (cholesterol + blood pressure + the estimate itself) rather than reassurance by age or sex.</p>
+            <span class="rc-src">Source: <a href="https://doi.org/10.1161/CIR.0000000000000678">ACC/AHA primary-prevention guideline, 2019</a></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="rc-group">
+        <h3>When symptoms point there</h3>
+        <p class="rc-groupnote">Not screening tests. They earn their place when the picture fits. The ask: &ldquo;do my symptoms make this one worth considering?&rdquo;</p>
+        <ul class="rc-items">
+          <li>
+            <input type="checkbox" id="c-ana"><label for="c-ana">ANA with reflex panel</label>
+            <p class="rc-why">A first screen for autoimmune disease when symptoms span systems: joints, skin, dryness, fevers. It&rsquo;s symptom-triggered for a reason: roughly a third of healthy people test weakly positive (31.7% at 1:40; 13.3% at 1:80), so without a fitting picture it creates more confusion than answers.</p>
+            <span class="rc-src">Source: <a href="https://doi.org/10.1002/art.1780400909">Tan et al., Arthritis &amp; Rheumatism 1997;40(9):1601&ndash;11</a></span>
+          </li>
+          <li>
+            <input type="checkbox" id="c-ortho"><label for="c-ortho">Orthostatic vitals</label>
+            <p class="rc-why">Heart rate and blood pressure lying down and then standing, over ten minutes, in the office. For when dizziness, a racing heart or worse-when-upright symptoms are part of the story.</p>
+            <span class="rc-src">Source: <a href="https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html">CDC, Evaluation of ME/CFS</a></span>
+          </li>
+          <li>
+            <input type="checkbox" id="c-adhd"><label for="c-adhd">Adult-ADHD screener (validated)</label>
+            <p class="rc-why">When the trouble with focus has been there for life and midlife made it unmanageable. Women are identified years later than men; a validated screener is a short questionnaire, not a guess.</p>
+            <span class="rc-src">Source: <a href="https://doi.org/10.1111/jcpp.13920">Skoglund et al., J Child Psychol Psychiatry 2024</a></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="rc-caveat">
+        <p><b>This is not an order sheet.</b> Broad lab panels are low-yield: testing everyone for everything mostly finds noise, which is why <a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">family-medicine guidance</a> keeps the first panel small. The ask is &ldquo;was this considered?&rdquo;, and &ldquo;not needed, because&hellip;&rdquo; is a perfectly good answer. Which of these fit your picture is your clinician&rsquo;s call.</p>
+      </div>
+      <p class="rc-clinician"><b>Discuss with your clinician.</b> This page is general information, not medical advice for you, and it cannot say which of these apply to you. Bring it to the visit and weigh it together.</p>
+    </div>
+  </section>
+
+  <section class="lg-section rc-nextsec" aria-label="What to do with it">
+    <div class="hr-wrap">
+      <p class="lg-kicker">Next</p>
+      <div class="rc-next">
+        <div>
+          <h3>Check these against your own history</h3>
+          <p>The Ledger ticks this list from the tests you have already logged, shows what&rsquo;s still open, and builds your Visit Kit from it. Everything stays on your device.</p>
+          <p class="rc-cta"><a class="hr-button" href="/projects/the-ledger/#tested">Open the Ledger</a></p>
+        </div>
+        <div>
+          <h3>Teach this in your practice</h3>
+          <p>How It Presents in Women is a point-of-care micro-learning course for primary care, nurse practitioners and physician associates, built on the same evidence. It starts once its clinical co-author is named.</p>
+          <p class="rc-cta"><a class="rc-textlink" href="/learn/#problem-2">How It Presents in Women (coming) &rarr;</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hr-section" aria-label="Sources">
+    <div class="hr-wrap">
+      <p class="hr-sources"><b>Sources.</b> The list and its reasoning are the same knowledge base the <a href="/projects/the-ledger/">Ledger</a> uses, so the two never disagree.</p>
+      <div class="hr-sources">
+        <ul>
+          <li>NICE, <a href="https://www.nice.org.uk/guidance/ng23">Menopause: identification and management (NG23)</a>: diagnosis of perimenopause in women over 45 on symptoms, without laboratory tests.</li>
+          <li>American Academy of Family Physicians, <a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">Fatigue in Adults: Evaluation and Management</a>, 2023: the small first panel, and why broad testing is low-yield.</li>
+          <li>EMAS, <a href="https://emas-online.org/wp-content/uploads/2024/04/PIIS0378512224000860.pdf">position statement on thyroid disease and menopause</a>, Maturitas 2024.</li>
+          <li>CDC, <a href="https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html">Evaluation of ME/CFS</a> for clinicians: the baseline battery and orthostatic testing.</li>
+          <li>ACC/AHA, <a href="https://doi.org/10.1161/CIR.0000000000000678">2019 guideline on the primary prevention of cardiovascular disease</a>: formal risk calculation.</li>
+          <li>Tan et al., <a href="https://doi.org/10.1002/art.1780400909">Range of antinuclear antibodies in healthy individuals</a>, Arthritis &amp; Rheumatism 1997: ANA positivity in healthy people.</li>
+          <li>Skoglund et al., <a href="https://doi.org/10.1111/jcpp.13920">Time after time: failure to identify and support females with ADHD</a>, J Child Psychol Psychiatry 2024: the later identification of women.</li>
+        </ul>
+        <p style="margin-top: 1rem;">As of November 2026. Draft compiled by Herada; <b>pending clinical review</b>. General information, not medical advice for any individual.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="hr-footer">
+  <div class="hr-wrap"><p class="hr-ui">A Herada page. Draft, pending clinical review. Not medical advice. Solo founder. Evidence published, never sold. Nothing you enter leaves your device (<a href="/privacy/">privacy</a>).</p></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  // No storage of any kind: ticks live on the open page, copy goes to the clipboard, print goes to paper.
+  var printBtn = document.getElementById("printBtn");
+  var copyBtn = document.getElementById("copyBtn");
+  var copied = document.getElementById("copied");
+  if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
+
+  function text() {
+    var lines = [
+      "RULE-OUT CHECKLIST · joinherada.com/projects/rule-out-checklist/",
+      "Before accepting a perimenopause or anxiety explanation for fatigue, brain fog, joint pain or palpitations: was each of these considered?",
+      ""
+    ];
+    var groups = document.querySelectorAll(".rc-group");
+    for (var g = 0; g < groups.length; g++) {
+      var h = groups[g].querySelector("h3");
+      lines.push((h ? h.textContent : "").toUpperCase());
+      var items = groups[g].querySelectorAll(".rc-items li");
+      for (var i = 0; i < items.length; i++) {
+        var box = items[i].querySelector("input[type=checkbox]");
+        var label = items[i].querySelector("label");
+        lines.push((box && box.checked ? "[x] " : "[ ] ") + (label ? label.textContent.trim() : ""));
+      }
+      lines.push("");
+    }
+    lines.push("The ask: \"was this considered?\" \"Not needed, because...\" is a good answer.");
+    lines.push("Draft, pending clinical review. Questions to weigh with my clinician, not an order sheet.");
+    return lines.join("\n");
+  }
+  function say(msg) {
+    if (!copied) return;
+    copied.textContent = msg;
+    window.setTimeout(function () { copied.textContent = ""; }, 4000);
+  }
+  function fallbackCopy(t) {
+    var ta = document.createElement("textarea");
+    ta.value = t; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.left = "-9999px";
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  if (copyBtn) copyBtn.addEventListener("click", function () {
+    var t = text();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(function () { say("Copied. Paste it into your notes."); }, function () {
+        say(fallbackCopy(t) ? "Copied. Paste it into your notes." : "Couldn’t copy here. Select the list and copy it by hand.");
+      });
+    } else {
+      say(fallbackCopy(t) ? "Copied. Paste it into your notes." : "Couldn’t copy here. Select the list and copy it by hand.");
+    }
+  });
+})();
+</script>
+</body>
+</html>
