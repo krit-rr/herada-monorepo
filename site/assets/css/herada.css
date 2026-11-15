@@ -399,5 +399,7 @@ a.hr-tile:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; 
 .hr-prose { max-width: 38rem; }
 .hr-prose > * + * { margin-top: 1.25rem; }
 .hr-prose h2 { margin-top: 3rem; }
+.hr-prose h3 { margin-top: 2.5rem; font-size: 1.375rem; }
+.hr-prose h3 + p { margin-top: 0.5rem; }
 .hr-prose ul, .hr-prose ol { padding-left: 1.25rem; margin-bottom: 0; }
 .hr-prose li + li { margin-top: 0.5rem; }
