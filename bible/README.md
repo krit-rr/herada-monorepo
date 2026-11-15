@@ -9,8 +9,14 @@ The working draft is a Google Doc for now.
 
 - Google Doc: _add link_
 
-The public page is `site/bible/index.html`, which currently describes the guide
-and collects interest by email.
+The public page is `site/bible/index.html`, which describes the guide, collects
+interest by email, and since Nov 15, 2026 carries one "What's covered" callout
+per life stage (teens, twenties and thirties, pregnancy and the year after,
+midlife, sixty-five and after): sourced coverage lines, dated, flagged
+"pending billing review" until checked. The stage text itself is Krit's and
+is not on the page yet. The callouts are the seed of the measure mapping in
+`data/measures/hedis-map.json`; the comment on each callout names its
+measures. "Getting midlife care on Medicaid" is added when Krit's prose is in.
 
 ## Structure
 
