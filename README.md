@@ -6,7 +6,10 @@ and each project or prototype.
     site/        the public website (joinherada.com), plain HTML and CSS
     bible/       Women's Health Bible notes; the draft lives in a Google Doc for now
     projects/    one folder per project or prototype
-    docs/        design system, WordPress migration checklist, reference files
+    data/        source datasets and analysis scripts, a README per dataset
+    data/measures/  the internal map from Bible sections to HEDIS measures (not NCQA content)
+    cme/         outline and accreditation notes for "How It Presents in Women"; no content yet
+    docs/        design system, WordPress migration checklist, privacy note, reference files
     .github/     the workflow that publishes the site
 
 ## How publishing works
