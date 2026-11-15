@@ -1,0 +1,227 @@
+{
+  "as_of": "2026-11-15",
+  "note": "Internal mapping by Herada. Not NCQA content. Measure names and abbreviations are NCQA's; descriptions are Herada's plain-language paraphrase; always check the current HEDIS Volume 2 specification before relying on a detail.",
+  "hedis_year": "MY 2026: HEDIS MY 2026 Volume 2 (published August 2025) as amended by the March 31, 2026 Technical Update. NCQA's MY 2027 Volume 2 (released August 3, 2026) was also checked through NCQA's public MY 2027 summary post and its February 2026 notification memo; neither lists a specification change to any of the six measures below, so the MY 2026 descriptions are expected to carry into MY 2027. Everything here comes from NCQA's public pages and memos; the specification text itself (Volume 2) was not consulted.",
+  "how_to_read": "Each measure has a plain_definition in Herada's words, the NCQA public page it was checked against, a verification block that separates what the public pages confirm from what they do not, and message candidates. Message candidates are unreviewed drafts about coverage and expectations, never about diagnosis or treatment; each carries a basis_url. Bible section ids: teens, reproductive, pregnancy, midlife, later, plus essentials (insurance terminology, hormonal basics) and advocacy.",
+  "sources_checked": [
+    {"title": "NCQA HEDIS Measure Library (measure pages for BCS-E, CCS-E, CHL, OMW, PPC, PDS-E)", "url": "https://www.ncqa.org/report-cards/health-plans/state-of-health-care-quality-report/", "checked": "2026-11-15"},
+    {"title": "NCQA: HEDIS MY 2025: What's New, What's Changed, What's Retired (August 1, 2024)", "url": "https://www.ncqa.org/blog/hedis-my-2025-whats-new-whats-changed-whats-retired/", "checked": "2026-11-15"},
+    {"title": "NCQA: Updates to Breast Cancer Screening Age Range for HEDIS MY 2025 (October 3, 2024)", "url": "https://www.ncqa.org/blog/updates-to-breast-cancer-screening-age-range-for-hedis-my-2025/", "checked": "2026-11-15"},
+    {"title": "NCQA: Proposed Timeline for Retiring and Replacing HEDIS Hybrid Measures (November 15, 2024)", "url": "https://www.ncqa.org/blog/ncqas-proposed-timeline-for-retiring-and-replacing-hedis-hybrid-measures/", "checked": "2026-11-15"},
+    {"title": "NCQA: HEDIS MY 2026: What's New, What's Changed, What's Retired (August 1, 2025)", "url": "https://www.ncqa.org/blog/hedis-my-2026-whats-new-whats-changed-whats-retired/", "checked": "2026-11-15"},
+    {"title": "NCQA: HEDIS MY 2025 Trending Memo (September 2025)", "url": "https://wpcdn.ncqa.org/www-prod/HEDIS-MY2025-Trending-Memo.pdf", "checked": "2026-11-15"},
+    {"title": "NCQA: HEDIS MY 2025 Measure Description table", "url": "https://wpcdn.ncqa.org/www-prod/wp-content/uploads/HEDIS-MY-2025-Measure-Description.pdf", "checked": "2026-11-15"},
+    {"title": "NCQA: Notification of Changes memo, HEDIS MY 2027 public comment (draft dated February 2026)", "url": "https://wpcdn.ncqa.org/www-prod/wp-content/uploads/09.-Notification-of-Changes-Memo_MY-2027.pdf", "checked": "2026-11-15"},
+    {"title": "NCQA: NCQA Releases HEDIS MY 2026 Volume 2 Technical Update (April 27, 2026)", "url": "https://www.ncqa.org/blog/ncqa-releases-hedis-my-2026-volume-2-technical-update/", "checked": "2026-11-15"},
+    {"title": "NCQA: HEDIS MY 2027: What's New, What's Changed, What's Retired (August 3, 2026)", "url": "https://www.ncqa.org/blog/hedis-my-2027-whats-new-whats-changed-whats-retired/", "checked": "2026-11-15"},
+    {"title": "NCQA: HEDIS Electronic Clinical Data Systems (ECDS) Reporting", "url": "https://www.ncqa.org/resources/hedis-electronic-clinical-data-systems-ecds-reporting/", "checked": "2026-11-15"},
+    {"title": "NCQA: 2026 Health Plan Ratings, List of Required Performance Measures (July 2026 posting)", "url": "https://wpcdn.ncqa.org/www-prod/wp-content/uploads/2026-HPR-List-of-Required-Performance-Measures_July-2026_Final_7.22.2026.pdf", "checked": "2026-11-15"}
+  ],
+  "measures": [
+    {
+      "id": "CCS-E",
+      "name": "Cervical Cancer Screening",
+      "domain": "Effectiveness of Care: Prevention and Screening (NCQA Measure Library grouping, and where MY 2027 Volume 2 places it). In MY 2025 Volume 2 the measure sat in the separate 'Measures Reported Using Electronic Clinical Data Systems' domain (confirmed in NCQA's MY 2025 measure-description table); NCQA removed that domain for MY 2027.",
+      "plain_definition": "Of people 21 to 64 who are recommended for routine cervical cancer screening, the share who were screened by any one of three routes: a Pap test (cervical cytology) in the last three years for ages 21 to 64, an HPV test alone in the last five years for ages 30 to 64, or a Pap test plus an HPV test (cotesting) in the last five years for ages 30 to 64.",
+      "age_band": "21 to 64 (the HPV testing routes apply from age 30)",
+      "sex_or_population": "People with a cervix who are recommended for routine screening; NCQA now writes 'members' and 'persons' rather than 'women'. Reported for Commercial and Medicaid plans (CCS-E appears in NCQA's 2026 Health Plan Ratings required lists for Commercial and Medicaid, not Medicare). Exclusions, such as hysterectomy with no residual cervix, live in Volume 2 and were not checked here.",
+      "reporting": "ECDS only since MY 2025. NCQA retired the administrative and hybrid methods for CCS in MY 2025 after voluntary ECDS reporting ran alongside them (parallel reporting in MY 2024 and MY 2025 per NCQA's November 2024 timeline post).",
+      "recent_changes": "MY 2025: moved to ECDS-only reporting. MY 2026 Technical Update (released March 31, 2026): NCQA's public notification memo (February 2026 public-comment materials) says the High Risk HPV Lab Test Value Set was expanded with LOINC codes so that self-collected vaginal HPV samples count, citing the American Cancer Society's updated guideline; NCQA's April 27, 2026 blog summary of the Technical Update did not list this item (it says its list is not exhaustive), so confirm it in the Technical Update text before writing about it. MY 2027: no CCS-E change in NCQA's public summary.",
+      "source_url": "https://www.ncqa.org/report-cards/health-plans/state-of-health-care-quality-report/measures-list/cervical-cancer-screening-ccs-e/",
+      "source_checked": "2026-11-15",
+      "bible_sections": ["reproductive", "midlife", "essentials"],
+      "message_candidates": [
+        {"text": "If you are 21 to 65, your health plan covers cervical cancer screening (a Pap test or an HPV test) with no copay when you use an in-network provider.", "status": "candidate, unreviewed", "basis_url": "https://www.healthcare.gov/preventive-care-women/"},
+        {"text": "From age 30, an HPV test every five years or a Pap test every three years both count as being up to date on screening.", "status": "candidate, unreviewed", "basis_url": "https://www.ncqa.org/report-cards/health-plans/state-of-health-care-quality-report/measures-list/cervical-cancer-screening-ccs-e/"},
+        {"text": "If you are 30 to 65, you can ask whether your clinic offers a screening test where you collect the HPV sample yourself.", "status": "candidate, unreviewed", "basis_url": "https://www.womenspreventivehealth.org/recommendations/cervical-cancer/"}
+      ],
+      "verification": {
+        "verified_on_ncqa_public_pages": [
+          "age band 21 to 64 and the three screening routes with three-year and five-year lookbacks (measure page; MY 2025 measure-description table)",
+          "ECDS-only from MY 2025 (MY 2025 what's-new post; ECDS reporting page)",
+          "self-collected HPV sample LOINC addition announced for the MY 2026 Technical Update (notification memo PDF, February 2026)",
+          "Commercial and Medicaid product lines (2026 Health Plan Ratings lists)"
+        ],
+        "not_verified": [
+          "the self-collection change in the final Technical Update text (NCQA's blog summary omitted it)",
+          "whether a self-collected sample must be collected in a clinical setting to count (one health plan tip sheet says so; not on an NCQA public page)",
+          "the exclusion list"
+        ]
+      }
+    },
+    {
+      "id": "BCS-E",
+      "name": "Breast Cancer Screening",
+      "domain": "Effectiveness of Care: Prevention and Screening (NCQA Measure Library grouping; NCQA's MY 2027 summary names BCS-E as the example of an ECDS measure now placed under Prevention and Screening). In MY 2025 Volume 2 the measure sat in the separate 'Measures Reported Using Electronic Clinical Data Systems' domain (confirmed in NCQA's MY 2025 measure-description table).",
+      "plain_definition": "Of women 40 to 74 who are recommended for routine breast cancer screening, the share who had a mammogram in about the last two years. NCQA counts a mammogram from October 1 two years before the measurement year through the end of the measurement year, so the window is about 27 months; that is why NCQA's trending memo describes the eligible group as 42 to 74 at the end of the year.",
+      "age_band": "40 to 74 as described on NCQA's public page. NCQA's September 2025 trending memo words the MY 2025 change as 52 to 74 becoming 42 to 74 (age at the end of the measurement year) with stratifications 42 to 51 and 52 to 74 plus a Total; NCQA's October 2024 blog describes the same stratifications as 40 to 49 and 50 to 74.",
+      "sex_or_population": "Women recommended for routine screening (NCQA's public description says 'persons 40 to 74 years of age'). Reported for Commercial, Medicaid and Medicare plans; the BCS-E Total rate is required in all three 2026 Health Plan Ratings lists.",
+      "reporting": "ECDS only since MY 2023 (NCQA's ECDS reporting page lists the transition to ECDS-only reporting for BCS-E in MY 2023; a traditional version with voluntary ECDS reporting came before that).",
+      "recent_changes": "MY 2025: age range expanded from 50 to 74 to 40 to 74 to align with the USPSTF April 2024 recommendation; NCQA announced it October 3, 2024 and applied it through the MY 2025 Volume 2 Technical Update (March 31, 2025), adding age stratifications and a Total rate. Note that NCQA's MY 2025 measure-description table, published before the Technical Update, still reads 50 to 74. NCQA's 2026 Health Plan Ratings use the Total rate (October 2025 posting). MY 2026: no BCS-E change in NCQA's public summary. MY 2027: no specification change; the measure moved from the former ECDS domain into Prevention and Screening, and the companion measure Documented Assessment After Mammogram (DBM-E) is retiring.",
+      "source_url": "https://www.ncqa.org/report-cards/health-plans/state-of-health-care-quality-report/measures-list/breast-cancer-screening-bcs-e/",
+      "source_checked": "2026-11-15",
+      "bible_sections": ["midlife", "later", "essentials"],
+      "message_candidates": [
+        {"text": "If you are 40 to 74, most health plans must cover a screening mammogram with no copay every one to two years when you use an in-network provider.", "status": "candidate, unreviewed", "basis_url": "https://www.healthcare.gov/preventive-care-women/"},
+        {"text": "On Medicare, Part B covers one screening mammogram every 12 months with no copay if your provider accepts Medicare.", "status": "candidate, unreviewed", "basis_url": "https://www.medicare.gov/coverage/mammograms"},
+        {"text": "If a screening mammogram leads to extra images or a biopsy, ask your plan how those will be billed, because the no-copay rule is for the screening itself and plans differ on follow-up.", "status": "candidate, unreviewed", "basis_url": "https://www.womenspreventivehealth.org/recommendations/breast-cancer/"}
+      ],
+      "verification": {
+        "verified_on_ncqa_public_pages": [
+          "age band 40 to 74 and the USPSTF 2024 basis (measure page)",
+          "MY 2025 expansion, stratifications and Technical Update timing (October 3, 2024 blog; September 2025 trending memo)",
+          "ECDS-only since MY 2023 (ECDS reporting page)",
+          "all three product lines and use of the Total rate (2026 Health Plan Ratings lists)"
+        ],
+        "not_verified": [
+          "the exact lookback wording (October 1 two years prior through the end of the measurement year) is from Volume 2 as restated by health plans; NCQA's public page does not state it",
+          "the prior range 50 to 74 is stated in NCQA's MY 2025 measure-description table but the October 2024 blog says only that NCQA expanded the age range to 40 to 74"
+        ]
+      }
+    },
+    {
+      "id": "PPC",
+      "name": "Prenatal and Postpartum Care",
+      "domain": "Access/Availability of Care",
+      "plain_definition": "Of live births delivered between October 8 of the year before the measurement year and October 7 of the measurement year, two rates: Timeliness of Prenatal Care, the share with a prenatal visit in the first trimester (or on or before the plan enrollment date, or within 42 days of enrolling), and Postpartum Care, the share with a postpartum visit 7 to 84 days after delivery.",
+      "age_band": "No age limit; the unit is a delivery",
+      "sex_or_population": "Members who delivered a live birth. Reported for Commercial and Medicaid plans (both PPC rates appear in NCQA's 2026 Health Plan Ratings lists for Commercial and Medicaid, not Medicare).",
+      "reporting": "Administrative or Hybrid (medical record review allowed). PPC was one of eight measures still allowing the Hybrid method in MY 2025. NCQA's February 2026 memo says that instead of moving PPC to administrative-only in MY 2028, it will develop a new ECDS and risk-based replacement by MY 2028 and retire the Hybrid version at the same time; the Hybrid method overall is slated to end by MY 2029.",
+      "recent_changes": "No specification change to PPC in NCQA's public MY 2025, MY 2026 or MY 2027 summaries. Planning change a message writer should know: NCQA's November 2024 timeline had PPC becoming administrative-only in MY 2028; the February 2026 notification memo replaced that with an ECDS and risk-based replacement measure by MY 2028. MY 2027 adds a related new measure, Prenatal Syphilis Screening (PSY-E).",
+      "source_url": "https://www.ncqa.org/report-cards/health-plans/state-of-health-care-quality-report/measures-list/prenatal-and-postpartum-care-ppc/",
+      "source_checked": "2026-11-15",
+      "bible_sections": ["pregnancy", "advocacy", "essentials"],
+      "message_candidates": [
+        {"text": "If you are pregnant, prenatal checkups count as preventive care, so you should not owe a copay for the visit itself when you use an in-network provider.", "status": "candidate, unreviewed", "basis_url": "https://www.womenspreventivehealth.org/recommendations/well-woman-preventive-visits/"},
+        {"text": "You can expect a postpartum checkup in the first 12 weeks after giving birth; health plans are measured on whether you got one between 1 and 12 weeks after delivery.", "status": "candidate, unreviewed", "basis_url": "https://www.ncqa.org/report-cards/health-plans/state-of-health-care-quality-report/measures-list/prenatal-and-postpartum-care-ppc/"},
+        {"text": "If you are on Medicaid, you cannot be charged copays for pregnancy-related care.", "status": "candidate, unreviewed", "basis_url": "https://www.medicaid.gov/medicaid/cost-sharing/cost-sharing-out-pocket-costs"}
+      ],
+      "verification": {
+        "verified_on_ncqa_public_pages": [
+          "delivery window (October 8 to October 7), first-trimester or 42-day prenatal rule, and the 7 to 84 day postpartum window (measure page; MY 2025 measure-description table)",
+          "Hybrid method allowed in MY 2025 and the MY 2028 plan (November 2024 timeline post; February 2026 notification memo; ECDS reporting page)",
+          "Commercial and Medicaid product lines (2026 Health Plan Ratings lists)"
+        ],
+        "not_verified": [
+          "what the ECDS and risk-based replacement measure will look like (not yet published)",
+          "what counts as a postpartum visit (visit types and codes are in Volume 2)"
+        ]
+      }
+    },
+    {
+      "id": "PDS-E",
+      "name": "Postpartum Depression Screening and Follow-Up",
+      "domain": "Effectiveness of Care: Behavioral Health (NCQA Measure Library grouping). In MY 2025 Volume 2 the measure sat in the 'Measures Reported Using Electronic Clinical Data Systems' domain (confirmed in NCQA's MY 2025 measure-description table); NCQA removed that domain for MY 2027.",
+      "plain_definition": "Two rates per delivery. Depression Screening: the share of people who were screened for depression with a standard questionnaire during the postpartum period (NCQA's public page says only 'during the postpartum period'; health plan documentation restates the window as 7 to 84 days after delivery). Follow-Up on Positive Screen: among deliveries with a positive screen, the share with follow-up care within 30 days.",
+      "age_band": "No age limit; the unit is a delivery",
+      "sex_or_population": "Members who delivered. Product lines are not stated on NCQA's public page; the measure is not in NCQA's 2026 Health Plan Ratings required lists.",
+      "reporting": "ECDS (electronic clinical data such as EHR, registry, case management and claims). NCQA's ECDS page lists public reporting from MY 2022; it has only ever been specified for ECDS. NCQA says PDS-E and its companion PND-E are based on USPSTF and ACOG recommendations.",
+      "recent_changes": "None listed for PDS-E in NCQA's public MY 2025, MY 2026 or MY 2027 summaries. Context: in MY 2027 NCQA removed the ECDS domain and placed ECDS measures under clinical domains.",
+      "source_url": "https://www.ncqa.org/hedis/measures/postpartum-depression-screening-and-follow-up/",
+      "source_checked": "2026-11-15",
+      "bible_sections": ["pregnancy", "advocacy"],
+      "message_candidates": [
+        {"text": "Depression screening during pregnancy and in the year after birth is covered as preventive care, so you can ask for it at your postpartum visit if no one offers it.", "status": "candidate, unreviewed", "basis_url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/screening-depression-suicide-risk-adults"},
+        {"text": "Your baby's doctor can also screen you for depression at well-baby visits, and that screening is covered at no cost.", "status": "candidate, unreviewed", "basis_url": "https://www.healthcare.gov/preventive-care-women/"},
+        {"text": "If a depression screen comes back positive, you should expect a follow-up contact within 30 days; health plans are measured on this.", "status": "candidate, unreviewed", "basis_url": "https://www.ncqa.org/hedis/measures/postpartum-depression-screening-and-follow-up/"}
+      ],
+      "verification": {
+        "verified_on_ncqa_public_pages": [
+          "the two rates and the 30-day follow-up window (measure page; MY 2025 measure-description table)",
+          "ECDS reporting and public reporting from MY 2022 (ECDS reporting page)",
+          "USPSTF and ACOG basis (measure page)"
+        ],
+        "not_verified": [
+          "the 7 to 84 day screening window (from health plan tip sheets; a New Hampshire Medicaid quality page that may state it returned 503 on three tries)",
+          "product lines",
+          "which screening instruments and follow-up visit types count (Volume 2)"
+        ]
+      }
+    },
+    {
+      "id": "CHL",
+      "name": "Chlamydia Screening (named Chlamydia Screening in Women through MY 2024)",
+      "domain": "Effectiveness of Care: Prevention and Screening",
+      "plain_definition": "Of members 16 to 24 who are recommended for routine chlamydia screening and whose claims or pharmacy records show they are sexually active, the share who had at least one chlamydia test during the measurement year.",
+      "age_band": "16 to 24",
+      "sex_or_population": "Women 16 to 24 identified as sexually active and, since MY 2025, transgender members recommended for routine chlamydia screening. Reported for Commercial and Medicaid plans (CHL Total appears in NCQA's 2026 Health Plan Ratings lists for Commercial and Medicaid, not Medicare).",
+      "reporting": "Administrative (claims, encounter and pharmacy data). Inferred: CHL has no ECDS version and is not among the eight measures NCQA listed as still allowing the Hybrid method in MY 2025; NCQA's public page does not name the method.",
+      "recent_changes": "MY 2025: renamed from 'Chlamydia Screening in Women' to 'Chlamydia Screening' and expanded to include transgender members recommended for routine screening (NCQA's MY 2025 summary; the rename is also recorded in the November 2025 posting of NCQA's 2026 Health Plan Ratings list). MY 2026 and MY 2027: none listed.",
+      "source_url": "https://www.ncqa.org/report-cards/health-plans/state-of-health-care-quality-report/measures-list/chlamydia-screening-chl/",
+      "source_checked": "2026-11-15",
+      "bible_sections": ["teens", "reproductive", "essentials"],
+      "message_candidates": [
+        {"text": "If you are 24 or younger and sexually active, a chlamydia test is covered at no cost when you use an in-network provider, and health plans are measured on whether you get one each year.", "status": "candidate, unreviewed", "basis_url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/chlamydia-and-gonorrhea-screening"},
+        {"text": "Asking for a chlamydia test at a checkup is normal and expected; it is on the list of preventive services most plans must cover with no copay.", "status": "candidate, unreviewed", "basis_url": "https://www.healthcare.gov/preventive-care-women/"}
+      ],
+      "verification": {
+        "verified_on_ncqa_public_pages": [
+          "age band 16 to 24, 'identified as sexually active', and at least one test in the measurement year (measure page; MY 2025 measure-description table)",
+          "MY 2025 rename and inclusion of transgender members (MY 2025 what's-new post; Health Plan Ratings list)",
+          "USPSTF 2021 basis (measure page)",
+          "Commercial and Medicaid product lines (2026 Health Plan Ratings lists)"
+        ],
+        "not_verified": [
+          "how 'sexually active' is identified: NCQA's public page does not say; health plan toolkits describe pharmacy data (dispensed contraceptives) and claims with pregnancy, sexual activity or pregnancy test codes",
+          "the reporting method (administrative is inferred, see reporting)"
+        ]
+      }
+    },
+    {
+      "id": "OMW",
+      "name": "Osteoporosis Management in Women Who Had a Fracture",
+      "domain": "Effectiveness of Care: Musculoskeletal Conditions",
+      "plain_definition": "Of women 67 to 85 who had a fracture, the share who, within 180 days (six months) after the fracture, either had a bone mineral density test or were prescribed a medicine to treat osteoporosis.",
+      "age_band": "67 to 85",
+      "sex_or_population": "Women 67 to 85 with a fracture. Medicare product line only in NCQA's 2026 Health Plan Ratings (OMW appears in the Medicare list and not in the Commercial or Medicaid lists). Health plan documents add that fractures of the finger, toe, face and skull do not count and that a bone density test in the 24 months before the fracture excludes the member; those details are in Volume 2 and were not checked on an NCQA page.",
+      "reporting": "Administrative (claims and pharmacy data). Inferred: OMW has no ECDS version and is not among the eight measures NCQA listed as still allowing the Hybrid method in MY 2025; NCQA's public page says plans can improve by tracking administrative data for fractures but does not name the method.",
+      "recent_changes": "None listed for OMW in NCQA's public MY 2025, MY 2026 or MY 2027 summaries. Related: Osteoporosis Screening in Older Women (OSW, women 65 to 75, Medicare) sits next to OMW in the ratings list.",
+      "source_url": "https://www.ncqa.org/report-cards/health-plans/state-of-health-care-quality-report/measures-list/osteoporosis-management-in-women-who-had-a-fracture-omw/",
+      "source_checked": "2026-11-15",
+      "bible_sections": ["later", "advocacy"],
+      "message_candidates": [
+        {"text": "If you are on Medicare and break a bone, Part B covers a bone density test with no copay when your X-rays show possible osteoporosis and your provider accepts Medicare.", "status": "candidate, unreviewed", "basis_url": "https://www.medicare.gov/coverage/bone-mass-measurements"},
+        {"text": "After a fracture at 67 or older, Medicare health plans are measured on whether you were offered a bone density test or an osteoporosis medicine within six months, so it is fair to ask about it.", "status": "candidate, unreviewed", "basis_url": "https://www.ncqa.org/report-cards/health-plans/state-of-health-care-quality-report/measures-list/osteoporosis-management-in-women-who-had-a-fracture-omw/"},
+        {"text": "Medicare covers a bone density test once every two years, with no copay if your provider accepts Medicare, for women whose doctor finds they are at risk for osteoporosis.", "status": "candidate, unreviewed", "basis_url": "https://www.medicare.gov/coverage/bone-mass-measurements"}
+      ],
+      "verification": {
+        "verified_on_ncqa_public_pages": [
+          "age band 67 to 85, fracture, and the 180-day window with bone density test or osteoporosis medicine (measure page; MY 2025 measure-description table)",
+          "Medicare product line only in Health Plan Ratings (2026 list)"
+        ],
+        "not_verified": [
+          "the reporting method (administrative is inferred, see reporting)",
+          "the exclusion details (fracture sites, prior bone density test) which come from health plan documents",
+          "whether Volume 2 reports OMW for any product line other than Medicare"
+        ]
+      }
+    }
+  ],
+  "related_measures_not_mapped": [
+    {"id": "IMA-E", "name": "Immunizations for Adolescents", "why": "Includes an HPV vaccine indicator by age 13; relevant to the teens section but outside this first pass."},
+    {"id": "PND-E", "name": "Prenatal Depression Screening and Follow-Up", "why": "Companion to PDS-E for the pregnancy section."},
+    {"id": "PRS-E", "name": "Prenatal Immunization Status", "why": "Pregnancy section; required in NCQA's Commercial and Medicaid ratings lists."},
+    {"id": "PSY-E", "name": "Prenatal Syphilis Screening", "why": "New in MY 2027; first-year measure."},
+    {"id": "OSW", "name": "Osteoporosis Screening in Older Women", "why": "Women 65 to 75, Medicare; pairs with OMW for the later section."},
+    {"id": "FMA-E", "name": "Follow-Up After Abnormal Mammogram Assessment", "why": "Members 40 to 74; relevant to the 'what happens after an abnormal screen' message. Its sibling DBM-E retires in MY 2027."}
+  ],
+  "could_not_verify": [
+    "PDS-E screening window of 7 to 84 days after delivery: not on NCQA's public page or in NCQA's measure-description table; taken from health plan documentation.",
+    "CHL: how 'sexually active' is identified (pharmacy and claims data) is not described on NCQA's public page.",
+    "CHL and OMW reporting method: administrative is inferred from NCQA's list of Hybrid measures, not stated on the public pages.",
+    "BCS-E lookback wording (October 1 two years prior through the end of the measurement year): from Volume 2 as restated by health plans.",
+    "CCS-E self-collected HPV samples: announced in NCQA's February 2026 notification memo as a MY 2026 Technical Update change, but absent from NCQA's April 2026 blog summary of that update; the Technical Update text itself was not read.",
+    "PDS-E product lines.",
+    "Domain placement of BCS-E, CCS-E and PDS-E in MY 2026 Volume 2: confirmed for MY 2025 (ECDS domain) from NCQA's measure-description table and for MY 2027 (clinical domains) from NCQA's summary; MY 2026 itself is assumed to match MY 2025.",
+    "HEDIS Volume 2 text was not consulted for any measure; every detail above comes from NCQA public pages and memos."
+  ],
+  "bible_section_index": {
+    "teens": ["CHL"],
+    "reproductive": ["CCS-E", "CHL"],
+    "pregnancy": ["PPC", "PDS-E"],
+    "midlife": ["BCS-E", "CCS-E"],
+    "later": ["BCS-E", "OMW"],
+    "essentials": ["BCS-E", "CCS-E", "CHL", "PPC"],
+    "advocacy": ["PPC", "PDS-E", "OMW"]
+  }
+}
