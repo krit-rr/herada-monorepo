@@ -283,6 +283,28 @@ a.hr-tile:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; 
 .hr-cols3 > * { min-width: 0; border-top: 2px solid var(--ink); padding-top: 1.25rem; }
 .hr-cols3 p { margin: 0 0 1rem; font-size: 1.125rem; line-height: 1.6; color: var(--ink-soft); }
 .hr-cols3 .hr-kicker { margin: 0 0 1rem; color: var(--kicker); }
+/* Two-up split (Learn page sign-up) */
+.hr-cols2 { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+@media (min-width: 900px) {
+  .hr-cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; }
+}
+.hr-cols2 > * { min-width: 0; border-top: 2px solid var(--ink); padding-top: 1.25rem; display: flex; flex-direction: column; }
+.hr-cols2 h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.hr-cols2 p { margin-top: 0.75rem; max-width: 32rem; font-size: 1.125rem; line-height: 1.6; color: var(--ink-soft); }
+.hr-cols2 .hr-actions { margin-top: auto; padding-top: 1.5rem; }
+
+/* "What's covered" callout (Bible life stages) + review flag */
+.hr-callout { margin-top: 1.5rem; max-width: 38rem; padding: 1.1rem 1.25rem 1.25rem; border: 1px solid var(--ink); }
+.hr-callout .hr-kicker { margin-bottom: 0.75rem; }
+.hr-callout ul { margin: 0; padding-left: 1.1rem; }
+.hr-callout li { font-size: 1rem; line-height: 1.5; color: var(--ink); }
+.hr-callout li + li { margin-top: 0.6rem; }
+.hr-callout li small { display: block; font-size: 0.8125rem; color: var(--ink-soft); }
+.hr-callout li small a { overflow-wrap: anywhere; }
+.hr-flag { display: inline-block; margin-top: 0.9rem; font-family: var(--body); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--kicker); }
+.hr-flag::before { content: "[ "; color: var(--accent); }
+.hr-flag::after { content: " ]"; color: var(--accent); }
+
 .hr-cols3 .hr-who {
   margin: 0;
   padding: 0.7rem 0;

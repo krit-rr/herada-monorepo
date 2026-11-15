@@ -14,6 +14,8 @@ Draft for Krit's review, November 2026. A plan, not legal advice.
   store nothing. Nothing from either reaches us.
 - Email to joinherada@gmail.com is the only personal information we hold:
   the sender's address and what they wrote, in the inbox, used to reply.
+- The Learn page's sign-up is a set of `mailto:` links. There is no form
+  on the site and nothing is collected when the page is opened.
 - The Misrouting Registry, when it opens, runs on a separate consented
   form service with its own terms. Export files from it are research data
   and get their own README under `data/` before any analysis.
