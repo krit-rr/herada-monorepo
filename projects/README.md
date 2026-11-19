@@ -33,6 +33,8 @@ as `her-health-advocate/` does.
 One vocabulary on the home tiles and the projects page, in pipeline order:
 
 - **Drafting**: being built, not ready to read yet.
+  (The Medical Boarding Pass, Nov 2026: readable, but its rules file and
+  Spanish are first drafts pending clinical, plan-quality and translation review.)
 - **Reviewing**: complete enough to read; figures or claims are being checked.
 - **Polishing**: content settled; layout, copy and edge cases being tidied.
 - **Almost There**: ready apart from a named blocker.

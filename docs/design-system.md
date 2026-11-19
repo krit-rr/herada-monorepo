@@ -77,6 +77,8 @@ and no bright violets.
 | `hr-cols2` | Learn | Two-up split with a 2px ink rule above each half; stacks below 900px. |
 | `hr-callout` | Bible | 1px ink box, kicker, list of short lines each with a `small` source line. |
 | `hr-flag` | Bible, project pages | Small uppercase label in muted periwinkle inside raspberry brackets. |
+| `bp-pass`, `bp-band` | Boarding Pass | The pass: 1px ink border, raspberry header band with paper type (kicker, title, a meta row of label-over-value pairs), then bracket group labels and 1px-ruled items. Each item: name, interval tag in muted periwinkle, two sentences, then "Free · say: “…”" with Free in raspberry. |
+| `bp-lang` | Boarding Pass | EN / ES toggle in the header: two bordered buttons, the pressed one ink on paper. |
 | `hr-evidence` | Projects index | The one-line opener on each entry: a bold uppercase learner tag ("For women", "For clinicians", "For women and clinicians", "Frozen", "Origin") then "Evidence of …". |
 
 ## Logo

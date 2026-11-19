@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Medical Boarding Pass: a page by Herada</title>
+<meta name="description" content="The preventive care you are owed this year, free with your plan, and the words to book it. Built from your age, state and plan type, in your browser. Minnesota Medicaid first. English and Spanish.">
+<link rel="canonical" href="https://joinherada.com/projects/boarding-pass/">
+<meta name="theme-color" content="#FDFCFE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#211E28" media="(prefers-color-scheme: dark)">
+<meta property="og:site_name" content="Herada">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Medical Boarding Pass">
+<meta property="og:description" content="The preventive care you are owed this year, free with your plan, and the words to book it. Minnesota Medicaid first. English and Spanish.">
+<meta property="og:url" content="https://joinherada.com/projects/boarding-pass/">
+<meta property="og:image" content="https://joinherada.com/assets/img/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Herada: women aren’t getting what they’re owed in healthcare.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* Herada design system (v3 palette, Oct 2026), inlined so this page stands alone. */
+:root {
+  --bg: #FDFCFE;
+  --strip: #B7B5E4;
+  --ink: #2B2733;
+  --ink-soft: #5B5666;
+  --accent: #AD1457;
+  --accent-hover: #8A0E45;
+  --accent-ink: #FDFCFE;
+  --rule: #CFCCD6;
+  --kicker: #6B68A0;
+  --dim: #EFEDF5;
+  --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --ui: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --page: 68rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+    --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+    --kicker: #B7B5E4; --dim: #2A2634;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+  --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+  --kicker: #B7B5E4; --dim: #2A2634;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1.1875rem; line-height: 1.55;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.5rem, 5.5vw, 4rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.625rem, 3.5vw, 2.25rem); letter-spacing: -0.015em; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hr-wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
+.hr-ui { font-family: var(--ui); font-size: 0.875rem; }
+
+.hr-header { border-bottom: 1px solid var(--rule); }
+.hr-header .hr-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem 2rem; padding-top: 0.9rem; padding-bottom: 0.9rem; }
+.hr-wordmark { font-family: var(--display); font-size: 1.375rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); text-decoration: none; }
+.hr-header .bp-right { display: flex; align-items: center; gap: 1.25rem; }
+.hr-header span.hr-ui { color: var(--ink-soft); }
+.bp-lang { display: inline-flex; border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; }
+.bp-lang button { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; padding: 0.45rem 0.7rem; min-width: 2.75rem; min-height: 2.25rem; background: transparent; color: var(--ink-soft); border: none; cursor: pointer; }
+.bp-lang button + button { border-left: 1px solid var(--rule); }
+.bp-lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+.hr-notice { background: var(--strip); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.9375rem; color: #2B2733; }
+.hr-notice b { font-weight: 700; }
+
+.hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
+.hr-intro h1 { max-width: 22ch; }
+.hr-lede { max-width: 44rem; margin-top: 1.5rem; font-size: 1.375rem; line-height: 1.45; color: var(--ink); }
+
+.lg-section { border-top: 3px solid var(--ink); padding: 2.25rem 0 2.75rem; }
+.lg-kicker { font-family: var(--ui); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.85rem; }
+.lg-kicker::before { content: "["; color: var(--accent); }
+.lg-kicker::after { content: "]"; color: var(--accent); }
+.lg-sub { margin-top: 0.5rem; max-width: 44rem; font-size: 1.0625rem; color: var(--ink-soft); }
+
+/* The form: age, state, plan. Nothing else is asked. */
+.bp-form { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: flex-end; margin-top: 1.5rem; }
+.bp-field { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+.bp-field > span { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; color: var(--ink-soft); }
+input, select {
+  font-family: var(--ui); font-size: 1rem; color: var(--ink);
+  background: var(--bg); border: 1px solid var(--rule); border-radius: 2px;
+  padding: 0.5rem 0.65rem; min-height: 2.75rem;
+}
+input:hover, select:hover { border-color: var(--ink-soft); }
+input[type="number"] { width: 6.5rem; }
+select { min-width: 14rem; max-width: 100%; }
+.hr-button {
+  display: inline-block; padding: 0.8rem 1.4rem; background: var(--accent); color: var(--accent-ink);
+  border: none; border-radius: 2px; font-family: var(--ui); font-size: 1rem; font-weight: 600;
+  text-decoration: none; cursor: pointer; min-height: 2.75rem;
+}
+.hr-button:hover { background: var(--accent-hover); color: var(--accent-ink); }
+.bp-ghost {
+  display: inline-block; padding: 0.75rem 1.35rem; background: transparent; color: var(--ink);
+  border: 1px solid var(--ink); border-radius: 2px; font-family: var(--ui); font-size: 1rem; font-weight: 600; cursor: pointer; min-height: 2.75rem;
+}
+.bp-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.bp-err { display: none; margin-top: 0.75rem; font-family: var(--ui); font-size: 0.875rem; color: var(--accent); }
+.bp-err.show { display: block; }
+.bp-hint { margin-top: 0.9rem; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); max-width: 44rem; }
+
+/* The pass itself: a raspberry header band, then ruled items. */
+.bp-pass { margin-top: 2rem; max-width: 46rem; border: 1px solid var(--ink); background: var(--bg); }
+.bp-band { background: var(--accent); color: var(--accent-ink); padding: 1.1rem 1.4rem 1.2rem; }
+.bp-band .bp-kick { font-family: var(--ui); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.92; }
+.bp-band h2 { color: var(--accent-ink); font-size: clamp(1.5rem, 3.2vw, 2rem); margin-top: 0.25rem; }
+.bp-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.75rem 1.25rem; margin-top: 1rem; }
+.bp-meta div { min-width: 0; }
+.bp-meta span { display: block; font-family: var(--ui); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85; }
+.bp-meta b { display: block; font-family: var(--display); font-size: 1.125rem; font-weight: 600; margin-top: 0.1rem; }
+.bp-body { padding: 0.5rem 1.4rem 1.4rem; }
+.bp-group { margin-top: 1.5rem; }
+.bp-group h3 { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); }
+.bp-group h3::before { content: "["; color: var(--accent); margin-right: 0.15rem; }
+.bp-group h3::after { content: "]"; color: var(--accent); margin-left: 0.15rem; }
+.bp-items { margin: 0.5rem 0 0; padding: 0; list-style: none; }
+.bp-items li { padding: 1rem 0; border-top: 1px solid var(--rule); }
+.bp-items li:last-child { border-bottom: 1px solid var(--rule); }
+.bp-item-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.25rem 1rem; }
+.bp-item-head b { font-family: var(--display); font-size: 1.1875rem; font-weight: 600; }
+.bp-when { font-family: var(--ui); font-size: 0.8125rem; font-weight: 600; color: var(--kicker); letter-spacing: 0.04em; }
+.bp-what { margin-top: 0.4rem; font-size: 1rem; color: var(--ink-soft); max-width: 40rem; }
+.bp-say { margin-top: 0.55rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink); }
+.bp-say b { color: var(--accent); font-weight: 700; }
+.bp-say q { font-style: normal; }
+.bp-src { display: block; margin-top: 0.3rem; font-family: var(--ui); font-size: 0.75rem; color: var(--ink-soft); }
+.bp-src a { overflow-wrap: anywhere; }
+.bp-also { margin: 0.6rem 0 0; padding: 0; list-style: none; }
+.bp-also li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.6rem; padding: 0.45rem 0; border-top: 1px solid var(--rule); font-size: 1rem; }
+.bp-also li:last-child { border-bottom: 1px solid var(--rule); }
+.bp-also b { font-weight: 600; }
+.bp-also .bp-when { font-size: 0.75rem; }
+.bp-also .bp-say { margin: 0; flex-basis: 100%; font-size: 0.875rem; }
+.bp-also .bp-src { flex-basis: 100%; margin-top: 0.1rem; }
+.bp-foot { margin-top: 1.5rem; padding-top: 0.75rem; border-top: 2px solid var(--ink); font-family: var(--ui); font-size: 0.75rem; color: var(--ink-soft); }
+.bp-empty { margin-top: 1.5rem; padding: 1.5rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); color: var(--ink-soft); max-width: 44rem; }
+.bp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.5rem; margin-top: 1.5rem; }
+.bp-plannote { margin-top: 1.25rem; max-width: 46rem; padding: 0.9rem 1.1rem; border: 1px solid var(--rule); font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); }
+.bp-plannote b { color: var(--ink); font-weight: 600; }
+
+/* The EOB reader: text only, in the page only. */
+textarea { width: 100%; max-width: 46rem; min-height: 11rem; resize: vertical; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink); background: var(--bg); border: 1px solid var(--rule); border-radius: 2px; padding: 0.65rem 0.75rem; margin-top: 1rem; }
+textarea:hover { border-color: var(--ink-soft); }
+.bp-eobout { margin-top: 1.5rem; max-width: 46rem; }
+.bp-flag { padding: 0.9rem 0; border-top: 1px solid var(--rule); font-size: 1rem; }
+.bp-flag:last-child { border-bottom: 1px solid var(--rule); }
+.bp-flag b { font-weight: 600; }
+.bp-flag .bp-tag { display: inline-block; font-family: var(--ui); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.1rem 0.45rem; border: 1px solid var(--accent); border-radius: 2px; color: var(--accent); margin-right: 0.5rem; vertical-align: middle; }
+.bp-flag .bp-tag.soft { border-color: var(--kicker); color: var(--kicker); }
+.bp-flag .bp-line { display: block; margin-top: 0.3rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.8125rem; color: var(--ink-soft); overflow-wrap: anywhere; }
+.bp-flag .bp-next { margin-top: 0.35rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink); }
+
+.bp-clinician { margin-top: 1.5rem; max-width: 46rem; font-size: 1rem; color: var(--ink-soft); }
+.bp-clinician b { color: var(--ink); font-weight: 600; }
+.hr-section { border-top: 1px solid var(--rule); padding: clamp(2.5rem, 6vw, 4rem) 0; }
+.hr-sources { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
+.hr-sources ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+.hr-sources li { margin-top: 0.25rem; }
+.hr-sources a { overflow-wrap: anywhere; }
+.hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
+
+/* Print: the pass alone, one letter page. */
+@page { size: letter portrait; margin: 12mm 14mm; }
+@media print {
+  :root, :root[data-theme="dark"] {
+    --bg: #FDFCFE; --strip: #B7B5E4; --ink: #2B2733; --ink-soft: #5B5666;
+    --accent: #AD1457; --accent-hover: #8A0E45; --accent-ink: #FDFCFE; --rule: #CFCCD6; --kicker: #6B68A0; --dim: #EFEDF5;
+  }
+  body { font-size: 9pt; }
+  .hr-header, .hr-notice, .hr-intro, .bp-formsec, .bp-actions, .bp-eobsec, .hr-section, .hr-footer, .bp-clinician, .bp-plannote, .lg-sub, .lg-kicker { display: none !important; }
+  .lg-section { border-top: none; padding: 0; }
+  .lg-section .hr-wrap { padding-left: 0; padding-right: 0; max-width: none; }
+  .bp-pass { margin-top: 0; max-width: none; }
+  .bp-band { -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 0.6rem 0.9rem 0.7rem; }
+  .bp-band h2 { font-size: 15pt; }
+  .bp-meta { margin-top: 0.5rem; }
+  .bp-meta b { font-size: 10pt; }
+  .bp-body { padding: 0.2rem 0.9rem 0.8rem; }
+  .bp-group { margin-top: 0.7rem; }
+  .bp-group h3 { font-size: 7pt; }
+  .bp-items li { padding: 0.38rem 0; }
+  .bp-item-head b { font-size: 10pt; }
+  .bp-when { font-size: 7pt; }
+  .bp-what { font-size: 8pt; margin-top: 0.15rem; max-width: none; }
+  .bp-say { font-size: 8pt; margin-top: 0.2rem; }
+  .bp-src { font-size: 6.5pt; margin-top: 0.1rem; }
+  .bp-src a { color: var(--ink-soft); text-decoration: none; }
+  .bp-also li { padding: 0.22rem 0; font-size: 8pt; }
+  .bp-also .bp-say { font-size: 7.5pt; }
+  .bp-foot { margin-top: 0.6rem; font-size: 6.5pt; }
+}
+</style>
+<meta name="robots" content="noindex">
+<!-- Hidden while the projects are unlinked from the main site: deployed, shareable by
+     address, kept out of search engines and the sitemap. Remove this tag to go public. -->
+<link rel="icon" type="image/png" href="/assets/img/herada-monogram-lavender.png">
+<link rel="apple-touch-icon" href="/assets/img/herada-monogram-tile.png">
+</head>
+<body>
+<header class="hr-header">
+  <div class="hr-wrap">
+    <a class="hr-wordmark" href="/">HERADA</a>
+    <div class="bp-right">
+      <span class="hr-ui" data-t="header"></span>
+      <div class="bp-lang" role="group" aria-label="Language / Idioma">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<aside class="hr-notice" aria-label="Page notice">
+  <div class="hr-wrap"><p><b data-t="noticeTag"></b> <span data-t="notice"></span></p></div>
+</aside>
+
+<main>
+  <section class="hr-intro">
+    <div class="hr-wrap">
+      <h1 data-t="h1"></h1>
+      <p class="hr-lede" data-t="lede"></p>
+    </div>
+  </section>
+
+  <section class="lg-section bp-formsec" aria-label="Your details">
+    <div class="hr-wrap">
+      <p class="lg-kicker" data-t="formKicker"></p>
+      <h2 data-t="formTitle"></h2>
+      <p class="lg-sub" data-t="formSub"></p>
+      <form id="form" class="bp-form" novalidate>
+        <label class="bp-field"><span data-t="age"></span><input type="number" id="age" inputmode="numeric" min="18" max="120" step="1" autocomplete="off"></label>
+        <label class="bp-field"><span data-t="state"></span><select id="state"><option value="MN">Minnesota</option><option value="other" data-t-opt="otherStates"></option></select></label>
+        <label class="bp-field"><span data-t="plan"></span><select id="plan"></select></label>
+        <button type="submit" class="hr-button" data-t="build"></button>
+      </form>
+      <p class="bp-err" id="err"></p>
+      <p class="bp-hint" data-t="formHint"></p>
+    </div>
+  </section>
+
+  <section class="lg-section" id="passsec" aria-label="Your boarding pass">
+    <div class="hr-wrap">
+      <p class="lg-kicker" data-t="passKicker"></p>
+      <h2 id="passTitle"></h2>
+      <p class="lg-sub" id="passSub"></p>
+      <div id="pass"></div>
+      <div class="bp-actions">
+        <button type="button" class="bp-ghost" id="printBtn" data-t="print"></button>
+      </div>
+      <div class="bp-plannote" id="planNote"></div>
+      <p class="bp-clinician"><b data-t="clinicianLead"></b> <span data-t="clinician"></span></p>
+    </div>
+  </section>
+
+  <section class="lg-section bp-eobsec" aria-label="EOB check">
+    <div class="hr-wrap">
+      <p class="lg-kicker" data-t="eobKicker"></p>
+      <h2 data-t="eobTitle"></h2>
+      <p class="lg-sub" data-t="eobSub"></p>
+      <textarea id="eob" aria-label="EOB text"></textarea>
+      <div class="bp-actions" style="margin-top: 1rem;">
+        <button type="button" class="hr-button" id="eobBtn" data-t="eobCheck"></button>
+        <button type="button" class="bp-ghost" id="eobClear" data-t="eobClear"></button>
+      </div>
+      <div class="bp-eobout" id="eobOut" aria-live="polite"></div>
+      <p class="bp-hint" data-t="eobHint"></p>
+    </div>
+  </section>
+
+  <section class="hr-section" aria-label="Sources">
+    <div class="hr-wrap">
+      <div class="hr-sources">
+        <p><b data-t="sourcesLead"></b> <span data-t="sources"></span></p>
+        <ul id="sourceList"></ul>
+        <p style="margin-top: 1rem;" id="asOf"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="hr-footer">
+  <div class="hr-wrap"><p class="hr-ui" data-t="footer"></p></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  // Nothing is stored: no localStorage, no cookies, no requests other than data.json.
+  var T = {
+    en: {
+      header: "Page · The Medical Boarding Pass",
+      noticeTag: "[Draft]",
+      notice: "Pending clinical and plan-quality review. Minnesota Medicaid only for now. Nothing you enter is stored or sent.",
+      h1: "Your medical boarding pass.",
+      lede: "The preventive care you are owed this year, free with your plan, and the words to book it. Enter your age, state and plan. The page builds itself, and nothing leaves it.",
+      formKicker: "Your details", formTitle: "Three things, nothing else", formSub: "Age, state and plan. No health questions. The sample pass below is for a 42-year-old on Medical Assistance until you change it.",
+      age: "Age", state: "State", plan: "Plan", build: "Build my pass", otherStates: "Another state (coming)", unsure: "I’m not sure which",
+      formHint: "Minnesota only for now. If you are not sure which plan you have, the name is on your card; the pass assumes Medical Assistance until you pick one.",
+      errAge: "Enter an age from 18 to 120.", errState: "Only Minnesota is covered yet. Other states are coming.",
+      passKicker: "Your pass", passTitle: "What you are owed this year", passSub: "Each line says what the visit is, that it is free with your plan, and the words to book it. Print it or keep it open at the front desk.",
+      bandKick: "Medical boarding pass", bandTitle: "Preventive care, {year}",
+      passenger: "Passenger", passengerVal: "Woman, {age}", from: "State", planLabel: "Plan", valid: "Valid through", validVal: "December {year}", issued: "Issued",
+      thisYear: "This year", atCheckup: "At your checkup, also ask for", ifYou: "If this is you",
+      free: "Free", say: "say:", every: "", source: "Source", checked: "checked",
+      foot: "Draft, pending clinical and plan-quality review. Coverage can change; each line names its source and the month it was checked. joinherada.com/projects/boarding-pass/",
+      empty: "Nothing on the list fits those details yet. Try another age, or check that Minnesota and a plan are selected.",
+      print: "Print the pass",
+      planUnsureNote: "You picked “not sure”, so the pass assumes Medical Assistance. The plan name is on your card; MinnesotaCare has a few differences.",
+      clinicianLead: "Discuss with your clinician.", clinician: "This page says what a plan covers and what to ask for, not what you need. Which of these fit you is a conversation with your clinician.",
+      eobKicker: "After the visit", eobTitle: "Were you charged for preventive care?", eobSub: "Paste the text of an Explanation of Benefits (EOB) or a bill. The page looks for preventive services with a charge next to them. Text only; nothing is uploaded, saved or sent anywhere.",
+      eobCheck: "Check it", eobClear: "Clear", eobEmpty: "Paste some text first.",
+      eobNone: "No preventive service with a charge next to it was found. If a line still looks wrong to you, call the member services number on your card.",
+      eobFlag: "Looks like preventive care billed with a charge", eobMaybe: "Preventive care with an amount nearby; check this line",
+      eobNext: "Call the member services number on your card and ask for the claim to be reprocessed as preventive care. Preventive visits and screenings on this pass should carry no copay with Medical Assistance or MinnesotaCare.",
+      eobHint: "A first draft: it reads plain text and can miss things or flag the wrong line. It does not read PDFs or photos, by design.",
+      sourcesLead: "Sources.", sources: "Every line on the pass comes from data.json, a copy of data/measures/mn-medicaid.json in the Herada repository: public Minnesota DHS and MHCP pages, the US Preventive Services Task Force, the HRSA women’s preventive services guidelines, and healthcare.gov, each with the date checked.",
+      asOf: "As of {asof}. Draft compiled by Herada; pending clinical and plan-quality review. General information, not medical advice for any individual.",
+      footer: "A Herada page. Draft, pending clinical and plan-quality review. Not medical advice. Solo founder. Evidence published, never sold. Nothing you enter leaves your device (privacy).",
+      loadErr: "The coverage rules could not be loaded. Reload the page, or come back later.",
+      months: ["January","February","March","April","May","June","July","August","September","October","November","December"]
+    },
+    es: {
+      header: "Página · El pase de abordar médico",
+      noticeTag: "[Borrador]",
+      notice: "Pendiente de revisión clínica y de calidad del plan. Por ahora, solo Medicaid de Minnesota. Nada de lo que escriba se guarda ni se envía.",
+      h1: "Su pase de abordar médico.",
+      lede: "La atención preventiva que le corresponde este año, gratis con su plan, y las palabras para pedir la cita. Escriba su edad, su estado y su plan. La página se arma sola y nada sale de ella.",
+      formKicker: "Sus datos", formTitle: "Tres cosas, nada más", formSub: "Edad, estado y plan. Sin preguntas de salud. El pase de muestra de abajo es para una mujer de 42 años con Medical Assistance hasta que usted lo cambie.",
+      age: "Edad", state: "Estado", plan: "Plan", build: "Armar mi pase", otherStates: "Otro estado (próximamente)", unsure: "No estoy segura",
+      formHint: "Por ahora, solo Minnesota. Si no sabe qué plan tiene, el nombre está en su tarjeta; el pase supone Medical Assistance hasta que elija uno.",
+      errAge: "Escriba una edad de 18 a 120.", errState: "Por ahora solo cubrimos Minnesota. Otros estados vienen pronto.",
+      passKicker: "Su pase", passTitle: "Lo que le corresponde este año", passSub: "Cada línea dice qué es la visita, que es gratis con su plan, y las palabras para pedir la cita. Imprímalo o téngalo abierto en la recepción.",
+      bandKick: "Pase de abordar médico", bandTitle: "Atención preventiva, {year}",
+      passenger: "Pasajera", passengerVal: "Mujer, {age}", from: "Estado", planLabel: "Plan", valid: "Válido hasta", validVal: "diciembre de {year}", issued: "Emitido",
+      thisYear: "Este año", atCheckup: "En su chequeo, pida también", ifYou: "Si este es su caso",
+      free: "Gratis", say: "diga:", every: "", source: "Fuente", checked: "verificado",
+      foot: "Borrador, pendiente de revisión clínica y de calidad del plan. La cobertura puede cambiar; cada línea indica su fuente y el mes en que se verificó. joinherada.com/projects/boarding-pass/",
+      empty: "Nada de la lista corresponde a esos datos todavía. Pruebe otra edad, o revise que Minnesota y un plan estén seleccionados.",
+      print: "Imprimir el pase",
+      planUnsureNote: "Eligió “no estoy segura”, así que el pase supone Medical Assistance. El nombre del plan está en su tarjeta; MinnesotaCare tiene algunas diferencias.",
+      clinicianLead: "Hable con su médica o médico.", clinician: "Esta página dice lo que cubre un plan y qué pedir, no lo que usted necesita. Cuáles de estos aplican a usted es una conversación con su médica o médico.",
+      eobKicker: "Después de la visita", eobTitle: "¿Le cobraron atención preventiva?", eobSub: "Pegue el texto de su Explicación de Beneficios (EOB) o de una factura. La página busca servicios preventivos con un cobro al lado. Solo texto; nada se sube, se guarda ni se envía a ningún lugar.",
+      eobCheck: "Revisar", eobClear: "Borrar", eobEmpty: "Primero pegue algún texto.",
+      eobNone: "No se encontró ningún servicio preventivo con un cobro al lado. Si una línea igual le parece incorrecta, llame al número de servicios para miembros de su tarjeta.",
+      eobFlag: "Parece atención preventiva con un cobro", eobMaybe: "Atención preventiva con un monto cerca; revise esta línea",
+      eobNext: "Llame al número de servicios para miembros de su tarjeta y pida que vuelvan a procesar el reclamo como atención preventiva. Las visitas y pruebas preventivas de este pase no deberían tener copago con Medical Assistance ni con MinnesotaCare.",
+      eobHint: "Un primer borrador: lee texto simple y puede omitir cosas o marcar la línea equivocada. No lee PDF ni fotos, a propósito.",
+      sourcesLead: "Fuentes.", sources: "Cada línea del pase viene de data.json, una copia de data/measures/mn-medicaid.json en el repositorio de Herada: páginas públicas del DHS y MHCP de Minnesota, el Grupo de Trabajo de Servicios Preventivos de EE. UU. (USPSTF), las guías de servicios preventivos para mujeres de HRSA y healthcare.gov, cada una con la fecha en que se verificó.",
+      asOf: "Al {asof}. Borrador compilado por Herada; pendiente de revisión clínica y de calidad del plan. Información general, no un consejo médico para ninguna persona en particular.",
+      footer: "Una página de Herada. Borrador, pendiente de revisión clínica y de calidad del plan. No es consejo médico. Fundadora única. Evidencia publicada, nunca vendida. Nada de lo que escriba sale de su dispositivo (privacidad).",
+      loadErr: "No se pudieron cargar las reglas de cobertura. Recargue la página o vuelva más tarde.",
+      months: ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"]
+    }
+  };
+  var lang = (navigator.language || "").toLowerCase().indexOf("es") === 0 ? "es" : "en";
+  var DATA = null;
+  var last = { age: 42, state: "MN", plan: "ma", unsure: false };
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function t(k, vars) {
+    var s = (T[lang] && T[lang][k]) != null ? T[lang][k] : (T.en[k] || "");
+    if (vars) Object.keys(vars).forEach(function (v) { s = s.replace("{" + v + "}", vars[v]); });
+    return s;
+  }
+  function L(obj, key) { var v = obj[key + "_" + lang]; return (v == null || v === "") ? (obj[key + "_en"] || "") : v; }
+  function fmtDate(d) { return lang === "es" ? d.getDate() + " de " + t("months")[d.getMonth()] + " de " + d.getFullYear() : t("months")[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear(); }
+  function fmtAsOf(iso) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ""); if (!m) return iso || ""; return fmtDate(new Date(+m[1], +m[2] - 1, +m[3])); }
+  function monthYear(iso) { var m = /^(\d{4})-(\d{2})/.exec(iso || ""); if (!m) return iso || ""; return t("months")[+m[2] - 1] + " " + m[1]; }
+
+  function applyStrings() {
+    document.documentElement.lang = lang;
+    Array.prototype.forEach.call(document.querySelectorAll("[data-t]"), function (el) {
+      var k = el.getAttribute("data-t");
+      if (k === "footer") {
+        var f = t("footer"); var word = lang === "es" ? "privacidad" : "privacy";
+        el.innerHTML = esc(f).replace("(" + word + ")", '(<a href="/privacy/">' + word + "</a>)");
+      } else el.textContent = t(k);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-t-opt]"), function (el) { el.textContent = t(el.getAttribute("data-t-opt")); });
+    Array.prototype.forEach.call(document.querySelectorAll(".bp-lang button"), function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
+    document.getElementById("passTitle").textContent = t("passTitle");
+    document.getElementById("passSub").textContent = t("passSub");
+    fillPlans();
+  }
+  function fillPlans() {
+    var sel = document.getElementById("plan"); var cur = sel.value || last.plan;
+    sel.innerHTML = "";
+    (DATA && DATA.plan_types ? DATA.plan_types : [{ id: "ma", name_en: "Medical Assistance (Minnesota’s Medicaid)", name_es: "Medical Assistance (el Medicaid de Minnesota)" }, { id: "mncare", name_en: "MinnesotaCare", name_es: "MinnesotaCare" }]).forEach(function (p) {
+      var o = document.createElement("option"); o.value = p.id; o.textContent = L(p, "name"); sel.appendChild(o);
+    });
+    var u = document.createElement("option"); u.value = "unsure"; u.textContent = t("unsure"); sel.appendChild(u);
+    sel.value = cur; if (!sel.value) sel.value = "ma";
+  }
+
+  // Which lines a woman of this age, on this plan, is owed. No health questions are asked:
+  // services with conditions render under "if this is you" instead.
+  function fits(s, age, plan) {
+    if (s.applies_to && s.applies_to !== "women" && s.applies_to !== "all") return false;
+    if (s.age_min != null && age < s.age_min) return false;
+    if (s.age_max != null && age > s.age_max) return false;
+    if (s.plan_types && s.plan_types.length && s.plan_types.indexOf(plan) < 0) return false;
+    return true;
+  }
+  function placement(s) {
+    if (s.placement) return s.placement;
+    if (s.conditions && s.conditions.length) return "conditional";
+    return "headline";
+  }
+  function itemHtml(s, compact) {
+    var src = (s.basis || []).filter(function (b) { return b && b.url; });
+    var srcHtml = src.length ? '<span class="bp-src">' + esc(t("source")) + ": " + src.map(function (b) { return '<a href="' + esc(b.url) + '">' + esc(b.title || b.type) + "</a>"; }).join("; ") + (src[0].checked ? " · " + esc(t("checked")) + " " + esc(monthYear(src[0].checked)) : "") + "</span>" : "";
+    var say = L(s, "say");
+    var sayHtml = '<p class="bp-say"><b>' + esc(L(s, "free") || t("free")) + "</b> · " + esc(t("say")) + " <q>" + esc(say) + "</q></p>";
+    if (compact) return "<li><b>" + esc(L(s, "name")) + '</b> <span class="bp-when">' + esc(L(s, "interval")) + "</span>" + sayHtml + srcHtml + "</li>";
+    return '<li><div class="bp-item-head"><b>' + esc(L(s, "name")) + '</b><span class="bp-when">' + esc(L(s, "interval")) + "</span></div>" +
+      '<p class="bp-what">' + esc(L(s, "what_happens")) + "</p>" + sayHtml + srcHtml + "</li>";
+  }
+  function render() {
+    var el = document.getElementById("pass");
+    if (!DATA) { el.innerHTML = '<p class="bp-empty">' + esc(t("loadErr")) + "</p>"; return; }
+    var age = last.age, plan = last.plan;
+    var head = [], also = [], cond = [];
+    (DATA.services || []).forEach(function (s) {
+      if (!fits(s, age, plan)) return;
+      var p = placement(s);
+      if (p === "conditional") cond.push(s); else if (p === "checkup") also.push(s); else head.push(s);
+    });
+    // Four to six headline lines; anything beyond six joins the checkup list.
+    while (head.length > 6) also.unshift(head.pop());
+    var planObj = (DATA.plan_types || []).filter(function (p) { return p.id === plan; })[0];
+    var now = new Date(), year = now.getFullYear();
+    var html = '<article class="bp-pass" aria-label="' + esc(t("bandKick")) + '">' +
+      '<div class="bp-band"><p class="bp-kick">' + esc(t("bandKick")) + "</p><h2>" + esc(t("bandTitle", { year: year })) + "</h2>" +
+      '<div class="bp-meta"><div><span>' + esc(t("passenger")) + "</span><b>" + esc(t("passengerVal", { age: age })) + "</b></div>" +
+      "<div><span>" + esc(t("from")) + "</span><b>Minnesota</b></div>" +
+      "<div><span>" + esc(t("planLabel")) + "</span><b>" + esc(planObj ? (L(planObj, "short_name") || L(planObj, "name")) : plan) + "</b></div>" +
+      "<div><span>" + esc(t("valid")) + "</span><b>" + esc(t("validVal", { year: year })) + "</b></div>" +
+      "<div><span>" + esc(t("issued")) + "</span><b>" + esc(fmtDate(now)) + "</b></div></div></div>" +
+      '<div class="bp-body">';
+    if (!head.length && !also.length && !cond.length) html += '<p class="bp-empty">' + esc(t("empty")) + "</p>";
+    if (head.length) html += '<div class="bp-group"><h3>' + esc(t("thisYear")) + '</h3><ul class="bp-items">' + head.map(function (s) { return itemHtml(s, false); }).join("") + "</ul></div>";
+    if (also.length) html += '<div class="bp-group"><h3>' + esc(t("atCheckup")) + '</h3><ul class="bp-also">' + also.map(function (s) { return itemHtml(s, true); }).join("") + "</ul></div>";
+    if (cond.length) html += '<div class="bp-group"><h3>' + esc(t("ifYou")) + '</h3><ul class="bp-also">' + cond.map(function (s) { return itemHtml(s, true); }).join("") + "</ul></div>";
+    html += '<p class="bp-foot">' + esc(t("foot")) + "</p></div></article>";
+    el.innerHTML = html;
+    var note = document.getElementById("planNote");
+    var bits = [];
+    if (last.unsure) bits.push(esc(t("planUnsureNote")));
+    if (planObj) { if (L(planObj, "preventive_cost_sharing")) bits.push("<b>" + esc(L(planObj, "name")) + ".</b> " + esc(L(planObj, "preventive_cost_sharing"))); if (L(planObj, "managed_care_note")) bits.push(esc(L(planObj, "managed_care_note"))); }
+    note.innerHTML = bits.join(" "); note.style.display = bits.length ? "" : "none";
+    renderSources();
+  }
+  function renderSources() {
+    var ul = document.getElementById("sourceList"); ul.innerHTML = "";
+    if (!DATA) return;
+    (DATA.sources_checked || []).forEach(function (s) {
+      var li = document.createElement("li"); li.innerHTML = '<a href="' + esc(s.url) + '">' + esc(s.title) + "</a>" + (s.checked ? " (" + esc(t("checked")) + " " + esc(fmtAsOf(s.checked)) + ")" : ""); ul.appendChild(li);
+    });
+    document.getElementById("asOf").textContent = t("asOf", { asof: fmtAsOf(DATA.as_of) });
+  }
+
+  // The EOB reader. Plain text in, a short list out, nothing kept.
+  var owes = /(you owe|you pay|your (cost|share|responsibility)|patient (responsibility|owes|balance|pays)|member (responsibility|owes|pays)|amount (you|patient|member) (owe|pay)s?|balance due|copay|co-pay|coinsurance|co-insurance|deductible|usted (debe|paga)|su (parte|costo|responsabilidad)|monto que (usted )?debe|saldo|copago|coseguro|deducible)/i;
+  var money = /\$\s?\d{1,3}(?:,\d{3})*(?:\.\d{2})?|\b\d{1,3}(?:,\d{3})*\.\d{2}\b/g;
+  function allAmounts(str) {
+    var re = new RegExp(money.source, "g"), x, out = [];
+    while ((x = re.exec(str))) out.push({ i: x.index, v: parseFloat(x[0].replace(/[^0-9.]/g, "")) || 0, raw: x[0] });
+    return out;
+  }
+  // The amount she is asked to pay: the first amount after an "owe" word, else the last amount on the line.
+  function patientAmount(str) {
+    var amts = allAmounts(str); if (!amts.length) return null;
+    var m = owes.exec(str);
+    if (m) { var after = amts.filter(function (a) { return a.i > m.index; }); if (after.length) return after[0]; }
+    return amts[amts.length - 1];
+  }
+  function eobCheck() {
+    var out = document.getElementById("eobOut");
+    var text = document.getElementById("eob").value || "";
+    if (!text.trim()) { out.innerHTML = '<p class="bp-hint">' + esc(t("eobEmpty")) + "</p>"; return; }
+    var codes = {}, words = [];
+    (DATA && DATA.services || []).forEach(function (s) {
+      (s.cpt_hints || []).forEach(function (c) { codes[String(c).toUpperCase()] = s; });
+      var nm = L(s, "name").toLowerCase(); if (nm) words.push([nm, s]);
+      (s.keywords || []).forEach(function (k) { words.push([String(k).toLowerCase(), s]); });
+    });
+    var generic = ["preventive", "preventative", "well woman", "well-woman", "wellness", "annual exam", "annual physical", "screening", "mammogram", "mammography", "pap", "cervical", "hpv", "chlamydia", "colonoscopy", "cologuard", "fit test", "immunization", "vaccine", "flu shot", "prophylaxis", "dental exam", "eye exam", "preventivo", "preventiva", "mamografía", "papanicolaou", "vacuna", "examen anual", "chequeo"];
+    var lines = text.split(/\r?\n/);
+    var flags = [];
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i]; var low = line.toLowerCase();
+      if (!low.trim()) continue;
+      var hit = null;
+      var m = low.match(/\b(\d{5}|[a-z]\d{4})\b/g);
+      if (m) for (var j = 0; j < m.length && !hit; j++) if (codes[m[j].toUpperCase()]) hit = codes[m[j].toUpperCase()];
+      if (!hit) for (var k = 0; k < words.length && !hit; k++) if (words[k][0] && low.indexOf(words[k][0]) >= 0) hit = words[k][1];
+      var gen = !hit && generic.some(function (g) { return low.indexOf(g) >= 0; });
+      if (!hit && !gen) continue;
+      // Amounts on this line; the next line only when this one has none (tables often wrap).
+      var scope = money.test(line) ? line : line + " " + (lines[i + 1] || "");
+      money.lastIndex = 0;
+      var amt = patientAmount(scope);
+      if (!amt) continue;
+      var anyPositive = allAmounts(scope).some(function (a) { return a.v > 0; });
+      if (!anyPositive) continue;
+      var strong = owes.test(scope) && amt.v > 0;
+      flags.push({ strong: strong, name: hit ? L(hit, "name") : null, line: line.trim(), amt: amt.raw });
+      if (flags.length >= 20) break;
+    }
+    if (!flags.length) { out.innerHTML = '<p class="bp-flag">' + esc(t("eobNone")) + "</p>"; return; }
+    out.innerHTML = flags.map(function (f) {
+      return '<div class="bp-flag"><span class="bp-tag' + (f.strong ? "" : " soft") + '">' + esc(f.strong ? t("eobFlag") : t("eobMaybe")) + "</span>" +
+        (f.name ? "<b>" + esc(f.name) + "</b> " : "") + (f.amt ? "<b>" + esc(f.amt) + "</b>" : "") +
+        '<span class="bp-line">' + esc(f.line.slice(0, 180)) + "</span>" +
+        (f.strong ? '<p class="bp-next">' + esc(t("eobNext")) + "</p>" : "") + "</div>";
+    }).join("");
+  }
+
+  // Wiring
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var err = document.getElementById("err"); err.className = "bp-err";
+    var age = parseInt(document.getElementById("age").value, 10);
+    var state = document.getElementById("state").value;
+    var plan = document.getElementById("plan").value;
+    if (!(age >= 18 && age <= 120)) { err.textContent = t("errAge"); err.className = "bp-err show"; return; }
+    if (state !== "MN") { err.textContent = t("errState"); err.className = "bp-err show"; return; }
+    last = { age: age, state: state, plan: plan === "unsure" ? "ma" : plan, unsure: plan === "unsure" };
+    render();
+    document.getElementById("passsec").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".bp-lang button"), function (b) {
+    b.addEventListener("click", function () { lang = b.getAttribute("data-lang"); applyStrings(); render(); var o = document.getElementById("eobOut"); if (o.innerHTML) eobCheck(); });
+  });
+  document.getElementById("printBtn").addEventListener("click", function () { window.print(); });
+  document.getElementById("eobBtn").addEventListener("click", eobCheck);
+  document.getElementById("eobClear").addEventListener("click", function () { document.getElementById("eob").value = ""; document.getElementById("eobOut").innerHTML = ""; });
+
+  document.getElementById("age").value = last.age;
+  applyStrings();
+  render();
+  fetch("data.json", { cache: "no-store" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+    DATA = d; fillPlans(); render();
+  }).catch(function () { DATA = null; render(); });
+})();
+</script>
+</body>
+</html>
