@@ -81,7 +81,7 @@ a:hover { color: var(--accent-hover); }
 .hr-notice { background: var(--strip); }
 .hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink); }
 
-.qz-kicker { font-family: var(--ui); font-size: 1rem; font-weight: 700; color: var(--ink); }
+.qz-kicker { font-family: var(--ui); font-size: 1rem; font-weight: 700; letter-spacing: 0; color: var(--ink); }
 .qz-kicker::before { content: "["; color: var(--accent); }
 .qz-kicker::after { content: "]"; color: var(--accent); }
 
@@ -205,6 +205,8 @@ a:hover { color: var(--accent-hover); }
       [4, "A healthy skeptic: you smell a shaky number at close range."],
       [7, "You grade sources like it’s your job. (Want a job?)"]
     ],
+    resultNote: "The real lesson: in women’s health, the grade of a number matters as much as the number. Registries beat surveys; surveys beat press releases; press releases beat nothing, barely. Every figure Herada publishes carries its grade: see <a href='/projects/diagnostic-detour/'>The Diagnostic Detour</a>.",
+    shareLine: "I scored {score}/{total} on “Myth or measured?” Can you tell which women’s-health stats hold up? joinherada.com/projects/quizzes/",
     questions: [
       { q: "“Women wait 4.6 years and see 4.8 doctors before an autoimmune diagnosis.”",
         answer: 1, verdict: "Doesn’t hold up as stated.",
@@ -319,9 +321,73 @@ a:hover { color: var(--accent-hover); }
     }
   };
 
-  var QUIZZES = [MYTH, STYLE];
+  // ====================================================================
+  // Quiz 3: How much do you actually know about perimenopause? Ten
+  // statements; every reveal carries the guideline or cohort behind it.
+  // Claims are checked against the Women's Health Bible draft before
+  // this quiz ships (see README).
+  // ====================================================================
+  var PERI = {
+    id: "perimenopause",
+    kind: "graded",
+    title: "How much do you actually know about perimenopause?",
+    blurb: "Ten statements about the years before the last period. True, or not quite? Every reveal carries the guideline or study behind it.",
+    meta: "10 rounds · the transition, sourced",
+    optionsLabels: ["True · that’s how it works", "Not quite · it’s more complicated"],
+    scoreLines: [
+      [0, "The transition kept its secrets. You now hold ten of them."],
+      [5, "Half the receipts. The rest are in the reveals you just read."],
+      [8, "You could run the appointment. Possibly the clinic."],
+      [10, "Ten for ten. Send it to the group chat and take a bow."]
+    ],
+    resultNote: "The real lesson: perimenopause has a staging system, guidelines and long cohorts behind it. The symptoms are real, the timing is yours, and the look-alikes deserve a check before the label settles. For the conversation that follows, <a href='/projects/the-ledger/'>the Ledger</a> keeps the record and builds the questions.",
+    shareLine: "I scored {score}/{total} on Herada’s perimenopause quiz. How much do you actually know? joinherada.com/projects/quizzes/",
+    questions: [
+      { q: "“You have to skip periods before it counts as perimenopause.”",
+        answer: 1, verdict: "A week’s shift counts.",
+        why: "STRAW+10, the staging system clinicians and researchers use, marks the early menopausal transition by a persistent difference of seven days or more in the length of consecutive cycles. Skipped periods and gaps of 60 days or more belong to the late transition, which usually runs one to three years before the final period.",
+        src: "Harlow et al., STRAW+10, Menopause 2012", url: "https://doi.org/10.1097/gme.0b013e31824d8f40" },
+      { q: "“A blood test can tell you whether you’re in perimenopause.”",
+        answer: 1, verdict: "Over 45, it’s a diagnosis from symptoms, not a blood test.",
+        why: "FSH swings widely from week to week in the years before menopause, so one level proves little. NICE says not to use FSH to diagnose perimenopause or menopause in women over 45 with typical symptoms: irregular periods plus symptoms is perimenopause, twelve months without a period is menopause. The test earns its place under 45, and especially under 40, when premature ovarian insufficiency is the question.",
+        src: "NICE guideline NG23, Menopause: identification and management (updated 2024)", url: "https://www.nice.org.uk/guidance/ng23" },
+      { q: "“Hot flashes last a year or two, then stop.”",
+        answer: 1, verdict: "The median is over seven years.",
+        why: "The SWAN cohort followed 3,302 women for up to 17 years. Among the 1,449 with frequent hot flashes or night sweats, the median total duration was 7.4 years, and 4.5 of those years came after the final period. Women whose flashes began in early perimenopause had the longest runs, past eleven years.",
+        src: "Avis et al., SWAN, JAMA Internal Medicine 2015", url: "https://doi.org/10.1001/jamainternmed.2014.8063" },
+      { q: "“Perimenopause brain fog is all in your head.”",
+        answer: 1, verdict: "It’s measurable, and it lifts.",
+        why: "In 2,362 SWAN women tested yearly, scores for processing speed and verbal memory kept improving with practice before and after the transition but stalled during perimenopause: processing speed in the late stage, verbal memory in both. The dip was small and temporary, and performance recovered once women were postmenopausal.",
+        src: "Greendale et al., SWAN, Neurology 2009", url: "https://doi.org/10.1212/WNL.0b013e3181a71193" },
+      { q: "“The risk of a first depression rises during the transition.”",
+        answer: 0, verdict: "It does: about double.",
+        why: "The Harvard Study of Moods and Cycles followed 460 women aged 36 to 45 with no history of major depression. Those who entered perimenopause were twice as likely to develop significant depressive symptoms as those who stayed premenopausal, and the risk was higher again with hot flashes. New low mood in your forties deserves the same attention as anything else on this list.",
+        src: "Cohen et al., Archives of General Psychiatry 2006", url: "https://doi.org/10.1001/archpsyc.63.4.385" },
+      { q: "“Once your periods are irregular, you can’t get pregnant.”",
+        answer: 1, verdict: "Ovulation still happens, unpredictably.",
+        why: "Fertility falls through the forties but doesn’t reach zero until menopause is confirmed. UK guidance: keep using contraception until two years after your last natural period if you’re under 50, and one year after it if you’re over 50. Bleeds on hormone therapy don’t count as periods for this.",
+        src: "FSRH guideline, Contraception for Women Aged over 40 Years (2017, amended 2023)", url: "https://fsrh.org/Common/Uploaded%20files/documents/fsrh-guideline-contraception-for-women-aged-over-40-years-august-2017-amended-july-2023-.pdf" },
+      { q: "“Menopausal hormone therapy is too risky for most women to consider.”",
+        answer: 1, verdict: "Timing is the point, not a blanket no.",
+        why: "The Menopause Society’s 2022 position statement: for women under 60 or within ten years of their last period who have bothersome hot flashes and no contraindications, the benefits of hormone therapy outweigh the risks. Starting later carries more risk. Dose, type, route and your own history all matter, which makes it a conversation, not a blanket yes or no.",
+        src: "The 2022 Hormone Therapy Position Statement of The North American Menopause Society, Menopause 2022", url: "https://doi.org/10.1097/GME.0000000000002028" },
+      { q: "“Vaginal estrogen for dryness carries the same risks as hormone therapy pills.”",
+        answer: 1, verdict: "It acts locally, with minimal absorption.",
+        why: "Low-dose vaginal estrogen treats dryness, pain with sex and recurrent urinary symptoms where they happen, with far less reaching the bloodstream than systemic therapy. The Menopause Society’s position statement makes it the first-line prescription treatment for these symptoms, and NICE recommends it for as long as it helps, including for women already on systemic HRT, without routine endometrial monitoring. Symptoms tend to return when it stops.",
+        src: "The 2020 Genitourinary Syndrome of Menopause Position Statement of The North American Menopause Society, Menopause 2020", url: "https://doi.org/10.1097/GME.0000000000001609" },
+      { q: "“Any bleeding after twelve months without a period needs checking.”",
+        answer: 0, verdict: "It does: every time.",
+        why: "Bleeding after menopause is usually benign, but it is the main warning sign of endometrial cancer, so it earns an evaluation every time. ACOG’s 2026 update asks for a transvaginal ultrasound plus a tissue sample as the first step for most patients; ultrasound alone is kept for a single episode with a thin, fully seen lining and no strong risk factors, partly because aggressive cancers that disproportionately affect Black women can hide behind a thin lining. Heavy or unpredictable bleeding during perimenopause is common too, and worth raising when it is new, very heavy or between cycles.",
+        src: "ACOG Clinical Practice Update, Obstetrics & Gynecology 2026", url: "https://doi.org/10.1097/AOG.0000000000006275" },
+      { q: "“Fatigue, weight gain and mood swings in your forties are perimenopause. Case closed.”",
+        answer: 1, verdict: "Thyroid disease wears the same symptoms.",
+        why: "An underactive or overactive thyroid brings cycle changes, mood shifts, sweats, sleep trouble and hair change: the perimenopause checklist, almost line for line. European menopause guidance treats the thyroid as part of telling them apart, so a TSH with free T4 belongs in the conversation before the label settles. The Ledger’s look-alikes map carries the rest of the list.",
+        src: "EMAS position statement on thyroid disease and menopause, Maturitas 2024", url: "https://emas-online.org/wp-content/uploads/2024/04/PIIS0378512224000860.pdf" }
+    ]
+  };
+
+  var QUIZZES = [MYTH, STYLE, PERI];
   var COMING = [
-    { title: "How much do you actually know about perimenopause?", meta: "Coming soon" },
     { title: "How complete was your workup?", meta: "Coming soon · will ship after clinical review" },
     { title: "Who should I actually see?", meta: "Coming soon · will ship after clinical review" }
   ];
@@ -366,7 +432,7 @@ a:hover { color: var(--accent-hover); }
     state.revealed = false;
     var qz = state.quiz;
     var q = qz.questions[state.i];
-    var out = ['<p class="qz-kicker" style="margin-top:2rem">' + esc(qz.title) + '</p><h2 class="qz-question">' + q.q + "</h2>"];
+    var out = ['<h1 class="qz-kicker" style="margin-top:2rem">' + esc(qz.title) + '</h1><h2 class="qz-question">' + q.q + "</h2>"];
     out.push('<div class="qz-options">');
     if (qz.kind === "graded") {
       qz.optionsLabels.forEach(function (label, oi) {
@@ -387,7 +453,7 @@ a:hover { color: var(--accent-hover); }
     var q = qz.questions[state.i];
     var correct = pick === q.answer;
     if (correct) state.score++;
-    var out = ['<p class="qz-kicker" style="margin-top:2rem">' + esc(qz.title) + '</p><h2 class="qz-question">' + q.q + "</h2>"];
+    var out = ['<h1 class="qz-kicker" style="margin-top:2rem">' + esc(qz.title) + '</h1><h2 class="qz-question">' + q.q + "</h2>"];
     out.push('<div class="qz-reveal"><p class="qz-verdict' + (correct ? " good" : "") + '">' + (correct ? "You called it. " : "Not quite. ") + esc(q.verdict) + "</p>");
     out.push("<p>" + esc(q.why) + "</p>");
     out.push('<p class="qz-src">Source: <a href="' + esc(q.url) + '">' + esc(q.src) + "</a></p></div>");
@@ -402,16 +468,16 @@ a:hover { color: var(--accent-hover); }
       var total = qz.questions.length;
       var line = qz.scoreLines[0][1];
       qz.scoreLines.forEach(function (sl) { if (state.score >= sl[0]) line = sl[1]; });
-      out.push('<div class="qz-result"><p class="qz-kicker">Your result</p>');
+      out.push('<div class="qz-result"><h1 class="qz-kicker">Your result</h1>');
       out.push('<p class="qz-big">' + state.score + " / " + total + "</p>");
       out.push("<p><b>" + esc(line) + "</b></p>");
-      out.push("<p>The real lesson: in women’s health, the grade of a number matters as much as the number. Registries beat surveys; surveys beat press releases; press releases beat nothing, barely. Every figure Herada publishes carries its grade: see <a href='/projects/diagnostic-detour/'>The Diagnostic Detour</a>.</p>");
-      out.push(resultActions("I scored " + state.score + "/" + total + " on “Myth or measured?” Can you tell which women’s-health stats hold up? joinherada.com/projects/quizzes/"));
+      out.push("<p>" + qz.resultNote + "</p>");
+      out.push(resultActions(qz.shareLine.replace("{score}", state.score).replace("{total}", total)));
       out.push("</div>");
     } else {
       var best = Object.keys(qz.results).sort(function (a, b) { return (state.tally[b] || 0) - (state.tally[a] || 0); })[0];
       var r = qz.results[best];
-      out.push('<div class="qz-result"><p class="qz-kicker">Your exam-room archetype</p>');
+      out.push('<div class="qz-result"><h1 class="qz-kicker">Your exam-room archetype</h1>');
       out.push("<h2>" + esc(r.name) + "</h2>");
       out.push("<p>" + esc(r.desc) + "</p>");
       out.push('<p class="qz-strength"><b>' + esc(r.strength) + "</b></p>");
