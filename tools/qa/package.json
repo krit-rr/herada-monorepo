@@ -1,0 +1,13 @@
+{
+  "name": "herada-qa",
+  "private": true,
+  "description": "Dev-only checks for the Herada site: a page sweep and the Ledger flow in headless Chromium. Not part of the site.",
+  "scripts": {
+    "sweep": "node sweep.js",
+    "ledger": "node ledger-e2e.js"
+  },
+  "devDependencies": {
+    "axe-core": "4.14.0",
+    "playwright": "1.63.0"
+  }
+}

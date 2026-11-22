@@ -1,0 +1,71 @@
+# Runs on every pull request: assembles the site exactly as the deploy
+# workflow does, checks every internal link, then opens every page in headless
+# Chromium at phone, tablet and desktop widths (script errors, sideways
+# scrolling, axe-core accessibility) and runs the Ledger end to end. The
+# scripts live in tools/qa; the same assemble and sitemap scripts feed the
+# deploy. This is dev-only tooling; the site itself has no build step.
+name: QA
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qa:
+    name: QA
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Assemble site
+        run: bash tools/qa/assemble.sh _site
+
+      - name: Write sitemap.xml
+        run: bash tools/qa/sitemap.sh _site
+
+      - name: Check internal links
+        run: python3 tools/qa/linkcheck.py _site
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tools/qa/package-lock.json
+
+      - name: Install the QA tools
+        working-directory: tools/qa
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Serve the assembled site
+        run: |
+          python3 -m http.server 8080 --directory _site > /dev/null 2>&1 &
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            curl -sf http://127.0.0.1:8080/ > /dev/null && break
+            sleep 1
+          done
+          curl -sf http://127.0.0.1:8080/ > /dev/null
+
+      - name: Sweep every page
+        run: node tools/qa/sweep.js http://127.0.0.1:8080 --root _site --shots qa-shots
+
+      - name: Run the Ledger end to end
+        run: node tools/qa/ledger-e2e.js http://127.0.0.1:8080/projects/the-ledger/ --out qa-ledger
+
+      - name: Keep the screenshots and Ledger artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-output
+          path: |
+            qa-shots
+            qa-ledger
+          retention-days: 7

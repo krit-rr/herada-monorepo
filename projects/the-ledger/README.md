@@ -20,7 +20,13 @@ curiosity-phrased ask-lines and look-alike pair notes.
 one derived from the log:
 
 1. **The timeline** — symptoms as severity-weighted bars (raspberry =
-   ongoing), visits and life events as markers. PNG export on-device.
+   ongoing), visits and life events as markers. On screen it compresses
+   its month scale to fit the container when that leaves at least 18px
+   per month, thins the month labels, packs event labels into up to three
+   rows and shortens any label that has no room (the full text stays in a
+   tooltip); otherwise it keeps its natural width and scrolls sideways
+   with a hint. The PNG export and the printout always use the natural
+   width.
 2. **The one-pager** — ongoing now / visits / tests / resolved, the
    handover summary (its own print and copy buttons, too).
 3. **Tested & worth asking** — the ten-check consider-list (7 routine,

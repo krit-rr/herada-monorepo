@@ -17,8 +17,10 @@ workflow publishes each `projects/<folder>/public/` to
    - `site/projects/index.html`: one `<li>` in the `hr-list`, with a status
      span, the title linking to `/projects/<folder>/`, and a one-line
      description.
-   - `site/index.html`: one `hr-tile` with the same status and the title.
-     Tiles show status and name only, no links.
+   - `site/index.html` carries three tiles only (the Bible, the Rule-Out
+     Checklist and the Diagnostic Detour, since Nov 15, 2026), each linking
+     to its page. A new project goes on the projects page, not the home
+     tiles, unless Krit says otherwise.
 3. Push to `main`. The workflow copies the folder, writes `sitemap.xml`,
    checks every internal link, and deploys.
 
@@ -38,6 +40,9 @@ One vocabulary on the home tiles and the projects page, in pipeline order:
 
 A finished one-off is labelled by its event and year instead
 ("Hackathon, 2023").
+
+The Rule-Out Checklist and the Ledger share one knowledge base (the ten
+checks, their reasoning and sources). Change both in the same commit.
 
 Anything that touches clinical content (a symptom map, a checklist, a quiz
 that gives health information) carries a **Draft, pending clinical review**

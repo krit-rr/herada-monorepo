@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://joinherada.com/assets/img/og-default.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Herada: women deserve better healthcare.">
+<meta property="og:image:alt" content="Herada: women aren’t getting what they’re owed in healthcare.">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -435,12 +435,14 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     </div>
   </section>
 
-  <section class="lg-section lg-printpage" aria-label="Visit Kit page three: tested and worth asking">
+  <section id="tested" class="lg-section lg-printpage" aria-label="Visit Kit page three: tested and worth asking">
     <div class="hr-wrap">
       <p class="lg-kicker" id="listKicker">The Visit Kit · Page 3 · Tested &amp; worth asking</p>
       <h2>What&rsquo;s been checked + what hasn&rsquo;t</h2>
       <span class="vk-print-head" id="printDate3"></span>
       <p class="lg-sub">The consider-list for the midlife look-alikes, filled from your logged tests: a check is ticked because a matching test is in your log. The unticked boxes are their own message; &ldquo;log it&rdquo; adds one. Each item&rsquo;s reasoning sits under &ldquo;why · source.&rdquo;</p>
+      <p class="lg-sub">NICE guideline NG23 lets clinicians diagnose perimenopause in women over 45 from symptoms alone, without labs. This list is what should be weighed before that label settles: ask whether each was considered, not for the panel.</p>
+      <p class="lg-sub">Printable on its own, with every source: <a href="/projects/rule-out-checklist/">the Rule-Out Checklist</a>.</p>
       <div id="testedGroups"></div>
       <div id="otherTests"></div>
 
@@ -539,7 +541,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 </main>
 
 <footer class="hr-footer">
-  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice. The Ledger starts the conversation + your clinician carries it.</p></div>
+  <div class="hr-wrap"><p class="hr-ui">A Herada tool. Not medical advice. The Ledger starts the conversation + your clinician carries it. Solo founder. Evidence published, never sold. Nothing you enter leaves your device (<a href="/privacy/">privacy</a>).</p></div>
 </footer>
 
 <script>
@@ -977,12 +979,12 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   function renderLog() {
     var logEl = document.getElementById("log");
+    var out = [];
     if (!data.records.length) {
       logEl.innerHTML = '<p class="lg-empty">Add your first entry above. The log builds itself here, newest first.</p>';
       return;
     }
     var sorted = data.records.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; });
-    var out = [];
     var lastMonth = null;
     sorted.forEach(function (r) {
       var mk = monthKey(r.date);
@@ -1108,7 +1110,15 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   }
 
   // ---------- Timeline SVG ----------
-  function renderSVG(forExport) {
+  // Rough text measure for label fitting (Figtree averages about 0.54em per character).
+  function estWidth(str, size) { return str.length * size * 0.54; }
+  function fitLabel(full, avail, size) {
+    if (estWidth(full, size) <= avail) return full;
+    var keep = Math.max(4, Math.floor(avail / (size * 0.54)) - 1);
+    return full.slice(0, keep).replace(/[\s·,;:]+$/, "") + "…";
+  }
+
+  function renderSVG(forExport, fitWidth) {
     var C = forExport ? EXPORT_COLORS : LIVE_COLORS;
     var now = today();
     var symptoms = timelineSymptoms();
@@ -1126,20 +1136,60 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     var totalMonths = monthsBetween(d0, d1);
 
     var padL = 30, padR = 30;
-    var plotW = Math.max(600, totalMonths * 52);
+    var natural = Math.max(600, totalMonths * 52);
+    var plotW = natural;
+    // On screen, compress the month scale to the container when that keeps
+    // at least 18px per month; otherwise keep the natural width and let the
+    // box scroll. The exported image always uses the natural width.
+    if (!forExport && fitWidth) {
+      var avail = Math.floor(fitWidth) - padL - padR;
+      if (avail > 0 && avail < natural && avail >= totalMonths * 18) plotW = avail;
+    }
     var W = padL + plotW + padR;
+    var t0 = d0.getTime(), t1 = d1.getTime();
+    function x(d) { return padL + (d.getTime() - t0) / (t1 - t0) * plotW; }
 
+    // Event labels pack into up to three rows so neighbours never overlap;
+    // a label that still has no room is shortened to the gap beside its marker.
     var sortedEvents = markers.slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+    var EV_SIZE = 11.5, EV_ROW = 18, EV_ROWS = 3;
+    var placed = [[], [], []];
+    var MIN_LABEL = estWidth("Abcde…", EV_SIZE);
+    var eventLabels = sortedEvents.map(function (e) {
+      var ex = x(parseDate(e.date));
+      var roomR = (W - padR) - (ex + 8), roomL = (ex - 8) - padL;
+      var need = estWidth(e.text, EV_SIZE);
+      var anchor = need <= roomR ? "start" : (need <= roomL ? "end" : (roomR >= roomL ? "start" : "end"));
+      // The free gap beside the marker on each row, then the roomiest row.
+      function gapOn(r) {
+        var lim;
+        if (anchor === "start") {
+          var startAt = ex + 8; lim = W - padR;
+          placed[r].forEach(function (p) { if (p.x1 >= startAt - 6) lim = Math.min(lim, Math.max(p.x0, startAt)); });
+          return lim - startAt - 6;
+        }
+        var endAt = ex - 8; lim = padL;
+        placed[r].forEach(function (p) { if (p.x0 <= endAt + 6) lim = Math.max(lim, Math.min(p.x1, endAt)); });
+        return endAt - lim - 6;
+      }
+      var row = 0, gap = gapOn(0);
+      for (var r = 1; r < EV_ROWS && gap < need; r++) { var g = gapOn(r); if (g > gap) { gap = g; row = r; } }
+      // No room for even a short label: keep the marker (its tooltip carries the text).
+      var text = gap >= need ? e.text : (gap >= MIN_LABEL ? fitLabel(e.text, gap, EV_SIZE) : "");
+      var wdt = estWidth(text, EV_SIZE);
+      var x0 = anchor === "start" ? ex + 8 : ex - 8 - wdt, x1 = x0 + wdt;
+      if (text) placed[row].push({ x0: x0, x1: x1 });
+      return { e: e, ex: ex, anchor: anchor, text: text, row: row };
+    });
+    var rowsUsed = eventLabels.reduce(function (m, l) { return Math.max(m, l.row + 1); }, 0);
     var titleH = forExport ? 54 : 0;
-    var eventsH = sortedEvents.length ? 58 : 14;
+    var eventsH = sortedEvents.length ? 24 + (rowsUsed - 1) * EV_ROW + 16 : 14;
+    var eventLineTop = titleH + 24 + (rowsUsed - 1) * EV_ROW;
     var rowH = 46;
     var rowsTop = titleH + eventsH;
     var axisTop = rowsTop + symptoms.length * rowH + 6;
     var legendH = forExport ? 40 : 0;
     var H = axisTop + 34 + legendH;
-
-    var t0 = d0.getTime(), t1 = d1.getTime();
-    function x(d) { return padL + (d.getTime() - t0) / (t1 - t0) * plotW; }
 
     var out = [];
     out.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Timeline of symptoms, visits and life events" font-family="Figtree, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">');
@@ -1162,15 +1212,13 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       out.push('<text x="' + tx + '" y="' + (axisTop + 22) + '" font-size="11.5" fill="' + C.soft + '" text-anchor="middle">' + label + "</text>");
     }
 
-    sortedEvents.forEach(function (e, i) {
-      var ex = x(parseDate(e.date));
-      var labelY = titleH + (i % 2 === 0 ? 16 : 34);
-      var lineTop = titleH + 42;
+    eventLabels.forEach(function (l) {
+      var ex = l.ex, lineTop = eventLineTop;
       out.push('<line x1="' + ex + '" y1="' + lineTop + '" x2="' + ex + '" y2="' + axisTop + '" stroke="' + C.rule + '" stroke-width="1" stroke-dasharray="2 3"/>');
-      out.push('<path d="M ' + ex + " " + (lineTop - 5) + ' l 4.5 5 l -4.5 5 l -4.5 -5 Z" fill="' + C.ink + '"/>');
-      var anchor = ex > W - 150 ? "end" : "start";
-      var lx = anchor === "start" ? ex + 8 : ex - 8;
-      out.push('<text x="' + lx + '" y="' + labelY + '" font-size="11.5" fill="' + C.ink + '" text-anchor="' + anchor + '">' + esc(e.text) + "</text>");
+      out.push('<path d="M ' + ex + " " + (lineTop - 5) + ' l 4.5 5 l -4.5 5 l -4.5 -5 Z" fill="' + C.ink + '"><title>' + esc(l.e.text) + " · " + fmtDate(l.e.date) + "</title></path>");
+      if (!l.text) return;
+      var lx = l.anchor === "start" ? ex + 8 : ex - 8;
+      out.push('<text x="' + lx + '" y="' + (titleH + 16 + l.row * EV_ROW) + '" font-size="' + EV_SIZE + '" fill="' + C.ink + '" text-anchor="' + l.anchor + '">' + esc(l.text) + (l.text !== l.e.text ? "<title>" + esc(l.e.text) + "</title>" : "") + "</text>");
     });
 
     var hasOngoing = symptoms.some(function (s) { return !s.end; });
@@ -1190,11 +1238,14 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       var bh = BAR_H[s.severity] || 9;
       var by = top + 30 - bh / 2;
       var fill = s.end ? C.ink : C.accent;
-      var label = esc(s.name) + " · " + (SEVERITY_NAME[s.severity] || "moderate") + (s.end ? "" : " · ongoing");
-      var anchor2 = bx > W - 240 ? "end" : "start";
+      var rawLabel = s.name + " · " + (SEVERITY_NAME[s.severity] || "moderate") + (s.end ? "" : " · ongoing");
+      var roomRight = (W - padR) - bx, roomLeft = (bx + bw) - padL;
+      var need = estWidth(rawLabel, 12);
+      var anchor2 = need <= roomRight ? "start" : (need <= roomLeft ? "end" : (roomRight >= roomLeft ? "start" : "end"));
       var lx2 = anchor2 === "start" ? bx : bx + bw;
-      out.push('<text x="' + lx2 + '" y="' + (top + 14) + '" font-size="12" fill="' + C.soft + '" text-anchor="' + anchor2 + '">' + label + "</text>");
-      out.push('<rect x="' + bx + '" y="' + by + '" width="' + bw + '" height="' + bh + '" rx="1" fill="' + fill + '"><title>' + label + ": " + fmtDate(s.start) + " to " + (s.end ? fmtDate(s.end) : "today") + "</title></rect>");
+      var shown = fitLabel(rawLabel, anchor2 === "start" ? roomRight : roomLeft, 12);
+      out.push('<text x="' + lx2 + '" y="' + (top + 14) + '" font-size="12" fill="' + C.soft + '" text-anchor="' + anchor2 + '">' + esc(shown) + (shown !== rawLabel ? "<title>" + esc(rawLabel) + "</title>" : "") + "</text>");
+      out.push('<rect x="' + bx + '" y="' + by + '" width="' + bw + '" height="' + bh + '" rx="1" fill="' + fill + '"><title>' + esc(rawLabel) + ": " + fmtDate(s.start) + " to " + (s.end ? fmtDate(s.end) : "today") + "</title></rect>");
     });
 
     if (forExport) {
@@ -1204,9 +1255,9 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     return out.join("");
   }
 
-  function renderTimeline() {
+  function renderTimeline(naturalWidth) {
     var chartEl = document.getElementById("chart");
-    var svg = renderSVG(false);
+    var svg = renderSVG(false, naturalWidth ? 0 : chartEl.clientWidth);
     if (svg) {
       chartEl.innerHTML = '<div class="vk-scroll" tabindex="0" role="region" aria-label="Timeline chart. Scrolls sideways on small screens.">' + svg + '</div><p class="vk-scrollhint" hidden>Scroll sideways to see the whole timeline.</p>';
       updateScrollHint();
@@ -1430,8 +1481,8 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     ["printDate1", "printDate3", "printDate4"].forEach(function (id) { document.getElementById(id).textContent = stamp; });
   }
   // Fresh dates whether printing starts from a button or the browser menu.
-  window.addEventListener("beforeprint", function () { stampPages(); renderPager(); });
-  window.addEventListener("afterprint", function () { document.body.classList.remove("pm-pager"); });
+  window.addEventListener("beforeprint", function () { stampPages(); renderPager(); renderTimeline(true); });
+  window.addEventListener("afterprint", function () { document.body.classList.remove("pm-pager"); renderTimeline(); });
   document.getElementById("printKit").addEventListener("click", function () {
     document.body.classList.remove("pm-pager");
     stampPages();
@@ -1571,7 +1622,11 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     if (!box || !hint) return;
     hint.hidden = box.scrollWidth <= box.clientWidth + 1;
   }
-  window.addEventListener("resize", updateScrollHint);
+  var resizeTimer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { renderTimeline(); }, 150);
+  });
 
   renderForm();
   renderAll();

@@ -190,6 +190,9 @@ h1, h2, h3 {
   text-transform: uppercase;
 }
 .hr-tile h2 { font-size: 1.25rem; line-height: 1.15; }
+a.hr-tile { text-decoration: none; color: inherit; }
+a.hr-tile:hover h2 { text-decoration: underline; text-underline-offset: 0.18em; }
+a.hr-tile:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
 
 /* Buttons: square, flat */
 .hr-button {
@@ -280,6 +283,28 @@ h1, h2, h3 {
 .hr-cols3 > * { min-width: 0; border-top: 2px solid var(--ink); padding-top: 1.25rem; }
 .hr-cols3 p { margin: 0 0 1rem; font-size: 1.125rem; line-height: 1.6; color: var(--ink-soft); }
 .hr-cols3 .hr-kicker { margin: 0 0 1rem; color: var(--kicker); }
+/* Two-up split (Learn page sign-up) */
+.hr-cols2 { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+@media (min-width: 900px) {
+  .hr-cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; }
+}
+.hr-cols2 > * { min-width: 0; border-top: 2px solid var(--ink); padding-top: 1.25rem; display: flex; flex-direction: column; }
+.hr-cols2 h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.hr-cols2 p { margin-top: 0.75rem; max-width: 32rem; font-size: 1.125rem; line-height: 1.6; color: var(--ink-soft); }
+.hr-cols2 .hr-actions { margin-top: auto; padding-top: 1.5rem; }
+
+/* "What's covered" callout (Bible life stages) + review flag */
+.hr-callout { margin-top: 1.5rem; max-width: 38rem; padding: 1.1rem 1.25rem 1.25rem; border: 1px solid var(--ink); }
+.hr-callout .hr-kicker { margin-bottom: 0.75rem; }
+.hr-callout ul { margin: 0; padding-left: 1.1rem; }
+.hr-callout li { font-size: 1rem; line-height: 1.5; color: var(--ink); }
+.hr-callout li + li { margin-top: 0.6rem; }
+.hr-callout li small { display: block; font-size: 0.8125rem; color: var(--ink-soft); }
+.hr-callout li small a { overflow-wrap: anywhere; }
+.hr-flag { display: inline-block; margin-top: 0.9rem; font-family: var(--body); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--kicker); }
+.hr-flag::before { content: "[ "; color: var(--accent); }
+.hr-flag::after { content: " ]"; color: var(--accent); }
+
 .hr-cols3 .hr-who {
   margin: 0;
   padding: 0.7rem 0;
@@ -308,6 +333,11 @@ h1, h2, h3 {
 .hr-footer nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 .hr-footer a { color: var(--ink-soft); }
 .hr-footer nav a { padding: 0.25rem 0; }
+.hr-footer .hr-about { flex-basis: 100%; margin: 0; font-size: 0.875rem; color: var(--ink-soft); }
+.hr-home .hr-footer .hr-about { color: var(--paper-fade); }
+.hr-list .hr-evidence { margin: 0 0 0.5rem; font-family: var(--body); font-size: 0.9375rem; color: var(--ink); max-width: 38rem; }
+.hr-list .hr-evidence b { color: var(--kicker); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.75rem; margin-right: 0.35rem; }
+.hr-note-small { margin-top: 2rem; font-family: var(--body); font-size: 0.875rem; color: var(--ink-soft); }
 .hr-footer a:hover { color: var(--accent); }
 
 /* ============================================================
@@ -369,5 +399,7 @@ h1, h2, h3 {
 .hr-prose { max-width: 38rem; }
 .hr-prose > * + * { margin-top: 1.25rem; }
 .hr-prose h2 { margin-top: 3rem; }
+.hr-prose h3 { margin-top: 2.5rem; font-size: 1.375rem; }
+.hr-prose h3 + p { margin-top: 0.5rem; }
 .hr-prose ul, .hr-prose ol { padding-left: 1.25rem; margin-bottom: 0; }
 .hr-prose li + li { margin-top: 0.5rem; }
