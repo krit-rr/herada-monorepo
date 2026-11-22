@@ -18,7 +18,10 @@ Every push to `main` publishes:
 
 There is no build tool. Editing a page means editing its HTML file. The
 workflow copies folders, writes the sitemap in a few lines of shell, and
-refuses to deploy if an internal link points nowhere.
+refuses to deploy if an internal link points nowhere. Those scripts live in
+`tools/qa/`, together with the checks that run on every pull request: every
+page opened in headless Chromium at phone, tablet and desktop widths, plus the
+Ledger end to end. See `tools/qa/README.md` to run them locally.
 
 ## Previewing on your computer
 
