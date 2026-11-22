@@ -1,7 +1,9 @@
-# Builds the public site and deploys it to GitHub Pages on every push to main.
+# Publishes the site to GitHub Pages on every push to main.
 # The site is plain HTML and CSS, so "build" just means copying folders:
 #   site/                      -> /
 #   projects/<name>/public/    -> /projects/<name>/
+# then listing those pages in a sitemap and checking the internal links.
+# That is a few lines of shell and Python, not a build tool.
 name: Deploy site
 
 on:
@@ -22,7 +24,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+        with:
+          # Full history, so the sitemap can date each page from its last commit.
+          fetch-depth: 0
+
       - name: Assemble site
         run: |
           mkdir -p _site
@@ -34,8 +40,70 @@ jobs:
             mkdir -p "_site/projects/$name"
             cp -r "$dir/." "_site/projects/$name/"
           done
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+
+      - name: Write sitemap.xml
+        # One <url> per index.html in _site, dated by the last commit that
+        # touched its source file. 404.html is left out on purpose, and so is
+        # any page that carries a robots noindex tag: those deploy, and can be
+        # shared by address, but are not announced to search engines.
+        run: |
+          {
+            echo '<?xml version="1.0" encoding="UTF-8"?>'
+            echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+            find _site -name index.html | sort | while read -r page; do
+              grep -q 'name="robots" content="noindex' "$page" && continue
+              path="${page#_site}"
+              case "$path" in
+                /projects/*/*) rest="${path#/projects/}"; name="${rest%%/*}"; src="projects/$name/public/${rest#"$name"/}" ;;
+                *)             src="site$path" ;;
+              esac
+              date=$(git log -1 --format=%cs -- "$src")
+              echo "  <url><loc>https://joinherada.com${path%index.html}</loc><lastmod>${date:-$(date -u +%F)}</lastmod></url>"
+            done
+            echo '</urlset>'
+          } > _site/sitemap.xml
+          cat _site/sitemap.xml
+
+      - name: Check internal links
+        # Fails the deploy if any href, src or CSS url() points at a file that
+        # is not in _site. External links, mailto, tel, data URIs, bare anchors
+        # and the contents of <script> blocks are skipped.
+        run: |
+          python3 - <<'PY'
+          import os, re, sys
+          import xml.dom.minidom
+          root = "_site"
+          xml.dom.minidom.parse(os.path.join(root, "sitemap.xml"))
+          assert os.path.isfile(os.path.join(root, "robots.txt")), "robots.txt missing"
+          ref = re.compile(r'''(?i:href|src)\s*=\s*["']([^"'#?]+)|url\(\s*["']?([^"')#?]+)''')
+          script = re.compile(r"<script\b.*?</script>", re.S | re.I)
+          skip = ("http://", "https://", "mailto:", "tel:", "data:", "//", "javascript:")
+          broken = []
+          for dirpath, _, files in os.walk(root):
+              for fn in files:
+                  if not fn.endswith((".html", ".css")):
+                      continue
+                  page = os.path.join(dirpath, fn)
+                  text = open(page, encoding="utf-8", errors="replace").read()
+                  if fn.endswith(".html"):
+                      text = script.sub("", text)
+                  for m in ref.finditer(text):
+                      u = (m.group(1) or m.group(2) or "").strip()
+                      if not u or u.startswith(skip):
+                          continue
+                      if u.startswith("/"):
+                          target = os.path.join(root, u.lstrip("/"))
+                      else:
+                          target = os.path.normpath(os.path.join(dirpath, u))
+                      if not (os.path.isfile(target) or os.path.isfile(os.path.join(target, "index.html"))):
+                          broken.append(f"{os.path.relpath(page, root)}: {u}")
+          print(f"checked {root}: {len(broken)} broken reference(s)")
+          print("\n".join(broken))
+          sys.exit(1 if broken else 0)
+          PY
+
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
@@ -47,4 +115,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

@@ -16,13 +16,18 @@ The page renders, from the data alone:
 - a dot plot of time-based delays in years, one row per study, with the
   source grade on the row, women/men/both dots, medians as hollow dots
   where the mean is skewed, and review ranges as segments — registry and
-  claims markers solid, cohorts/reviews lighter, surveys faintest;
+  claims markers solid, cohorts/reviews lighter, surveys faintest. The
+  plot draws to the width of its box and redraws on resize: on a phone
+  the year scale compresses and a long row label takes two lines, so
+  nothing scrolls sideways;
 - stat sections for sex gaps (counter-evidence labelled as such),
   misdiagnosis and psychosomatic attribution, and visits/cost before
   diagnosis;
 - the trial gap (`#trial-gap`): women among patients vs. women among
   trial participants for ten female-majority conditions, bubble chart
-  plus exact-numbers table, from ClinicalTrials.gov posted results;
+  plus exact-numbers table, from ClinicalTrials.gov posted results. Under
+  about 600px the chart switches to a taller layout with numbered bubbles
+  and a key below, because the names collide at that width;
 - the evidence gaps (including the thesis's central hole: nobody has
   measured perimenopause misattribution);
 - "what you've heard that doesn't hold up" — widely repeated figures
@@ -37,6 +42,13 @@ chapter strip on both pages ties them together. The money chapter is
 **held back**: reachable by its address, carrying a `noindex` tag and a
 draft notice, and not linked from the chapter strip until the pair review
 against Penn et al. (2025) and a clinician's check are done.
+
+The page also prints as a handout: an `@media print` block drops the
+header, notice and footer, forces paper colors in every color scheme,
+scales both charts to the page, sets the stat rows in two columns, keeps
+each row on one page, and stamps the top with where and when it was
+printed (a `beforeprint` listener fills it in). About seven Letter pages
+as of Nov 2026, down from twelve.
 
 ## Build rules (Krit, Oct 2026)
 

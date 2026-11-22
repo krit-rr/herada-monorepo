@@ -1,9 +1,9 @@
 /* Herada design system: minimal (Oct 2026).
-   Static-site port of the live WordPress "minimal" design; the WordPress
-   originals are archived in docs/wordpress-export/minimal/. Radicchio
+   Static-site port of the live WordPress "minimal" design (the WordPress
+   export left the repo in Nov 2026; git history keeps it). Radicchio
    homepage with paper type and square project tiles; paper ground
    elsewhere. Rules: no shadows, gradients, pill buttons or animations.
-   See docs/design-system.md. */
+   Design notes: the comments in this file and the project READMEs. */
 
 :root {
   --paper: #FDFCFE;
