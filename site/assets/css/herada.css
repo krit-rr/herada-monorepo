@@ -189,7 +189,7 @@ h1, h2, h3 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.hr-tile h3 { font-size: 1.25rem; line-height: 1.15; }
+.hr-tile h2 { font-size: 1.25rem; line-height: 1.15; }
 
 /* Buttons: square, flat */
 .hr-button {
@@ -237,14 +237,14 @@ h1, h2, h3 {
   color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
 }
-.hr-news h3 {
+.hr-news h2 {
   margin-top: 0.35rem;
   font-size: 1.25rem;
   line-height: 1.2;
   letter-spacing: -0.005em;
 }
-.hr-news h3 a { color: var(--ink); text-decoration: none; }
-.hr-news h3 a:hover { color: var(--accent); text-decoration: underline; }
+.hr-news h2 a { color: var(--ink); text-decoration: none; }
+.hr-news h2 a:hover { color: var(--accent); text-decoration: underline; }
 
 /* Post pages: title, date, content */
 .hr-post h1 {
@@ -307,6 +307,7 @@ h1, h2, h3 {
 .hr-footer .hr-wordmark { font-size: 1.125rem; }
 .hr-footer nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 .hr-footer a { color: var(--ink-soft); }
+.hr-footer nav a { padding: 0.25rem 0; }
 .hr-footer a:hover { color: var(--accent); }
 
 /* ============================================================
@@ -335,12 +336,12 @@ h1, h2, h3 {
 .hr-flip h2, .hr-flip h3 { color: var(--accent); }
 
 /* Tile colors cycle: radicchio, periwinkle, violet-black */
-.hr-flip .hr-tile .hr-status, .hr-flip .hr-tile h3 { color: var(--paper); }
+.hr-flip .hr-tile .hr-status, .hr-flip .hr-tile h2 { color: var(--paper); }
 .hr-flip .hr-tile:nth-child(3n + 2) { background: var(--peri); }
 .hr-flip .hr-tile:nth-child(3n + 2) .hr-status,
-.hr-flip .hr-tile:nth-child(3n + 2) h3 { color: var(--ink); }
+.hr-flip .hr-tile:nth-child(3n + 2) h2 { color: var(--ink); }
 .hr-flip .hr-tile:nth-child(3n) { background: var(--ink); }
-.hr-flip .hr-tile:nth-child(3n) h3 { color: var(--paper); }
+.hr-flip .hr-tile:nth-child(3n) h2 { color: var(--paper); }
 .hr-flip .hr-tile:nth-child(3n) .hr-status { color: var(--band-soft); }
 
 /* ============================================================
@@ -356,9 +357,9 @@ h1, h2, h3 {
 }
 .hr-list li:last-child { border-bottom: 1px solid var(--rule); }
 .hr-list p { max-width: 38rem; color: var(--ink-soft); }
-.hr-list h3 { font-size: 1.375rem; }
-.hr-list h3 a { color: var(--ink); text-decoration: none; }
-.hr-list h3 a:hover { color: var(--accent); text-decoration: underline; }
+.hr-list h2 { font-size: 1.375rem; }
+.hr-list h2 a { color: var(--ink); text-decoration: none; }
+.hr-list h2 a:hover { color: var(--accent); text-decoration: underline; }
 .hr-list .hr-status { font-family: var(--body); font-size: 0.875rem; color: var(--ink-soft); }
 @media (min-width: 48rem) {
   .hr-list li { grid-template-columns: 11rem 1fr; }
