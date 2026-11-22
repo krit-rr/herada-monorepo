@@ -6,7 +6,6 @@ and each project or prototype.
     site/        the public website (joinherada.com), plain HTML and CSS
     bible/       Women's Health Bible notes; the draft lives in a Google Doc for now
     projects/    one folder per project or prototype
-    docs/        design system, WordPress migration checklist, reference files
     .github/     the workflow that publishes the site
 
 ## How publishing works
@@ -28,6 +27,4 @@ Then open http://localhost:8000.
 
 ## Where to start
 
-1. `docs/wordpress-migration.md`: the checklist for moving off WordPress.
-2. `projects/README.md`: how to add a project.
-3. `docs/design-system.md`: colors, type and rules to keep the site consistent.
+1. `projects/README.md`: how to add a project.
