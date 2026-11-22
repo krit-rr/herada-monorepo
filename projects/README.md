@@ -17,9 +17,9 @@ workflow publishes each `projects/<folder>/public/` to
    - `site/projects/index.html`: one `<li>` in the `hr-list`, with a status
      span, the title linking to `/projects/<folder>/`, and a one-line
      description.
-   - `site/index.html` carries three tiles only (the Bible, the Rule-Out
-     Checklist and the Diagnostic Detour, since Nov 15, 2026), each linking
-     to its page. A new project goes on the projects page, not the home
+   - `site/index.html` carries three squares only: a blank one, the Rule-Out
+     Checklist and the Diagnostic Detour (since Nov 22, 2026), the two named
+     ones linking to their pages. A new project goes on the projects page, not the home
      tiles, unless Krit says otherwise.
 3. Push to `main`. The workflow copies the folder, writes `sitemap.xml`,
    checks every internal link, and deploys.
