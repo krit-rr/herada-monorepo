@@ -50,18 +50,7 @@ together (inherited from the Rule-Out Checklist via the Visit Kit).
 
 None external. One `localStorage` record (`herada-ledger-v1`,
 try/catch-wrapped; works without storage): `records[]` plus the Kit's
-`picks`, `want` and `questions`.
-
-**Sample ledger (demo mode).** The empty log offers "see it filled in
-with a sample ledger": a fictional patient, 47, with about a year of
-records across all five types, dated relative to today. It is generated
-in memory by `sampleData()` and guarded by the `sampleMode` flag: while
-it is shown, `save()` does nothing, the entry form and the backup
-buttons are disabled, "log it" is hidden, and print, copy, the image
-and the picker keep working, with the printouts and copied text saying
-it is a sample. "Clear the sample" (or "Clear all") restores whatever
-is in storage. If a real log exists, loading the sample asks first and
-never overwrites it. On first load it imports the retired
+`picks`, `want` and `questions`. On first load it imports the retired
 standalone Visit Kit's state (`herada-visit-kit-v1`) — symptoms, events
 and tested rows become ordinary log records — then removes that key.
 Backup file save/load, optionally encrypted in the browser (AES-GCM,

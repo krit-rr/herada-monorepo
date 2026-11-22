@@ -141,16 +141,6 @@ textarea { width: 100%; resize: vertical; min-height: 4rem; }
 }
 .lg-feed button:hover { color: var(--accent); }
 .lg-empty { margin-top: 1.5rem; padding: 2rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); color: var(--ink-soft); max-width: 44rem; }
-/* Sample ledger (demo mode): a fictional log shown in memory, never saved. */
-.lg-sample { font-family: var(--ui); font-size: inherit; font-weight: 600; background: none; border: none; padding: 0.25rem 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 0.18em; }
-.lg-sample:hover { color: var(--accent-hover); }
-.lg-samplebar { margin-top: 1.5rem; padding: 0.9rem 1.1rem; border: 1px solid var(--accent); border-radius: 2px; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink); max-width: 54rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1rem; }
-.lg-samplebar b { font-weight: 700; }
-.lg-samplebar b::before { content: "["; color: var(--accent); }
-.lg-samplebar b::after { content: "]"; color: var(--accent); }
-.lg-samplebar span { flex: 1 1 20rem; }
-body.lg-samplemode .vk-logit { display: none; }
-body.lg-samplemode .lg-types, body.lg-samplemode #form, body.lg-samplemode .lg-backup .lg-brow { opacity: 0.5; }
 @media (max-width: 40rem) {
   .lg-feed li { grid-template-columns: auto 1fr auto; }
   .lg-date { grid-column: 1 / -1; }
@@ -775,77 +765,6 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   function blank() { return { records: [], picks: [], want: "", questions: ["", "", ""] }; }
 
-  // ---------- Sample ledger (demo mode) ----------
-  // A fictional patient, dated relative to today so the sample never looks
-  // stale. It lives in memory only: save() does nothing while it is shown,
-  // and clearing it brings back whatever is in storage.
-  var sampleMode = false;
-  var SAMPLE_HINT = "Clear the sample to start your own log.";
-  function daysAgo(n) {
-    var d = new Date(); d.setDate(d.getDate() - n);
-    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-  }
-  function sampleData() {
-    var n = 0;
-    function rec(type, back, fields) {
-      var r = { type: type, id: "sample-" + (++n), date: daysAgo(back) };
-      Object.keys(fields).forEach(function (k) { r[k] = fields[k]; });
-      return r;
-    }
-    return {
-      records: [
-        rec("symptom", 380, { name: "Fatigue, all day", severity: "3" }),
-        rec("visit", 340, { who: "PCP", said: "probably stress; come back in three months" }),
-        rec("test", 335, { name: "CBC", result: "normal", status: "told-normal" }),
-        rec("test", 335, { name: "CMP", result: "normal", status: "told-normal" }),
-        rec("symptom", 330, { name: "Night sweats", severity: "2", end: daysAgo(200) }),
-        rec("event", 310, { name: "Changed jobs" }),
-        rec("symptom", 300, { name: "Brain fog, afternoons", severity: "2" }),
-        rec("test", 235, { name: "TSH", result: "normal, no number given", status: "told-normal" }),
-        rec("visit", 230, { who: "PCP", said: "labs are normal; this is probably perimenopause", next: "sleep hygiene, review in three months" }),
-        rec("treatment", 220, { name: "Sertraline 50mg", end: daysAgo(100), outcome: "no change after three months" }),
-        rec("symptom", 150, { name: "Joint pain, mornings", severity: "2" }),
-        rec("symptom", 120, { name: "Palpitations, evenings", severity: "1", end: daysAgo(40) }),
-        rec("visit", 110, { who: "Urgent care", said: "ECG is fine; follow up with your PCP", next: "cardiology referral if it continues" }),
-        rec("test", 110, { name: "ECG", result: "normal", status: "told-normal" }),
-        rec("test", 100, { name: "Ferritin", result: "18 ng/mL", status: "abnormal" }),
-        rec("test", 95, { name: "Vitamin D", status: "waiting" }),
-        rec("event", 70, { name: "Started caring for a parent" })
-      ],
-      picks: ["fatigue", "fog", "nightsweat", "joint", "palp"],
-      want: "A plan for the fatigue, not just reassurance. If labs are normal, I want to know what we check next.",
-      questions: ["What else could explain this picture?", "Was free T4 or TPO checked with the TSH, or just TSH?", ""]
-    };
-  }
-  function hasOwnEntries() { return !!(data.records.length || data.picks.length || data.want || data.questions.join("")); }
-  function loadSample() {
-    if (sampleMode) return;
-    if (hasOwnEntries() && !confirm("You already have a log on this device. Show the sample instead? Nothing of yours changes, and clearing the sample brings your log back.")) return;
-    data = sanitize(sampleData());
-    sampleMode = true;
-    document.body.classList.add("lg-samplemode");
-    renderAll();
-    renderForm();
-  }
-  function clearSample() {
-    if (!sampleMode) return;
-    sampleMode = false;
-    document.body.classList.remove("lg-samplemode");
-    data = load() || blank();
-    renderAll();
-    renderForm();
-  }
-  // While the sample is shown, entry and backup are off; print, copy, the
-  // image and the picker still work, because showing those is the point.
-  function applySampleUI() {
-    var on = sampleMode;
-    Array.prototype.forEach.call(document.querySelectorAll("#types button, #fields input, #fields select, #addBtn, #saveBackup, #loadBackupBtn, #passphrase"), function (el) { el.disabled = on; });
-    if (on) document.getElementById("hint").textContent = SAMPLE_HINT;
-  }
-  function sampleBar() {
-    return '<div class="lg-samplebar" role="status"><b>Sample</b><span>A fictional patient, 47, so you can see how the kit builds itself. Nothing here is saved.</span><button type="button" class="lg-sample" id="clearSample">Clear the sample</button></div>';
-  }
-
   // ---------- Storage (must never break the page) ----------
   function validDate(s) { return typeof s === "string" && /^\d{4}-\d{2}-\d{2}$/.test(s); }
   function sanitize(d) {
@@ -868,7 +787,6 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     } catch (err) { return null; }
   }
   function save() {
-    if (sampleMode) return;
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (err) { /* storage unavailable: in-memory only */ }
   }
   function genId() { return Date.now() + "-" + Math.random().toString(36).slice(2, 7); }
@@ -996,7 +914,6 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     }).join("");
     document.getElementById("hint").textContent = cfg.hint;
     document.getElementById("err").classList.remove("show");
-    applySampleUI();
     if (prefillName) {
       var nameEl = document.querySelector('#fields [data-f="name"]');
       if (nameEl) nameEl.value = prefillName;
@@ -1061,12 +978,8 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   function renderLog() {
     var logEl = document.getElementById("log");
     var out = [];
-    if (sampleMode) out.push(sampleBar());
     if (!data.records.length) {
-      out.push(sampleMode
-        ? '<p class="lg-empty">The sample is empty now. Clear it to start your own log.</p>'
-        : '<p class="lg-empty">Add your first entry above. The log builds itself here, newest first. <button type="button" class="lg-sample" id="loadSample">Or see it filled in with a sample ledger.</button></p>');
-      logEl.innerHTML = out.join("");
+      logEl.innerHTML = '<p class="lg-empty">Add your first entry above. The log builds itself here, newest first.</p>';
       return;
     }
     var sorted = data.records.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; });
@@ -1085,8 +998,6 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   }
 
   document.addEventListener("click", function (ev) {
-    if (ev.target.closest && ev.target.closest("#loadSample")) { loadSample(); return; }
-    if (ev.target.closest && ev.target.closest("#clearSample")) { clearSample(); return; }
     var rm = ev.target.closest ? ev.target.closest("button[data-rm]") : null;
     if (rm) {
       var id = rm.getAttribute("data-rm");
@@ -1282,7 +1193,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     out.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Timeline of symptoms, visits and life events" font-family="Figtree, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">');
     if (forExport) {
       out.push('<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="' + C.paper + '"/>');
-      out.push('<text x="' + padL + '" y="26" font-size="19" font-weight="600" fill="' + C.ink + '">' + (sampleMode ? "A sample timeline · the Ledger" : "My timeline · the Ledger") + "</text>");
+      out.push('<text x="' + padL + '" y="26" font-size="19" font-weight="600" fill="' + C.ink + '">My timeline · the Ledger</text>');
       out.push('<text x="' + padL + '" y="44" font-size="12" fill="' + C.soft + '">Made with Herada · joinherada.com · ' + MONTHS[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear() + "</text>");
     }
 
@@ -1395,7 +1306,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   function renderPager() {
     var d = new Date();
     var out = [];
-    out.push("<header><h3>" + (sampleMode ? "A sample one-pager" : "My health one-pager") + "</h3><span>prepared " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + (sampleMode ? " · fictional patient" : " · written by the patient") + "</span></header>");
+    out.push("<header><h3>My health one-pager</h3><span>prepared " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + " · written by the patient</span></header>");
 
     var ongoing = group("symptom").filter(function (r) { return !r.end; });
     var resolved = group("symptom").filter(function (r) { return r.end; });
@@ -1429,7 +1340,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       }, "");
     }
 
-    out.push('<p class="lg-pfoot">' + (sampleMode ? "A sample ledger, fictional, from joinherada.com" : "Written by the patient with joinherada.com") + ' · a personal log and a head start for the visit, not a medical record. Draft, pending clinical review.</p>');
+    out.push('<p class="lg-pfoot">Written by the patient with joinherada.com · a personal log and a head start for the visit, not a medical record. Draft, pending clinical review.</p>');
     document.getElementById("pager").innerHTML = out.join("");
   }
 
@@ -1469,7 +1380,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
     qChipsEl.appendChild(b);
   });
 
-  function renderAll() { renderLog(); renderPicker(); renderTimeline(); renderChecks(); renderPager(); renderToday(); applySampleUI(); }
+  function renderAll() { renderLog(); renderPicker(); renderTimeline(); renderChecks(); renderPager(); renderToday(); }
 
   // ---------- Copy ----------
   function copyWith(noteId, text) {
@@ -1517,7 +1428,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   function kitText() {
     var fits = fitKeys();
     var states = checkStates();
-    var lines = ["THE VISIT KIT · " + (sampleMode ? "a sample, fictional patient" : "written by the patient") + " (joinherada.com)", "(Draft, pending clinical review · questions to weigh with my clinician, not an order sheet)", ""];
+    var lines = ["THE VISIT KIT · written by the patient (joinherada.com)", "(Draft, pending clinical review · questions to weigh with my clinician, not an order sheet)", ""];
     if (data.picks.length) {
       var labels = SYMPTOMS.filter(function (s) { return data.picks.indexOf(s.id) !== -1; }).map(function (s) { return s.label; });
       lines.push("MY SYMPTOMS: " + labels.join(", "));
@@ -1564,7 +1475,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   // ---------- Print ----------
   function stampPages() {
     var d = new Date();
-    var stamp = "prepared " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + " · " + (sampleMode ? "a sample ledger, fictional" : "written by the patient") + " · joinherada.com · draft, pending clinical review";
+    var stamp = "prepared " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + " · written by the patient · joinherada.com · draft, pending clinical review";
     ["printDate1", "printDate3", "printDate4"].forEach(function (id) { document.getElementById(id).textContent = stamp; });
   }
   // Fresh dates whether printing starts from a button or the browser menu.
@@ -1615,7 +1526,6 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   // ---------- Clear ----------
   document.getElementById("clearAll").addEventListener("click", function () {
-    if (sampleMode) { clearSample(); return; }
     if (!data.records.length && !data.picks.length && !data.want && !data.questions.join("")) return;
     if (!confirm("Remove everything from this device (the log + picks + questions)? (Save a backup file first if you want to keep it.)")) return;
     data = blank();
