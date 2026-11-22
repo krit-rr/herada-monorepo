@@ -9,7 +9,6 @@ and each project or prototype.
     data/        source datasets and analysis scripts, a README per dataset
     data/measures/  the internal map from Bible sections to HEDIS measures (not NCQA content)
     cme/         outline and accreditation notes for "How It Presents in Women"; no content yet
-    docs/        design system, WordPress migration checklist, privacy note, reference files
     .github/     the workflow that publishes the site
 
 ## How publishing works
@@ -34,6 +33,4 @@ Then open http://localhost:8000.
 
 ## Where to start
 
-1. `docs/wordpress-migration.md`: the checklist for moving off WordPress.
-2. `projects/README.md`: how to add a project.
-3. `docs/design-system.md`: colors, type and rules to keep the site consistent.
+1. `projects/README.md`: how to add a project.
