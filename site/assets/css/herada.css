@@ -153,47 +153,11 @@ h1, h2, h3 {
 .hr-section h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
 
 /* The "in progress" line */
-.hr-note {
-  max-width: 32ch;
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
-  line-height: 1.15;
-  letter-spacing: -0.015em;
-}
-.hr-note + .hr-kicker { margin-top: clamp(3rem, 7vw, 4.5rem); }
 
 /* Small square tiles: projects (homepage) */
-.hr-tiles {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 14rem));
-  gap: 1.25rem;
-}
 @media (min-width: 640px) {
-  .hr-tiles { grid-template-columns: repeat(auto-fill, 14rem); }
-}
-.hr-tile {
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  padding: 1.25rem;
-  background: var(--accent);
-  min-width: 0;
-}
-.hr-tile .hr-status {
-  font-family: var(--body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.hr-tile h2 { font-size: 1.25rem; line-height: 1.15; }
-a.hr-tile { text-decoration: none; color: inherit; }
-a.hr-tile:hover h2 { text-decoration: underline; text-underline-offset: 0.18em; }
-a.hr-tile:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
-
+  }
+a
 /* Buttons: square, flat */
 .hr-button {
   display: inline-block;
@@ -268,8 +232,7 @@ a.hr-tile:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; 
 .hr-post-content li + li { margin-top: 0.5rem; }
 
 /* Contact page: statement, button, three columns */
-.hr-contact .hr-note { margin-top: 1.75rem; max-width: none; }
-.hr-contact .hr-actions { margin-top: 2.75rem; }
+.hr-contact .hr-contact .hr-actions { margin-top: 2.75rem; }
 .hr-contact .hr-button { font-size: 1.25rem; padding: 1.1rem 2rem; }
 .hr-cols3 {
   display: grid;
@@ -283,15 +246,8 @@ a.hr-tile:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; 
 .hr-cols3 > * { min-width: 0; border-top: 2px solid var(--ink); padding-top: 1.25rem; }
 .hr-cols3 p { margin: 0 0 1rem; font-size: 1.125rem; line-height: 1.6; color: var(--ink-soft); }
 .hr-cols3 .hr-kicker { margin: 0 0 1rem; color: var(--kicker); }
-/* Two-up split (Learn page sign-up) */
-.hr-cols2 { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
 @media (min-width: 900px) {
-  .hr-cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; }
-}
-.hr-cols2 > * { min-width: 0; border-top: 2px solid var(--ink); padding-top: 1.25rem; display: flex; flex-direction: column; }
-.hr-cols2 h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
-.hr-cols2 p { margin-top: 0.75rem; max-width: 32rem; font-size: 1.125rem; line-height: 1.6; color: var(--ink-soft); }
-.hr-cols2 .hr-actions { margin-top: auto; padding-top: 1.5rem; }
+  }
 
 .hr-cols3 .hr-who {
   margin: 0;
@@ -301,7 +257,7 @@ a.hr-tile:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; 
   font-size: 1.125rem;
 }
 
-/* Footer: logo, email, Instagram */
+/* Footer: logo, email, Privacy */
 .hr-footer {
   border-top: 1px solid var(--rule);
   padding: 2rem 0;
@@ -321,11 +277,7 @@ a.hr-tile:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; 
 .hr-footer nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 .hr-footer a { color: var(--ink-soft); }
 .hr-footer nav a { padding: 0.25rem 0; }
-.hr-footer .hr-about { flex-basis: 100%; margin: 0; font-size: 0.875rem; color: var(--ink-soft); }
-.hr-home .hr-footer .hr-about { color: var(--paper-fade); }
-.hr-list .hr-evidence { margin: 0 0 0.5rem; font-family: var(--body); font-size: 0.9375rem; color: var(--ink); max-width: 38rem; }
-.hr-list .hr-evidence b { color: var(--kicker); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.75rem; margin-right: 0.35rem; }
-.hr-note-small { margin-top: 2rem; font-family: var(--body); font-size: 0.875rem; color: var(--ink-soft); }
+.hr-home .hr-note-small { margin-top: 2rem; font-family: var(--body); font-size: 0.875rem; color: var(--ink-soft); }
 .hr-footer a:hover { color: var(--accent); }
 
 /* ============================================================
@@ -349,23 +301,8 @@ a.hr-tile:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; 
 .hr-home .hr-footer .hr-logo { color: var(--paper); }
 
 /* The flipped section: paper ground, radicchio type */
-.hr-flip { background: var(--paper); color: var(--accent); }
-.hr-flip .hr-kicker, .hr-flip .hr-note,
-.hr-flip h2, .hr-flip h3 { color: var(--accent); }
 
 /* Tile colors cycle: radicchio, periwinkle, violet-black */
-.hr-flip .hr-tile .hr-status, .hr-flip .hr-tile h2 { color: var(--paper); }
-.hr-flip .hr-tile:nth-child(3n + 2) { background: var(--peri); }
-.hr-flip .hr-tile:nth-child(3n + 2) .hr-status,
-.hr-flip .hr-tile:nth-child(3n + 2) h2 { color: var(--ink); }
-.hr-flip .hr-tile:nth-child(3n) { background: var(--ink); }
-.hr-flip .hr-tile:nth-child(3n) h2 { color: var(--paper); }
-.hr-flip .hr-tile:nth-child(3n) .hr-status { color: var(--band-soft); }
-
-/* ============================================================
-   Kept for the unlinked project pages
-   ============================================================ */
-.hr-list { list-style: none; margin: 2.5rem 0 0; padding: 0; }
 .hr-list li {
   display: grid;
   grid-template-columns: 1fr;

@@ -27,8 +27,6 @@ in the same commit so the two pages never disagree. The checklist page links
 to the Ledger ("check these against your own history"); the Ledger links
 back ("printable on its own").
 
-The second call to action, for clinicians, points to How It Presents in
-Women on `/learn/`, which does not exist yet as a course.
 
 ## Privacy
 
