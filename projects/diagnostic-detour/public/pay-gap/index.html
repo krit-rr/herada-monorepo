@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Diagnostic Detour, the money: a project by Herada</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="The money chapter of the Diagnostic Detour. What Medicare assigns to matched procedures on female and male anatomy, from the public 2026 physician fee schedule: physician work and national payment, pair by pair, with the published pairs marked and the rest open to correction.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* Herada design system (v3 palette, Oct 2026), inlined so this page stands alone. */
+:root {
+  --bg: #FDFCFE;
+  --strip: #B7B5E4;
+  --ink: #2B2733;
+  --ink-soft: #5B5666;
+  --accent: #AD1457;
+  --accent-hover: #8A0E45;
+  --accent-ink: #FDFCFE;
+  --rule: #CFCCD6;
+  --kicker: #6B68A0;
+  --peri: #B7B5E4;
+  --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --ui: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --page: 68rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+    --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+    --kicker: #B7B5E4; --peri: #56528A;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #211E28; --strip: #34304A; --ink: #FDFCFE; --ink-soft: #BBC2E2;
+  --accent: #F08DB5; --accent-hover: #F6B3CE; --accent-ink: #211E28; --rule: #45405A;
+  --kicker: #B7B5E4; --peri: #56528A;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1.1875rem; line-height: 1.55;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.5rem, 5.5vw, 4rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.625rem, 3.5vw, 2.25rem); letter-spacing: -0.015em; }
+h3 { font-size: 1.25rem; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 0.18em; overflow-wrap: anywhere; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hr-wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
+.hr-ui { font-family: var(--ui); font-size: 0.875rem; }
+
+.hr-header { border-bottom: 1px solid var(--rule); }
+.hr-header .hr-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 2rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+.hr-wordmark { font-family: var(--display); font-size: 1.375rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); text-decoration: none; }
+.hr-header span.hr-ui { color: var(--ink-soft); }
+
+.hr-notice { background: var(--strip); }
+.hr-notice p { padding: 0.8rem 0; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink); }
+.hr-notice b { font-weight: 700; }
+
+.hr-intro { padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
+.hr-intro h1 { max-width: 22ch; }
+.hr-lede { max-width: 44rem; margin-top: 1.5rem; font-size: 1.375rem; line-height: 1.45; color: var(--ink); }
+/* Chapter strip: this page is the money chapter of the Detour; the rest live on the first page. */
+.pg-chapters { margin-top: 1.75rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.9rem; }
+.pg-chapters .pg-chapter-label { font-weight: 700; color: var(--ink); }
+.pg-chapters .pg-chapter-label::before { content: "["; color: var(--accent); }
+.pg-chapters .pg-chapter-label::after { content: "]"; color: var(--accent); }
+.pg-chapters a { color: var(--accent); }
+.pg-chapters [aria-current="page"] { color: var(--ink); font-weight: 700; }
+.pg-chapters .pg-held { color: var(--ink-soft); }
+.pg-chapters .pg-held .pg-badge { margin-left: 0.3rem; }
+
+/* The two headline counts */
+.pg-headline { border-top: 3px solid var(--ink); padding: clamp(2rem, 5vw, 3rem) 0; }
+.pg-leads { display: grid; grid-template-columns: 1fr; gap: 2.25rem 3rem; }
+@media (min-width: 58rem) { .pg-leads { grid-template-columns: 1fr 1fr; } }
+.pg-headline p.pg-big {
+  max-width: 26ch; font-family: var(--display); font-weight: 600;
+  font-size: clamp(1.625rem, 4vw, 2.25rem); line-height: 1.18; letter-spacing: -0.015em;
+}
+.pg-headline .pg-cite { margin-top: 1.25rem; font-family: var(--ui); font-size: 0.9375rem; color: var(--ink-soft); max-width: 44rem; }
+
+/* Badges */
+.pg-badge {
+  display: inline-block; font-family: var(--ui); font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 0.12rem 0.45rem;
+  border: 1px solid var(--rule); border-radius: 2px; color: var(--ink-soft); white-space: nowrap;
+}
+.pg-badge.b-same-operation, .pg-badge.b-published { border-color: var(--ink); color: var(--ink); }
+.pg-badge.b-moderate, .pg-badge.b-not-a-pair { font-style: italic; }
+.pg-flag { font-family: var(--ui); font-size: 0.75rem; font-weight: 600; color: var(--accent); white-space: nowrap; }
+
+/* Sections */
+.pg-section { border-top: 3px solid var(--ink); padding: clamp(2.25rem, 5vw, 3.5rem) 0; }
+.pg-kicker { font-family: var(--ui); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.85rem; }
+.hr-intro .pg-kicker { margin-bottom: 1rem; }
+.pg-kicker::before { content: "["; color: var(--accent); }
+.pg-kicker::after { content: "]"; color: var(--accent); }
+.pg-section .pg-sub { margin-top: 0.75rem; max-width: 44rem; font-size: 1.0625rem; color: var(--ink-soft); }
+
+/* Metric toggle */
+.pg-toggle { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.pg-toggle button {
+  font-family: var(--ui); font-size: 0.9375rem; font-weight: 600; padding: 0.5rem 0.9rem;
+  background: none; border: 1px solid var(--ink); border-radius: 2px; color: var(--ink); cursor: pointer;
+}
+.pg-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+/* Dumbbell plot */
+.pg-plot { margin-top: 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.pg-plot svg { display: block; }
+.pg-scrollhint { margin: 0.5rem 0 0; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); }
+.pg-legend { margin-top: 1.25rem; font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.5rem; }
+.pg-key { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--ink); white-space: nowrap; }
+.pg-key svg { display: block; flex: none; }
+
+/* Tables */
+.pg-table-wrap { margin-top: 1.5rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0.875rem; min-width: 52rem; width: 100%; }
+.pg-table th, .pg-table td { text-align: right; padding: 0.6rem 0.9rem 0.6rem 0; border-bottom: 1px solid var(--rule); font-variant-numeric: tabular-nums; vertical-align: top; }
+.pg-table th:first-child, .pg-table td:first-child { text-align: left; }
+.pg-table thead th { font-weight: 600; color: var(--ink-soft); border-bottom: 1px solid var(--ink); vertical-align: bottom; }
+.pg-table td:first-child { font-weight: 600; min-width: 14rem; }
+.pg-table .pg-src { display: block; font-weight: 400; color: var(--ink-soft); max-width: 24rem; }
+.pg-table .pg-code { font-weight: 400; color: var(--ink-soft); white-space: nowrap; }
+.pg-table .pg-neg { color: var(--accent); font-weight: 700; }
+.pg-table .pg-pos { color: var(--ink); font-weight: 700; }
+.pg-table td.pg-note { text-align: left; font-weight: 400; color: var(--ink-soft); min-width: 16rem; max-width: 24rem; }
+.pg-table td.pg-global { white-space: nowrap; }
+
+/* Plain lists */
+.pg-plain { margin: 1.5rem 0 0; padding: 0; list-style: none; max-width: 48rem; }
+.pg-plain li { padding: 0.9rem 0; border-top: 1px solid var(--rule); font-size: 1.0625rem; }
+.pg-plain li:last-child { border-bottom: 1px solid var(--rule); }
+.pg-plain b { font-weight: 600; }
+.pg-plain span { color: var(--ink-soft); }
+.pg-plain .pg-meta { display: block; margin-top: 0.3rem; font-family: var(--ui); font-size: 0.8125rem; color: var(--ink-soft); }
+
+.hr-section { border-top: 3px solid var(--ink); padding: clamp(2.5rem, 6vw, 4rem) 0; }
+.hr-prose { max-width: 44rem; }
+.hr-prose p { margin-top: 1rem; font-size: 1.0625rem; color: var(--ink-soft); }
+.hr-prose h3 { margin-top: 2rem; color: var(--ink); }
+.hr-sources { margin-top: clamp(2rem, 5vw, 3rem); padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
+
+.hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<header class="hr-header">
+  <div class="hr-wrap">
+    <a class="hr-wordmark" href="/">HERADA</a>
+    <span class="hr-ui">Project · The Diagnostic Detour · The money</span>
+  </div>
+</header>
+
+<aside class="hr-notice" aria-label="Page notice">
+  <div class="hr-wrap"><p><b>[Draft, held back]</b> The money chapter of the Diagnostic Detour, reachable by this address only until the pair review is done. Pairs marked published come from the literature. Pairs marked proposed are Herada&rsquo;s own + wait on a clinician&rsquo;s check. Nothing here is advice about any bill.</p></div>
+</aside>
+
+<main>
+  <section class="hr-intro">
+    <div class="hr-wrap">
+      <p class="pg-kicker">The Diagnostic Detour · the money</p>
+      <h1 id="title">The Procedure Pay Gap Explorer</h1>
+      <p class="hr-lede" id="lede"></p>
+      <nav class="pg-chapters" aria-label="Chapters">
+        <span class="pg-chapter-label">Chapters</span>
+        <a href="../#years">Years to a diagnosis</a>
+        <a href="../#gap">The gap</a>
+        <a href="../#wrong">The wrong label</a>
+        <a href="../#cost">The meter running</a>
+        <a href="../#trial-gap">Who gets studied</a>
+        <a href="../#holes">The holes</a>
+        <a href="../#refused">What doesn&rsquo;t hold up</a>
+        <span aria-current="page">The money</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="pg-headline" aria-label="The headline counts">
+    <div class="hr-wrap">
+      <div class="pg-leads">
+        <div>
+          <p class="pg-big" id="headline"></p>
+          <p class="pg-cite" id="headlineCite"></p>
+        </div>
+        <div>
+          <p class="pg-big" id="headline2"></p>
+          <p class="pg-cite" id="headline2Cite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-label="One operation, two codes">
+    <div class="hr-wrap">
+      <p class="pg-kicker">Same operation</p>
+      <h2>One operation, two codes</h2>
+      <p class="pg-sub" id="sameSub"></p>
+      <div class="pg-table-wrap" id="sameTable" tabindex="0" role="region" aria-label="Same-operation pairs table. Scrolls sideways on small screens."></div>
+      <p class="pg-scrollhint" hidden>Scroll sideways for the full table.</p>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-label="The published pairs">
+    <div class="hr-wrap">
+      <p class="pg-kicker">Published pairs</p>
+      <h2>The pairs the literature uses, at 2026 values</h2>
+      <p class="pg-sub" id="pubSub"></p>
+      <div class="pg-toggle" role="group" aria-label="Which value to plot">
+        <button type="button" data-metric="work" aria-pressed="true">Physician work (RVU)</button>
+        <button type="button" data-metric="fac_payment" aria-pressed="false">National payment, facility ($)</button>
+      </div>
+      <div class="pg-legend">
+        <span class="pg-key"><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="var(--accent)"/></svg>Female-anatomy procedure</span>
+        <span class="pg-key"><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="var(--ink)"/></svg>Male-anatomy procedure</span>
+        <span class="pg-key">Gap = female relative to male</span>
+      </div>
+      <div class="pg-plot" id="pubPlot" tabindex="0" role="region" aria-label="Published pairs chart. Scrolls sideways on small screens."></div>
+      <p class="pg-scrollhint" hidden>Scroll sideways for the full chart.</p>
+      <div class="pg-table-wrap" id="pubTable" tabindex="0" role="region" aria-label="Published pairs table. Scrolls sideways on small screens."></div>
+      <p class="pg-scrollhint" hidden>Scroll sideways for the full table.</p>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-label="Proposed pairs">
+    <div class="hr-wrap">
+      <p class="pg-kicker">Proposed · unreviewed</p>
+      <h2>Pairs we propose, for checking</h2>
+      <p class="pg-sub" id="propSub"></p>
+      <div class="pg-plot" id="propPlot" tabindex="0" role="region" aria-label="Proposed pairs chart. Scrolls sideways on small screens."></div>
+      <p class="pg-scrollhint" hidden>Scroll sideways for the full chart.</p>
+      <div class="pg-table-wrap" id="propTable" tabindex="0" role="region" aria-label="Proposed pairs table. Scrolls sideways on small screens."></div>
+      <p class="pg-scrollhint" hidden>Scroll sideways for the full table.</p>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-label="Not a fair pair">
+    <div class="hr-wrap">
+      <p class="pg-kicker">What you&rsquo;ll hear</p>
+      <h2>The comparison that isn&rsquo;t a fair pair</h2>
+      <p class="pg-sub" id="popSub"></p>
+      <ul class="pg-plain" id="popList"></ul>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-label="Reading the gap">
+    <div class="hr-wrap">
+      <p class="pg-kicker">Reading it</p>
+      <h2>What a gap here does and doesn&rsquo;t mean</h2>
+      <div class="hr-prose">
+        <p><b>The unit.</b> Medicare values every procedure in relative value units: a work RVU for the clinician&rsquo;s time, skill and stress, plus practice-expense and malpractice RVUs. The total, times one national conversion factor, is the payment before geographic adjustment. The work RVU is the part that says how hard Medicare thinks the operation is, which is why the literature compares it first.</p>
+        <p><b>Global periods.</b> A code with a 90-day global includes the operation plus three months of routine follow-up; a 10-day or 0-day code does not. Pairs whose global periods differ are flagged, because their RVUs are not the same kind of number.</p>
+        <p><b>Who sets the values.</b> Work RVUs come from physician surveys run through the AMA&rsquo;s Relative Value Scale Update Committee, which CMS usually accepts. The pairs here were valued by different specialty societies at different times, and that history is part of what the gaps show.</p>
+        <p><b>Codes, not paychecks.</b> Medicare&rsquo;s conversion factor is the same for a urologist and a gynecologist. Polan and Barber found the remaining dollar gap in how employers pay per RVU, which differs by specialty. This page compares what the codes are worth, not what any surgeon takes home.</p>
+        <p><b>Pairs are judgment calls.</b> Anatomy is matched; the operations are never identical. The published pairs carry their authors&rsquo; judgment, the proposed pairs carry Herada&rsquo;s until a clinician has checked them, and the same-operation pairs are the only ones where the code itself does the matching.</p>
+        <p><b>Why it reaches beyond Medicare.</b> Most private insurers price from the same RVUs, so a code valued low is valued low almost everywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-label="The literature">
+    <div class="hr-wrap">
+      <p class="pg-kicker">The literature</p>
+      <h2>Where the evidence stands</h2>
+      <p class="pg-sub">Four analyses of the same question since the RVU system began, each on its own set of pairs. This page&rsquo;s pairs are not the 55 that Penn and colleagues verified; the pair review will reconcile the two lists.</p>
+      <ul class="pg-plain" id="literature"></ul>
+    </div>
+  </section>
+
+  <section class="hr-section" aria-label="Method">
+    <div class="hr-wrap">
+      <h2>How the numbers are built</h2>
+      <div class="hr-prose" id="method"></div>
+      <p class="hr-sources" id="sources">Compiled by <a href="/">Herada</a> from the CMS relative value file linked above and the published analyses listed on this page. The pair list, with every rationale and flag, ships in the repository as <code>data/pay-gap/pairs.json</code>; the pull script as <code>data/pay-gap/pull_pfs.py</code>; the page&rsquo;s data as <a href="pay-gap.json"><code>pay-gap.json</code></a>. CPT codes and descriptions are copyright American Medical Association; this page uses the codes with its own plain-language labels. Corrections invited: <a href="mailto:joinherada@gmail.com">joinherada@gmail.com</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="hr-footer">
+  <div class="hr-wrap"><p class="hr-ui">A chapter of the Diagnostic Detour, a Herada project. Public data, every pair labelled, corrections invited. Not medical or billing advice.</p></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  var MINUS = "−";
+  function pct(g) {
+    if (g == null) return "n/a";
+    var v = Math.round(g * 100);
+    return (v < 0 ? MINUS : v > 0 ? "+" : "") + Math.abs(v) + "%";
+  }
+  function money(x) { return x == null ? "n/a" : "$" + Math.round(x).toLocaleString("en-US"); }
+  function rvu(x) { return x == null ? "n/a" : x.toFixed(2); }
+  function badge(t) { return '<span class="pg-badge b-' + esc(t) + '">' + esc(t.replace(/-/g, " ")) + "</span>"; }
+  function codes(side) { return side.codes.join(" + ") + (side.averaged ? " (averaged)" : ""); }
+  function globalLabel(side) { return side.global_days.map(function (g) { return g === "000" ? "0 days" : g === "010" ? "10 days" : g === "090" ? "90 days" : g; }).join(" + "); }
+  function gapClass(g) { return g == null ? "" : g < -0.005 ? "pg-neg" : g > 0.005 ? "pg-pos" : ""; }
+
+  // Build rules (see README): pairs come only from the data file, and every
+  // pair shows its group and match strength. Nothing is computed off-page.
+  var METRICS = {
+    work: { key: "work_rvu", gap: "gap_work", label: "Physician work (RVU)", fmt: rvu, axis: function (v) { return v.toFixed(0); } },
+    fac_payment: { key: "fac_payment", gap: "gap_fac_payment", label: "National payment, facility", fmt: money, axis: function (v) { return "$" + v.toLocaleString("en-US"); } }
+  };
+
+  function plot(el, pairs, metric) {
+    var m = METRICS[metric];
+    var rows = pairs.slice().sort(function (a, b) { return (a[m.gap] == null ? 1 : a[m.gap]) - (b[m.gap] == null ? 1 : b[m.gap]); });
+    var maxV = 0;
+    rows.forEach(function (p) { maxV = Math.max(maxV, p.female[m.key] || 0, p.male[m.key] || 0); });
+    maxV = maxV * 1.08;
+    var padL = 16, padR = 70, labelH = 22, rowH = 56, axisH = 36;
+    var plotW = 760, W = padL + plotW + padR, H = rows.length * rowH + axisH + 8;
+    function x(v) { return padL + v / maxV * plotW; }
+    var ticks = 5;
+    var s = [];
+    s.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(m.label) + ' for the female and male procedure of each pair" font-family="Figtree, Helvetica, Arial, sans-serif">');
+    var axisY = rows.length * rowH + 4;
+    for (var t = 0; t <= ticks; t++) {
+      var v = maxV / ticks * t;
+      s.push('<line x1="' + x(v) + '" y1="0" x2="' + x(v) + '" y2="' + axisY + '" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 4"/>');
+      s.push('<text x="' + x(v) + '" y="' + (axisY + 20) + '" font-size="12.5" fill="var(--ink-soft)" text-anchor="middle">' + esc(m.axis(Math.round(v))) + "</text>");
+    }
+    rows.forEach(function (p, i) {
+      var top = i * rowH, cy = top + labelH + 14;
+      var fv = p.female[m.key], mv = p.male[m.key];
+      s.push('<text x="' + padL + '" y="' + (top + 15) + '" font-size="13.5" font-weight="600" fill="var(--ink)">' + esc(p.label) +
+        ' <tspan font-weight="700" fill="var(--ink-soft)" font-size="12" letter-spacing="1">' + esc(p.match.replace(/-/g, " ").toUpperCase()) + "</tspan>" +
+        (p.global_mismatch ? ' <tspan fill="var(--accent)" font-size="12" font-weight="700">global differs</tspan>' : "") + "</text>");
+      s.push('<line x1="' + padL + '" y1="' + cy + '" x2="' + (padL + plotW) + '" y2="' + cy + '" stroke="var(--rule)" stroke-width="1"/>');
+      if (fv != null && mv != null) {
+        s.push('<line x1="' + x(fv) + '" y1="' + cy + '" x2="' + x(mv) + '" y2="' + cy + '" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round" opacity="0.6"/>');
+      }
+      function dot(v, color, title) {
+        if (v == null) return;
+        s.push('<circle cx="' + x(v) + '" cy="' + cy + '" r="9.5" fill="var(--bg)"/>');
+        s.push('<circle cx="' + x(v) + '" cy="' + cy + '" r="7" fill="' + color + '"><title>' + esc(title) + "</title></circle>");
+      }
+      dot(mv, "var(--ink)", p.male.plain + " (" + codes(p.male) + "): " + m.fmt(mv));
+      dot(fv, "var(--accent)", p.female.plain + " (" + codes(p.female) + "): " + m.fmt(fv));
+      var g = p[m.gap];
+      s.push('<text x="' + (W - 6) + '" y="' + (cy + 4.5) + '" font-size="13" font-weight="700" text-anchor="end" fill="' + (g != null && g < -0.005 ? "var(--accent)" : "var(--ink)") + '">' + esc(pct(g)) + "</text>");
+    });
+    s.push("</svg>");
+    el.innerHTML = s.join("");
+    updateScrollHints();
+  }
+
+  function table(el, pairs, withNotes) {
+    var t = [];
+    t.push('<table class="pg-table"><thead><tr><th scope="col">Pair</th><th scope="col">Female procedure<br>code · work RVU</th><th scope="col">Male procedure<br>code · work RVU</th><th scope="col">Work gap</th><th scope="col">Facility payment<br>female / male</th><th scope="col">Payment gap</th><th scope="col">Global<br>female / male</th>' + (withNotes ? '<th scope="col">Match · note</th>' : "") + "</tr></thead><tbody>");
+    pairs.slice().sort(function (a, b) { return a.gap_work - b.gap_work; }).forEach(function (p) {
+      t.push("<tr><td>" + esc(p.label) + '<span class="pg-src">' + esc(p.female.plain) + " vs. " + esc(p.male.plain) + "</span></td>");
+      t.push('<td><span class="pg-code">' + esc(codes(p.female)) + "</span> · " + rvu(p.female.work_rvu) + "</td>");
+      t.push('<td><span class="pg-code">' + esc(codes(p.male)) + "</span> · " + rvu(p.male.work_rvu) + "</td>");
+      t.push('<td class="' + gapClass(p.gap_work) + '">' + esc(pct(p.gap_work)) + "</td>");
+      t.push("<td>" + money(p.female.fac_payment) + " / " + money(p.male.fac_payment) + "</td>");
+      t.push('<td class="' + gapClass(p.gap_fac_payment) + '">' + esc(pct(p.gap_fac_payment)) + "</td>");
+      t.push('<td class="pg-global">' + esc(globalLabel(p.female)) + " / " + esc(globalLabel(p.male)) + (p.global_mismatch ? '<br><span class="pg-flag">differs</span>' : "") + "</td>");
+      if (withNotes) t.push('<td class="pg-note">' + badge(p.match) + (p.note ? " " + esc(p.note) : "") + "</td>");
+      t.push("</tr>");
+    });
+    t.push("</tbody></table>");
+    el.innerHTML = t.join("");
+    updateScrollHints();
+  }
+
+  function count(pairs, key) { return pairs.filter(function (p) { return p[key] != null && p[key] < -0.005; }).length; }
+
+  function render(d) {
+    document.getElementById("lede").textContent = d.lede;
+    var by = {};
+    d.pairs.forEach(function (p) { (by[p.group] = by[p.group] || []).push(p); });
+    var same = by.same || [], pub = by.published || [], prop = by.proposed || [], pop = by.popular || [];
+    var src = d.source;
+    var srcLink = '<a href="' + esc(src.url) + '">' + esc(src.release) + "</a>";
+
+    // Headlines, counted from the data so a changed pair list can never leave a stale sentence.
+    var sameLow = count(same, "gap_work");
+    document.getElementById("headline").textContent = "Where one operation has a female code and a male code, the female code carries less physician work in " + sameLow + " of " + same.length + ".";
+    document.getElementById("headlineCite").innerHTML = "Work RVUs in the 2026 fee schedule, " + srcLink + ". Urethra and sling codes whose descriptors differ only by sex. " + badge("same-operation");
+    var pubLowWork = count(pub, "gap_work"), pubLowPay = count(pub, "gap_fac_payment");
+    document.getElementById("headline2").textContent = "Across the " + pub.length + " published pairs, the female-anatomy procedure carries less physician work in " + pubLowWork + " and a lower national payment in " + pubLowPay + ".";
+    document.getElementById("headline2Cite").innerHTML = "Pairs from Goff, Muntz and Cain (1997) as re-used by Polan and Barber (2021), at 2026 values. In 2015 the count was 6 of 12 on the same pairs. " + badge("published");
+
+    document.getElementById("sameSub").textContent = d.groups.same;
+    table(document.getElementById("sameTable"), same, true);
+
+    document.getElementById("pubSub").textContent = d.groups.published + " Sorted by the gap, female relative to male; hover a dot for the figure, or read the table.";
+    plot(document.getElementById("pubPlot"), pub, "work");
+    table(document.getElementById("pubTable"), pub, true);
+    Array.prototype.forEach.call(document.querySelectorAll(".pg-toggle button"), function (b) {
+      b.addEventListener("click", function () {
+        Array.prototype.forEach.call(document.querySelectorAll(".pg-toggle button"), function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        plot(document.getElementById("pubPlot"), pub, b.getAttribute("data-metric"));
+        plot(document.getElementById("propPlot"), prop, b.getAttribute("data-metric"));
+      });
+    });
+
+    document.getElementById("propSub").textContent = d.groups.proposed + " The same toggle above applies here.";
+    plot(document.getElementById("propPlot"), prop, "work");
+    table(document.getElementById("propTable"), prop, true);
+
+    document.getElementById("popSub").textContent = d.groups.popular;
+    document.getElementById("popList").innerHTML = pop.map(function (p) {
+      return "<li><b>" + esc(p.label) + "</b> <span>· " + esc(p.female.plain) + " (" + esc(codes(p.female)) + "), work " + rvu(p.female.work_rvu) + ", facility payment " + money(p.female.fac_payment) +
+        (p.female.nonfac_payment != null ? ", office " + money(p.female.nonfac_payment) : "") + "; " + esc(p.male.plain) + " (" + esc(codes(p.male)) + "), work " + rvu(p.male.work_rvu) + ", facility payment " + money(p.male.fac_payment) +
+        (p.male.nonfac_payment != null ? ", office " + money(p.male.nonfac_payment) : "") + ". Work gap " + esc(pct(p.gap_work)) + ".</span>" +
+        (p.note ? '<span class="pg-meta">' + esc(p.note) + "</span>" : "") + "</li>";
+    }).join("");
+
+    document.getElementById("literature").innerHTML = d.literature.map(function (l) {
+      return "<li><b>" + esc(l.authors) + " (" + l.year + ").</b> <span>" + esc(l.finding) + '</span><span class="pg-meta"><a href="' + esc(l.url) + '">' + esc(l.title) + "</a>. " + esc(l.journal) + ". PMID " + esc(l.pmid) + ".</span></li>";
+    }).join("");
+
+    document.getElementById("method").innerHTML =
+      "<p><b>File.</b> " + esc(src.name) + ", release " + srcLink + ", table <code>" + esc(src.table) + "</code>, released " + esc(src.released) + ". Public domain, read by <code>pull_pfs.py</code> on " + esc(d.as_of) + ".</p>" +
+      "<p><b>Payment.</b> " + esc(src.payment_formula) + ". Conversion factor " + src.conversion_factor + ". " + esc(src.conversion_factor_note) + " Facility means the operation is done in a hospital or surgical center; where a code can also be done in an office the office amount appears in the not-a-fair-pair line and in the data file.</p>" +
+      "<p><b>Pairs.</b> Each pair is one CPT code per side, except where the published analysis averaged two codes, which is marked. The work gap is the female work RVU relative to the male one; the payment gap is the same for the national facility amount. Codes with modifiers are not used.</p>" +
+      "<p><b>Not here.</b> Operating times, surgeon pay, private-insurer rates, and the 55 pairs of Penn and colleagues, which are in the paper and will be reconciled with this list in review.</p>";
+  }
+
+  // Charts keep their natural width and scroll sideways on narrow screens;
+  // the hint under each one shows only when it actually overflows.
+  function updateScrollHints() {
+    Array.prototype.forEach.call(document.querySelectorAll(".pg-plot, .pg-table-wrap"), function (box) {
+      var hint = box.nextElementSibling;
+      if (!hint || !hint.classList.contains("pg-scrollhint")) return;
+      hint.hidden = box.scrollWidth <= box.clientWidth + 1;
+    });
+  }
+  window.addEventListener("resize", updateScrollHints);
+
+  fetch("pay-gap.json")
+    .then(function (resp) { if (!resp.ok) throw new Error(resp.status); return resp.json(); })
+    .then(render)
+    .catch(function () {
+      document.getElementById("pubPlot").innerHTML = '<p style="color:var(--ink-soft); padding:1.5rem 0">The data file could not be loaded. It is generated by <code>data/pay-gap/pull_pfs.py</code> in the repository.</p>';
+    });
+})();
+</script>
+</body>
+</html>

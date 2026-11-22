@@ -33,6 +33,16 @@ The page renders, from the data alone:
 - "what you've heard that doesn't hold up" — widely repeated figures
   that trace to no primary source, with what to cite instead.
 
+The project is two pages. The second, **the money** (`public/pay-gap/`,
+also known as the Procedure Pay Gap Explorer), compares what Medicare
+assigns to matched procedures on female and male anatomy, from the public
+2026 physician fee schedule: physician work RVUs and the national facility
+payment, pair by pair, with the gap shown female relative to male. A
+chapter strip on both pages ties them together. The money chapter is
+**held back**: reachable by its address, carrying a `noindex` tag and a
+draft notice, and not linked from the chapter strip until the pair review
+against Penn et al. (2025) and a clinician's check are done.
+
 The page also prints as a handout: an `@media print` block drops the
 header, notice and footer, forces paper colors in every color scheme,
 scales both charts to the page, sets the stat rows in two columns, keeps
@@ -55,6 +65,18 @@ as of Nov 2026, down from twelve.
 Figures flagged `verify: true` in the data render with a "being
 verified" mark; the page is titled **Draft** until those checks are done.
 
+Rules for the money chapter:
+
+4. Pairs come only from `data/pay-gap/pairs.json`; the chapter never adds
+   a pair on its own and shows every pair's `group` (same-operation,
+   published, proposed, popular) and `match` strength.
+5. A pair whose global periods differ is marked, because a 90-day code
+   includes three months of follow-up care and a 10-day code does not.
+6. Proposed pairs stay labelled unreviewed until a clinician has checked
+   them, and the chapter stays unlinked until then. To publish it, make
+   "The money" a link in the chapter strip (the HTML comment says how)
+   and drop the `noindex` meta tag.
+
 ## Data
 
 - Source of truth: `data/diagnostic-delay/findings.json` (see its README
@@ -70,9 +92,16 @@ cp data/diagnostic-delay/findings.json projects/diagnostic-detour/public/data.js
 - `public/trial-gap.json` — trial-enrollment aggregates, written by
   `python3 data/trial-gap/pull_trials.py` (run from the repo root).
   Source, license and pull date: `data/trial-gap/README.md`.
+- `public/pay-gap/pay-gap.json`: the money chapter's data, written by
+  `python3 data/pay-gap/pull_pfs.py` (run from the repo root) from the
+  hand-edited pair list `data/pay-gap/pairs.json` and the CMS relative
+  value file. Source, release and formula: `data/pay-gap/README.md`.
 
 ## Files
 
 - `public/index.html` — the page, self-contained; reads `data.json` and
   `trial-gap.json`. Deploys to `/projects/diagnostic-detour/` via the
   Pages workflow.
+- `public/pay-gap/index.html`: the money chapter, self-contained; reads
+  `pay-gap.json` beside it. Deploys to `/projects/diagnostic-detour/pay-gap/`
+  with the rest of the folder, linked or not.
