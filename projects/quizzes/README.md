@@ -16,9 +16,19 @@ Live:
   result with a strength, a watch-out, two curiosity-phrased scripts,
   and a link to the matching tool. Explicitly labeled a
   communication-style quiz that knows nothing about the player's health.
+- **How much do you actually know about perimenopause?** (graded, 10
+  rounds) — ten statements about the transition, true or not quite, each
+  reveal carrying the guideline or cohort behind it: STRAW+10 staging,
+  NICE NG23 on FSH testing and vaginal oestrogen, SWAN on hot-flash
+  duration and cognition, the Harvard Study of Moods and Cycles on
+  depression risk, FSRH on contraception, the Menopause Society's 2022
+  and 2020 position statements, ACOG's 2026 postmenopausal-bleeding
+  update, and the EMAS thyroid statement the Ledger also cites. Every
+  source URL was probed on 2026-11-10. Ships only after its claims are
+  checked against the Women's Health Bible draft (Essentials: hormonal
+  basics), which is the open step.
 
-Coming (content pending): perimenopause knowledge (check against the
-Bible before shipping); workup-completeness and who-should-I-see
+Coming (content pending): workup-completeness and who-should-I-see
 (clinical — flagged and review-gated before they go live).
 
 Adding a quiz = adding a definition object (`kind: "graded"` with
@@ -30,7 +40,8 @@ option→key mappings and a results table) to the QUIZZES array in
 
 No external data files; the Myth quiz's claims and sources mirror
 `data/diagnostic-delay/findings.json` — keep them in sync if findings
-change. No storage of any kind. Copy-my-result writes to the clipboard
+change. The perimenopause quiz cites guidelines and cohort papers
+directly (one URL per round, inside the quiz definition). No storage of any kind. Copy-my-result writes to the clipboard
 on-device.
 
 ## Files

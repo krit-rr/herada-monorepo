@@ -6,7 +6,6 @@ and each project or prototype.
     site/        the public website (joinherada.com), plain HTML and CSS
     bible/       Women's Health Bible notes; the draft lives in a Google Doc for now
     projects/    one folder per project or prototype
-    docs/        design system, WordPress migration checklist, reference files
     .github/     the workflow that publishes the site
 
 ## How publishing works
@@ -15,8 +14,14 @@ Every push to `main` publishes:
 
 - `site/` to the root of the website
 - `projects/<name>/public/` to `/projects/<name>/`
+- a `sitemap.xml` listing those pages, dated from their last commits
 
-There is no build tool. Editing a page means editing its HTML file.
+There is no build tool. Editing a page means editing its HTML file. The
+workflow copies folders, writes the sitemap in a few lines of shell, and
+refuses to deploy if an internal link points nowhere. Those scripts live in
+`tools/qa/`, together with the checks that run on every pull request: every
+page opened in headless Chromium at phone, tablet and desktop widths, plus the
+Ledger end to end. See `tools/qa/README.md` to run them locally.
 
 ## Previewing on your computer
 
@@ -28,6 +33,4 @@ Then open http://localhost:8000.
 
 ## Where to start
 
-1. `docs/wordpress-migration.md`: the checklist for moving off WordPress.
-2. `projects/README.md`: how to add a project.
-3. `docs/design-system.md`: colors, type and rules to keep the site consistent.
+1. `projects/README.md`: how to add a project.
