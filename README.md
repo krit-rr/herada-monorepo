@@ -1,10 +1,9 @@
 # Herada
 
-Everything Herada makes, in one place: the website, the Women's Health Bible,
-and each project or prototype.
+Everything Herada makes, in one place: the website and each project or
+prototype.
 
     site/        the public website (joinherada.com), plain HTML and CSS
-    bible/       Women's Health Bible notes; the draft lives in a Google Doc for now
     projects/    one folder per project or prototype
     data/        source datasets and analysis scripts, a README per dataset
     data/measures/  the internal map from Bible sections to HEDIS measures (not NCQA content)
