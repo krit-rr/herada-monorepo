@@ -30,6 +30,9 @@ jobs:
           # Full history, so the sitemap can date each page from its last commit.
           fetch-depth: 0
 
+      - id: pages
+        uses: actions/configure-pages@v6
+
       - name: Assemble site
         run: bash tools/qa/assemble.sh _site
 
@@ -48,7 +51,15 @@ jobs:
         # and the contents of <script> blocks are skipped.
         run: python3 tools/qa/linkcheck.py _site
 
-      - uses: actions/configure-pages@v6
+      - name: Prefix root paths when Pages serves the site under /<repo>/
+        # Until joinherada.com is the Pages domain, the site lives at
+        # krit-rr.github.io/herada-monorepo/ and configure-pages reports that
+        # base path; the pages link from the root, so the prefix is added to the
+        # assembled copy only. With the custom domain set, base_path is empty
+        # and this step changes nothing. It runs after the link check so the
+        # check still sees root paths.
+        run: bash tools/qa/prefix.sh _site "${{ steps.pages.outputs.base_path }}"
+
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
