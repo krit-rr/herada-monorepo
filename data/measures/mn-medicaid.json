@@ -1,0 +1,1381 @@
+{
+  "as_of": "2026-11-19",
+  "scope": "Minnesota Medical Assistance (MA) and MinnesotaCare; adult women 18 and over; preventive services only",
+  "status": "draft, pending clinical and plan-quality review",
+  "note": "Herada's draft list of the preventive services that adult women with Minnesota Medical Assistance or MinnesotaCare can get at no cost, with the words to book each one. It paraphrases public pages from Minnesota DHS and the MHCP Provider Manual, the USPSTF, HRSA's Women's Preventive Services Guidelines (via the WPSI) and the CDC, and benefits, copays and health plans can change, so check the current source before relying on a detail.",
+  "plan_types": [
+    {
+      "id": "ma",
+      "name_en": "Medical Assistance (Minnesota's Medicaid)",
+      "name_es": "Asistencia Médica (el Medicaid de Minnesota)",
+      "preventive_cost_sharing_en": "Medical Assistance has no copays and no deductibles for any service, so a preventive visit or screening costs you nothing.",
+      "preventive_cost_sharing_es": "La Asistencia Médica no tiene copagos ni deducibles para ningún servicio, así que una visita o un examen de detección preventivo no le cuesta nada.",
+      "managed_care_note_en": "Most Medical Assistance members get their care through a health plan such as Blue Plus, HealthPartners, Hennepin Health, Medica, Medica One Health Plan (the former UCare plans) or a county-based plan (Itasca Medical Care, PrimeWest Health or South Country Health Alliance), and the plan's name is printed on your member card.",
+      "managed_care_note_es": "La mayoría de los miembros de la Asistencia Médica reciben su atención por medio de un plan de salud como Blue Plus, HealthPartners, Hennepin Health, Medica, Medica One Health Plan (los antiguos planes de UCare) o un plan de condado (Itasca Medical Care, PrimeWest Health o South Country Health Alliance), y el nombre del plan está impreso en su tarjeta de miembro.",
+      "source_url": "https://www.revisor.mn.gov/statutes/cite/256B.0631",
+      "source_checked": "2026-11-19",
+      "short_name_en": "Medical Assistance",
+      "short_name_es": "Asistencia Médica"
+    },
+    {
+      "id": "mncare",
+      "name_en": "MinnesotaCare",
+      "name_es": "MinnesotaCare",
+      "preventive_cost_sharing_en": "MinnesotaCare charges adults 21 and older a copay for a nonpreventive visit and a few other services, but preventive care such as a checkup, a screening test or a vaccine has no copay, and children under 21, pregnant adults and American Indians pay no copays at all.",
+      "preventive_cost_sharing_es": "MinnesotaCare cobra a los adultos de 21 años o más un copago por una visita no preventiva y por algunos otros servicios, pero la atención preventiva, como un chequeo, un examen de detección o una vacuna, no tiene copago, y los menores de 21 años, las personas embarazadas y los indígenas americanos no pagan ningún copago.",
+      "managed_care_note_en": "MinnesotaCare members also get their care through a health plan such as Blue Plus, HealthPartners, Hennepin Health, Medica, Medica One Health Plan (the former UCare plans) or a county-based plan (Itasca Medical Care, PrimeWest Health or South Country Health Alliance), and the plan's name is printed on your member card.",
+      "managed_care_note_es": "Los miembros de MinnesotaCare también reciben su atención por medio de un plan de salud como Blue Plus, HealthPartners, Hennepin Health, Medica, Medica One Health Plan (los antiguos planes de UCare) o un plan de condado (Itasca Medical Care, PrimeWest Health o South Country Health Alliance), y el nombre del plan está impreso en su tarjeta de miembro.",
+      "source_url": "https://www.revisor.mn.gov/statutes/cite/256L.03",
+      "source_checked": "2026-11-19",
+      "short_name_en": "MinnesotaCare",
+      "short_name_es": "MinnesotaCare"
+    }
+  ],
+  "services": [
+    {
+      "id": "well-visit",
+      "name_en": "Yearly checkup",
+      "name_es": "Chequeo anual",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": null,
+      "interval_en": "Once a year",
+      "interval_es": "Una vez al año",
+      "interval_months": 12,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "hrsa_wpsi",
+          "title": "WPSI: Well-Woman Preventive Visits (updated 2016, 2022)",
+          "url": "https://www.womenspreventivehealth.org/recommendations/well-woman-preventive-visits/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota State Plan Amendment MN-23-0028: USPSTF A and B services and ACIP vaccines without cost sharing (approved February 23, 2024, effective October 1, 2023)",
+          "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "DHS-3182 Minnesota Health Care Programs brochure (7-26): preventive and wellness care listed as covered under MA and MinnesotaCare",
+          "url": "https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3182-ENG",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "A nurse checks your weight and blood pressure, and your doctor or nurse practitioner asks about your health, your family and how you are feeling. Together you decide which tests and shots you are due for, and some can be done the same day.",
+      "what_happens_es": "Una enfermera le toma el peso y la presión arterial, y su doctora o enfermera practicante le pregunta sobre su salud, su familia y cómo se siente. Juntas deciden qué pruebas y vacunas le tocan, y algunas se pueden hacer el mismo día.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like to book my yearly checkup, the preventive visit.\"",
+      "say_es": "\"Quiero hacer una cita para mi chequeo anual, la visita preventiva.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "99385",
+        "99386",
+        "99387",
+        "99395",
+        "99396",
+        "99397"
+      ],
+      "verified": true,
+      "verification_note": "The MHCP Physician and Professional Services section states that MHCP covers Grade A and B preventive services recommended by the USPSTF and that preventive health counseling billed with preventive medicine E/M codes is covered; DHS-3182 lists preventive and wellness care as covered under MA and MinnesotaCare; SPA MN-23-0028 covers USPSTF A and B services without cost sharing; the MinnesotaCare copay table charges only nonpreventive visits. The yearly well-woman visit itself is an HRSA women's guideline rather than a USPSTF item, and no MHCP page using the words well-woman visit was found. The codes are the CPT preventive visit codes by age band as listed in the Wisconsin Well Woman Program code list (July 2026), not an MHCP list.",
+      "placement": "headline"
+    },
+    {
+      "id": "cervical-screening",
+      "name_en": "Cervical cancer screening (Pap or HPV test)",
+      "name_es": "Examen de detección del cáncer de cuello uterino (prueba de Papanicolaou o del VPH)",
+      "applies_to": "women",
+      "age_min": 21,
+      "age_max": 65,
+      "interval_en": "Every 3 years with a Pap test; from age 30, every 5 years with an HPV test",
+      "interval_es": "Cada 3 años con una prueba de Papanicolaou; desde los 30 años, cada 5 años con una prueba del VPH",
+      "interval_months": 36,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "A",
+          "title": "Cervical Cancer: Screening (August 2018), women 21 to 65",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/cervical-cancer-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "hrsa_wpsi",
+          "title": "WPSI: Cervical Cancer screening (page text dated 2022; the WPSI index marks the topic updated January 2026)",
+          "url": "https://www.womenspreventivehealth.org/recommendations/cervical-cancer/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota Statutes 256B.0625 subd. 10: MA covers laboratory and x-ray services",
+          "url": "https://www.revisor.mn.gov/statutes/cite/256B.0625",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "You lie on an exam table and the clinician gently places a small tool in the vagina and brushes a few cells from the cervix. It takes about a minute, and the sample goes to a lab that sends the result in a week or two.",
+      "what_happens_es": "Usted se acuesta en una camilla y la clínica coloca con cuidado un instrumento pequeño en la vagina y toma unas pocas células del cuello uterino con un cepillo. Tarda alrededor de un minuto, y la muestra se envía a un laboratorio que manda el resultado en una o dos semanas.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I am due for my Pap or HPV test and would like to schedule it.\"",
+      "say_es": "\"Me toca mi prueba de Papanicolaou o del VPH y quiero hacer la cita.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "88141",
+        "88142",
+        "88175",
+        "87624"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade A (August 2018): cytology every 3 years at 21 to 29; at 30 to 65 cytology every 3 years, high-risk HPV testing every 5 years, or cotesting every 5 years. WPSI (2022 text) matches; the WPSI index says the topic was updated in January 2026 and that update was not read. MHCP covers USPSTF A and B services and laboratory services, and SPA MN-23-0028 removes cost sharing. The codes come from the Wisconsin Well Woman Program code list; the MHCP fee schedule was not opened.",
+      "placement": "headline"
+    },
+    {
+      "id": "mammogram",
+      "name_en": "Screening mammogram",
+      "name_es": "Mamografía de detección",
+      "applies_to": "women",
+      "age_min": 40,
+      "age_max": 74,
+      "interval_en": "Every 1 to 2 years",
+      "interval_es": "Cada 1 a 2 años",
+      "interval_months": 24,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "B",
+          "title": "Breast Cancer: Screening (April 2024), women 40 to 74 every other year",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/breast-cancer-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "hrsa_wpsi",
+          "title": "WPSI: Breast Cancer screening for average-risk women (updated 2016, 2024): start between 40 and 50, at least every two years and as often as every year, through at least 74",
+          "url": "https://www.womenspreventivehealth.org/recommendations/breast-cancer/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Radiology/Diagnostic Services, Mammography (revised November 13, 2026)",
+          "url": "https://www.dhs.state.mn.us/dhs16_144355/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota Statutes 256L.03 subd. 5(e): no MinnesotaCare cost sharing for additional diagnostic services after a mammogram",
+          "url": "https://www.revisor.mn.gov/statutes/cite/256L.03",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "A technologist places each breast on a flat plate and a second plate presses down for a few seconds while the machine takes pictures. The pressure can be uncomfortable but is brief, and the whole visit takes about 20 minutes.",
+      "what_happens_es": "Una técnica coloca cada seno sobre una placa plana y otra placa lo presiona unos segundos mientras la máquina toma las imágenes. La presión puede ser incómoda pero dura poco, y toda la visita tarda unos 20 minutos.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare, and if more pictures are needed after a mammogram, MinnesotaCare does not charge for those either.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare, y si hacen falta más imágenes después de una mamografía, MinnesotaCare tampoco las cobra.",
+      "say_en": "\"I would like to schedule my screening mammogram.\"",
+      "say_es": "\"Quiero hacer una cita para mi mamografía de detección.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "77067",
+        "77063"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade B (April 2024) is every other year from 40 to 74; the USPSTF A and B list notes that HHS uses the 2002 recommendation for coverage, which is every 1 to 2 years from 40, and WPSI (2024) allows yearly to every two years, so the page says every 1 to 2 years. The MHCP Radiology section says MHCP covers medically necessary mammography services and that a health plan must cover additional diagnostic services after a mammogram with no cost sharing; Minnesota Statutes 256L.03 subd. 5(e) says the same for MinnesotaCare. The DHS MinnesotaCare cost page (seen only in search excerpts) says cancer screenings have no copay; whether the MinnesotaCare radiology copay ($45 per visit in the 2025 manual table, $50 in the 2027 summary) is ever applied to a screening mammogram was not confirmed in the manual. Codes are from the CMS tool and the Wisconsin Well Woman Program code list.",
+      "placement": "headline"
+    },
+    {
+      "id": "colorectal-screening",
+      "name_en": "Colon cancer screening (stool test or colonoscopy)",
+      "name_es": "Examen de detección del cáncer de colon (prueba de heces o colonoscopia)",
+      "applies_to": "women",
+      "age_min": 45,
+      "age_max": 75,
+      "interval_en": "A stool test every year, or a colonoscopy every 10 years",
+      "interval_es": "Una prueba de heces cada año, o una colonoscopia cada 10 años",
+      "interval_months": 12,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "A",
+          "title": "Colorectal Cancer: Screening (May 2021), adults 50 to 75 (grade A) and 45 to 49 (grade B)",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/colorectal-cancer-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota State Plan Amendment MN-23-0028",
+          "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "DHS-4858A 2027 Managed Care Summary of Coverage, Cost Sharing and Limits for MinnesotaCare: no copay for ambulatory surgery or an outpatient hospital visit",
+          "url": "https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4858A-ENG",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "For the stool test, you collect a small sample at home with a kit and mail it or drop it off, with no prep and no time off work. For a colonoscopy, you drink a prep the day before and a doctor looks inside the colon with a thin tube while you are sedated, so you need a ride home.",
+      "what_happens_es": "Para la prueba de heces, usted toma una muestra pequeña en casa con un kit y la envía por correo o la entrega, sin preparación y sin faltar al trabajo. Para una colonoscopia, toma un líquido de preparación el día anterior y un doctor mira dentro del colon con un tubo delgado mientras usted está sedada, así que necesita que alguien la lleve a casa.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I am due for colon cancer screening and would like a stool test kit or to schedule a colonoscopy.\"",
+      "say_es": "\"Me toca el examen de detección del cáncer de colon y quiero un kit de prueba de heces o hacer una cita para una colonoscopia.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "82270",
+        "G0328",
+        "81528",
+        "G0121",
+        "G0105"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade A for 50 to 75 and grade B for 45 to 49 (May 2021); options include a yearly FIT or gFOBT, a stool DNA test every 1 to 3 years, and a colonoscopy every 10 years, and the page shows the two simplest. MHCP covers USPSTF A and B services; SPA MN-23-0028 removes cost sharing; the 2027 MinnesotaCare summary lists no copay for ambulatory surgery or outpatient hospital visits. Codes are from the CMS Medicare preventive services tool; CPT 45378 and 82274 were not in a source opened.",
+      "placement": "headline"
+    },
+    {
+      "id": "dental-checkup",
+      "name_en": "Dental checkup and cleaning",
+      "name_es": "Chequeo y limpieza dental",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": null,
+      "interval_en": "A checkup and cleaning twice a year",
+      "interval_es": "Un chequeo y una limpieza dos veces al año",
+      "interval_months": 6,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota Statutes 256B.0625 subd. 9: MA covers medically necessary dental services; prophylaxis up to four times per year with a treatment plan; fluoride varnish every six months",
+          "url": "https://www.revisor.mn.gov/statutes/cite/256B.0625",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Dental Benefits (revised October 7, 2026): D0120 periodic exam two times per year, D0150 comprehensive exam once per two years, D1110 adult prophylaxis twice per year plus up to two more with a documented plan",
+          "url": "https://www.dhs.state.mn.us/dhs16_148002/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Dental Services, eligible members are MA and MinnesotaCare (revised February 24, 2025)",
+          "url": "https://www.dhs.state.mn.us/id_008953/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Billing the Member (Recipient), copay table: nonpreventive dental copay $0 for MinnesotaCare, not applicable for MA (revised January 17, 2025)",
+          "url": "https://www.dhs.state.mn.us/dhs16_146878/",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "A hygienist cleans your teeth and may take a few x-rays, and the dentist checks your teeth and gums. The visit takes about an hour, and if something needs fixing they explain it and book another visit.",
+      "what_happens_es": "Una higienista le limpia los dientes y puede tomar algunas radiografías, y el dentista le revisa los dientes y las encías. La visita tarda alrededor de una hora, y si algo necesita arreglo se lo explican y le dan otra cita.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like to book a dental checkup and cleaning; my dental coverage is through Minnesota Health Care Programs.\"",
+      "say_es": "\"Quiero hacer una cita para un chequeo y una limpieza dental; mi cobertura dental es de los Programas de Salud de Minnesota (Minnesota Health Care Programs).\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "D0120",
+        "D0150",
+        "D1110",
+        "D0274"
+      ],
+      "verified": true,
+      "verification_note": "Since the 2024 statute change, MA covers medically necessary dental services for adults with no separate limited adult benefit set; the MHCP Dental Benefits page allows a periodic exam twice a year, a comprehensive exam once every two years, an adult cleaning twice a year (up to four with a documented plan) and a full x-ray series every two years. The Dental Services section lists MA and MinnesotaCare members as eligible, the copay table shows no MinnesotaCare dental copay, and the 2027 MinnesotaCare summary says no copay per non-routine dental visit. Health plan members contact their plan about dental limits, and finding a dentist who takes MHCP can be the hard part. The hints are CDT codes from the MHCP page, not CPT codes.",
+      "placement": "headline"
+    },
+    {
+      "id": "eye-exam",
+      "name_en": "Eye exam",
+      "name_es": "Examen de la vista",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": null,
+      "interval_en": "Once every two years, or sooner if your vision changes",
+      "interval_es": "Una vez cada dos años, o antes si su vista cambia",
+      "interval_months": 24,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Optical Services (revised January 2, 2025): optical services covered for all eligible MHCP members; comprehensive and intermediate vision examinations covered once every two years unless there has been a suspected change in vision",
+          "url": "https://www.dhs.state.mn.us/id_008954/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota Statutes 256B.0625 subd. 12: MA covers eyeglasses if prescribed by a licensed practitioner",
+          "url": "https://www.revisor.mn.gov/statutes/cite/256B.0625",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Billing the Member (Recipient), copay table: eyeglasses copay none for MA, $10 for MinnesotaCare (2025 table); DHS-4858A shows $15 for 2027",
+          "url": "https://www.dhs.state.mn.us/dhs16_146878/",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "You read letters on a chart and look through a set of lenses while the eye doctor finds the clearest one, and you may get drops that blur your vision for a few hours. If you need glasses, you pick a frame from the covered list and they are made and sent to the office.",
+      "what_happens_es": "Usted lee letras en una tabla y mira a través de un juego de lentes mientras el oculista encuentra el más claro, y puede recibir gotas que le nublan la vista por unas horas. Si necesita anteojos, elige un armazón de la lista cubierta y los hacen y los envían al consultorio.",
+      "free_en": "Free with Medical Assistance, glasses included. With MinnesotaCare the exam is free and a pair of glasses has a small copay ($10 in 2026, $15 in 2027).",
+      "free_es": "Gratis con la Asistencia Médica, anteojos incluidos. Con MinnesotaCare el examen es gratis y un par de anteojos tiene un copago pequeño ($10 en 2026, $15 en 2027).",
+      "say_en": "\"I would like to schedule a routine eye exam; I have Minnesota Health Care Programs coverage.\"",
+      "say_es": "\"Quiero hacer una cita para un examen de la vista de rutina; tengo cobertura de los Programas de Salud de Minnesota (Minnesota Health Care Programs).\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [],
+      "verified": true,
+      "verification_note": "The MHCP Optical Services section covers a comprehensive or intermediate vision examination once every two years unless there has been a suspected change in vision, for all eligible MHCP members, and covers eyeglasses when the correction is 0.50 diopters or more, with one frame from the contract list. The copay table shows no MA copay and a $10 MinnesotaCare eyeglasses copay in 2025, the DHS cost page excerpt shows $10 for 2026, and the 2027 summary shows $15; a routine exam without symptoms is not a nonpreventive visit under the copay definition. Exam CPT codes (92004, 92014) were not on the page opened, so no hints are given.",
+      "placement": "headline"
+    },
+    {
+      "id": "osteoporosis-screening",
+      "name_en": "Bone density scan",
+      "name_es": "Prueba de densidad ósea",
+      "applies_to": "women",
+      "age_min": 65,
+      "age_max": null,
+      "interval_en": "Once at 65; ask your clinic if and when to repeat it",
+      "interval_es": "Una vez a los 65 años; pregunte en su clínica si hay que repetirla y cuándo",
+      "interval_months": null,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "B",
+          "title": "Osteoporosis to Prevent Fractures: Screening (January 2025), women 65 and older, and postmenopausal women under 65 with one or more risk factors",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/osteoporosis-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota State Plan Amendment MN-23-0028",
+          "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "You lie on your back on a padded table with your clothes on while a scanner arm passes slowly over your hips and lower back. It is painless, uses a very low dose of x-ray and takes about 10 to 15 minutes.",
+      "what_happens_es": "Usted se acuesta boca arriba en una camilla acolchada, con su ropa puesta, mientras un brazo del escáner pasa despacio sobre sus caderas y la parte baja de la espalda. No duele, usa una dosis muy baja de rayos X y tarda unos 10 a 15 minutos.",
+      "free_en": "Free with Medical Assistance. With MinnesotaCare, ask the plan whether its radiology copay applies to this screening scan.",
+      "free_es": "Gratis con la Asistencia Médica. Con MinnesotaCare, pregunte al plan si su copago de radiología se aplica a esta prueba de detección.",
+      "say_en": "\"I am 65 and would like to schedule a bone density scan.\"",
+      "say_es": "\"Tengo 65 años y quiero hacer una cita para una prueba de densidad ósea.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "77080",
+        "77081",
+        "77078",
+        "G0130"
+      ],
+      "verified": false,
+      "verification_note": "USPSTF grade B (January 2025) for women 65 and older and for postmenopausal women under 65 with risk factors; the generator cannot express the younger group, so those women should ask. MA coverage without cost sharing follows from MHCP's USPSTF A and B statement and SPA MN-23-0028. Not confirmed: whether MinnesotaCare's radiology copay ($45 per visit in the 2025 manual table, $50 in the 2027 summary) is waived for this screening scan, and whether any MHCP frequency limit applies; the MHCP fee schedule was not opened. Codes are from the CMS Medicare preventive services tool (bone mass measurement).",
+      "placement": "headline"
+    },
+    {
+      "id": "family-planning",
+      "name_en": "Birth control visit",
+      "name_es": "Visita de planificación familiar (anticonceptivos)",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": 49,
+      "interval_en": "Whenever you need it, and a check once a year",
+      "interval_es": "Cuando lo necesite, y una revisión una vez al año",
+      "interval_months": 12,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "hrsa_wpsi",
+          "title": "WPSI: Contraception (updated 2016, 2022): the full range of FDA-approved methods, counseling, follow-up and sterilization",
+          "url": "https://www.womenspreventivehealth.org/recommendations/contraception/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "DHS-4858 2027 Managed Care Summary of Coverage for Medical Assistance: family planning services listed as covered",
+          "url": "https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4858-ENG",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Minnesota Family Planning Program, covered services (revised September 15, 2026)",
+          "url": "https://www.dhs.state.mn.us/dhs16_137813/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "federal",
+          "title": "42 U.S.C. 1396o(a)(2)(D): no Medicaid cost sharing for family planning services and supplies",
+          "url": "https://www.law.cornell.edu/uscode/text/42/1396o",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "You talk with the clinician about which methods fit your life, from pills and the patch to a shot, an implant or an IUD, and you can ask about sterilization too. Many methods can be started or placed the same day, and the visit is private.",
+      "what_happens_es": "Usted habla con la clínica sobre qué métodos se ajustan a su vida, desde pastillas y el parche hasta una inyección, un implante o un DIU, y también puede preguntar sobre la esterilización. Muchos métodos se pueden empezar o colocar el mismo día, y la visita es privada.",
+      "free_en": "Free with Medical Assistance, visit and method included. With MinnesotaCare the visit is free; ask the pharmacy whether your method has a prescription copay.",
+      "free_es": "Gratis con la Asistencia Médica, la visita y el método incluidos. Con MinnesotaCare la visita es gratis; pregunte en la farmacia si su método tiene copago de receta.",
+      "say_en": "\"I would like a family planning visit to talk about birth control.\"",
+      "say_es": "\"Quiero una visita de planificación familiar para hablar sobre anticonceptivos.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [],
+      "verified": false,
+      "verification_note": "DHS-4858 and DHS-4858A list family planning services as covered for MA and MinnesotaCare; the MHCP MFPP section lists family planning visits, exams, counseling, contraceptive medications and supplies, voluntary sterilization and STI testing as covered; federal law bars Medicaid cost sharing on family planning services and supplies. Not confirmed: whether MinnesotaCare's prescription copay ($10 generic and $25 brand in the 2025 manual table) is waived for contraceptives, because the general MHCP Family Planning and Reproductive Health sections could not be opened; MHCP's family planning code list was also not opened, so no codes are given. The age band is a generator convenience; the guideline covers all adolescent and adult women.",
+      "placement": "headline"
+    },
+    {
+      "id": "flu-shot",
+      "name_en": "Flu shot",
+      "name_es": "Vacuna contra la gripe (influenza)",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": null,
+      "interval_en": "Once a year, in the fall",
+      "interval_es": "Una vez al año, en el otoño",
+      "interval_months": 12,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "cdc_acip",
+          "title": "CDC Adult Immunization Schedule by Age, 2025 (page dated July 2, 2025): influenza, 1 dose annually, 19 and older",
+          "url": "https://www.cdc.gov/vaccines/hcp/imz-schedules/adult-age.html",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Immunization and Vaccine Benefits Codes for Adults (revised June 17, 2026)",
+          "url": "https://www.dhs.state.mn.us/main/idcplg?IdcService=GET_DYNAMIC_CONVERSION&RevisionSelectionMethod=LatestReleased&dDocName=DHS-320429",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Immunizations and Vaccinations: MHCP covers vaccines, toxoids and an administration fee (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota State Plan Amendment MN-23-0028: ACIP adult vaccines and their administration without cost sharing",
+          "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "A nurse or pharmacist gives one quick shot in your upper arm, and you can get it at your clinic or at many pharmacies. You may have a sore arm for a day, and you can go about your day right after.",
+      "what_happens_es": "Una enfermera o un farmacéutico le pone una inyección rápida en la parte alta del brazo, y puede recibirla en su clínica o en muchas farmacias. Puede tener el brazo adolorido un día, y puede seguir con su día de inmediato.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like to get my yearly flu shot.\"",
+      "say_es": "\"Quiero ponerme mi vacuna anual contra la gripe.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "90656",
+        "90658",
+        "90662",
+        "90674",
+        "90756"
+      ],
+      "verified": true,
+      "verification_note": "CDC schedule: 1 dose of an age-appropriate influenza vaccine every year from age 19. MHCP covers vaccines, toxoids and an administration fee, lists the adult influenza vaccine codes shown here, and covers pharmacist-administered vaccines (Minnesota Statutes 256B.0625 subd. 39(b)); SPA MN-23-0028 removes cost sharing for ACIP adult vaccines; the DHS MinnesotaCare cost page (seen in search excerpts) says vaccinations are $0. The live CDC page still showed the 2025 schedule on the check date.",
+      "placement": "headline"
+    },
+    {
+      "id": "blood-pressure",
+      "name_en": "Blood pressure check",
+      "name_es": "Control de la presión arterial",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": null,
+      "interval_en": "At every checkup, at least once a year",
+      "interval_es": "En cada chequeo, al menos una vez al año",
+      "interval_months": 12,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "A",
+          "title": "Hypertension in Adults: Screening (April 2021)",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/hypertension-in-adults-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota State Plan Amendment MN-23-0028",
+          "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "A cuff goes around your upper arm and squeezes for a few seconds while a machine or a nurse reads the numbers. If the reading is high, the clinic checks it again on another day before saying anything is wrong.",
+      "what_happens_es": "Le ponen un brazalete en la parte alta del brazo y este se aprieta unos segundos mientras una máquina o una enfermera lee los números. Si la medida sale alta, la clínica la vuelve a tomar otro día antes de decir que algo anda mal.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like my blood pressure checked at my visit.\"",
+      "say_es": "\"Quiero que me tomen la presión arterial en mi visita.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [],
+      "verified": true,
+      "verification_note": "USPSTF grade A (April 2021) for adults 18 and older without known hypertension, with confirmation outside the clinic before a diagnosis. It is part of the preventive visit under MHCP's USPSTF A and B coverage statement, so there is no separate charge or code; the USPSTF suggests yearly screening at 40 and over or at higher risk and every 3 to 5 years at 18 to 39 at lower risk, and the page keeps the simpler yearly wording.",
+      "placement": "checkup"
+    },
+    {
+      "id": "depression-screening",
+      "name_en": "Depression check",
+      "name_es": "Evaluación de depresión",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": null,
+      "interval_en": "At your checkup, at least once a year",
+      "interval_es": "En su chequeo, al menos una vez al año",
+      "interval_months": 12,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "B",
+          "title": "Depression and Suicide Risk in Adults: Screening (June 2023), adults including pregnant and postpartum persons and older adults",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/screening-depression-suicide-risk-adults",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "hrsa_wpsi",
+          "title": "WPSI: Screening for Anxiety (2020), a companion women's guideline",
+          "url": "https://www.womenspreventivehealth.org/recommendations/screening-for-anxiety/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Billing the Member (Recipient), copay table: no MinnesotaCare copay for mental health visits (revised January 17, 2025)",
+          "url": "https://www.dhs.state.mn.us/dhs16_146878/",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "You answer a short list of questions, on paper or a tablet, about your mood, sleep and energy over the last two weeks. Your clinician goes over your answers with you and tells you what support is available if you want it.",
+      "what_happens_es": "Usted contesta una lista corta de preguntas, en papel o en una tableta, sobre su ánimo, su sueño y su energía en las últimas dos semanas. Su clínica revisa las respuestas con usted y le dice qué apoyo hay disponible si lo quiere.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like a depression screening at my visit.\"",
+      "say_es": "\"Quiero que me hagan una evaluación de depresión en mi visita.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "G0444"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade B (June 2023) for all adults; the USPSTF does not fix an interval, so the page ties it to the checkup. MHCP covers USPSTF A and B services; SPA MN-23-0028 removes cost sharing; MinnesotaCare charges no copay for mental health visits. The only code with a source opened is Medicare's G0444; the brief assessment code often used (96127) was not in a source opened.",
+      "placement": "checkup"
+    },
+    {
+      "id": "ipv-screening",
+      "name_en": "Safety at home check (partner violence screening)",
+      "name_es": "Pregunta sobre su seguridad en casa (detección de violencia de pareja)",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": 49,
+      "interval_en": "At your checkup, once a year",
+      "interval_es": "En su chequeo, una vez al año",
+      "interval_months": 12,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "B",
+          "title": "Intimate Partner Violence and Caregiver Abuse of Older or Vulnerable Adults: Screening (June 2025), women of reproductive age",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/intimate-partner-violence-and-abuse-of-elderly-and-vulnerable-adults-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "hrsa_wpsi",
+          "title": "WPSI: Intimate Partner and Domestic Violence screening, at least annually for adolescent and adult women (updated 2016, 2024)",
+          "url": "https://www.womenspreventivehealth.org/recommendations/intimate-partner-and-domestic-violence/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "Your clinician asks you, in private, a few questions about whether you feel safe at home and with your partner. You can answer as much or as little as you want, and the clinic can connect you with help and a safe place to talk.",
+      "what_happens_es": "Su clínica le hace, en privado, unas pocas preguntas sobre si se siente segura en su casa y con su pareja. Usted puede contestar tanto o tan poco como quiera, y la clínica puede conectarla con ayuda y con un lugar seguro para hablar.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like a few minutes alone with the doctor or nurse at my visit.\"",
+      "say_es": "\"Quiero unos minutos a solas con la doctora o la enfermera en mi visita.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [],
+      "verified": true,
+      "verification_note": "USPSTF grade B (June 2025) for women of reproductive age, which sets the 18 to 49 band; WPSI recommends screening all adolescent and adult women at least annually, so older women can ask too. It is part of the visit under MHCP's USPSTF A and B coverage statement, with no separate code. The USPSTF detail page was not read; the title, grade and date come from the USPSTF A and B list.",
+      "placement": "checkup"
+    },
+    {
+      "id": "hiv-screening",
+      "name_en": "HIV test",
+      "name_es": "Prueba del VIH",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": 65,
+      "interval_en": "At least once between 15 and 65; more often if you are at higher risk",
+      "interval_es": "Al menos una vez entre los 15 y los 65 años; más seguido si tiene mayor riesgo",
+      "interval_months": null,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "A",
+          "title": "Human Immunodeficiency Virus (HIV) Infection: Screening (June 2019), adolescents and adults 15 to 65",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/human-immunodeficiency-virus-hiv-infection-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "hrsa_wpsi",
+          "title": "WPSI: Human Immunodeficiency Virus Infection screening (updated 2016, 2022)",
+          "url": "https://www.womenspreventivehealth.org/recommendations/human-immunodeficiency-virus-infection/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota State Plan Amendment MN-23-0028",
+          "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "A nurse takes a small tube of blood from your arm, or a drop from a finger prick for a rapid test. A rapid result can be ready in about 20 minutes, and a lab result in a few days.",
+      "what_happens_es": "Una enfermera le saca un tubo pequeño de sangre del brazo, o una gota con un pinchazo en el dedo para una prueba rápida. Un resultado rápido puede estar listo en unos 20 minutos, y uno de laboratorio en unos días.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like an HIV test as part of my routine care.\"",
+      "say_es": "\"Quiero hacerme la prueba del VIH como parte de mi atención de rutina.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "87389",
+        "G0475"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade A (June 2019) for ages 15 to 65 and for younger or older people at increased risk; WPSI says at least once in a lifetime from age 15 with risk-based rescreening. MHCP covers USPSTF A and B services and lab tests; SPA MN-23-0028 removes cost sharing. Codes are from the CMS Medicare preventive services tool (HIV screening).",
+      "placement": "checkup"
+    },
+    {
+      "id": "hepatitis-c",
+      "name_en": "Hepatitis C test",
+      "name_es": "Prueba de la hepatitis C",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": 79,
+      "interval_en": "Once; again only if you have a new risk",
+      "interval_es": "Una vez; otra vez solo si tiene un riesgo nuevo",
+      "interval_months": null,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "B",
+          "title": "Hepatitis C Virus Infection in Adolescents and Adults: Screening (March 2020), adults 18 to 79",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/hepatitis-c-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota State Plan Amendment MN-23-0028",
+          "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "A nurse takes a small tube of blood from your arm, often at the same time as other blood tests. The lab checks it for signs of the hepatitis C virus, and the clinic shares the result in a few days.",
+      "what_happens_es": "Una enfermera le saca un tubo pequeño de sangre del brazo, muchas veces junto con otros análisis de sangre. El laboratorio busca señales del virus de la hepatitis C, y la clínica le da el resultado en unos días.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I have never had a hepatitis C test and would like one.\"",
+      "say_es": "\"Nunca me he hecho la prueba de la hepatitis C y quiero hacérmela.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "G0472"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade B (March 2020) for adults 18 to 79, one-time screening with repeat testing for people with continued risk. MHCP covers USPSTF A and B services and lab tests; SPA MN-23-0028 removes cost sharing. The only code with a source opened is Medicare's G0472 from the CMS tool; the CPT antibody code commonly used (86803) was not found in a source opened.",
+      "placement": "checkup"
+    },
+    {
+      "id": "cholesterol-statin",
+      "name_en": "Cholesterol test and a talk about heart health",
+      "name_es": "Prueba de colesterol y una conversación sobre la salud del corazón",
+      "applies_to": "women",
+      "age_min": 40,
+      "age_max": 75,
+      "interval_en": "At your checkup; ask how often you need it",
+      "interval_es": "En su chequeo; pregunte cada cuánto la necesita",
+      "interval_months": null,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "B",
+          "title": "Statin Use for the Primary Prevention of Cardiovascular Disease in Adults: Preventive Medication (August 2022), adults 40 to 75 with risk factors",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/statin-use-in-adults-preventive-medication",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota Statutes 256B.0625 subd. 10: MA covers laboratory and x-ray services",
+          "url": "https://www.revisor.mn.gov/statutes/cite/256B.0625",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "A nurse takes a small tube of blood from your arm, sometimes after you skip food for a few hours. Your clinician uses the result, your age and your blood pressure to talk with you about your heart risk and about whether a daily pill called a statin makes sense for you.",
+      "what_happens_es": "Una enfermera le saca un tubo pequeño de sangre del brazo, a veces después de no comer por unas horas. Su clínica usa el resultado, su edad y su presión arterial para hablar con usted sobre su riesgo del corazón y sobre si una pastilla diaria llamada estatina tiene sentido para usted.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like a cholesterol test and to talk about my heart risk.\"",
+      "say_es": "\"Quiero una prueba de colesterol y hablar sobre mi riesgo del corazón.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "80061",
+        "82465",
+        "83718"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade B (August 2022) covers the statin discussion for adults 40 to 75 with one or more risk factors and a 10-year risk of 10 percent or more; the USPSTF has no separate adult lipid screening recommendation, so the blood test is covered as a laboratory service ordered at the visit, and healthcare.gov lists cholesterol screening for adults of certain ages or at higher risk. No interval is claimed. Codes are from the CMS Medicare preventive services tool (cardiovascular disease screening).",
+      "placement": "checkup"
+    },
+    {
+      "id": "adult-vaccines",
+      "name_en": "Other adult vaccines (Tdap, HPV through 26, COVID)",
+      "name_es": "Otras vacunas para adultos (Tdap, VPH hasta los 26 años, COVID)",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": null,
+      "interval_en": "Tdap every 10 years; HPV shots through age 26 if you did not finish them; COVID each season",
+      "interval_es": "Tdap cada 10 años; vacunas del VPH hasta los 26 años si no las terminó; COVID cada temporada",
+      "interval_months": null,
+      "conditions": [],
+      "basis": [
+        {
+          "type": "cdc_acip",
+          "title": "CDC Adult Immunization Schedule Notes, 2025 (July 2, 2025): Tdap once then Td or Tdap every 10 years; HPV through age 26, shared decision 27 to 45",
+          "url": "https://www.cdc.gov/vaccines/hcp/imz-schedules/adult-notes.html",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "cdc_acip",
+          "title": "CDC 2026-2027 COVID-19 Vaccination Guidance (updated September 23, 2026): a 2026-2027 COVID-19 vaccine is recommended for all adults 18 and older",
+          "url": "https://www.cdc.gov/covid/hcp/vaccine-considerations/routine-guidance.html",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Immunization and Vaccine Benefits Codes for Adults (revised June 17, 2026): Tdap 90715, HPV 90651, COVID vaccines reimbursable since September 11, 2023",
+          "url": "https://www.dhs.state.mn.us/main/idcplg?IdcService=GET_DYNAMIC_CONVERSION&RevisionSelectionMethod=LatestReleased&dDocName=DHS-320429",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota State Plan Amendment MN-23-0028: ACIP adult vaccines and their administration without cost sharing",
+          "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "Your clinic checks which shots you are due for, such as a tetanus booster (Tdap) every 10 years, the HPV series through age 26 and the season's COVID vaccine. A nurse gives each one in your upper arm, and it takes a few minutes.",
+      "what_happens_es": "Su clínica revisa qué vacunas le tocan, como el refuerzo contra el tétanos (Tdap) cada 10 años, la serie del VPH hasta los 26 años y la vacuna de COVID de la temporada. Una enfermera le pone cada una en la parte alta del brazo, y tarda unos minutos.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"Can you check which adult vaccines I am due for and give them at my visit?\"",
+      "say_es": "\"¿Puede revisar qué vacunas para adultos me tocan y ponérmelas en mi visita?\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "90715",
+        "90651",
+        "91320",
+        "91322"
+      ],
+      "verified": true,
+      "verification_note": "CDC notes: 1 dose Tdap then Td or Tdap every 10 years; HPV 2 or 3 doses through age 26, with shared decision making at 27 to 45; the 2026-2027 COVID guidance recommends a COVID-19 vaccine for all adults 18 and older (the 2025 schedule page still carries 2024-25 wording). The schedule also lists RSV (60 and older, or 50 to 59 at high risk), shingles (50 and older) and pneumococcal vaccines, which the page can add later. MHCP's adult vaccine code page lists 90715, 90651 and the COVID vaccine codes 91304, 91320 and 91322; SPA MN-23-0028 removes cost sharing for ACIP adult vaccines.",
+      "placement": "checkup"
+    },
+    {
+      "id": "chlamydia-gonorrhea",
+      "name_en": "Chlamydia and gonorrhea test",
+      "name_es": "Prueba de clamidia y gonorrea",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": 24,
+      "interval_en": "Usually once a year while you are sexually active, through age 24; after 24 if you are at higher risk",
+      "interval_es": "Por lo general una vez al año mientras tenga relaciones sexuales, hasta los 24 años; después de los 24 si tiene mayor riesgo",
+      "interval_months": 12,
+      "conditions": [
+        "sexually_active"
+      ],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "B",
+          "title": "Chlamydia and Gonorrhea: Screening (September 2021), sexually active women 24 and younger and older women at increased risk",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/chlamydia-and-gonorrhea-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "hrsa_wpsi",
+          "title": "WPSI: Sexually Transmitted Infections, counseling (updated 2016, 2022)",
+          "url": "https://www.womenspreventivehealth.org/recommendations/sexually-transmitted-infections/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota Statutes 256B.0625 subd. 10: MA covers laboratory and x-ray services",
+          "url": "https://www.revisor.mn.gov/statutes/cite/256B.0625",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "You give a urine sample in a cup, or the clinician takes a quick swab, and no blood is needed. The sample goes to a lab, and you can ask how you will get the result.",
+      "what_happens_es": "Usted da una muestra de orina en un vaso, o la clínica toma una muestra rápida con un hisopo, y no hace falta sangre. La muestra va a un laboratorio, y usted puede preguntar cómo recibirá el resultado.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like to be tested for chlamydia and gonorrhea.\"",
+      "say_es": "\"Quiero hacerme la prueba de clamidia y gonorrea.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "87491",
+        "87591"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade B (September 2021). The USPSTF does not set an interval; yearly is the CDC practice it cites, so the wording says usually. The age band is capped at 24 for the generator; older women at increased risk are covered too and should ask. MHCP covers USPSTF A and B services and lab tests; SPA MN-23-0028 removes cost sharing. Codes are from the CMS Medicare preventive services tool (STI screening).",
+      "placement": "conditional"
+    },
+    {
+      "id": "diabetes-screening",
+      "name_en": "Blood sugar test for diabetes",
+      "name_es": "Prueba de azúcar en la sangre para la diabetes",
+      "applies_to": "women",
+      "age_min": 35,
+      "age_max": 70,
+      "interval_en": "Every 3 years if the result is normal",
+      "interval_es": "Cada 3 años si el resultado es normal",
+      "interval_months": 36,
+      "conditions": [
+        "overweight"
+      ],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "B",
+          "title": "Prediabetes and Type 2 Diabetes: Screening (August 2021), adults 35 to 70 who have overweight or obesity",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/screening-for-prediabetes-and-type-2-diabetes",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "hrsa_wpsi",
+          "title": "WPSI: Diabetes after Pregnancy (updated 2017, 2023), for women who had gestational diabetes",
+          "url": "https://www.womenspreventivehealth.org/recommendations/diabetes-after-pregnancy/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota State Plan Amendment MN-23-0028",
+          "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "A nurse takes a small tube of blood from your arm, and for some tests you are asked not to eat for 8 hours before. The lab measures your blood sugar or your A1c, and the clinic shares the number with you in a few days.",
+      "what_happens_es": "Una enfermera le saca un tubo pequeño de sangre del brazo, y para algunas pruebas le piden no comer durante 8 horas antes. El laboratorio mide su azúcar en la sangre o su A1c, y la clínica le da el número en unos días.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare.",
+      "say_en": "\"I would like a blood sugar test to check for diabetes.\"",
+      "say_es": "\"Quiero una prueba de azúcar en la sangre para ver si tengo diabetes.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "82947",
+        "82950",
+        "82951",
+        "83036"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade B (August 2021) for adults 35 to 70 with overweight or obesity, and the USPSTF says screening every 3 years is reasonable. Women who had diabetes in pregnancy have a separate WPSI guideline (first test within a year after birth, then at least every 3 years), which the pregnant flag does not capture. MHCP covers USPSTF A and B services and lab tests; SPA MN-23-0028 removes cost sharing. Codes are from the CMS Medicare preventive services tool.",
+      "placement": "conditional"
+    },
+    {
+      "id": "tobacco-cessation",
+      "name_en": "Help to quit smoking or vaping",
+      "name_es": "Ayuda para dejar de fumar o de vapear",
+      "applies_to": "women",
+      "age_min": 18,
+      "age_max": null,
+      "interval_en": "Any time you are ready, as many times as you need",
+      "interval_es": "En cualquier momento en que esté lista, tantas veces como lo necesite",
+      "interval_months": null,
+      "conditions": [
+        "smoker_history"
+      ],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "A",
+          "title": "Tobacco Smoking Cessation in Adults, Including Pregnant Persons: Interventions (January 2021)",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/tobacco-use-in-adults-and-pregnant-women-counseling-and-interventions",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota Statutes 256B.0625 subd. 68: MA covers tobacco and nicotine cessation counseling, quitline services and all FDA-approved cessation drugs with no limits and no prior authorization",
+          "url": "https://www.revisor.mn.gov/statutes/cite/256B.0625",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota Statutes 256L.03 subd. 5(f): no MinnesotaCare cost sharing for cessation drugs or services",
+          "url": "https://www.revisor.mn.gov/statutes/cite/256L.03",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, education and counseling (tobacco cessation including Quitline, codes 99401 to 99409)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "You talk with a counselor, nurse or doctor, in person, by phone or by video, about a plan to quit. Patches, gum and quit medicines are covered too, with no limit and no approval needed first.",
+      "what_happens_es": "Usted habla con un consejero, una enfermera o un doctor, en persona, por teléfono o por video, sobre un plan para dejarlo. Los parches, los chicles y los medicamentos para dejar de fumar también están cubiertos, sin límite y sin necesidad de aprobación previa.",
+      "free_en": "Free with Medical Assistance and MinnesotaCare, counseling and quit medicines included.",
+      "free_es": "Gratis con la Asistencia Médica y con MinnesotaCare, incluidos la consejería y los medicamentos para dejar de fumar.",
+      "say_en": "\"I want to quit smoking and would like counseling and quit medicine.\"",
+      "say_es": "\"Quiero dejar de fumar y me gustaría recibir consejería y medicamento para dejarlo.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "99406",
+        "99407"
+      ],
+      "verified": true,
+      "verification_note": "USPSTF grade A (January 2021). Minnesota Statutes 256B.0625 subd. 68 requires MA to cover individual and group counseling, quitline calls and every FDA-approved cessation drug, and bars limits on type, duration or frequency, step therapy and prior authorization; 256L.03 subd. 5(f) bars MinnesotaCare cost sharing for these drugs and services; the MHCP Physician section lists tobacco cessation counseling, including Quitline services, under covered education and counseling. Codes are from the CMS Medicare preventive services tool.",
+      "placement": "conditional"
+    },
+    {
+      "id": "lung-cancer-screening",
+      "name_en": "Lung cancer screening scan (low-dose CT)",
+      "name_es": "Examen de detección del cáncer de pulmón (tomografía de baja dosis)",
+      "applies_to": "women",
+      "age_min": 50,
+      "age_max": 80,
+      "interval_en": "Once a year while you qualify",
+      "interval_es": "Una vez al año mientras cumpla los requisitos",
+      "interval_months": 12,
+      "conditions": [
+        "smoker_history"
+      ],
+      "basis": [
+        {
+          "type": "uspstf",
+          "grade": "B",
+          "title": "Lung Cancer: Screening (March 2021), adults 50 to 80 with a 20 pack-year history who smoke or quit within the past 15 years",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/lung-cancer-screening",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Physician and Professional Services, Preventive Medicine Services (revised July 30, 2026)",
+          "url": "https://www.dhs.state.mn.us/id_008926/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "MHCP Provider Manual: Radiology/Diagnostic Services, authorization requirements (revised November 13, 2026)",
+          "url": "https://www.dhs.state.mn.us/dhs16_144355/",
+          "checked": "2026-11-19"
+        },
+        {
+          "type": "mn_medicaid",
+          "title": "Minnesota Statutes 256B.0625 subd. 25a: prior authorization or decision support for CT in fee-for-service MA, not for health plan or MinnesotaCare members",
+          "url": "https://www.revisor.mn.gov/statutes/cite/256B.0625",
+          "checked": "2026-11-19"
+        }
+      ],
+      "what_happens_en": "You lie on a table that slides into a ring-shaped scanner and hold your breath for a few seconds while it takes pictures of your lungs. No needles or dye are used, and the scan itself takes less than a minute.",
+      "what_happens_es": "Usted se acuesta en una mesa que se desliza dentro de un escáner en forma de anillo y aguanta la respiración unos segundos mientras toma imágenes de sus pulmones. No se usan agujas ni tinte, y el escaneo en sí tarda menos de un minuto.",
+      "free_en": "Free with Medical Assistance. With MinnesotaCare, ask the plan whether its radiology copay applies to this screening scan.",
+      "free_es": "Gratis con la Asistencia Médica. Con MinnesotaCare, pregunte al plan si su copago de radiología se aplica a esta prueba de detección.",
+      "say_en": "\"I smoked for many years and would like to ask about a yearly lung cancer screening scan.\"",
+      "say_es": "\"Fumé por muchos años y quiero preguntar sobre un examen anual de detección del cáncer de pulmón.\"",
+      "plan_types": [
+        "ma",
+        "mncare"
+      ],
+      "cpt_hints": [
+        "71271",
+        "G0296"
+      ],
+      "verified": false,
+      "verification_note": "USPSTF grade B (March 2021) for adults 50 to 80 with a 20 pack-year history who currently smoke or quit within 15 years; the smoker_history flag cannot measure pack-years, so the clinic confirms who qualifies. MA coverage without cost sharing follows from MHCP's USPSTF A and B statement and SPA MN-23-0028. Not confirmed: whether a screening CT needs prior authorization in fee-for-service MA (the statute requires prior authorization or decision support for CT scans in fee-for-service only, and the Radiology section points to a fee schedule indicator that was not opened), and whether MinnesotaCare's radiology copay is waived for this screening. Codes are from the CMS Medicare preventive services tool.",
+      "placement": "conditional"
+    }
+  ],
+  "sources_checked": [
+    {
+      "title": "Minnesota Statutes 256B.0631 Prohibition on cost-sharing (2026 Minnesota Statutes, amended 2026 c 127 art 6)",
+      "url": "https://www.revisor.mn.gov/statutes/cite/256B.0631",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "Minnesota Statutes 256L.03 Covered health services (MinnesotaCare), subdivisions 1 and 5",
+      "url": "https://www.revisor.mn.gov/statutes/cite/256L.03",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "Minnesota Statutes 256B.0625 Covered services: subd. 3 physicians, 9 dental, 10 laboratory and x-ray, 12 eyeglasses, 14 diagnostic, screening and preventive services, 25a imaging prior authorization, 39 vaccines by pharmacists, 68 tobacco cessation",
+      "url": "https://www.revisor.mn.gov/statutes/cite/256B.0625",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "Minnesota Statutes 256B.055 subd. 15 Adults without children (the ACA expansion group)",
+      "url": "https://www.revisor.mn.gov/statutes/cite/256B.055",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "Minnesota Rules 9505.0225 Request to recipient to pay",
+      "url": "https://www.revisor.mn.gov/rules/9505.0225/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS-4858-ENG (8-26): 2027 Managed Care Summary of Coverage, Cost Sharing and Limits for Medical Assistance",
+      "url": "https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4858-ENG",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS-4858A-ENG (8-26): 2027 Managed Care Summary of Coverage, Cost Sharing and Limits for MinnesotaCare",
+      "url": "https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4858A-ENG",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS-4324-ENG: Families and Children PMAP Health Plan Choices by County, effective January 1 to December 31, 2027",
+      "url": "https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4324-ENG",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS-4326-ENG: MinnesotaCare Health Plan Choices by County, effective January 1 to December 31, 2027",
+      "url": "https://edocs.dhs.state.mn.us/lfserver/Public/DHS-4326-ENG",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS-3182-ENG (7-26): Minnesota Health Care Programs brochure",
+      "url": "https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3182-ENG",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS Eligibility Policy Manual 3.1.2.2 MinnesotaCare Premiums and Cost Sharing (September 1, 2020)",
+      "url": "https://hcopub.dhs.state.mn.us/epm/3_1_2_2.htm",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS Eligibility Policy Manual 2.1.1.2.3 MA Cost Sharing",
+      "url": "https://hcopub.dhs.state.mn.us/epm/2_1_1_2_3.htm",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: Physician and Professional Services (revised July 30, 2026)",
+      "url": "https://www.dhs.state.mn.us/id_008926/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: Billing the Member (Recipient) (revised January 17, 2025)",
+      "url": "https://www.dhs.state.mn.us/dhs16_146878/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: Billing Policy Overview (revised July 30, 2026)",
+      "url": "https://www.dhs.state.mn.us/id_008924/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: MHCP member eligibility and programs (revised January 9, 2026)",
+      "url": "https://www.dhs.state.mn.us/ID_008922/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: Optical Services (revised January 2, 2025)",
+      "url": "https://www.dhs.state.mn.us/id_008954/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: Dental Benefits (revised October 7, 2026)",
+      "url": "https://www.dhs.state.mn.us/dhs16_148002/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: Dental Services (revised February 24, 2025)",
+      "url": "https://www.dhs.state.mn.us/id_008953/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: Radiology/Diagnostic Services (revised November 13, 2026)",
+      "url": "https://www.dhs.state.mn.us/dhs16_144355/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: Minnesota Family Planning Program (revised September 15, 2026)",
+      "url": "https://www.dhs.state.mn.us/dhs16_137813/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual: Immunization and Vaccine Benefits Codes for Adults (revised June 17, 2026)",
+      "url": "https://www.dhs.state.mn.us/main/idcplg?IdcService=GET_DYNAMIC_CONVERSION&RevisionSelectionMethod=LatestReleased&dDocName=DHS-320429",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MHCP Provider Manual home and table of contents (revised July 6, 2026)",
+      "url": "https://www.dhs.state.mn.us/id_000094",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "Minnesota State Plan Amendment MN-13-0020: Alternative Benefit Plan for the adult expansion group (Group VIII adults), approved December 30, 2013, effective January 1, 2014",
+      "url": "https://www.medicaid.gov/State-resource-center/Medicaid-State-Plan-Amendments/Downloads/MN/MN-13-0020.pdf",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "Minnesota State Plan Amendment MN-23-0028: preventive services (USPSTF A and B, ACIP adult vaccines) without cost sharing, approved February 23, 2024, effective October 1, 2023",
+      "url": "https://www.medicaid.gov/medicaid/spa/downloads/MN-23-0028.pdf",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "Public Law 119-21, section 71120 (Medicaid cost sharing for certain expansion individuals from October 1, 2028)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "42 U.S.C. 1396o (Social Security Act 1916), subsections (a)(2) and (k)",
+      "url": "https://www.law.cornell.edu/uscode/text/42/1396o",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "42 U.S.C. 1396u-7 (Social Security Act 1937), benchmark coverage and essential health benefits",
+      "url": "https://www.law.cornell.edu/uscode/text/42/1396u-7",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "42 CFR 440.347 Essential health benefits (Alternative Benefit Plans)",
+      "url": "https://www.law.cornell.edu/cfr/text/42/440.347",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "42 CFR 600.405 and 600.520 Basic Health Program standard health plan coverage and cost sharing",
+      "url": "https://www.law.cornell.edu/cfr/text/42/600.405",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "45 CFR 156.115(a)(5): essential health benefits include the preventive services in 45 CFR 147.130",
+      "url": "https://www.law.cornell.edu/cfr/text/45/156.115",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "USPSTF A and B Recommendations list",
+      "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation-topics/uspstf-a-and-b-recommendations",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "Women's Preventive Services Initiative recommendations (well-woman visits, breast cancer, cervical cancer, contraception, HIV, intimate partner and domestic violence, sexually transmitted infections, anxiety, diabetes after pregnancy, obesity prevention in midlife women, urinary incontinence)",
+      "url": "https://www.womenspreventivehealth.org/recommendations/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "CDC Adult Immunization Schedule by Age and Notes (2025 schedule, page dated July 2, 2025)",
+      "url": "https://www.cdc.gov/vaccines/hcp/imz-schedules/adult-age.html",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "CDC 2026-2027 COVID-19 Vaccination Guidance (updated September 23, 2026)",
+      "url": "https://www.cdc.gov/covid/hcp/vaccine-considerations/routine-guidance.html",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "HealthCare.gov: Preventive care benefits for women",
+      "url": "https://www.healthcare.gov/preventive-care-women/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "HealthCare.gov: Preventive care benefits for adults",
+      "url": "https://www.healthcare.gov/preventive-care-adults/",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "CMS Medicare Preventive Services tool (code lists per service, 2026 Q4 edition)",
+      "url": "https://www.cms.gov/medicare/prevention/prevntiongeninfo/medicare-preventive-services/mps-quickreferencechart-1.html",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "Wisconsin Well Woman Program procedure code quick reference, July 1, 2026 to June 30, 2027",
+      "url": "https://dhs.wisconsin.gov/publications/p4/P43029a.pdf",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MNsure: 2026 Annual Health Plan Selection navigator presentation (January 14, 2026)",
+      "url": "https://www.mnsure.org/assets/2026%20AHPS%20011426%20-%20Navigators_tcm34-723053.pdf",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "MNsure: FAQ for Medica/UCare agreement effective January 1, 2026",
+      "url": "https://www.mnsure.org/assets/FAQ_for_Medica_UCare_Agreement_tcm34-713713.pdf",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS bulletin: Upcoming 2025 changes to member health plan choices (December 9, 2024)",
+      "url": "https://content.govdelivery.com/accounts/MNDHS/bulletins/3c65f1d",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS bulletin: UCare no longer available in some counties for PMAP and MinnesotaCare (July 15, 2025)",
+      "url": "https://content.govdelivery.com/accounts/MNDHS/bulletins/3e990e8",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS news release: New managed care contracts will serve 600,000 (October 5, 2022)",
+      "url": "https://content.govdelivery.com/accounts/MNDHS/bulletins/330a762",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "DHS MHCP Provider Connect bulletin (October 12, 2026): separate DHS enrollment website since July 2026",
+      "url": "https://content.govdelivery.com/accounts/MNDHS/bulletins/42e53f2",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "UCare plan closures page: UCare Medical Assistance plans transitioned to Medica (Medica One Health Plan) on October 1, 2026",
+      "url": "https://www.ucare.org/members/medicaid/plan-closures",
+      "checked": "2026-11-19"
+    },
+    {
+      "title": "KFF: Coverage of Preventive Services for Adults in Medicaid (November 2014), appendix on section 4106 state plan amendments",
+      "url": "https://www.kff.org/report-section/coverage-of-preventive-services-for-adults-in-medicaid-appendices/",
+      "checked": "2026-11-19"
+    }
+  ],
+  "could_not_verify": [
+    "The DHS consumer pages on mn.gov (MinnesotaCare 'How much does it cost?', 'Summary of coverage, cost sharing and limits', 'Annual health plan selection') could not be opened by our tools because of the site's bot protection, and the Wayback Machine is blocked here. The 2026 MinnesotaCare copay amounts ($28 doctor office visit, $100 emergency room, $10 per pair of eyeglasses, $10 generic or $25 brand prescriptions up to $70 per month, and '$0 for preventive care, such as annual checkups, cancer screenings and vaccinations') were seen only in search excerpts of those pages; the MHCP Billing the Member table (2025) and the 2027 DHS-4858A summary bracket them.",
+    "Whether Minnesota claims the ACA section 4106 one percentage point FMAP increase. SPA MN-23-0028 (effective October 1, 2023) attests coverage of all USPSTF A and B services and ACIP adult vaccines without cost sharing, which is the 4106 condition, but no document naming the FMAP claim was found, and KFF's 2014 list of 4106 state plan amendments did not include Minnesota.",
+    "MHCP Provider Manual sections Benefits at-a-glance, Managed Care Organizations, Family Planning, Reproductive Health/OB-GYN, Immunizations and Vaccinations, Laboratory and Pathology Services and the Member Evidence of Coverage were blocked by the site's bot protection on every attempt; coverage statements in this file rest on the sections that did open, the statutes, the SPAs and the DHS-4858 summaries.",
+    "The HRSA Women's Preventive Services Guidelines page (hrsa.gov/womens-guidelines) returned 403 to both tools, so the WPSI recommendation pages were used instead. The WPSI index marks cervical cancer screening as updated January 2026, but the page text read still says 2022; whether that update changed the screening schedule (for example, adding self-collected HPV tests) was not confirmed.",
+    "Whether MinnesotaCare's radiology copay ($45 per visit in the 2025 manual table, $50 per visit in the 2027 DHS-4858A summary) is ever applied to a screening mammogram, a bone density scan or a lung cancer screening CT. The DHS cost page excerpt says cancer screenings are $0 and the Radiology section says follow-up services after a mammogram carry no cost sharing, but the manual's radiology copay footnote was not found.",
+    "Whether MinnesotaCare's prescription copay is waived for contraceptives, and the MHCP family planning code list; the general Family Planning and Reproductive Health sections could not be opened.",
+    "The 2026 county-by-county plan list: eDocs now serves the 2027 editions of DHS-4324 and DHS-4326 (which add Medica One Health Plan and mark UCare as not accepting new enrollments), so the 2026 picture rests on the MNsure AHPS 2026 presentation and the DHS bulletins. UCare says its Medical Assistance plans transitioned to Medica as Medica One Health Plan on October 1, 2026, while the DHS-4858 summaries say Medica One Health Plan is new effective January 1, 2027; the exact transition date for members was not resolved.",
+    "MHCP's own fee schedule (procedure codes, frequency limits and prior authorization indicators) was not opened. Billing code hints come from the CMS Medicare preventive services tool, the Wisconsin Well Woman Program code list and the MHCP vaccine and dental pages; CPT 45378, 82274, 86803, 96127, 92004 and 92014 were not in a source opened and are left out.",
+    "Whether a lung cancer screening CT needs prior authorization in fee-for-service MA: Minnesota Statutes 256B.0625 subd. 25a requires prior authorization or decision support for CT scans in fee-for-service (not for health plan or MinnesotaCare members), and the Radiology section points to the fee schedule indicator.",
+    "The CDC adult schedule page still showed the 2025 edition (July 2, 2025) on the check date; a 2026 edition was not found at that URL. The 2026-2027 COVID guidance page (September 23, 2026) was used for COVID wording.",
+    "The USPSTF intimate partner violence (June 2025) detail page was not read; its title, grade, date and population come from the USPSTF A and B list.",
+    "Cost sharing after October 1, 2028: Minnesota Statutes 256B.0631 subd. 5 (added 2026) will charge adults without children above 100 percent of poverty $3 per nonpreventive visit, $3.50 for a nonemergency ER visit and small drug copays, and P.L. 119-21 section 71120 exempts primary care, mental health, substance use disorder, FQHC, CCBHC and RHC services, emergency services and family planning; preventive visits are excluded by the statute's own definition, but CMS implementing guidance was not checked."
+  ],
+  "placement_note": "placement is a display hint for the boarding-pass page: headline rows are the four to six lines on the pass (in this order, capped at six, overflow joins the checkup list); checkup rows sit under At your checkup, also ask for; conditional rows sit under If this is you, because the page asks no health questions."
+}

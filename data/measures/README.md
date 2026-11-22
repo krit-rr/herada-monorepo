@@ -1,3 +1,8 @@
+# Measures
+
+Two files: the HEDIS measure map (`hedis-map.json`) and the Minnesota Medicaid
+preventive-services rules behind the medical boarding pass (`mn-medicaid.json`).
+
 # HEDIS measure map
 
 Herada's internal crosswalk from six HEDIS measures to sections of the
@@ -63,3 +68,33 @@ legal read clears them; none makes a diagnosis or recommends treatment.
    newly confirmed out of `could_not_verify`.
 3. Validate: `python3 -I -m json.tool data/measures/hedis-map.json`.
    House style: no em dashes.
+
+# Minnesota Medicaid preventive rules (`mn-medicaid.json`)
+
+The rules the medical boarding pass reads (`projects/boarding-pass/public/data.json`
+is a copy; copy it across after editing). Scope: Minnesota Medical Assistance
+and MinnesotaCare, adult women 18 and over, preventive services only. Twenty
+service rows, each with the age band, the interval, the plan types, the
+coverage basis (USPSTF grade, HRSA guideline via the WPSI, CDC schedule,
+Minnesota statute, State Plan Amendment or MHCP Provider Manual section) with
+a URL and the date checked, two plain sentences on what the visit involves,
+the sentence to say when booking, Spanish strings, billing-code hints for the
+EOB check, a `verified` flag with a note on what the sources confirm, and a
+`placement` display hint. Two plan rows carry the cost-sharing answer and the
+managed-care note.
+
+- Source: public pages only, pulled by hand on 2026-11-19: mn.gov/dhs and
+  the MHCP Provider Manual, revisor.mn.gov, the USPSTF, womenspreventivehealth.org,
+  cdc.gov, medicaid.gov, healthcare.gov; the full list with URLs is in
+  `sources_checked`, and `could_not_verify` lists what the pages did not settle
+  (MinnesotaCare copay amounts rest on search excerpts because DHS consumer
+  pages sit behind a bot wall; whether its radiology copay touches a screening
+  scan; the 2026 county-plan list).
+- License: government pages are public domain or are linked, not copied.
+- Synthetic or personal rows: none; it is a rules file, not data about people.
+- Status: draft, pending clinical and plan-quality review. The Spanish is a
+  first draft pending a reviewer. No row is a diagnosis or a treatment.
+- Re-check each January (MinnesotaCare copays change with the year) and when
+  the MHCP manual sections cited show a new revision date. From October 1,
+  2028, Minnesota adds small copays for expansion adults above 100 percent of
+  poverty on nonpreventive care; preventive rows are unaffected by definition.
