@@ -13,14 +13,10 @@ workflow publishes each `projects/<folder>/public/` to
    - `public/index.html`: the page, self-contained (inline CSS and JS), so it
      stands alone at `/projects/<folder>/`. Copy the `<head>` of an existing
      project page to get the fonts, palette, metadata and dark mode.
-2. Link it from the site, in both places:
-   - `site/projects/index.html`: one `<li>` in the `hr-list`, with a status
-     span, the title linking to `/projects/<folder>/`, and a one-line
-     description.
-   - `site/index.html` carries three squares only: a blank one, the Rule-Out
-     Checklist and the Diagnostic Detour (since Nov 22, 2026), the two named
-     ones linking to their pages. A new project goes on the projects page, not the home
-     tiles, unless Krit says otherwise.
+2. Link it from the site: one `<li>` in `site/projects/index.html`, a status
+   span and the title linking to `/projects/<folder>/`. Nothing else: the
+   entries are status and title only, and the home page carries no tiles
+   (since Nov 22, 2026); the header links to the projects page.
 3. Push to `main`. The workflow copies the folder, writes `sitemap.xml`,
    checks every internal link, and deploys.
 
