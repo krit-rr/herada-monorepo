@@ -14,8 +14,11 @@ Every push to `main` publishes:
 
 - `site/` to the root of the website
 - `projects/<name>/public/` to `/projects/<name>/`
+- a `sitemap.xml` listing those pages, dated from their last commits
 
-There is no build tool. Editing a page means editing its HTML file.
+There is no build tool. Editing a page means editing its HTML file. The
+workflow copies folders, writes the sitemap in a few lines of shell, and
+refuses to deploy if an internal link points nowhere.
 
 ## Previewing on your computer
 
