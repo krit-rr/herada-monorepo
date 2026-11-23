@@ -69,7 +69,8 @@ a { color: var(--accent); text-underline-offset: 0.18em; }
 
 .hr-header { border-bottom: 1px solid var(--rule); }
 .hr-header .hr-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 2rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
-.hr-wordmark { font-family: var(--display); font-size: 1.375rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); }
+.hr-wordmark { font-family: var(--display); font-size: 1.375rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); text-decoration: none; }
+.hr-wordmark:hover { text-decoration: underline; }
 .hr-header span.hr-ui { color: var(--ink-soft); }
 
 .hr-notice { background: var(--strip); }
@@ -159,7 +160,7 @@ a { color: var(--accent); text-underline-offset: 0.18em; }
 <body>
 <header class="hr-header">
   <div class="hr-wrap">
-    <span class="hr-wordmark">HERADA</span>
+    <a class="hr-wordmark" href="/">HERADA</a>
     <span class="hr-ui">Prototype · Coverage Monitor</span>
   </div>
 </header>
