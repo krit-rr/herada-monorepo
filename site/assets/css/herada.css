@@ -287,6 +287,23 @@ a
    Homepage: radicchio ground, paper type
    ============================================================ */
 .hr-home { background: var(--accent); color: var(--paper); }
+/* Home: the hero owns the whole viewport between header and footer, content centred in it */
+.hr-home main { display: flex; flex-direction: column; }
+.hr-home .hr-hero { flex: 1 0 auto; display: flex; align-items: center; padding: clamp(3rem, 8vw, 6rem) 0; }
+.hr-home .hr-hero .hr-wrap { width: 100%; }
+.hr-cta { margin-top: 2.5rem; }
+.hr-cta a {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border: 1.5px solid var(--paper);
+  color: var(--paper);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.hr-cta a:hover { background: var(--paper); color: var(--accent); }
 .hr-home a { color: var(--paper); }
 .hr-home a:hover { color: var(--paper-dim); }
 .hr-home a:focus-visible { outline-color: var(--paper); }
