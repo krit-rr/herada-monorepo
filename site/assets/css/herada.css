@@ -140,10 +140,10 @@ h1, h2, h3 {
   color: var(--ink-soft);
 }
 .hr-hero .hr-lede {
-  max-width: 44rem;
+  max-width: 48rem;
   margin-top: 1.5rem;
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
-  line-height: 1.45;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.4;
 }
 
 /* Sections */
@@ -287,6 +287,25 @@ a
    Homepage: radicchio ground, paper type
    ============================================================ */
 .hr-home { background: var(--accent); color: var(--paper); }
+/* Home: the hero owns the whole viewport between header and footer, content centred in it */
+.hr-home main { display: flex; flex-direction: column; }
+.hr-home .hr-hero { flex: 1 0 auto; display: flex; align-items: center; padding: clamp(3rem, 8vw, 6rem) 0; }
+.hr-home .hr-hero .hr-wrap { width: 100%; }
+.hr-cta { margin-top: 3rem; text-align: center; }
+.hr-cta a {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border: 1.5px solid var(--paper);
+  background: var(--paper);
+  color: var(--accent);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.hr-home .hr-cta a { color: var(--accent); }
+.hr-home .hr-cta a:hover { background: transparent; color: var(--paper); }
 .hr-home a { color: var(--paper); }
 .hr-home a:hover { color: var(--paper-dim); }
 .hr-home a:focus-visible { outline-color: var(--paper); }
