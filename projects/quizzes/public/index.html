@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pop Quiz: a tool by Herada</title>
+<title>Pop Quizzes: a tool by Herada</title>
 <meta name="description" content="Quizzes in women's health worth your tap: guess which circulating stats hold up, find your exam-room style, and more. Nothing you answer leaves your device.">
 <link rel="canonical" href="https://joinherada.com/projects/quizzes/">
 <meta name="theme-color" content="#FDFCFE" media="(prefers-color-scheme: light)">
@@ -93,8 +93,8 @@ a:hover { color: var(--accent-hover); }
 .qz-card:last-child { border-bottom: 1px solid var(--rule); }
 .qz-card:hover h2 { color: var(--accent); }
 .qz-card .qz-meta { font-family: var(--ui); font-size: 0.875rem; font-weight: 700; color: var(--ink); }
-.qz-card .qz-meta::before { content: "["; color: var(--accent); }
-.qz-card .qz-meta::after { content: "]"; color: var(--accent); }
+.qz-card.qz-soon .qz-meta::before { content: "["; color: var(--accent); }
+.qz-card.qz-soon .qz-meta::after { content: "]"; color: var(--accent); }
 .qz-card h2 { margin-top: 0.3rem; }
 .qz-card p { margin-top: 0.4rem; font-size: 1.0625rem; color: var(--ink-soft); max-width: 44rem; }
 .qz-go { display: inline-block; margin-top: 0.6rem; font-family: var(--ui); font-size: 0.9375rem; font-weight: 600; color: var(--accent); }
@@ -167,12 +167,12 @@ a:hover { color: var(--accent-hover); }
 <header class="hr-header">
   <div class="hr-wrap">
     <a class="hr-wordmark" href="/">HERADA</a>
-    <span class="hr-ui">Tool · Pop Quiz</span>
+    <span class="hr-ui">Tool · Pop Quizzes</span>
   </div>
 </header>
 
 <aside class="hr-notice" aria-label="Page notice">
-  <div class="hr-wrap"><p><b>[Nothing stored]</b> Answers are never saved or sent anywhere + the page forgets when you close it. For curiosity, not diagnosis.</p></div>
+  <div class="hr-wrap"><p><b>[Nothing Stored]</b> Answers are never saved or sent anywhere + the page forgets when you close it. For curiosity, not diagnosis.</p></div>
 </aside>
 
 <main>
@@ -196,7 +196,7 @@ a:hover { color: var(--accent-hover); }
   var MYTH = {
     id: "myth-or-measured",
     kind: "graded",
-    title: "Myth or measured?",
+    title: "Myth or Measured?",
     blurb: "Eight stats that circulate in women's health. You call it: does the number trace to a real study, or does it fall apart when you pull the thread?",
     meta: "8 rounds · source-grading, the game",
     optionsLabels: ["Measured · it holds up", "Myth-ish · it doesn’t hold up"],
@@ -249,7 +249,7 @@ a:hover { color: var(--accent-hover); }
   var STYLE = {
     id: "appointment-style",
     kind: "archetype",
-    title: "What’s your appointment style?",
+    title: "What’s Your Appointment Style?",
     blurb: "Seven questions, four exam-room archetypes, zero judgment. Find yours and get the scripts that fit how you actually talk.",
     meta: "7 questions · for fun, with useful ends",
     questions: [
@@ -330,7 +330,7 @@ a:hover { color: var(--accent-hover); }
   var PERI = {
     id: "perimenopause",
     kind: "graded",
-    title: "How much do you actually know about perimenopause?",
+    title: "How Much Do You Actually Know About Perimenopause?",
     blurb: "Ten statements about the years before the last period. True, or not quite? Every reveal carries the guideline or study behind it.",
     meta: "10 rounds · the transition, sourced",
     optionsLabels: ["True · that’s how it works", "Not quite · it’s more complicated"],
@@ -388,8 +388,8 @@ a:hover { color: var(--accent-hover); }
 
   var QUIZZES = [MYTH, STYLE, PERI];
   var COMING = [
-    { title: "How complete was your workup?", meta: "Coming soon · will ship after clinical review" },
-    { title: "Who should I actually see?", meta: "Coming soon · will ship after clinical review" }
+    { title: "How Complete Was Your Workup?", meta: "Coming Soon · Pending clinical review" },
+    { title: "Who Should I Actually See?", meta: "Coming Soon · Pending clinical review" }
   ];
 
   var app = document.getElementById("app");
@@ -398,8 +398,8 @@ a:hover { color: var(--accent-hover); }
   // ---------- Hub ----------
   function renderHub() {
     state = null;
-    var out = ['<div class="qz-hub"><p class="qz-kicker">Pop quiz</p><h1>Tap through. Learn something. Keep the receipts.</h1>',
-      '<p class="qz-lede">Quizzes in women’s health that respect your intelligence. Nothing stored + every reveal sourced.</p>',
+    var out = ['<div class="qz-hub"><h1>Pop Quizzes</h1>',
+      '<p class="qz-lede">Taking a page out of Buzzfeed’s book to be fun and educational. Nothing stored + sources shared.</p>',
       '<div class="qz-cards">'];
     QUIZZES.forEach(function (qz) {
       out.push('<button type="button" class="qz-card" data-quiz="' + qz.id + '"><span class="qz-meta">' + esc(qz.meta) + "</span><h2>" + esc(qz.title) + "</h2><p>" + esc(qz.blurb) + '</p><span class="qz-go">Play →</span></button>');
@@ -468,7 +468,7 @@ a:hover { color: var(--accent-hover); }
       var total = qz.questions.length;
       var line = qz.scoreLines[0][1];
       qz.scoreLines.forEach(function (sl) { if (state.score >= sl[0]) line = sl[1]; });
-      out.push('<div class="qz-result"><h1 class="qz-kicker">Your result</h1>');
+      out.push('<div class="qz-result"><h1 class="qz-kicker">Your Result</h1>');
       out.push('<p class="qz-big">' + state.score + " / " + total + "</p>");
       out.push("<p><b>" + esc(line) + "</b></p>");
       out.push("<p>" + qz.resultNote + "</p>");
@@ -477,7 +477,7 @@ a:hover { color: var(--accent-hover); }
     } else {
       var best = Object.keys(qz.results).sort(function (a, b) { return (state.tally[b] || 0) - (state.tally[a] || 0); })[0];
       var r = qz.results[best];
-      out.push('<div class="qz-result"><h1 class="qz-kicker">Your exam-room archetype</h1>');
+      out.push('<div class="qz-result"><h1 class="qz-kicker">Your Exam-Room Archetype</h1>');
       out.push("<h2>" + esc(r.name) + "</h2>");
       out.push("<p>" + esc(r.desc) + "</p>");
       out.push('<p class="qz-strength"><b>' + esc(r.strength) + "</b></p>");

@@ -165,7 +165,9 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 .dd-scale li { padding: 0.45rem 0; border-top: 1px solid var(--rule); display: flex; gap: 0.75rem; align-items: baseline; }
 .dd-scale li:last-child { border-bottom: 1px solid var(--rule); }
 .dd-scale .dd-badge { flex: none; width: 7.5rem; text-align: center; }
-.hr-sources { margin-top: clamp(2rem, 5vw, 3rem); padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
+.hr-sources-sec .hr-wrap { border-top: 1px solid var(--rule); padding-top: 2rem; }
+.hr-sources-sec h2 { margin-bottom: 1rem; }
+.hr-sources { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
 
 .hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
 
@@ -241,17 +243,17 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
       <p class="hr-lede" id="lede"></p>
       <nav class="dd-chapters" aria-label="Chapters">
         <span class="dd-chapter-label">Chapters</span>
-        <a href="#years">Years to a diagnosis</a>
-        <a href="#gap">The gap</a>
-        <a href="#wrong">The wrong label</a>
-        <a href="#cost">The meter running</a>
-        <a href="#trial-gap">Who gets studied</a>
-        <a href="#holes">The holes</a>
-        <a href="#refused">What doesn&rsquo;t hold up</a>
+        <a href="#years">Years to a Diagnosis</a>
+        <a href="#gap">Gap</a>
+        <a href="#wrong">Wrong Label</a>
+        <a href="#cost">Meter Running</a>
+        <a href="#trial-gap">Who Gets Studied</a>
+        <a href="#holes">Holes</a>
+        <a href="#refused">What Doesn&rsquo;t Hold Up</a>
         <!-- The money chapter is written and lives at pay-gap/, held back until
              the pair review and a clinician's check. To publish it, replace the
-             span below with: <a href="pay-gap/">The money</a> -->
-        <span class="dd-held">The money<span class="dd-badge">reviewing</span></span>
+             span below with: <a href="pay-gap/">Money</a> -->
+        <span class="dd-held">Money<span class="dd-badge">reviewing</span></span>
       </nav>
     </div>
   </section>
@@ -273,8 +275,8 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 
   <section class="dd-section" id="years" aria-label="Years to a diagnosis">
     <div class="hr-wrap">
-      <p class="dd-kicker">Years to a diagnosis</p>
-      <h2>How long the detour runs</h2>
+      <p class="dd-kicker">Years to a Diagnosis</p>
+      <h2>How Long the Detour Runs</h2>
       <p class="dd-sub">Published delays from symptom onset (or first visit) to diagnosis, in years, longest first. Only time-based figures appear here; each row carries its source grade. <span class="dd-screen">Hover any dot for the source.</span></p>
       <div class="dd-legend" id="plotLegend" hidden>
         <span class="dd-key"><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="var(--accent)"/></svg>Women</span>
@@ -291,8 +293,8 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 
   <section class="dd-section" id="gap" aria-label="Women vs men">
     <div class="hr-wrap">
-      <p class="dd-kicker">The gap</p>
-      <h2>Women vs. men, same condition</h2>
+      <p class="dd-kicker">Gap</p>
+      <h2>Women vs. Men, Same Condition</h2>
       <p class="dd-sub">Where a study measured both sexes. Counter-evidence is shown too: the detour is not uniform, and pretending it is would be its own kind of misdiagnosis.</p>
       <ul class="dd-rows" id="gapRows"></ul>
     </div>
@@ -300,24 +302,24 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 
   <section class="dd-section" id="wrong" aria-label="The wrong label first">
     <div class="hr-wrap">
-      <p class="dd-kicker">The wrong label first</p>
-      <h2>Misdiagnosis and &ldquo;it&rsquo;s in your head&rdquo;</h2>
+      <p class="dd-kicker">Wrong Label First</p>
+      <h2>Misdiagnosis and &ldquo;It&rsquo;s in Your Head&rdquo;</h2>
       <ul class="dd-rows" id="wrongRows"></ul>
     </div>
   </section>
 
   <section class="dd-section" id="cost" aria-label="Visits and cost">
     <div class="hr-wrap">
-      <p class="dd-kicker">The meter running</p>
-      <h2>Visits and cost before the answer</h2>
+      <p class="dd-kicker">Meter Running</p>
+      <h2>Visits and Cost Before the Answer</h2>
       <ul class="dd-rows" id="costRows"></ul>
     </div>
   </section>
 
   <section class="dd-section" id="trial-gap" aria-label="Who gets studied">
     <div class="hr-wrap">
-      <p class="dd-kicker">Who gets studied</p>
-      <h2>The trial gap: patients vs. participants</h2>
+      <p class="dd-kicker">Who Gets Studied</p>
+      <h2>The Trial Gap: Patients vs. Participants</h2>
       <p class="dd-sub">For ten conditions whose patients are mostly women: the share of women among clinical-trial participants, against their share among patients, from ClinicalTrials.gov posted results. Below the diagonal, women are underrepresented relative to the patient population.</p>
       <div class="dd-plot" id="tgChart" tabindex="0" role="region" aria-label="Trial enrollment chart. Scrolls sideways on small screens."></div>
       <p class="dd-scrollhint" hidden>Scroll sideways for the full chart.</p>
@@ -329,8 +331,8 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 
   <section class="dd-section" id="holes" aria-label="Missing evidence">
     <div class="hr-wrap">
-      <p class="dd-kicker">The holes</p>
-      <h2>Where the evidence is missing</h2>
+      <p class="dd-kicker">Holes</p>
+      <h2>Where the Evidence Is Missing</h2>
       <p class="dd-sub">Conditions and questions where this research found no usable numbers at all. The biggest hole is the thesis itself. That is a study someone should run.</p>
       <ul class="dd-plain" id="gaps"></ul>
     </div>
@@ -338,8 +340,8 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 
   <section class="dd-section" id="refused" aria-label="Refused numbers">
     <div class="hr-wrap">
-      <p class="dd-kicker">The receipts we didn&rsquo;t find</p>
-      <h2>What you&rsquo;ve heard that doesn&rsquo;t hold up</h2>
+      <p class="dd-kicker">Receipts We Didn&rsquo;t Find</p>
+      <h2>What You&rsquo;ve Heard That Doesn&rsquo;t Hold Up</h2>
       <p class="dd-sub">Figures that circulate widely but trace to no primary source, plus anything graded &ldquo;secondary.&rdquo; None of these appear as data points anywhere on this page. They are listed so you know we looked + what to cite instead.</p>
       <ul class="dd-plain" id="untraceable"></ul>
     </div>
@@ -347,11 +349,17 @@ table.tg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 
   <section class="hr-section" id="method" aria-label="Method">
     <div class="hr-wrap">
-      <h2>How to read the grades</h2>
+      <h2>How to Read the Grades</h2>
       <ul class="dd-scale" id="scale"></ul>
       <div class="hr-prose">
         <p>Registry and claims figures count whole populations and are the strongest; cohorts count one clinic's patients; surveys count the people who answered, who are usually the people with the worst journeys. Where a widely quoted number failed verification, the traceable number is shown instead.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="hr-section hr-sources-sec" aria-label="Sources">
+    <div class="hr-wrap">
+      <h2>Sources</h2>
       <p class="hr-sources" id="sources">Compiled by <a href="/">Herada</a> from the published sources linked on each row. The delay dataset, with every source and flag, ships in the repository as <code>findings.json</code>; the trial-enrollment aggregates as <code>trial-gap.json</code>.</p>
     </div>
   </section>
