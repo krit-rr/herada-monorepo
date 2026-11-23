@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Medical Boarding Pass: a page by Herada</title>
+<title>Medical Boarding Pass: a page by Herada</title>
 <meta name="description" content="The preventive care you are owed this year, free with your plan, and the words to book it. Built from your age, state and plan type, in your browser. Minnesota Medicaid first. English and Spanish.">
 <link rel="canonical" href="https://joinherada.com/projects/boarding-pass/">
 <meta name="theme-color" content="#FDFCFE" media="(prefers-color-scheme: light)">
@@ -92,9 +92,6 @@ a:hover { color: var(--accent-hover); }
 .hr-lede { max-width: 44rem; margin-top: 1.5rem; font-size: 1.375rem; line-height: 1.45; color: var(--ink); }
 
 .lg-section { border-top: 3px solid var(--ink); padding: 2.25rem 0 2.75rem; }
-.lg-kicker { font-family: var(--ui); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.85rem; }
-.lg-kicker::before { content: "["; color: var(--accent); }
-.lg-kicker::after { content: "]"; color: var(--accent); }
 .lg-sub { margin-top: 0.5rem; max-width: 44rem; font-size: 1.0625rem; color: var(--ink-soft); }
 
 /* The form: age, state, plan. Nothing else is asked. */
@@ -136,8 +133,6 @@ select { min-width: 14rem; max-width: 100%; }
 .bp-body { padding: 0.5rem 1.4rem 1.4rem; }
 .bp-group { margin-top: 1.5rem; }
 .bp-group h3 { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); }
-.bp-group h3::before { content: "["; color: var(--accent); margin-right: 0.15rem; }
-.bp-group h3::after { content: "]"; color: var(--accent); margin-left: 0.15rem; }
 .bp-items { margin: 0.5rem 0 0; padding: 0; list-style: none; }
 .bp-items li { padding: 1rem 0; border-top: 1px solid var(--rule); }
 .bp-items li:last-child { border-bottom: 1px solid var(--rule); }
@@ -179,6 +174,8 @@ textarea:hover { border-color: var(--ink-soft); }
 .bp-clinician { margin-top: 1.5rem; max-width: 46rem; font-size: 1rem; color: var(--ink-soft); }
 .bp-clinician b { color: var(--ink); font-weight: 600; }
 .hr-section { border-top: 1px solid var(--rule); padding: clamp(2.5rem, 6vw, 4rem) 0; }
+.hr-sources-sec .hr-wrap { border-top: 1px solid var(--rule); padding-top: 2rem; }
+.hr-sources-sec h2 { margin-bottom: 1rem; }
 .hr-sources { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
 .hr-sources ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
 .hr-sources li { margin-top: 0.25rem; }
@@ -193,7 +190,7 @@ textarea:hover { border-color: var(--ink-soft); }
     --accent: #AD1457; --accent-hover: #8A0E45; --accent-ink: #FDFCFE; --rule: #CFCCD6; --kicker: #6B68A0; --dim: #EFEDF5;
   }
   body { font-size: 8.5pt; line-height: 1.3; }
-  .hr-header, .hr-notice, .hr-intro, .bp-formsec, .bp-actions, .bp-eobsec, .hr-section, .hr-footer, .bp-clinician, .bp-plannote, .lg-sub, .lg-kicker { display: none !important; }
+  .hr-header, .hr-notice, .hr-intro, .bp-formsec, .bp-actions, .bp-eobsec, .hr-section, .hr-footer, .bp-clinician, .bp-plannote, .lg-sub { display: none !important; }
   .lg-section { border-top: none; padding: 0; }
   .lg-section .hr-wrap { padding-left: 0; padding-right: 0; max-width: none; }
   .bp-pass { margin-top: 0; max-width: none; }
@@ -259,7 +256,6 @@ textarea:hover { border-color: var(--ink-soft); }
 
   <section class="lg-section bp-formsec" aria-label="Your details">
     <div class="hr-wrap">
-      <p class="lg-kicker" data-t="formKicker"></p>
       <h2 data-t="formTitle"></h2>
       <p class="lg-sub" data-t="formSub"></p>
       <form id="form" class="bp-form" novalidate>
@@ -275,7 +271,6 @@ textarea:hover { border-color: var(--ink-soft); }
 
   <section class="lg-section" id="passsec" aria-label="Your boarding pass">
     <div class="hr-wrap">
-      <p class="lg-kicker" data-t="passKicker"></p>
       <h2 id="passTitle"></h2>
       <p class="lg-sub" id="passSub"></p>
       <div id="pass"></div>
@@ -289,7 +284,6 @@ textarea:hover { border-color: var(--ink-soft); }
 
   <section class="lg-section bp-eobsec" aria-label="EOB check">
     <div class="hr-wrap">
-      <p class="lg-kicker" data-t="eobKicker"></p>
       <h2 data-t="eobTitle"></h2>
       <p class="lg-sub" data-t="eobSub"></p>
       <textarea id="eob" aria-label="EOB text"></textarea>
@@ -302,10 +296,11 @@ textarea:hover { border-color: var(--ink-soft); }
     </div>
   </section>
 
-  <section class="hr-section" aria-label="Sources">
+  <section class="hr-section hr-sources-sec" aria-label="Sources">
     <div class="hr-wrap">
+      <h2 data-t="sourcesTitle"></h2>
       <div class="hr-sources">
-        <p><b data-t="sourcesLead"></b> <span data-t="sources"></span></p>
+        <p><span data-t="sources"></span></p>
         <ul id="sourceList"></ul>
         <p style="margin-top: 1rem;" id="asOf"></p>
       </div>
@@ -323,16 +318,16 @@ textarea:hover { border-color: var(--ink-soft); }
   // Nothing is stored: no localStorage, no cookies, no requests other than data.json.
   var T = {
     en: {
-      header: "Page · The Medical Boarding Pass",
+      header: "Page · Medical Boarding Pass",
       noticeTag: "[Draft]",
       notice: "Pending clinical and plan-quality review. Minnesota Medicaid only for now. Nothing you enter is stored or sent.",
-      h1: "Your medical boarding pass.",
+      h1: "Medical Boarding Pass",
       lede: "The preventive care you are owed this year, free with your plan, and the words to book it. Enter your age, state and plan. The page builds itself, and nothing leaves it.",
-      formKicker: "Your details", formTitle: "Three things, nothing else", formSub: "Age, state and plan. No health questions. The sample pass below is for a 42-year-old on Medical Assistance until you change it.",
+      formTitle: "Your Details", formSub: "Three things, nothing else: age, state and plan. No health questions. The sample pass below is for a 42-year-old on Medical Assistance until you change it.",
       age: "Age", state: "State", plan: "Plan", build: "Build my pass", otherStates: "Another state (coming)", unsure: "I’m not sure which",
       formHint: "Minnesota only for now. If you are not sure which plan you have, the name is on your card; the pass assumes Medical Assistance until you pick one.",
       errAge: "Enter an age from 18 to 120.", errState: "Only Minnesota is covered yet. Other states are coming.",
-      passKicker: "Your pass", passTitle: "What you are owed this year", passSub: "Each line says what the visit is, that it is free with your plan, and the words to book it. Print it or keep it open at the front desk.",
+      passTitle: "Your Pass", passSub: "What you are owed this year. Each line says what the visit is, that it is free with your plan, and the words to book it. Print it or keep it open at the front desk.",
       bandKick: "Medical boarding pass", bandTitle: "Preventive care, {year}",
       passenger: "Passenger", passengerVal: "Woman, {age}", from: "State", planLabel: "Plan", valid: "Valid through", validVal: "December {year}", issued: "Issued",
       thisYear: "This year", atCheckup: "At your checkup, also ask for", ifYou: "If this is you",
@@ -342,29 +337,29 @@ textarea:hover { border-color: var(--ink-soft); }
       print: "Print the pass",
       planUnsureNote: "You picked “not sure”, so the pass assumes Medical Assistance. The plan name is on your card; MinnesotaCare has a few differences.",
       clinicianLead: "Discuss with your clinician.", clinician: "This page says what a plan covers and what to ask for, not what you need. Which of these fit you is a conversation with your clinician.",
-      eobKicker: "After the visit", eobTitle: "Were you charged for preventive care?", eobSub: "Paste the text of an Explanation of Benefits (EOB) or a bill. The page looks for preventive services with a charge next to them. Text only; nothing is uploaded, saved or sent anywhere.",
+      eobTitle: "After the Visit", eobSub: "Were you charged for preventive care? Paste the text of an Explanation of Benefits (EOB) or a bill. The page looks for preventive services with a charge next to them. Text only; nothing is uploaded, saved or sent anywhere.",
       eobCheck: "Check it", eobClear: "Clear", eobEmpty: "Paste some text first.",
       eobNone: "No preventive service with a charge next to it was found. If a line still looks wrong to you, call the member services number on your card.",
       eobFlag: "Looks like preventive care billed with a charge", eobMaybe: "Preventive care with an amount nearby; check this line",
       eobNext: "Call the member services number on your card and ask for the claim to be reprocessed as preventive care. Preventive visits and screenings on this pass should carry no copay with Medical Assistance or MinnesotaCare.",
       eobHint: "A first draft: it reads plain text and can miss things or flag the wrong line. It does not read PDFs or photos, by design.",
-      sourcesLead: "Sources.", sources: "Every line on the pass comes from data.json, a copy of data/measures/mn-medicaid.json in the Herada repository: public Minnesota DHS and MHCP pages, the US Preventive Services Task Force, the HRSA women’s preventive services guidelines, and healthcare.gov, each with the date checked.",
+      sourcesTitle: "Sources", sources: "Every line on the pass comes from data.json, a copy of data/measures/mn-medicaid.json in the Herada repository: public Minnesota DHS and MHCP pages, the US Preventive Services Task Force, the HRSA women’s preventive services guidelines, and healthcare.gov, each with the date checked.",
       asOf: "As of {asof}. Draft compiled by Herada; pending clinical and plan-quality review. General information, not medical advice for any individual.",
       footer: "A Herada page. Draft, pending clinical and plan-quality review. Not medical advice (privacy).",
       loadErr: "The coverage rules could not be loaded. Reload the page, or come back later.",
       months: ["January","February","March","April","May","June","July","August","September","October","November","December"]
     },
     es: {
-      header: "Página · El pase de abordar médico",
+      header: "Página · Pase de abordar médico",
       noticeTag: "[Borrador]",
       notice: "Pendiente de revisión clínica y de calidad del plan. Por ahora, solo Medicaid de Minnesota. Nada de lo que escriba se guarda ni se envía.",
-      h1: "Su pase de abordar médico.",
+      h1: "Pase de abordar médico",
       lede: "La atención preventiva que le corresponde este año, gratis con su plan, y las palabras para pedir la cita. Escriba su edad, su estado y su plan. La página se arma sola y nada sale de ella.",
-      formKicker: "Sus datos", formTitle: "Tres cosas, nada más", formSub: "Edad, estado y plan. Sin preguntas de salud. El pase de muestra de abajo es para una mujer de 42 años con Medical Assistance hasta que usted lo cambie.",
+      formTitle: "Sus datos", formSub: "Tres cosas, nada más: edad, estado y plan. Sin preguntas de salud. El pase de muestra de abajo es para una mujer de 42 años con Medical Assistance hasta que usted lo cambie.",
       age: "Edad", state: "Estado", plan: "Plan", build: "Armar mi pase", otherStates: "Otro estado (próximamente)", unsure: "No estoy segura",
       formHint: "Por ahora, solo Minnesota. Si no sabe qué plan tiene, el nombre está en su tarjeta; el pase supone Medical Assistance hasta que elija uno.",
       errAge: "Escriba una edad de 18 a 120.", errState: "Por ahora solo cubrimos Minnesota. Otros estados vienen pronto.",
-      passKicker: "Su pase", passTitle: "Lo que le corresponde este año", passSub: "Cada línea dice qué es la visita, que es gratis con su plan, y las palabras para pedir la cita. Imprímalo o téngalo abierto en la recepción.",
+      passTitle: "Su pase", passSub: "Lo que le corresponde este año. Cada línea dice qué es la visita, que es gratis con su plan, y las palabras para pedir la cita. Imprímalo o téngalo abierto en la recepción.",
       bandKick: "Pase de abordar médico", bandTitle: "Atención preventiva, {year}",
       passenger: "Pasajera", passengerVal: "Mujer, {age}", from: "Estado", planLabel: "Plan", valid: "Válido hasta", validVal: "diciembre de {year}", issued: "Emitido",
       thisYear: "Este año", atCheckup: "En su chequeo, pida también", ifYou: "Si este es su caso",
@@ -374,13 +369,13 @@ textarea:hover { border-color: var(--ink-soft); }
       print: "Imprimir el pase",
       planUnsureNote: "Eligió “no estoy segura”, así que el pase supone Medical Assistance. El nombre del plan está en su tarjeta; MinnesotaCare tiene algunas diferencias.",
       clinicianLead: "Hable con su médica o médico.", clinician: "Esta página dice lo que cubre un plan y qué pedir, no lo que usted necesita. Cuáles de estos aplican a usted es una conversación con su médica o médico.",
-      eobKicker: "Después de la visita", eobTitle: "¿Le cobraron atención preventiva?", eobSub: "Pegue el texto de su Explicación de Beneficios (EOB) o de una factura. La página busca servicios preventivos con un cobro al lado. Solo texto; nada se sube, se guarda ni se envía a ningún lugar.",
+      eobTitle: "Después de la visita", eobSub: "¿Le cobraron atención preventiva? Pegue el texto de su Explicación de Beneficios (EOB) o de una factura. La página busca servicios preventivos con un cobro al lado. Solo texto; nada se sube, se guarda ni se envía a ningún lugar.",
       eobCheck: "Revisar", eobClear: "Borrar", eobEmpty: "Primero pegue algún texto.",
       eobNone: "No se encontró ningún servicio preventivo con un cobro al lado. Si una línea igual le parece incorrecta, llame al número de servicios para miembros de su tarjeta.",
       eobFlag: "Parece atención preventiva con un cobro", eobMaybe: "Atención preventiva con un monto cerca; revise esta línea",
       eobNext: "Llame al número de servicios para miembros de su tarjeta y pida que vuelvan a procesar el reclamo como atención preventiva. Las visitas y pruebas preventivas de este pase no deberían tener copago con Medical Assistance ni con MinnesotaCare.",
       eobHint: "Un primer borrador: lee texto simple y puede omitir cosas o marcar la línea equivocada. No lee PDF ni fotos, a propósito.",
-      sourcesLead: "Fuentes.", sources: "Cada línea del pase viene de data.json, una copia de data/measures/mn-medicaid.json en el repositorio de Herada: páginas públicas del DHS y MHCP de Minnesota, el Grupo de Trabajo de Servicios Preventivos de EE. UU. (USPSTF), las guías de servicios preventivos para mujeres de HRSA y healthcare.gov, cada una con la fecha en que se verificó.",
+      sourcesTitle: "Fuentes", sources: "Cada línea del pase viene de data.json, una copia de data/measures/mn-medicaid.json en el repositorio de Herada: páginas públicas del DHS y MHCP de Minnesota, el Grupo de Trabajo de Servicios Preventivos de EE. UU. (USPSTF), las guías de servicios preventivos para mujeres de HRSA y healthcare.gov, cada una con la fecha en que se verificó.",
       asOf: "Al {asof}. Borrador compilado por Herada; pendiente de revisión clínica y de calidad del plan. Información general, no un consejo médico para ninguna persona en particular.",
       footer: "Una página de Herada. Borrador, pendiente de revisión clínica y de calidad del plan. No es consejo médico (privacidad).",
       loadErr: "No se pudieron cargar las reglas de cobertura. Recargue la página o vuelva más tarde.",

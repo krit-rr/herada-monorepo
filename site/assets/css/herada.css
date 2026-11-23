@@ -278,6 +278,9 @@ a
 .hr-footer a { color: var(--ink-soft); }
 .hr-footer nav a { padding: 0.25rem 0; }
 .hr-home .hr-note-small { margin-top: 2rem; font-family: var(--body); font-size: 0.875rem; color: var(--ink-soft); }
+
+/* "As of" line under long prose: small, italic, set a little apart */
+.hr-asof { margin-top: 3rem; font-family: var(--body); font-size: 0.875rem; font-style: italic; color: var(--ink-soft); }
 .hr-footer a:hover { color: var(--accent); }
 
 /* ============================================================

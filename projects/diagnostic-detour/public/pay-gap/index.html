@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Diagnostic Detour, the money: a project by Herada</title>
+<title>The Diagnostic Detour, Money: a project by Herada</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="The money chapter of the Diagnostic Detour. What Medicare assigns to matched procedures on female and male anatomy, from the public 2026 physician fee schedule: physician work and national payment, pair by pair, with the published pairs marked and the rest open to correction.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,7 +152,9 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 .hr-prose { max-width: 44rem; }
 .hr-prose p { margin-top: 1rem; font-size: 1.0625rem; color: var(--ink-soft); }
 .hr-prose h3 { margin-top: 2rem; color: var(--ink); }
-.hr-sources { margin-top: clamp(2rem, 5vw, 3rem); padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
+.hr-sources-sec .hr-wrap { border-top: 1px solid var(--rule); padding-top: 2rem; }
+.hr-sources-sec h2 { margin-bottom: 1rem; }
+.hr-sources { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
 
 .hr-footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; color: var(--ink-soft); }
 </style>
@@ -161,7 +163,7 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 <header class="hr-header">
   <div class="hr-wrap">
     <a class="hr-wordmark" href="/">HERADA</a>
-    <span class="hr-ui">Project · The Diagnostic Detour · The money</span>
+    <span class="hr-ui">Project · The Diagnostic Detour · Money</span>
   </div>
 </header>
 
@@ -207,7 +209,7 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
   <section class="pg-section" aria-label="One operation, two codes">
     <div class="hr-wrap">
       <p class="pg-kicker">Same operation</p>
-      <h2>One operation, two codes</h2>
+      <h2>One Operation, Two Codes</h2>
       <p class="pg-sub" id="sameSub"></p>
       <div class="pg-table-wrap" id="sameTable" tabindex="0" role="region" aria-label="Same-operation pairs table. Scrolls sideways on small screens."></div>
       <p class="pg-scrollhint" hidden>Scroll sideways for the full table.</p>
@@ -217,7 +219,7 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
   <section class="pg-section" aria-label="The published pairs">
     <div class="hr-wrap">
       <p class="pg-kicker">Published pairs</p>
-      <h2>The pairs the literature uses, at 2026 values</h2>
+      <h2>The Pairs the Literature Uses, at 2026 Values</h2>
       <p class="pg-sub" id="pubSub"></p>
       <div class="pg-toggle" role="group" aria-label="Which value to plot">
         <button type="button" data-metric="work" aria-pressed="true">Physician work (RVU)</button>
@@ -238,7 +240,7 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
   <section class="pg-section" aria-label="Proposed pairs">
     <div class="hr-wrap">
       <p class="pg-kicker">Proposed · unreviewed</p>
-      <h2>Pairs we propose, for checking</h2>
+      <h2>Pairs We Propose, for Checking</h2>
       <p class="pg-sub" id="propSub"></p>
       <div class="pg-plot" id="propPlot" tabindex="0" role="region" aria-label="Proposed pairs chart. Scrolls sideways on small screens."></div>
       <p class="pg-scrollhint" hidden>Scroll sideways for the full chart.</p>
@@ -250,7 +252,7 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
   <section class="pg-section" aria-label="Not a fair pair">
     <div class="hr-wrap">
       <p class="pg-kicker">What you&rsquo;ll hear</p>
-      <h2>The comparison that isn&rsquo;t a fair pair</h2>
+      <h2>The Comparison That Isn&rsquo;t a Fair Pair</h2>
       <p class="pg-sub" id="popSub"></p>
       <ul class="pg-plain" id="popList"></ul>
     </div>
@@ -259,7 +261,7 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
   <section class="pg-section" aria-label="Reading the gap">
     <div class="hr-wrap">
       <p class="pg-kicker">Reading it</p>
-      <h2>What a gap here does and doesn&rsquo;t mean</h2>
+      <h2>What a Gap Here Does and Doesn&rsquo;t Mean</h2>
       <div class="hr-prose">
         <p><b>The unit.</b> Medicare values every procedure in relative value units: a work RVU for the clinician&rsquo;s time, skill and stress, plus practice-expense and malpractice RVUs. The total, times one national conversion factor, is the payment before geographic adjustment. The work RVU is the part that says how hard Medicare thinks the operation is, which is why the literature compares it first.</p>
         <p><b>Global periods.</b> A code with a 90-day global includes the operation plus three months of routine follow-up; a 10-day or 0-day code does not. Pairs whose global periods differ are flagged, because their RVUs are not the same kind of number.</p>
@@ -274,7 +276,7 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
   <section class="pg-section" aria-label="The literature">
     <div class="hr-wrap">
       <p class="pg-kicker">The literature</p>
-      <h2>Where the evidence stands</h2>
+      <h2>Where the Evidence Stands</h2>
       <p class="pg-sub">Four analyses of the same question since the RVU system began, each on its own set of pairs. This page&rsquo;s pairs are not the 55 that Penn and colleagues verified; the pair review will reconcile the two lists.</p>
       <ul class="pg-plain" id="literature"></ul>
     </div>
@@ -282,8 +284,14 @@ table.pg-table { border-collapse: collapse; font-family: var(--ui); font-size: 0
 
   <section class="hr-section" aria-label="Method">
     <div class="hr-wrap">
-      <h2>How the numbers are built</h2>
+      <h2>How the Numbers Are Built</h2>
       <div class="hr-prose" id="method"></div>
+    </div>
+  </section>
+
+  <section class="hr-section hr-sources-sec" aria-label="Sources">
+    <div class="hr-wrap">
+      <h2>Sources</h2>
       <p class="hr-sources" id="sources">Compiled by <a href="/">Herada</a> from the CMS relative value file linked above and the published analyses listed on this page. The pair list, with every rationale and flag, ships in the repository as <code>data/pay-gap/pairs.json</code>; the pull script as <code>data/pay-gap/pull_pfs.py</code>; the page&rsquo;s data as <a href="pay-gap.json"><code>pay-gap.json</code></a>. CPT codes and descriptions are copyright American Medical Association; this page uses the codes with its own plain-language labels. Corrections invited: <a href="mailto:joinherada@gmail.com">joinherada@gmail.com</a>.</p>
     </div>
   </section>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Ledger: a tool by Herada</title>
+<title>Ledger: a tool by Herada</title>
 <meta name="description" content="A private, local-only log of your health story (symptoms + visits + tests + treatments) that builds the Visit Kit: your timeline, what's been tested + what's worth asking, and your questions for today. Printable, nothing typed twice.">
 <link rel="canonical" href="https://joinherada.com/projects/the-ledger/">
 <meta name="theme-color" content="#FDFCFE" media="(prefers-color-scheme: light)">
@@ -85,9 +85,7 @@ a:hover { color: var(--accent-hover); }
 .hr-lede { max-width: 44rem; margin-top: 1.5rem; font-size: 1.375rem; line-height: 1.45; color: var(--ink); }
 
 .lg-section { border-top: 3px solid var(--ink); padding: 2.25rem 0 2.75rem; }
-.lg-kicker { font-family: var(--ui); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.85rem; }
-.lg-kicker::before { content: "["; color: var(--accent); }
-.lg-kicker::after { content: "]"; color: var(--accent); }
+.lg-kicker { font-family: var(--ui); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kicker); margin-bottom: 0.85rem; }
 .lg-sub { margin-top: 0.5rem; max-width: 44rem; font-size: 1.0625rem; color: var(--ink-soft); }
 
 /* Record-type picker + forms */
@@ -285,6 +283,8 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 .hr-section { border-top: 1px solid var(--rule); padding: clamp(2.5rem, 6vw, 4rem) 0; }
 .hr-prose { max-width: 44rem; }
 .hr-prose p { margin-top: 1rem; font-size: 1.0625rem; color: var(--ink-soft); }
+.hr-sources-sec .hr-wrap { border-top: 1px solid var(--rule); padding-top: 2rem; }
+.hr-sources-sec h2 { margin-bottom: 1rem; }
 .hr-sources { font-family: var(--ui); font-size: 0.875rem; color: var(--ink-soft); max-width: 46rem; }
 .hr-sources ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
 .hr-sources li { margin-top: 0.25rem; }
@@ -353,7 +353,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 <header class="hr-header">
   <div class="hr-wrap">
     <a class="hr-wordmark" href="/">HERADA</a>
-    <span class="hr-ui">Tool · The Ledger</span>
+    <span class="hr-ui">Tool · Ledger</span>
   </div>
 </header>
 
@@ -364,7 +364,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 <main>
   <section class="hr-intro">
     <div class="hr-wrap">
-      <h1>Your whole story, kept + told.</h1>
+      <h1>Ledger</h1>
       <p class="hr-lede">Log symptoms, visits, tests and treatments once. The Ledger keeps the record, and builds the Visit Kit from it: your timeline, your one-pager, what&rsquo;s been tested and what&rsquo;s worth asking, and your questions for today. Printable, nothing typed twice.</p>
     </div>
   </section>
@@ -372,8 +372,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   <!-- ============ The log: the only place data is entered ============ -->
   <section class="lg-section lg-entry" aria-label="Add to the ledger">
     <div class="hr-wrap">
-      <p class="lg-kicker">Add to the ledger</p>
-      <h2>What happened?</h2>
+      <h2>Add an Entry</h2>
       <div class="lg-types" id="types" role="group" aria-label="Record type">
         <button type="button" data-type="symptom" aria-pressed="true">Symptom</button>
         <button type="button" data-type="visit" aria-pressed="false">Visit</button>
@@ -392,8 +391,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   <section class="lg-section lg-logsec" aria-label="The log">
     <div class="hr-wrap">
-      <p class="lg-kicker">The log</p>
-      <h2>The story so far</h2>
+      <h2>The Log</h2>
       <div id="log"><p class="lg-empty">Add your first entry above. The log builds itself here, newest first.</p></div>
     </div>
   </section>
@@ -401,8 +399,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   <!-- ============ The picker: screen only, chips light up from the log ============ -->
   <section class="lg-section vk-picker" aria-label="Your symptoms">
     <div class="hr-wrap">
-      <p class="lg-kicker">What shares your symptoms · Optional</p>
-      <h2>The look-alikes</h2>
+      <h2>Look-Alikes (Optional)</h2>
       <p class="lg-sub">Chips light up from your logged symptoms. Adjust them to see which midlife conditions share your picture. The checks that fit get a raspberry edge on the tested list. Worth a look because <a href="https://www.nice.org.uk/guidance/ng23">NICE guidance</a> lets perimenopause be diagnosed from symptoms alone after 45, so the label can settle before the look-alikes are weighed.</p>
       <div class="vk-symchips" id="symChips" role="group" aria-label="Symptoms"></div>
       <p class="vk-preset">Or start from <a href="#" id="preset">the classic cluster</a>: fatigue, brain fog, joint pain, palpitations. <a href="#" id="clearPicks" hidden>Clear picks</a></p>
@@ -413,8 +410,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   <!-- ============ The Visit Kit: four printable pages, all derived from the log ============ -->
   <section class="lg-section lg-printpage" aria-label="Visit Kit page one: the timeline">
     <div class="hr-wrap">
-      <p class="lg-kicker">The Visit Kit · Page 1 · The timeline</p>
-      <h2>What happened, and when</h2>
+      <h2>Visit Kit, Page 1: Timeline</h2>
       <span class="vk-print-head" id="printDate1"></span>
       <p class="lg-sub">Drawn from your log: symptoms become bars (thicker = more severe, raspberry = ongoing); visits and life events become markers.</p>
       <div id="chart"><p class="vk-empty">Log a symptom and the timeline draws itself here.</p></div>
@@ -424,8 +420,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   <section class="lg-section lg-printpage lg-pagersec" aria-label="Visit Kit page two: the one-pager">
     <div class="hr-wrap">
-      <p class="lg-kicker">The Visit Kit · Page 2 · The one-pager</p>
-      <h2>The handover</h2>
+      <h2>Visit Kit, Page 2: One-Pager</h2>
       <div class="lg-pager" id="pager"></div>
       <div class="lg-actions">
         <button type="button" class="lg-ghost" id="printPager">Print just this page</button>
@@ -437,8 +432,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   <section id="tested" class="lg-section lg-printpage" aria-label="Visit Kit page three: tested and worth asking">
     <div class="hr-wrap">
-      <p class="lg-kicker" id="listKicker">The Visit Kit · Page 3 · Tested &amp; worth asking</p>
-      <h2>What&rsquo;s been checked + what hasn&rsquo;t</h2>
+      <h2 id="listKicker">Visit Kit, Page 3: Tested and Worth Asking</h2>
       <span class="vk-print-head" id="printDate3"></span>
       <p class="lg-sub">The consider-list for the midlife look-alikes, filled from your logged tests: a check is ticked because a matching test is in your log. The unticked boxes are their own message; &ldquo;log it&rdquo; adds one. Each item&rsquo;s reasoning sits under &ldquo;why · source.&rdquo;</p>
       <p class="lg-sub">NICE guideline NG23 lets clinicians diagnose perimenopause in women over 45 from symptoms alone, without labs. This list is what should be weighed before that label settles: ask whether each was considered, not for the panel.</p>
@@ -454,14 +448,13 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   <section class="lg-section lg-printpage" aria-label="Visit Kit page four: today's visit">
     <div class="hr-wrap">
-      <p class="lg-kicker">The Visit Kit · Page 4 · Today&rsquo;s visit</p>
-      <h2>What I want from today</h2>
+      <h2>Visit Kit, Page 4: Today&rsquo;s Visit</h2>
       <span class="vk-print-head" id="printDate4"></span>
       <div id="wantWrap" style="margin-top: 1rem; max-width: 52rem;">
         <textarea id="want" maxlength="300" placeholder="e.g. A plan for figuring out my fatigue, not just reassurance. If labs are normal, I want to know what we check next."></textarea>
       </div>
 
-      <p class="lg-kicker" style="margin-top: 2rem">My three questions</p>
+      <h3 style="margin-top: 2rem">My Three Questions</h3>
       <div class="vk-qs" id="questions">
         <div class="vk-q"><span class="vk-qnum">1</span><input type="text" maxlength="140" data-q="0" aria-label="Question 1" placeholder="Tap a suggestion below, or write your own"></div>
         <div class="vk-q"><span class="vk-qnum">2</span><input type="text" maxlength="140" data-q="1" aria-label="Question 2" placeholder=""></div>
@@ -470,7 +463,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       <div class="vk-chips" id="qChips" role="group" aria-label="Question suggestions"></div>
 
       <div class="vk-route">
-        <h3>Who sees what</h3>
+        <h3>Who Sees What</h3>
         <ul>
           <li><b>Cycles and hormones</b> → OB-GYN or a menopause specialist</li>
           <li><b>Thyroid, metabolic</b> → endocrinology</li>
@@ -496,10 +489,9 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
   <!-- ============ Keep it ============ -->
   <section class="lg-section lg-keep" aria-label="Backup and clearing">
     <div class="hr-wrap">
-      <p class="lg-kicker">Keep it</p>
-      <h2>Backup &amp; move devices</h2>
+      <h2>Backup</h2>
       <div class="lg-backup">
-        <h3>Backup file</h3>
+        <h3>Backup File</h3>
         <p>Save your ledger as a file you keep. Add a passphrase + the file is encrypted on your device before it&rsquo;s saved. Load it here on any device to continue.</p>
         <div class="lg-brow">
           <input type="password" id="passphrase" placeholder="Optional passphrase" autocomplete="new-password" aria-label="Backup passphrase">
@@ -517,15 +509,20 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
 
   <section class="hr-section" aria-label="About and sources">
     <div class="hr-wrap">
-      <h2>Why this page exists</h2>
+      <h2>Why This Page Exists</h2>
       <div class="hr-prose">
         <p>Fatigue, brain fog, joint pain and palpitations are shared symptoms: each appears in at least four of the ten conditions this page maps (fatigue in all ten), which is why pattern-matching on any one of them misroutes people. The fix isn&rsquo;t more testing for everyone; it&rsquo;s keeping your own record and putting the consider-list next to it, so the explanation that remains has actually earned it.</p>
         <p>Everything stays on your device, saved in your browser only (Clear all removes it); the printouts, image, text copies and backup file are generated locally, and a passphrase-protected backup is encrypted in the browser before saving.</p>
       </div>
-      <p class="hr-sources" style="margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);">Draft compiled by Herada; <b>pending clinical review</b>: the symptom map + consider-list + separating checks are one knowledge base, reviewed together. General information, not medical advice for any individual. Each check links its source above.</p>
-      <details class="vk-more" style="margin-top: 0.75rem;">
-        <summary>All sources</summary>
-        <ul class="hr-sources">
+    </div>
+  </section>
+
+  <section class="hr-section hr-sources-sec" aria-label="Sources">
+    <div class="hr-wrap">
+      <h2>Sources</h2>
+      <p class="hr-sources">Draft compiled by Herada; <b>pending clinical review</b>: the symptom map + consider-list + separating checks are one knowledge base, reviewed together. General information, not medical advice for any individual. Each check links its source above.</p>
+      <div class="hr-sources">
+        <ul>
           <li><a href="https://www.nice.org.uk/guidance/ng23">NICE NG23 · Menopause: identification and management</a></li>
           <li><a href="https://www.aafp.org/pubs/afp/issues/2023/0700/fatigue-adults.html">Latimer et al., Fatigue in Adults: Evaluation and Management · Am Fam Physician 2023;108(1):58–69</a></li>
           <li><a href="https://www.cdc.gov/me-cfs/hcp/diagnosis-testing/evaluation-of-me-cfs.html">CDC · Evaluation of ME/CFS (clinical testing recommendations)</a></li>
@@ -534,7 +531,7 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
           <li><a href="https://doi.org/10.1002/art.1780400909">Tan et al., Range of antinuclear antibodies in &ldquo;healthy&rdquo; individuals · Arthritis &amp; Rheumatism 1997</a></li>
           <li><a href="https://doi.org/10.1111/jcpp.13920">Skoglund et al., Time after time · J Child Psychol Psychiatry 2024</a></li>
         </ul>
-      </details>
+      </div>
       <p class="hr-sources" style="margin-top: 1rem;">A free tool by <a href="/">Herada</a>. As of October 2026.</p>
     </div>
   </section>
@@ -1291,8 +1288,8 @@ li.vk-done .vk-box { background: var(--accent); border-color: var(--accent); }
       return '<div class="vk-group"><h3>' + esc(g.title) + '</h3><p class="vk-groupnote">' + esc(g.note) + '</p><ul class="vk-tested">' + rows + "</ul></div>";
     }).join("");
     document.getElementById("listKicker").textContent = data.picks.length
-      ? "The Visit Kit · Page 3 · Tested & worth asking · raspberry-edged items fit your picks"
-      : "The Visit Kit · Page 3 · Tested & worth asking";
+      ? "Visit Kit, Page 3: Tested and Worth Asking (raspberry-edged items fit your picks)"
+      : "Visit Kit, Page 3: Tested and Worth Asking";
 
     var others = otherTests();
     var el = document.getElementById("otherTests");
