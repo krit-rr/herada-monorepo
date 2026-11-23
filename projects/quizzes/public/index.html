@@ -95,7 +95,7 @@ a:hover { color: var(--accent-hover); }
 .qz-card .qz-meta { font-family: var(--ui); font-size: 0.875rem; font-weight: 700; color: var(--ink); }
 .qz-card.qz-soon .qz-meta::before { content: "["; color: var(--accent); }
 .qz-card.qz-soon .qz-meta::after { content: "]"; color: var(--accent); }
-.qz-card h2 { margin-top: 0.3rem; }
+.qz-card .qz-meta + h2 { margin-top: 0.3rem; }
 .qz-card p { margin-top: 0.4rem; font-size: 1.0625rem; color: var(--ink-soft); max-width: 44rem; }
 .qz-go { display: inline-block; margin-top: 0.6rem; font-family: var(--ui); font-size: 0.9375rem; font-weight: 600; color: var(--accent); }
 .qz-card:hover .qz-go { color: var(--accent-hover); }
@@ -402,7 +402,7 @@ a:hover { color: var(--accent-hover); }
       '<p class="qz-lede">Taking a page out of Buzzfeed’s book to be fun and educational. Nothing stored + sources shared.</p>',
       '<div class="qz-cards">'];
     QUIZZES.forEach(function (qz) {
-      out.push('<button type="button" class="qz-card" data-quiz="' + qz.id + '"><span class="qz-meta">' + esc(qz.meta) + "</span><h2>" + esc(qz.title) + "</h2><p>" + esc(qz.blurb) + '</p><span class="qz-go">Play →</span></button>');
+      out.push('<button type="button" class="qz-card" data-quiz="' + qz.id + '"><h2>' + esc(qz.title) + "</h2><p>" + esc(qz.blurb) + '</p><span class="qz-go">Play →</span></button>');
     });
     COMING.forEach(function (c) {
       out.push('<div class="qz-card qz-soon"><span class="qz-meta">' + esc(c.meta) + "</span><h2>" + esc(c.title) + "</h2></div>");
