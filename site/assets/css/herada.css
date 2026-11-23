@@ -324,7 +324,7 @@ a
 
 /* The flipped section: paper ground, radicchio type */
 
-/* Tile colors cycle: radicchio, periwinkle, violet-black */
+/* Projects list: status column and title share a baseline */
 .hr-list li {
   display: grid;
   grid-template-columns: 1fr;
@@ -339,8 +339,7 @@ a
 .hr-list h2 a:hover { color: var(--accent); text-decoration: underline; }
 .hr-list .hr-status { font-family: var(--body); font-size: 0.875rem; color: var(--ink-soft); }
 @media (min-width: 48rem) {
-  .hr-list li { grid-template-columns: 11rem 1fr; }
-  .hr-list .hr-status { padding-top: 0.4rem; }
+  .hr-list li { grid-template-columns: 11rem 1fr; align-items: baseline; }
 }
 
 .hr-prose { max-width: 38rem; }
